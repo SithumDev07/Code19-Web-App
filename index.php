@@ -32,6 +32,8 @@
             </nav>
         </div>
 
+
+
         <header class="container mx-auto">
             <div class="mt-12 ml-16 relative">
                 <h1 class="text-gray-700 font-sans font-bold text-6xl w-1/2">Gain more control over your business</h1>

@@ -6,10 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="./public/style.css">
+    <script src="./scripts/signup.js"></script>
+    <style>
+      .success {
+        border-color: rgba(16, 185, 129, 1);
+      }
+      .error {
+        border-color: rgba(239, 68, 68, 1);
+      }
+
+      .fa-check-circle {
+        visibility: hidden;
+      }
+      .fa-exclamation-circle {
+        visibility: hidden;
+      }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <main class="bg-white">
-        <div class="bg-white border-b fixed top-0 left-0 right-0">
+        <div class="bg-white border-b fixed top-0 left-0 right-0 z-20">
             <nav class="h-16 container mx-auto flex">
                 <div class="logo w-20 h-16 p-2 mr-10 flex items-center justify-center">
                     <img class="w-full h-full object-contain" src="https://cdn.worldvectorlogo.com/logos/tailwindcss.svg" alt="Logo">
@@ -30,32 +47,42 @@
 
         <header class="container mx-auto my-24">
             <div class="w-full max-w-xs mx-auto">
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="" method="POST">
-                  <div class="mb-4">
+                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./includes/register-inc.php" method="POST">
+                  <div class="mb-4 relative">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                       Username
                     </label>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username">
+                    <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
+                    <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
+                    <p class="text-red-500 text-xs italic hidden">Username is required</p>
                   </div>
-                  <div class="mb-4">
+                  <div class="mb-4 relative">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                       Email Address
                     </label>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="email" placeholder="Email address">
+                    <i class="fas fa-check-circle text-green-500 absolute top-10 right-2""></i>
+                    <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2""></i>
+                    <p class="text-red-500 text-xs italic hidden">Email address is required</p>
                   </div>
-                  <div class="mb-6">
+                  <div class="mb-6 relative">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                       Password
                     </label>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1" id="password" type="password" placeholder="******************">
-                    <!-- <p class="text-red-500 text-xs italic">Please choose a password.</p> -->
+                    <i class="fas fa-check-circle text-green-500 absolute top-10 right-2""></i>
+                    <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2""></i>
+                    <p class="text-red-500 text-xs italic hidden">Password is required</p>
                   </div>
-                  <div class="mb-6">
+                  <div class="mb-6 relative">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                       Confirm Password
                     </label>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1" id="password" type="password" placeholder="******************">
-                    <!-- <p class="text-red-500 text-xs italic">Please choose a password.</p> -->
+                    <i class="fas fa-check-circle text-green-500 absolute top-10 right-2""></i>
+                    <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2""></i>
+                    <p class="text-red-500 text-xs italic hidden">Please confirm your password</p>
                   </div>
                   <div class="flex items-center justify-between mb-6">
                     <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
