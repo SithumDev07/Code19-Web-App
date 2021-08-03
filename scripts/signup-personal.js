@@ -12,10 +12,10 @@ var currentDate = date.toISOString().substring(0,10);
 var maximumDate = date.getFullYear() - 16;
 var minimumDate = date.getFullYear() - 55;
 
+var newDate = currentDate.replace(date.getFullYear(), maximumDate);
 
-console.log(minimumDate)
 
-document.getElementById('DOB').value = currentDate;
+document.getElementById('DOB').value = newDate;
 
 
 if(submit.addEventListener) {
@@ -70,7 +70,11 @@ function checkInputs() {
     if(DOB.value === null) {
         setErrorDate(DOB, 'Please select your birthdate');
         success =  false;
-    } else {
+    } else if(DOB.value.slice(0,4) < minimumDate || DOB.value.slice(0,4) > maximumDate) {
+        setErrorDate(DOB, 'Your age must be between 16 and 55');
+        success =  false;
+    }
+    else {
         setSuccessDate(DOB);
     }
 
@@ -143,8 +147,7 @@ function isValidDate(date)
 }
 
 signin.addEventListener('click', () => {
-    console.log(isValidDate(DOB.value));
-    console.log(DOB.value);
+    console.log(DOB.value.slice(0,4))
 })
 
 // console.log(isValidDate(DOB.value));
