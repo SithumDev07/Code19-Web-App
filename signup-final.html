@@ -30,6 +30,19 @@
       .profile-picture:hover > i {
           top: 50%;
       }
+      #upload-profile{
+          position: absolute;
+          top: 0;
+          z-index: 10;
+          width: 6rem;
+          height: 6rem;
+          opacity: 0;
+          left: 0;
+          cursor: pointer;
+      }
+      #upload-profile::-webkit-file-upload-button {
+          visibility: hidden;
+      }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -63,8 +76,9 @@
                         </label>
                        <div class="w-24 h-24 rounded-full overflow-hidden relative cursor-pointer profile-picture">
                             <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl z-10"></i>
-                            <img class="opacity-50" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="Profile">
-                       </div>
+                            <img id="profile" class="opacity-50" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="Profile">
+                            <input type="file" name="profileUpload" id="upload-profile">
+                        </div>
                         <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
                         <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
                         <p class="text-red-500 text-xs italic hidden">Only Supports for .jpeg .png .pdf only</p>
@@ -82,7 +96,7 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
                       Home (Optional)
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastName" type="text" placeholder="Ex: +94 3X XXX XXX X">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="landLine" type="text" placeholder="Ex: +94 3X XXX XXX X">
                     <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
                     <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
                     <p class="text-red-500 text-xs italic hidden">Phone number is not valid</p>
@@ -91,31 +105,27 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                       Position
                     </label>
-                    <select class="px-3 py-2 w-28 rounded">
+                    <select class="px-3 py-2 w-28 rounded" id="position">
                         <option value="Chef">Chef</option>
                         <option value="Staff">Staff</option>
                         <option value="Helper">Helper</option>
                         <option value="Manager">Manager</option>
                       </select>
-                    <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
-                    <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
-                    <p class="text-red-500 text-xs italic hidden">Address is required</p>
+                    <p class="text-red-500 text-xs italic hidden">Position is required</p>
                   </div>
                   <div class="mb-4 relative">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                       Shift
                     </label>
-                    <select class="px-3 py-2 w-28 rounded">
+                    <select class="px-3 py-2 w-28 rounded" id="shift">
                         <option value="Chef">Day</option>
                         <option value="Staff">Night</option>
                       </select>
-                    <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
-                    <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
-                    <p class="text-red-500 text-xs italic hidden">Address is required</p>
+                    <p class="text-red-500 text-xs italic hidden">Shift is required</p>
                   </div>
                   
                   <div class="flex w-full items-center mb-4">
-                    <input type="checkbox" class="rounded text-blue-700 cursor-pointer" />
+                    <input type="checkbox" class="rounded text-blue-700 cursor-pointer focus:outline-none" id="agreement" />
                     <label class="block text-gray-700 text-sm font-bold ml-2" for="password">
                         I agree to the <a href="terms" class="text-blue-700">terms & conditions</a>
                       </label>
@@ -123,7 +133,7 @@
 
                   <div class="flex items-center justify-between mb-6">
                     
-                    <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" id='submit' value="Finish" />
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer disabled:opacity-40" id='submit' disabled >Finish</button>
                   </div>
                   <p class="inline-block align-baseline font-bold text-sm text-gray-500">
                     Already have an account? <a class="text-blue-500 hover:text-blue-800 ml-1" id="signin">Sign in</a>
@@ -135,6 +145,6 @@
               </div>
         </header>
     </main>
-    <script src="./scripts/signup-personal.js"></script>
+    <script src="./scripts/signup-final.js"></script>
 </body>
 </html>

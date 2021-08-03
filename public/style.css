@@ -674,6 +674,20 @@ select {
   background-color: currentColor;
 }
 
+[type='file'] {
+  background: unset;
+  border-color: inherit;
+  border-width: 0;
+  border-radius: 0;
+  padding: 0;
+  font-size: unset;
+  line-height: inherit;
+}
+
+[type='file']:focus {
+  outline: 1px auto -webkit-focus-ring-color;
+}
+
 .container {
   width: 100%;
 }
@@ -1209,6 +1223,10 @@ select {
 
 .opacity-50 {
   opacity: 0.5;
+}
+
+.disabled\:opacity-40:disabled {
+  opacity: 0.4;
 }
 
 *, ::before, ::after {
