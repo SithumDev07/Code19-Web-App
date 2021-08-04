@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
+    <title>Dashboard</title>
+    <style>
+        #searchInput:focus{
+            outline: none !important;
+            border: 0 !important;
+        }
+    </style>
+</head>
+<body>
+    <main class="flex">
+        <aside class="w-24 h-screen bg-gray-300 flex flex-col items-center p-10 text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              </svg>
+
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+        </aside>
+        <section class="container mx-auto h-screen flex-1 px-10 py-3 bg-gradient-to-bl from-gray-100 to-gray-300">
+            <div class="top container mx-auto flex items-center justify-between">
+                <div class="flex flex-col">
+                    <h1 class="font-sans text-4xl font-bold text-gray-800">Dashboard</h1>
+                    <p class="text-base font-bold text-gray-400">Control Everything</p>
+                </div>
+                <div class="flex items-center w-72 rounded-full bg-gray-200 h-12 justify-between px-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                    <input type="text" placeholder="search" id="searchInput" class="flex-1 border-0 bg-transparent focus:outline-none text-base">
+                </div>
+            </div>
+            <div class="cards w-full flex mt-10">
+                <div class="card w-48 h-52 rounded-3xl bg-white shadow-sm mr-5 cursor-pointer"></div>
+                <div class="card w-48 h-52 rounded-3xl bg-white shadow-sm mr-5 cursor-pointer"></div>
+                <div class="card w-48 h-52 rounded-3xl bg-white shadow-sm mr-5 cursor-pointer"></div>
+                <div class="card w-48 h-52 rounded-3xl bg-white shadow-sm mr-5 cursor-pointer"></div>
+            </div>
+            <canvas id="myChart" class="w-full mt-12" height="300"></canvas>
+        </section>
+        <aside class="w-72 h-screen bg-gray-900"></aside>
+    </main>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+</body>
+</html>
