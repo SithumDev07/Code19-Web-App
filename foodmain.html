@@ -8,34 +8,34 @@
     <link rel="stylesheet" href="./public/style.css">
 </head>
 <body>
-    <main>
-        <nav>
-            <div class="logo">
-                <img src="" alt="Logo">
+    <main class="bg-yellow-100 px-10 py-1">
+        <nav class="flex justify-between container mx-auto items-center">
+            <div class="logo w-24 h-20">
+                <img src="./assets/logo/main-page-logo.png" class="w-full h-full object-cover" alt="Logo">
             </div>
 
-            <ul>
-                <li><a href="#">Today</a></li>
-                <li><a href="#">How to order?</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Contact</a></li>
+            <ul class="flex">
+                <li><a href="#" class="mr-10 font-bold">Today</a></li>
+                <li><a href="#" class="mr-10">How to order?</a></li>
+                <li><a href="#" class="mr-10">FAQ</a></li>
+                <li><a href="#" class="mr-10">Contact</a></li>
             </ul>
 
-            <div class="signup">
+            <div class="signup w-28 flex items-center justify-center h-12 px-3 py-1 border border-gray-600 rounded-full cursor-pointer">
                 signup
             </div>
         </nav>
 
-        <header>
+        <header class="grid grid-cols-2">
             <div class="left">
-                <h1>Get fresh food in a Easy Way</h1>
-            <a href="">Explore <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <h1 class="text-5xl">Get fresh food in a Easy Way</h1>
+            <a href="" class="flex text-gray-100 bg-black w-28 py-3 px-3 rounded-md">Explore <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg></a>
             </div>
 
             <div class="right">
-                <div class="discount uppercase">
+                <div class="discount uppercase w-48 py-3 bg-gray-100">
                     upto <p class="text-red-600">40%</p> discount
                 </div>
                 <img src="" alt="Featured-Food">
