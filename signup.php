@@ -2,6 +2,21 @@
 
 require_once 'layouts/header.php';
 
+include 'config.php';
+
+if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $emailAddress = $_POST['email'];
+    $password = $_POST['password'];
+
+    $sql = "INSERT INTO usersphp(username, email, password) VALUES ('$username', '$emailAddress', '$password')";
+
+    $result = $conn->query($sql);
+
+    if ($result) echo "New record created";
+    else echo "There was an error" . $conn->connect_error;
+}
+
 ?>
 
 <header class="container mx-auto my-24">
@@ -11,7 +26,7 @@ require_once 'layouts/header.php';
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                     Username
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" name="username">
                 <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
                 <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
                 <p class="text-red-500 text-xs italic hidden">Username is required</p>
@@ -20,7 +35,7 @@ require_once 'layouts/header.php';
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                     Email Address
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email address">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email address" name="email">
                 <i class="fas fa-check-circle text-green-500 absolute top-10 right-2""></i>
                     <i class=" fas fa-exclamation-circle text-red-500 absolute top-10 right-2""></i>
                 <p class="text-red-500 text-xs italic hidden">Email address is required</p>
@@ -29,7 +44,7 @@ require_once 'layouts/header.php';
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                     Password
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1" id="password" type="password" placeholder="******************">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1" id="password" type="password" placeholder="******************" name="password">
                 <i class="fas fa-check-circle text-green-500 absolute top-10 right-2""></i>
                     <i class=" fas fa-exclamation-circle text-red-500 absolute top-10 right-2""></i>
                 <p class="text-red-500 text-xs italic hidden">Password is required</p>
@@ -47,7 +62,7 @@ require_once 'layouts/header.php';
                 <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                     Forgot Password?
                 </a>
-                <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id='submit' value="Next" />
+                <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id='submit' name="submit" value="Next" />
             </div>
             <p class="inline-block align-baseline font-bold text-sm text-gray-500">
                 Already have an account? <a href="" class="text-blue-500 hover:text-blue-800 ml-1">Sign in</a>
