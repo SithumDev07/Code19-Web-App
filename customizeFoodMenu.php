@@ -65,11 +65,11 @@
 <body class="md:overflow-hidden h-full md:h-screen">
     <main class="glass px-3 md:px-10 py-1 h-full">
 
-        <div class="fixed h-14 w-14 rounded-full bg-black top-1 md:top-6 right-1 md:right-8 flex justify-center items-center text-white cursor-pointer">
+        <a href="./foodMain.php" class="fixed h-14 w-14 rounded-full bg-black top-1 md:top-6 right-1 md:right-8 flex justify-center items-center text-white cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
-        </div>
+        </a>
 
         <!-- Header -->
         <header class="flex flex-col xl:flex-row xl:container xl:mx-auto h-screen">
