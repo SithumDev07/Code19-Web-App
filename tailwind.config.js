@@ -7,8 +7,9 @@ module.exports = {
   variants: {
     extend: {
       opacity: ['disabled'],
-      scale: ['active']
+      scale: ['active'],
     },
+    animation: ['responsive', 'motion-safe', 'motion-reduce']
   },
   plugins: [
     require('@tailwindcss/forms'),

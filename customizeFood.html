@@ -22,6 +22,26 @@
           z-index: 2;
           backdrop-filter: blur(2rem);
         }
+        .topping-error {
+            bottom: -20%;
+            transition: all 0.5s ease-in;
+        }
+
+        .topping-error-active {
+            animation: popup 1s forwards 1s;
+        }
+
+        @keyframes popup {
+            0% {
+                bottom: -100%;
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+            100%{
+                bottom: 5rem;
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+        }
+
     </style>
 </head>
 <body class="md:overflow-hidden h-full md:h-screen">
@@ -120,6 +140,8 @@
                 <a disabled href="./foodmain.html" class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black w-36 py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold">Checkout <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg></a>
+
+                  <div class="-bottom-full topping-error-active motion-safe:animate-bounce fixed left-1/2 explore flex text-gray-100 bg-red-500 py-3 px-5 rounded justify-center items-center mt-5 font-semibold disabled:opacity-50">Please select at least one topping</div>
             </div>
         </header>
     </main>
