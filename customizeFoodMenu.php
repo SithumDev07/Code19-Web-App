@@ -25,18 +25,38 @@
         }
 
         .topping-error-active {
-            animation: popup 1s linear;
+            /* animation: popup 1s linear; */
+
+            bottom: 2rem;
         }
 
-        @keyframes popup {
+        /* @keyframes popup {
             0% {
                 transform: translateY(-100%);
                 animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
             }
 
             100% {
-                transform: translateY(100%);
+                transform: translateY(20%);
                 animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+        } */
+
+        .bounce-err {
+            animation: bounce 0.5s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(-25%);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+
+            50% {
+                transform: translateY(0);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
             }
         }
     </style>
@@ -83,15 +103,18 @@
                     }
                     ?>
                 </div>
-                <button class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black w-36 py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="checkout">Checkout <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button disabled class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black w-36 py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="checkout">Checkout <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg></button>
 
-                <div class="-bottom-full motion-safe:animate-bounce fixed left-1/2 explore flex text-gray-100 bg-red-500 py-3 px-5 rounded justify-center items-center mt-5 font-semibold disabled:opacity-50 error">Please select at least one topping</div>
+                <div class="-bottom-full bounce-err fixed left-1/2 explore flex text-gray-100 bg-red-500 py-3 px-5 rounded justify-center items-center mt-5 font-semibold disabled:opacity-50 error">Please select at least one topping</div>
             </div>
         </header>
     </main>
     <script>
+        const checkout = document.querySelector('#checkout');
+        let activeCount = 0;
+
         function setActive(id) {
             const topping = document.querySelector(`#${id}`);
             document.querySelector(`#${id}`).classList.toggle('bg-black');
@@ -99,10 +122,30 @@
             document.querySelector(`#${id}`).classList.toggle('border-gray-300');
 
             topping.querySelector('svg').classList.toggle('hidden');
-            console.log(id);
+
+            countActive(id);
+
+
+            if (activeCount == 0) {
+                var att = document.createAttribute("disabled");
+                checkout.setAttribute("disabled", "");
+            }
+            if (activeCount > 0) {
+                if (checkout.hasAttribute('disabled'))
+                    checkout.attributes.removeNamedItem('disabled');
+            };
         }
 
-        const checkout = document.querySelector('#checkout');
+        function countActive(id) {
+            const topping = document.querySelector(`#${id}`);
+            if (topping.classList.contains('bg-black')) {
+                activeCount++;
+            } else {
+                activeCount--;
+            }
+        }
+
+
         checkout.addEventListener('click', () => {
             document.querySelector('.error').classList.remove('-bottom-full');
             document.querySelector('.error').classList.add('topping-error-active');
