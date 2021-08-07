@@ -36,15 +36,18 @@
                 <a href=""><img src="./assets/logo/main-page-logo.png" class="w-full h-full object-cover" alt="Logo"></a>
             </div>
 
-            <ul class="flex">
+            <ul class="flex flex-1 justify-center">
                 <li><a href="#" class="mr-10 font-bold">Today</a></li>
                 <li><a href="#" class="mr-10">How to order?</a></li>
                 <li><a href="#" class="mr-10">FAQ</a></li>
                 <li><a href="#" class="mr-10">Contact</a></li>
             </ul>
 
-            <div class="signup w-28 flex items-center justify-center h-12 px-3 py-1 border border-gray-600 rounded-full cursor-pointer">
-                signup
+            <div class="flex items-center">
+                <a href="" class="mr-4 text-red-500 font-semibold">Login</a>
+                <div class="signup w-28 flex items-center justify-center h-12 px-3 py-1 border border-gray-600 rounded-full cursor-pointer">
+                    signup
+                </div>
             </div>
         </nav>
 
@@ -201,7 +204,8 @@
                         <div class="w-40 h-40">
                             <img src="./assets/featured/featured-burger.png" alt="Food Today's Special" class="w-full h-full object-contain">
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-600 text-center -mt-4 mb-1">Cheese Burger Haloween Special</h3>
+                        <!-- <h3 class="text-2xl font-bold text-gray-600 text-center -mt-4 mb-1">Cheese Burger Haloween Special</h3> -->
+                        <h3 class="text-2xl font-bold text-gray-600 text-center -mt-4 mb-1"><?php echo $food ?></h3>
                         <div class="stars text-yellow-500 flex">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
