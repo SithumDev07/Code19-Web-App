@@ -69,16 +69,42 @@
 
         <!-- Header -->
         <header class="flex flex-col xl:flex-row xl:container xl:mx-auto h-screen">
-            <div class="left flex flex-col xl:flex-1">
+            <div class="left flex flex-col xl:flex-1 px-2">
                 <h1 class="text-6xl md:text-9xl font-extrabold selection:bg-red-500" style="-webkit-text-stroke: 2px; -webkit-text-stroke-color: rgb(229, 231, 235); color: transparent;">Checkout</h1>
                 
-                <div class="flex items-center justify-center">
-                    
+                <div class="payment w-full h-auto border rounded-md p-6 my-6">
+                    <div class="flex">
+                        <div class="credit-card w-72 h-44 rounded-2xl flex flex-col p-3 justify-between bg-primary relative overflow-hidden">
+                            <div class="flex justify-between relative">
+                                <div class="w-6 h-6 rounded-full bg-gray-50 opacity-40"></div>
+                                <div class="w-6 h-6 rounded-full bg-gray-50 absolute top-0 left-4 z-10"></div>
+                                <h4 class="uppercase font-semibold text-gray-100 text-xl">visa</h4>
+                            </div>
+                            <h3 class="font-semibold text-2xl text-gray-200">8956 1254 8995</h3>
+                            <div class="flex justify-between">
+                                <h3 class="uppercase font-semibold text-gray-200 text-sm">Your Name</h3>
+                                <h3 class="uppercase font-semibold text-gray-200 text-sm z-20">09/23</h3>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-48 w-48 absolute -bottom-20 -right-16 text-blue-400 z-10" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                              </svg>
+                        </div>
+
+                        <div class="w-44 h-44 rounded-2xl border-dotted border-2 border-gray-200 ml-5 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-xl bg-gray-100 bg-opacity-10 flex items-center justify-center text-gray-100">
+                                <button class="transform transition duration-200 hover:scale-110">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                      </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="right relative flex xl:justify-center flex-col flex-1 p-2">
-               <div class="cart w-full h-auto border rounded-md p-6  overflow-y-auto">
+               <div class="cart w-full h-auto border rounded-md p-6 overflow-y-auto">
                    <div class="cart-card w-full h-auto rounded-lg border flex items-center px-3 py-4 pr-5 mb-6">
                         <div class="w-32 h-32">
                             <img src="./assets/featured/featured-burger.png" class="w-full h-full object-contain" alt="">

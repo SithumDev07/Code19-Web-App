@@ -1,8 +1,13 @@
 module.exports = {
-  purge: [],
+  // mode: 'jit',
+  // purge: ['./*.html',],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    backgroundColor: theme => ({
+      ...theme('colors'),
+      'primary': '#343DFF',
+     })
   },
   variants: {
     extend: {
