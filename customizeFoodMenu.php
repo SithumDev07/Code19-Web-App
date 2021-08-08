@@ -103,7 +103,7 @@
                     }
                     ?>
                 </div>
-                <button disabled class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black w-36 py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="checkout">Checkout <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button disabled class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black w-36 py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="checkout" onclick="goCheckout()">Checkout <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg></button>
 
@@ -114,6 +114,7 @@
     <script>
         const checkout = document.querySelector('#checkout');
         let activeCount = 0;
+        let canMove = false;
 
         function setActive(id) {
             const topping = document.querySelector(`#${id}`);
@@ -131,8 +132,10 @@
                 checkout.setAttribute("disabled", "");
             }
             if (activeCount > 0) {
-                if (checkout.hasAttribute('disabled'))
+                if (checkout.hasAttribute('disabled')) {
                     checkout.attributes.removeNamedItem('disabled');
+                    canMove = true;
+                }
             };
         }
 
@@ -143,6 +146,11 @@
             } else {
                 activeCount--;
             }
+        }
+
+        function goCheckout() {
+            if (canMove)
+                window.location.href = "./checkout.php";
         }
 
 
