@@ -68,6 +68,7 @@
 <body class="md:overflow-hidden h-full md:h-screen">
     <main class="glass px-3 md:px-10 py-1 h-full">
 
+
         <a href="./customizeFoodMenu.php" class="fixed h-14 w-14 rounded-full bg-black top-1 md:top-6 left-1 md:left-6 flex justify-center items-center text-white cursor-pointer z-50">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -160,138 +161,84 @@
 
             <div class="right relative flex xl:justify-center flex-col flex-1 p-2">
                 <div class="cart w-full h-auto border rounded-md p-6 overflow-y-auto">
-                    <div class="cart-card w-full h-auto rounded-lg border flex items-center px-3 py-4 pr-5 mb-6">
-                        <div class="w-32 h-32">
-                            <img src="./assets/featured/featured-burger.png" class="w-full h-full object-contain" alt="">
-                        </div>
-                        <div class="conetent flex flex-col flex-1 border-l border-r px-3">
-                            <h1 class="text-xl font-bold text-gray-100">Cheese Burger Haloween Special (XL)</h1>
-                            <div class="flex flex-wrap">
-                                <button class="flex px-3 py-2 rounded-full bg-black text-gray-200 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-1 mt-3 text-xs">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Cheese
-                                </button>
+
+
+                    <?php
+                    $arr = array(
+                        "Product" => "Cheese Burger Haloween Special (XL)", "UnitPrice" => '$49', "Quantity" => "7", "Toppings" => array(
+                            "One" => "Cheese", "02" => "Chilli Sauce", "03" => "Mushrooms", "04" => "Cuttle Fish", "05" => "Olives", "06" => "Capsicum", "07" => "Halloween Special Salad"
+                        )
+                    );
+
+                    $thaprobane = array(
+                        "Product" => "Chiken Special BBQ Burger (R)", "UnitPrice" => '$54', "Quantity" => "1", "Toppings" => array(
+                            "One" => "Chicken", "02" => "Chilli Sauce", "03" => "Special Dayya Sauce", "04" => "Baken", "05" => "Olives"
+                        )
+                    );
+
+                    $finalArray = array($arr, $thaprobane, $arr, $arr, $arr, $arr, $arr);
+
+
+                    foreach ($finalArray as $final) {
+                        $jsonmine =  json_encode($final);
+                        $yummy = json_decode($jsonmine);
+
+                    ?>
+
+                        <div class="cart-card w-full h-auto rounded-lg border flex items-center px-3 py-4 pr-5 mb-6">
+                            <div class="w-32 h-32">
+                                <img src="./assets/featured/featured-burger.png" class="w-full h-full object-contain" alt="">
+                            </div>
+                            <div class="conetent flex flex-col flex-1 border-l border-r px-3">
+                                <h1 class="text-xl font-bold text-gray-100"><?php echo $yummy->Product ?></h1>
+                                <div class="flex flex-wrap">
+
+                                    <?php
+
+                                    foreach ($yummy->Toppings as $key => $value) {
+
+                                    ?>
+
+                                        <button class="flex px-3 py-2 rounded-full bg-black text-gray-200 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-1 mt-3 text-xs">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <?php echo $value ?>
+                                        </button>
+
+                                    <?php
+                                    }
+
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="pricing flex flex-col pl-3 items-center">
+                                <h1 class="text-gray-100 font-semibold text-2xl"><?php echo $yummy->UnitPrice ?>/<span class="text-sm">each</span></h1>
+                                <div class="p-3 w-auto h-auto flex items-center text-gray-200 active:scale-90 mt-3 text-xs">
+                                    <button class="transition duration-150 hover:shadow-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                        </svg>
+                                    </button>
+                                    <p class="mx-3 font-bold text-xl"><?php echo $yummy->Quantity ?></p>
+                                    <button class="transition duration-150 hover:shadow-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <button class="text-red-600 text-lg font-bold shadow-sm">Remove</button>
                             </div>
                         </div>
-                        <div class="pricing flex flex-col pl-3 items-center">
-                            <h1 class="text-gray-100 font-semibold text-2xl">$12/<span class="text-sm">each</span></h1>
-                            <div class="p-3 w-auto h-auto flex items-center text-gray-200 active:scale-90 mt-3 text-xs">
-                                <button class="transition duration-150 hover:shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                    </svg>
-                                </button>
-                                <p class="mx-3 font-bold text-xl">07</p>
-                                <button class="transition duration-150 hover:shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <button class="text-red-600 text-lg font-bold shadow-sm">Remove</button>
-                        </div>
-                    </div>
-                    <div class="cart-card w-full h-auto rounded-lg border flex items-center px-3 py-4 pr-5 mb-6">
-                        <div class="w-32 h-32">
-                            <img src="./assets/featured/featured-burger.png" class="w-full h-full object-contain" alt="">
-                        </div>
-                        <div class="conetent flex flex-col flex-1 border-l border-r px-3">
-                            <h1 class="text-xl font-bold text-gray-100">Cheese Burger Haloween Special (XL)</h1>
-                            <div class="flex flex-wrap">
-                                <button class="flex px-3 py-2 rounded-full bg-black text-gray-200 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-1 mt-3 text-xs">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Cheese
-                                </button>
-                            </div>
-                        </div>
-                        <div class="pricing flex flex-col pl-3 items-center">
-                            <h1 class="text-gray-100 font-semibold text-2xl">$12/<span class="text-sm">each</span></h1>
-                            <div class="p-3 w-auto h-auto flex items-center text-gray-200 active:scale-90 mt-3 text-xs">
-                                <button class="transition duration-150 hover:shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                    </svg>
-                                </button>
-                                <p class="mx-3 font-bold text-xl">07</p>
-                                <button class="transition duration-150 hover:shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <button class="text-red-600 text-lg font-bold shadow-sm">Remove</button>
-                        </div>
-                    </div>
-                    <div class="cart-card w-full h-auto rounded-lg border flex items-center px-3 py-4 pr-5 mb-6">
-                        <div class="w-32 h-32">
-                            <img src="./assets/featured/featured-burger.png" class="w-full h-full object-contain" alt="">
-                        </div>
-                        <div class="conetent flex flex-col flex-1 border-l border-r px-3">
-                            <h1 class="text-xl font-bold text-gray-100">Cheese Burger Haloween Special (XL)</h1>
-                            <div class="flex flex-wrap">
-                                <button class="flex px-3 py-2 rounded-full bg-black text-gray-200 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-1 mt-3 text-xs">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Cheese
-                                </button>
-                            </div>
-                        </div>
-                        <div class="pricing flex flex-col pl-3 items-center">
-                            <h1 class="text-gray-100 font-semibold text-2xl">$12/<span class="text-sm">each</span></h1>
-                            <div class="p-3 w-auto h-auto flex items-center text-gray-200 active:scale-90 mt-3 text-xs">
-                                <button class="transition duration-150 hover:shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                    </svg>
-                                </button>
-                                <p class="mx-3 font-bold text-xl">07</p>
-                                <button class="transition duration-150 hover:shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <button class="text-red-600 text-lg font-bold shadow-sm">Remove</button>
-                        </div>
-                    </div>
-                    <div class="cart-card w-full h-auto rounded-lg border flex items-center px-3 py-4 pr-5 mb-6">
-                        <div class="w-32 h-32">
-                            <img src="./assets/featured/featured-burger.png" class="w-full h-full object-contain" alt="">
-                        </div>
-                        <div class="conetent flex flex-col flex-1 border-l border-r px-3">
-                            <h1 class="text-xl font-bold text-gray-100">Cheese Burger Haloween Special (XL)</h1>
-                            <div class="flex flex-wrap">
-                                <button class="flex px-3 py-2 rounded-full bg-black text-gray-200 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-1 mt-3 text-xs">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                    Cheese
-                                </button>
-                            </div>
-                        </div>
-                        <div class="pricing flex flex-col pl-3 items-center">
-                            <h1 class="text-gray-100 font-semibold text-2xl">$12/<span class="text-sm">each</span></h1>
-                            <div class="p-3 w-auto h-auto flex items-center text-gray-200 active:scale-90 mt-3 text-xs">
-                                <button class="transition duration-150 hover:shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                    </svg>
-                                </button>
-                                <p class="mx-3 font-bold text-xl">07</p>
-                                <button class="transition duration-150 hover:shadow-lg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <button class="text-red-600 text-lg font-bold shadow-sm">Remove</button>
-                        </div>
-                    </div>
+
+
+
+                    <?php
+
+
+                    }
+
+                    ?>
                 </div>
             </div>
 
