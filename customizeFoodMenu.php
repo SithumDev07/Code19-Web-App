@@ -59,13 +59,31 @@
                 animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
             }
         }
+
+        .toppings::-webkit-scrollbar {
+            width: 0.6em;
+            border-radius: 50%;
+        }
+
+        .toppings::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .toppings::-webkit-scrollbar-thumb {
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 1.2em;
+        }
+
+        .toppings {
+            -webkit-overflow-scrolling: touch;
+        }
     </style>
 </head>
 
-<body class="md:overflow-hidden h-full md:h-screen">
-    <main class="glass px-3 md:px-10 py-1 h-full">
+<body class="overflow-hidden h-screen">
+    <main class="glass px-3 md:px-10 py-1 h-screen">
 
-        <a href="./foodMain.php" class="fixed h-14 w-14 rounded-full bg-black top-1 md:top-6 right-1 md:right-8 flex justify-center items-center text-white cursor-pointer">
+        <a href="./foodMain.php" class="fixed h-14 w-14 rounded-full bg-black top-1 md:top-6 right-1 md:right-8 flex justify-center items-center text-white z-50">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -85,9 +103,9 @@
                 <h1 class="text-2xl md:text-5xl lg:text-7xl xl:text-5xl text-gray-200 font-bold">Cheese Burger Haloween Special (XL)</h1>
                 <p class="text-justify text-gray-300 text-base md:text-xl xl:text-base my-2 md:my-6 lg:my-10 xl:my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus nobis tenetur, voluptate, dolor excepturi architecto, necessitatibus doloribus quo est laboriosam nisi. Recusandae animi qui exercitationem et atque assumenda, commodi mollitia?</p>
                 <h3 class="uppercase font-semibold text-2xl text-gray-200 tracking-widest">Topping</h3>
-                <div class="flex my-2 md:my-4 flex-wrap">
+                <div class="flex my-2 md:my-4 flex-wrap overflow-y-auto toppings">
                     <?php
-                    $toppings = array("Cheese", "Chilli Sauce", "Mushrooms", "Cuttle Fish", "Olives", "Capsicum", "Halloween Special Salad");
+                    $toppings = array("Cheese", "Chilli Sauce", "Mushrooms", "Cuttle Fish", "Olives", "Capsicum", "Halloween Special Salad", "BBQ Sauce", "Indian Spices");
                     foreach ($toppings as $topping) {
                         $id = preg_replace('/\s+/', '', $topping);
                     ?>
@@ -103,7 +121,23 @@
                     }
                     ?>
                 </div>
-                <button disabled class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black w-36 py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="checkout" onclick="goCheckout()">Checkout <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="flex justify-between items-center">
+                    <div class="p-3 w-auto h-auto flex items-center text-gray-200 active:scale-90 mt-3 text-xs">
+                        <button class="transition duration-150 hover:shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                        </button>
+                        <p class="mx-3 font-bold text-2xl">06</p>
+                        <button class="transition duration-150 hover:shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
+                            </svg>
+                        </button>
+                    </div>
+                    <h2 class="text-4xl text-gray-100 font-semibold">$39/<span class="text-sm">each</span></h2>
+                </div>
+                <button disabled class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="checkout" onclick="goCheckout()">Add to cart<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg></button>
 
@@ -150,7 +184,7 @@
 
         function goCheckout() {
             if (canMove)
-                window.location.href = "./checkout.php";
+                window.location.href = "./foodMain.php";
         }
 
 

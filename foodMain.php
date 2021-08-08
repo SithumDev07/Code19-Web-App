@@ -44,10 +44,20 @@
             </ul>
 
             <div class="flex items-center">
-                <a href="" class="mr-4 text-red-500 font-semibold">Login</a>
-                <div class="signup w-28 flex items-center justify-center h-12 px-3 py-1 border border-gray-600 rounded-full cursor-pointer">
+                <a href="" class="mr-4 text-gray-100 font-semibold">Login</a>
+                <div class="signup w-28 flex items-center justify-center h-12 px-3 py-1 border border-gray-600 rounded-full cursor-pointer mr-4">
                     signup
                 </div>
+                <a href="./checkout.php" class="text-white mr-4 relative">
+                    <div class="py-1 px-2 rounded-full bg-red-500 absolute -top-2 -right-2 text-xs">3</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                </a>
+                <a href="" class="w-14 h-14 rounded-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" class="w-full h-full object-cover" alt="">
+                </a>
+
             </div>
         </nav>
 
@@ -73,7 +83,7 @@
             </div>
 
             <div class="right relative">
-                <div class="discount uppercase w-48 py-3 bg-gray-100 absolute top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center">
+                <div class="discount uppercase w-48 py-3 bg-gray-100 bg-opacity-60 absolute top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center font-bold">
                     upto <p class="text-red-600 mx-1">40%</p> discount
                 </div>
                 <img src="./assets/featured/featured-burger.png" alt="Featured-Food">

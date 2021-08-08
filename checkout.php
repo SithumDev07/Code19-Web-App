@@ -69,7 +69,7 @@
     <main class="glass px-3 md:px-10 py-1 h-full">
 
 
-        <a href="./customizeFoodMenu.php" class="fixed h-14 w-14 rounded-full bg-black top-1 md:top-6 left-1 md:left-6 flex justify-center items-center text-white cursor-pointer z-50">
+        <a href="./foodmain.php" class="fixed h-14 w-14 rounded-full bg-black top-1 md:top-6 left-1 md:left-6 flex justify-center items-center text-white cursor-pointer z-50">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
