@@ -26,6 +26,24 @@
             z-index: 2;
             backdrop-filter: blur(2rem);
         }
+
+        body::-webkit-scrollbar {
+            width: 0.6em;
+            border-radius: 50%;
+        }
+
+        body::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 1.2em;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 
