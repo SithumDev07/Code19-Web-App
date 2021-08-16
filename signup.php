@@ -4,14 +4,20 @@ require_once 'layouts/header.php';
 
 include 'config.php';
 
-$username;
-$emailAddress;
-$password;
+
+$firstname;
+$lastname;
+$address;
+$birthday;
+
+session_start();
 
 if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $emailAddress = $_POST['email'];
-    $password = $_POST['password'];
+    // $username = $_POST['username'];
+    $_SESSION['username'] = $_POST['username'];
+    $_SESSION['emailadd'] = $_POST['email'];
+    // $emailAddress = $_POST['email'];
+    $_SESSION['password'] = $_POST['password'];
 
     // $sql = "INSERT INTO usersphp(username, email, password) VALUES ('$username', '$emailAddress', '$password')";
 
@@ -19,6 +25,11 @@ if (isset($_POST['submit'])) {
 
     // if ($result) echo "New record created";
     // else echo "There was an error" . $conn->connect_error;
+} else if(isset($_POST['submittwo'])) {
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $address = $_POST['address'];
+    $birthday = $_POST['birthday'];
 }
 
 ?>
@@ -27,11 +38,8 @@ if (isset($_POST['submit'])) {
     <div class="w-full max-w-xs mx-auto">
 
     <?php 
-        if(!isset($_GET['steptwo'])) {
+        if(!isset($_GET['steptwo']) && !isset($_GET['stepthree'])) {
             ?> 
-            
-
-            
             
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./signup.php?steptwo" method="POST">
         <!-- <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"> -->
@@ -91,13 +99,13 @@ if (isset($_POST['submit'])) {
             if(isset($_GET['steptwo'])) {
                 
         ?>
-        <h1><?php if(!empty($username)) { echo $username . ' ' . $emailAddress; } else echo 'They are not here'; ?></h1>
+        
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./signup.php?stepthree" method="POST">
                   <div class="mb-4 relative">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">
                       First Name
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstName" type="text" placeholder="First name">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstName" type="text" placeholder="First name" name="firstname">
                     <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
                     <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
                     <p class="text-red-500 text-xs italic hidden">FirstName is required</p>
@@ -106,7 +114,7 @@ if (isset($_POST['submit'])) {
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
                       Last Name
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastName" type="text" placeholder="Last name">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastName" type="text" placeholder="Last name" name="lastname">
                     <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
                     <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
                     <p class="text-red-500 text-xs italic hidden">Last Name is required</p>
@@ -115,7 +123,7 @@ if (isset($_POST['submit'])) {
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                       Address
                     </label>
-                    <textarea name="address" id="address" class="hadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1" placeholder="Address"></textarea>
+                    <textarea name="address" id="address" class="hadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1" placeholder="Address" name="address"></textarea>
                     <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
                     <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
                     <p class="text-red-500 text-xs italic hidden">Address is required</p>
@@ -124,7 +132,7 @@ if (isset($_POST['submit'])) {
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                       Date of Birth
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1" id="DOB" type="date" required>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1" id="DOB" type="date" required name="birthday">
                     <!-- <i class="fas fa-check-circle text-green-500 absolute top-10 right-2""></i>
                     <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2""></i> -->
                     <p class="text-red-500 text-xs italic hidden">Please confirm your password</p>
@@ -133,7 +141,7 @@ if (isset($_POST['submit'])) {
                     <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                       Forgot Password?
                     </a>
-                    <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id='submit' value="Next" />
+                    <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id='submit' value="Next" name="submittwo"/>
                   </div>
                   <p class="inline-block align-baseline font-bold text-sm text-gray-500">
                     Already have an account? <a class="text-blue-500 hover:text-blue-800 ml-1" id="signin">Sign in</a>
@@ -145,6 +153,7 @@ if (isset($_POST['submit'])) {
             } else if(isset($_GET['stepthree'])) {
 
             ?>
+            <h1><?php if(!empty($username) && !empty($firstname)) { echo $_SESSION['username'] . ' ' . $firstname . ' ' . $lastname . ' ' . $_SESSION['emailadd']; } else echo 'They are not here'; ?></h1>
             <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./index.php" method="POST">
                     <div class="mb-4 relative text-center flex flex-col justify-center items-center">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">
@@ -230,9 +239,17 @@ if (isset($_POST['submit'])) {
 </main>
 <script src="./scripts/common.js"></script>
 <?php
-    if(!isset($_GET['steptwo'])) {
+    if(!isset($_GET['steptwo']) && !isset($_GET['stepthree'])) {
         ?>
     <script src="./scripts/signup.js"></script>
+        <?php
+    } else if (isset($_GET['steptwo'])) {
+        ?>
+    <script src="./scripts/signup-personal.js"></script>
+        <?php
+    } else if(isset($_GET['stepthree'])) {
+        ?>
+    <script src="./scripts/signup-final.js"></script>
         <?php
     }
 ?>

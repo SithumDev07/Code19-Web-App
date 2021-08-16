@@ -15,7 +15,20 @@ var minimumDate = date.getFullYear() - 55;
 var newDate = currentDate.replace(date.getFullYear(), maximumDate);
 
 
-document.getElementById('DOB').value = newDate;
+
+
+if(DOB !== null) {
+    // console.log('Working');
+    if(DOB.value === '') {
+        DOB.value = newDate;
+        DOB.setAttribute("min", currentDate.replace(date.getFullYear(), minimumDate));
+        DOB.setAttribute("max", currentDate);
+    }
+}
+
+focusEventListener(firstName);
+focusEventListener(lastName);
+focusEventListener(address);
 
 
 if(submit.addEventListener) {
@@ -49,12 +62,18 @@ function checkInputs() {
     if(firstNameValue === '') {
         setError(firstName, 'First name is required');
         success =  false;
+    }else if(validateSpecialCharacters(firstNameValue)) {
+        setError(firstName, 'Special characters not allowed');
+        success =  false;
     } else {
         setSuccess(firstName);
     }
 
     if(lastNameValue === '') {
         setError(lastName, 'Last name is required');
+        success =  false;
+    }else if(validateSpecialCharacters(lastNameValue)) {
+        setError(lastName, 'Special characters not allowed');
         success =  false;
     } else {
         setSuccess(lastName);
