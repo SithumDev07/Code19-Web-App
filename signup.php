@@ -45,20 +45,11 @@ if (isset($_POST['submit'])) {
         }
     }
 
-
-    
-
-    // $sql = "INSERT INTO usersphp(username, email, password) VALUES ('$username', '$emailAddress', '$password')";
-
-    // $result = $conn->query($sql);
-
-    // if ($result) echo "New record created";
-    // else echo "There was an error" . $conn->connect_error;
 } else if(isset($_POST['submittwo'])) {
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $address = $_POST['address'];
-    $birthday = $_POST['birthday'];
+    $_SESSION['firstname'] = $_POST['firstname'];
+    $_SESSION['lastname'] = $_POST['lastname'];
+    $_SESSION['address'] = $_POST['address'];
+    $_SESSION['birthday'] = $_POST['birthday'];
 }
 
 ?>
@@ -184,7 +175,7 @@ if (isset($_POST['submit'])) {
             } else if(isset($_GET['stepthree'])) {
 
             ?>
-            <h1><?php if(!empty($username) && !empty($firstname)) { echo $_SESSION['username'] . ' ' . $firstname . ' ' . $lastname . ' ' . $_SESSION['emailadd']; } else echo 'They are not here'; ?></h1>
+
             <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./includes/register-inc.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-4 relative text-center flex flex-col justify-center items-center">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">
@@ -254,6 +245,15 @@ if (isset($_POST['submit'])) {
                   <p class="inline-block align-baseline font-bold text-sm text-gray-500">
                     Already have an account? <a class="text-blue-500 hover:text-blue-800 ml-1" id="signin">Sign in</a>
                   </p>
+
+                  <!-- Getting Previous Form Values -->
+                  <input class="hidden" type="text" value="<?php echo $_SESSION['username']; ?>" name="username">
+                  <input class="hidden" type="text" value="<?php echo $_SESSION['emailadd']; ?>" name="email">
+                  <input class="hidden" type="text" value="<?php echo $_SESSION['password']; ?>" name="password">
+                  <input class="hidden" type="text" value="<?php echo $_SESSION['firstname']; ?>" name="firstname">
+                  <input class="hidden" type="text" value="<?php echo $_SESSION['lastname']; ?>" name="lastname">
+                  <input class="hidden" type="text" value="<?php echo $_SESSION['address']; ?>" name="address">
+                  <input class="hidden" type="text" value="<?php echo $_SESSION['birthday']; ?>" name="birthday">
                 </form>
 
 

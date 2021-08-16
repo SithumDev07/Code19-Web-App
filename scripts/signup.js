@@ -4,6 +4,15 @@ const email = document.querySelector('#email');
 const password = document.querySelector('#password');
 const confirmedPassword = document.querySelector('#confirmedPassword');
 const submit = document.querySelector('#submit');
+const restricted = document.querySelector('#restricted');
+
+if(restricted !== null) {
+    restricted.addEventListener('click', () => {
+        document.querySelector('main').classList.remove('blur-error')
+        document.querySelector('.restricted').classList.add('hidden')
+        console.log('Working');
+    })
+}
 
 console.log('Working');
 focusEventListener(username);

@@ -58,13 +58,31 @@
             <?php
 
         }
+
+        if(isset($_GET['error']) && $_GET['error'] == 'restricted') {
+    ?> 
+        .blur-error {
+            opacity: .1;
+        }     
+    <?php
+        }
       ?>
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-    <main class="bg-white">
+    <?php
+        if(isset($_GET['error']) && $_GET['error'] == 'restricted') {
+            ?>
+                <div class="restricted fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-64 bg-white flex flex-col items-center justify-center shadow-xl z-50 rounded">
+                    <h1 class="text-2xl font-semibold text-gray-500">Please Login</h1>
+                    <button class="text-white px-10 py-2 bg-yellow-400 rounded mt-5" id="restricted">Ok</button>
+                </div>
+            <?php
+        }
+    ?>
+    <main class="bg-white blur-error">
         <div class="bg-white border-b fixed top-0 left-0 right-0 z-20">
             <nav class="h-16 container mx-auto flex">
                 <div class="logo w-20 h-16 p-2 mr-10 flex items-center justify-center">

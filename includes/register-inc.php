@@ -1,5 +1,7 @@
 <?php
 
+require '../config.php';
+
 
 if (isset($_POST['final'])) {
     $username = $_POST['username'];
@@ -13,13 +15,13 @@ if (isset($_POST['final'])) {
     $landline = $_POST['landline'];
     $position = $_POST['position'];
     $shift = $_POST['shift'];
-    $file = $_POST['profileUpload'];
+    $file = $_FILES['profileUpload'];
 
-    $fileName = $_FILES['Image']['name'];
-    $fileTmpName = $_FILES['Image']['tmp_name'];
-    $fileSize = $_FILES['Image']['size'];
-    $fileError = $_FILES['Image']['error'];
-    $fileType = $_FILES['Image']['type'];
+    $fileName = $_FILES['profileUpload']['name'];
+    $fileTmpName = $_FILES['profileUpload']['tmp_name'];
+    $fileSize = $_FILES['profileUpload']['size'];
+    $fileError = $_FILES['profileUpload']['error'];
+    $fileType = $_FILES['profileUpload']['type'];
 
     $fileExt = explode('.', $fileName);
     $fileActualExt = strtolower(end($fileExt));
@@ -45,9 +47,13 @@ if (isset($_POST['final'])) {
                         exit();
                     } else {
                         $fullName = $firstname . ' ' . $lastname;
-                        mysqli_stmt_bind_param($statement, 'sssssssssss', $username, $fullName, $password, $email, $address, $birthday, $position, $shift, $mobile, $landline, $fileNameNew);
+                        $hashPass = password_hash($password, PASSWORD_DEFAULT);
+                        mysqli_stmt_bind_param($statement, 'sssssssssss', $username, $fullName, $hashPass, $email, $address, $birthday, $position, $shift, $mobile, $landline, $fileNameNew);
                         mysqli_stmt_execute($statement);
 
+                        session_start();
+                        $_SESSION['sessionId'] = 1;
+                        $_SESSION['sessionUser'] = $username;
                         header("Location: ../dashboard.php?success=registered");
                         exit();
                     }
