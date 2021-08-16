@@ -13,6 +13,10 @@
             border-color: rgba(16, 185, 129, 1);
         }
 
+        .listening {
+            border-color: rgba(251, 191, 36, 1);
+        }
+
         .error {
             border-color: rgba(239, 68, 68, 1);
         }
@@ -24,6 +28,37 @@
         .fa-exclamation-circle {
             visibility: hidden;
         }
+
+        .fa-camera {
+          top: 150%;
+          transition: top 0.4s ease-in-out;
+      }
+
+      <?php 
+      
+        if(isset($_GET['stepthree'])) {
+
+            ?> 
+            .profile-picture:hover > i {
+          top: 50%;
+      }
+      #upload-profile{
+          position: absolute;
+          top: 0;
+          z-index: 10;
+          width: 6rem;
+          height: 6rem;
+          opacity: 0;
+          left: 0;
+          cursor: pointer;
+      }
+      #upload-profile::-webkit-file-upload-button {
+          visibility: hidden;
+      }
+            <?php
+
+        }
+      ?>
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
