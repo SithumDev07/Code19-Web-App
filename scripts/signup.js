@@ -32,8 +32,7 @@ function returnToPrevious (e) {
 
 
 function checkInputs() {
-    // e.preventDefault();
-    //Getting all the values
+    document.getElementById('alreadyTaken').classList.add('hidden');
     const usernameValue = username.value.trim();
     const emailValue = email.value.trim();
     const passwordValue = password.value.trim();
@@ -41,6 +40,7 @@ function checkInputs() {
     var success = true;
 
     if(usernameValue === '') {
+        
         setError(username, 'Username is required');
         success =  false;
     }  else if(validateSpecialCharacters(usernameValue)) {

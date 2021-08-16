@@ -138,6 +138,12 @@ function validateSpecialCharacters(input) {
     return format.test(input) ? true : false;
 }
 
+function isValidPhoneNumber(input) {
+    // var format = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    var format = /^(0|[+94]{3})?[7-9][0-9]{9}$/;;
+    return format.test(input) ? true : false;
+}
+
 //Main Validatot function
 function validate(input, container) {
     // console.log(container);
@@ -240,13 +246,14 @@ function isValidImageSize(file) {
             // The size of the file.
             if (newFile >= 3072) {
                 alert(
-                  "File is too large, please select a file less than 3mb");
-                  return false;
-            } else if (newFile < 1024) {
-                alert(
-                  "File is too small, please select a file greater than 1mb");
+                  "Profile Picture is too large, please select a file less than 3MB");
                   return false;
             } 
+            // else if (newFile < 1024) {
+            //     alert(
+            //       "File is too small, please select a file greater than 1mb");
+            //       return false;
+            // } 
 
             return true;
         }

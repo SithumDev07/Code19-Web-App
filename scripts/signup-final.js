@@ -1,4 +1,5 @@
 const form = document.querySelector('form');
+const profilePicture = document.querySelector('#upload-profile')
 const mobile = document.querySelector('#mobile');
 const landLine = document.querySelector('#landLine');
 const position = document.querySelector('#position');
@@ -12,6 +13,9 @@ agreement.addEventListener('click', () => {
     submit.classList.toggle('disabled:opacity-40');
     submit.toggleAttribute('disabled');
 })
+
+focusEventListener(mobile);
+focusEventListener(landLine);
 
 
 if(submit.addEventListener) {
@@ -41,10 +45,25 @@ function checkInputs() {
     const landLineValue = landLine.value.trim();
     var success = true;
 
+        if(profilePicture.files.length === 0) {
+            alert('Please choose an image');
+            success = false;
+        }
+        
+        if(profilePicture.files.length !== 0) {
+            if(!isValidExtention(profilePicture)) {
+                success = false;
+            }
+        
+            if(!isValidImageSize(profilePicture)) {
+                success=false;
+            }
+        }
+
     if(mobileValue === '') {
         setError(mobile, 'Mobile number is required');
         success =  false;
-    } else if(mobileValue.length != 10) {
+    } else if(mobileValue.length !== 11) {
         setError(mobile, 'Mobile number is invalid');
         success =  false;
     }else {
@@ -52,7 +71,7 @@ function checkInputs() {
     }
 
 
-    if(!(landLineValue === '') && landLineValue.length != 10) {
+    if(!(landLineValue === '') && landLineValue.length !== 11) {
         setError(landLine, 'Landline number is invalid');
         success =  false;
     } else if(landLineValue === '') {

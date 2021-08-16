@@ -4,20 +4,49 @@ require_once 'layouts/header.php';
 
 include 'config.php';
 
-
-$firstname;
-$lastname;
-$address;
-$birthday;
-
 session_start();
 
 if (isset($_POST['submit'])) {
-    // $username = $_POST['username'];
-    $_SESSION['username'] = $_POST['username'];
-    $_SESSION['emailadd'] = $_POST['email'];
-    // $emailAddress = $_POST['email'];
-    $_SESSION['password'] = $_POST['password'];
+
+    $username = $_POST['username'];
+    
+    if (!preg_match("/^[a-zA-Z0-9]*/", $username)) {
+        $location = "Location: ./signup.php?error=invalid_username&email=" . $_POST['email'];
+        $location = str_replace(PHP_EOL, '', $location);
+        header($location);
+        exit();
+    } else {
+        $sql = "SELECT * FROM staff_member WHERE user_name = ?";
+        $statement = mysqli_stmt_init($conn);
+
+        if (!mysqli_stmt_prepare($statement, $sql)) {
+            header("Location: ./signup.php?error=sqlerror");
+            exit();
+        } else {
+            mysqli_stmt_bind_param($statement, "s", $username);
+            mysqli_stmt_execute($statement);
+            mysqli_stmt_store_result($statement);
+            $rowCount = mysqli_stmt_num_rows($statement); //If output is 1, there is a row in database
+
+            if ($rowCount > 0) {
+                $location = "Location: ./signup.php?error=username_already_taken&email=" . $_POST['email'];
+                $location = str_replace(PHP_EOL, '', $location);
+                header($location);
+                exit();
+            } else {
+                $_SESSION['username'] = $_POST['username'];
+                $_SESSION['emailadd'] = $_POST['email'];
+                $_SESSION['password'] = $_POST['password'];
+                $location = "Location: ./signup.php?steptwo";
+                $location = str_replace(PHP_EOL, '', $location);
+                header($location);
+                exit();
+            }
+        }
+    }
+
+
+    
 
     // $sql = "INSERT INTO usersphp(username, email, password) VALUES ('$username', '$emailAddress', '$password')";
 
@@ -41,7 +70,7 @@ if (isset($_POST['submit'])) {
         if(!isset($_GET['steptwo']) && !isset($_GET['stepthree'])) {
             ?> 
             
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./signup.php?steptwo" method="POST">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./signup.php" method="POST">
         <!-- <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"> -->
             <div class="mb-4 relative">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
@@ -51,12 +80,13 @@ if (isset($_POST['submit'])) {
                 <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
                 <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
                 <p class="text-red-500 text-xs italic hidden">Username is required</p>
+                <p class="text-red-500 text-xs italic" id="alreadyTaken"><?php if(isset($_GET['error']) && $_GET['error'] == 'username_already_taken') { echo 'Username is already exists, try another'; } ?></p>
             </div>
             <div class="mb-4 relative">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                     Email Address
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email address" name="email">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email address" name="email" value="<?php if(isset($_GET['error']) && $_GET['error'] == 'username_already_taken') { echo $_GET['email']; } ?>">
                 <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
                     <i class=" fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
                 <p class="text-red-500 text-xs italic hidden">Email address is required</p>
@@ -101,6 +131,7 @@ if (isset($_POST['submit'])) {
         ?>
         
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./signup.php?stepthree" method="POST">
+        <h1><?php  echo $_SESSION['emailadd'];?></h1>
                   <div class="mb-4 relative">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">
                       First Name
@@ -154,7 +185,7 @@ if (isset($_POST['submit'])) {
 
             ?>
             <h1><?php if(!empty($username) && !empty($firstname)) { echo $_SESSION['username'] . ' ' . $firstname . ' ' . $lastname . ' ' . $_SESSION['emailadd']; } else echo 'They are not here'; ?></h1>
-            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./index.php" method="POST">
+            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./includes/register-inc.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-4 relative text-center flex flex-col justify-center items-center">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">
                           Profile Picture
@@ -172,7 +203,7 @@ if (isset($_POST['submit'])) {
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">
                       Mobile
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="mobile" type="tel" placeholder="Ex: +94 7X XXX XXX X">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="mobile" type="number" placeholder="Ex: +94 7X XXX XXX X" name="mobile">
                     <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
                     <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
                     <p class="text-red-500 text-xs italic hidden">Mobile Phone is required</p>
@@ -181,7 +212,7 @@ if (isset($_POST['submit'])) {
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
                       Home (Optional)
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="landLine" type="text" placeholder="Ex: +94 3X XXX XXX X">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="landLine" type="number" placeholder="Ex: +94 3X XXX XXX X" name="landline">
                     <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
                     <i class="fas fa-exclamation-circle text-red-500 absolute top-10 right-2"></i>
                     <p class="text-red-500 text-xs italic hidden">Phone number is not valid</p>
@@ -190,7 +221,7 @@ if (isset($_POST['submit'])) {
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                       Position
                     </label>
-                    <select class="px-3 py-2 w-28 rounded" id="position">
+                    <select class="px-3 py-2 w-28 rounded" id="position" name="position">
                         <option value="Chef">Chef</option>
                         <option value="Staff">Staff</option>
                         <option value="Helper">Helper</option>
@@ -202,9 +233,9 @@ if (isset($_POST['submit'])) {
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                       Shift
                     </label>
-                    <select class="px-3 py-2 w-28 rounded" id="shift">
-                        <option value="Chef">Day</option>
-                        <option value="Staff">Night</option>
+                    <select class="px-3 py-2 w-28 rounded" id="shift" name="shift">
+                        <option value="Day">Day</option>
+                        <option value="Night">Night</option>
                       </select>
                     <p class="text-red-500 text-xs italic hidden">Shift is required</p>
                   </div>
@@ -218,7 +249,7 @@ if (isset($_POST['submit'])) {
 
                   <div class="flex items-center justify-between mb-6">
                     
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer disabled:opacity-40" id='submit' disabled >Finish</button>
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer disabled:opacity-40" id='submit' name="final" disabled >Finish</button>
                   </div>
                   <p class="inline-block align-baseline font-bold text-sm text-gray-500">
                     Already have an account? <a class="text-blue-500 hover:text-blue-800 ml-1" id="signin">Sign in</a>
