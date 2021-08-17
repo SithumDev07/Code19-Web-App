@@ -37,7 +37,7 @@
 
                                 ?>
                                 <h1><?php echo $_SESSION['sessionUser']; ?></h1>
-                                <a href="./signup.php" class="bg-yellow-400 px-4 text-sm py-2 font-bold text-white rounded-full cursor-pointer hover:bg-yellow-500">Login</a>
+                                <a href="./login.php?username=<?php echo $_SESSION['sessionUser']; ?>" class="bg-yellow-400 px-4 text-sm py-2 font-bold text-white rounded-full cursor-pointer hover:bg-yellow-500">Login</a>
                             <?php
                             } else {
 
