@@ -7,7 +7,7 @@ include 'config.php';
 
 <header class="container mx-auto my-24">
     <div class="w-full max-w-xs mx-auto">   
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./signup.php" method="POST">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./includes/login-inc.php" method="POST">
         <!-- <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"> -->
             <div class="mb-4 relative">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
@@ -33,7 +33,7 @@ include 'config.php';
                 <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                     Forgot Password?
                 </a>
-                <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id='submit' name="submit" value="Next" />
+                <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id='login' name="submit" value="Login" />
             </div>
             <p class="inline-block align-baseline font-bold text-sm text-gray-500">
                 Already have an account? <a href="" class="text-blue-500 hover:text-blue-800 ml-1">Sign in</a>
