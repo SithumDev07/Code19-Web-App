@@ -81,8 +81,10 @@ if (!isset($_SESSION['sessionId'])) {
         }
 
         .z-4 {
-            z-index: 4;
-            
+            z-index: 4; 
+        }
+        .z-5 {
+            z-index: 5; 
         }
     </style>
 </head>
@@ -418,6 +420,7 @@ if (!isset($_SESSION['sessionId'])) {
                        </ul>
                        <span class="underline-slide absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 20%;"></span>
                    </div>
+
                    <!-- Search Field -->
                    <div class="mt-5 flex items-center w-full sticky top-0" id="stickySearch">
                         <input type="text" placeholder="Search for orderID, Customer, Order Status Or Something..." class="flex-1 bg-transparent border transform transition-colors duration-300">
@@ -599,6 +602,194 @@ if (!isset($_SESSION['sessionId'])) {
                         <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
                     </tr>
                    </table>
+                </div>
+
+
+                <!-- Deliveries -->
+                <div class="moving-part dashboard glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-5" id="stickyContainerDelivery">
+                    <div class="greeting flex w-full justify-between items-center">
+                        <h1 class="text-2xl text-gray-700 font-semibold">👋 Deliveries</h1>
+                        
+                        <div class="flex items-center">
+                            <a href="#" class="text-yellow-500 font-bold">View All</a>
+                        <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                                Add Widget
+                        </button>
+                        </div>
+                    </div>
+
+                    <!-- Search -->
+
+                    <!-- Search Field -->
+                   <div class="mt-5 flex items-center w-full sticky top-0 z-50" id="stickySearchDelivery">
+                        <input type="text" placeholder="Search for orderID, Customer, Order Status Or Something..." class="flex-1 bg-transparent border transform transition-colors duration-300">
+                        <button class="flex items-center text-gray-500 mx-5 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="filterDelivery">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
+                            </svg>
+                            Filters
+                        </button>
+                        <div class="relative">
+                            <button class="flex items-center text-gray-500 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="exportDelivery">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                </svg>
+                                Export
+                            </button>
+
+                            <div class="border border-gray-600 w-36 h-20 rounded-md absolute -bottom-24 right-0 flex-col shadow-md p-3 bg-gray-100 hidden exportedDelivery">
+                                <button class="flex items-center text-gray-500 text-sm border-b border-gray-500 pb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                    </svg>
+                                    Export as .xlsx
+                                </button>
+                                <button class="flex items-center text-gray-500 text-sm mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                    </svg>
+                                    Export as .doc
+                                </button>
+                            </div>
+                        </div>
+                   </div>
+
+                    <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
+                       <ul class="flex items-center h-full">
+                           <li class="option-delivery all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer" style="width: 20%;">All Orders</li>
+                           <li class="option-delivery completed block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Completed</li>
+                           <li class="option-delivery continuing block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Continuing</li>
+                           <li class="option-delivery on-hold block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">On Hold</li>
+                           <li class="option-delivery canceled block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Canceled</li>
+                       </ul>
+                       <span class="underline-slide-delivery absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 20%;"></span>
+                   </div>
+
+                    <div class="flex mt-5 mb-24">
+                        <div class="left-delivery flex-1 flex flex-wrap">
+
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full overflow-hidden">
+                                        <img class="object-cover" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="delivery">
+                                    </div>
+                                    <h1 class="text-gray-500 font-semibold mx-4 flex-1">2168454FAGT</h1>
+                                    <button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-2 rounded bg-blue-200 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                    </svg>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1 mt-2">
+                                    <h1 class="text-gray-600 font-semibold">Mr. Sithum Basnayake</h1>
+                                    <p class="text-sm text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim, cumque.</p>
+                                    <p class="text-xs text-gray-500">Chicken Submarine XL x3, Chicken Subma...</p>
+                                </div>
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        12.00 p.m
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex items-center">
+                                        Delivering
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-yellow-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full overflow-hidden">
+                                        <img class="object-cover" src="./photo_uploads/users/Mayuko.jpg" alt="delivery">
+                                    </div>
+                                    <h1 class="text-gray-500 font-semibold mx-4 flex-1">2168454FAGT</h1>
+                                    <button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-2 rounded bg-blue-200 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                    </svg>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1 mt-2">
+                                    <h1 class="text-gray-600 font-semibold">Ms. Myauko Inoiue</h1>
+                                    <p class="text-sm text-gray-400">Third Avenue, Tokyo, Japan.</p>
+                                    <p class="text-xs text-gray-500">Chicken Submarine XL x3, Chicken Subma...</p>
+                                </div>
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        11.20 p.m
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex items-center">
+                                        Delivered
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full overflow-hidden">
+                                        <img class="object-cover" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="delivery">
+                                    </div>
+                                    <h1 class="text-gray-500 font-semibold mx-4 flex-1">2168454FAGT</h1>
+                                    <button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-2 rounded bg-blue-200 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                    </svg>
+                                    </button>
+                                </div>
+                                <div class="flex flex-col flex-1 mt-2">
+                                    <h1 class="text-gray-600 font-semibold">Mr. Sithum Basnayake</h1>
+                                    <p class="text-sm text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim, cumque.</p>
+                                    <p class="text-xs text-gray-500">Chicken Submarine XL x3, Chicken Subma...</p>
+                                </div>
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        12.00 p.m
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex items-center">
+                                        Delivering
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-red-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+                        </div>
+                        <div class="right-map rounded-xl bg-white w-72 overflow-hidden hidden xl:inline-flex">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7923.136119299889!2d79.89118293959962!3d6.822269768053192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25ac61680bad9%3A0xb6dbdd061fb17aa8!2sSri%20Lanka%20Air%20Force%20Museum!5e0!3m2!1sen!2slk!4v1629235096894!5m2!1sen!2slk" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
