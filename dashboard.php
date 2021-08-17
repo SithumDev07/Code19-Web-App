@@ -800,16 +800,29 @@ if (!isset($_SESSION['sessionId'])) {
                 <div class="moving-part dashboard glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-6" id="stickyContainerInventory">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">🏪 Inventory</h1>
-                        
-                        <div class="flex items-center">
-                            <a href="#" class="text-yellow-500 font-bold">View All</a>
+
                         <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                                Add Widget
+                                Add Ingredient
                         </button>
+                    </div>
+
+                    <div class="warning w-full rounded-xl bg-yellow-500 bg-opacity-30 my-5 flex items-center p-5">
+                        <div class="flex-1">
+                            <h1 class="text-2xl font-semibold text-gray-600">Total 12 Ingredients are running out</h1>
+                            <button class="flex items-center text-sm mt-4">
+                                Show
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </button>
                         </div>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-yellow-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
                     </div>
 
                     <!-- Search -->
@@ -848,7 +861,7 @@ if (!isset($_SESSION['sessionId'])) {
                         </div>
                    </div>
 
-                    <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
+                    <!-- <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
                        <ul class="flex items-center h-full">
                            <li class="option-inventory all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer" style="width: 20%;">All Orders</li>
                            <li class="option-inventory completed block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Completed</li>
@@ -857,119 +870,140 @@ if (!isset($_SESSION['sessionId'])) {
                            <li class="option-inventory canceled block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Canceled</li>
                        </ul>
                        <span class="underline-slide-inventory absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 20%;"></span>
-                   </div>
+                   </div> -->
 
                     <div class="flex mt-5 mb-24">
                         <div class="left-delivery flex-1 flex flex-wrap">
 
                         <!-- Single Card -->
                             <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                                <div class="flex items-center">
-                                    <div class="w-8 h-8 rounded-full overflow-hidden">
-                                        <img class="object-cover" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="delivery">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="">
+                                        <h1 class="text-gray-600 font-semibold">All Purpose Flour</h1>
+                                        <p class="text-sm text-gray-500 font-bold my-1">Ranathunga Stores</p>
+                                        <p class="text-xs text-gray-400">+94 76 6 108 500</p>
+                                        <p class="text-xs text-gray-400">ranathunga@gmail.com</p>
                                     </div>
-                                    <h1 class="text-gray-500 font-semibold mx-4 flex-1">2168454FAGT</h1>
-                                    <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-2 rounded bg-blue-200 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                                    </svg>
-                                    </button>
+                                    <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center">48Kg</h1>
                                 </div>
-                                <div class="flex flex-col flex-1 mt-2">
-                                    <h1 class="text-gray-600 font-semibold">Mr. Sithum Basnayake</h1>
-                                    <p class="text-sm text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim, cumque.</p>
-                                    <p class="text-xs text-gray-500">Chicken Submarine XL x3, Chicken Subma...</p>
+
+                                <div class="flex items-center">
+                                    <h1 class="text-gray-500 font-semibold flex-1">Previous Stock</h1>
+                                    <p class="text-gray-500 font-semibold">12th Aug</p>
                                 </div>
                                 <div class="flex items-center mt-2 justify-between">
                                     <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        12.00 p.m
+                                        13Kg
                                     </button>
 
                                     <div class="text-gray-500 text-xs flex items-center">
-                                        Delivering
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z" clip-rule="evenodd" />
-                                        </svg>
+                                        Average Consumtion
                                     </div>
                                 </div>
                                 <div class="absolute bottom-0 w-full h-1 bg-yellow-400 left-0"></div>
                             </div>
 
                             <!-- End of card -->
+
                         <!-- Single Card -->
                             <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                                <div class="flex items-center">
-                                    <div class="w-8 h-8 rounded-full overflow-hidden">
-                                        <img class="object-cover" src="./photo_uploads/users/Mayuko.jpg" alt="delivery">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="">
+                                        <h1 class="text-gray-600 font-semibold">Mozeralla Cheese</h1>
+                                        <p class="text-sm text-gray-500 font-bold my-1">Highland Farms</p>
+                                        <p class="text-xs text-gray-400">+94 31 2 212 545</p>
+                                        <p class="text-xs text-gray-400">kelaniya@highland.com</p>
                                     </div>
-                                    <h1 class="text-gray-500 font-semibold mx-4 flex-1">2168454FAGT</h1>
-                                    <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-2 rounded bg-blue-200 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                                    </svg>
-                                    </button>
+                                    <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center">100Kg</h1>
                                 </div>
-                                <div class="flex flex-col flex-1 mt-2">
-                                    <h1 class="text-gray-600 font-semibold">Ms. Myauko Inoiue</h1>
-                                    <p class="text-sm text-gray-400">Third Avenue, Tokyo, Japan.</p>
-                                    <p class="text-xs text-gray-500">Chicken Submarine XL x3, Chicken Subma...</p>
+
+                                <div class="flex items-center">
+                                    <h1 class="text-gray-500 font-semibold flex-1">Previous Stock</h1>
+                                    <p class="text-gray-500 font-semibold">Yesterday</p>
                                 </div>
                                 <div class="flex items-center mt-2 justify-between">
                                     <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        11.20 p.m
+                                        5Kg
                                     </button>
 
                                     <div class="text-gray-500 text-xs flex items-center">
-                                        Delivered
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z" clip-rule="evenodd" />
-                                        </svg>
+                                        Average Consumtion
                                     </div>
                                 </div>
                                 <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
                             </div>
 
                             <!-- End of card -->
+
                         <!-- Single Card -->
                             <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                                <div class="flex items-center">
-                                    <div class="w-8 h-8 rounded-full overflow-hidden">
-                                        <img class="object-cover" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="delivery">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="">
+                                        <h1 class="text-gray-600 font-semibold">Oat Milk Low..</h1>
+                                        <p class="text-sm text-gray-500 font-bold my-1">Highland Farms</p>
+                                        <p class="text-xs text-gray-400">+94 31 2 212 545</p>
+                                        <p class="text-xs text-gray-400">kelaniya@highland.com</p>
                                     </div>
-                                    <h1 class="text-gray-500 font-semibold mx-4 flex-1">2168454FAGT</h1>
-                                    <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-2 rounded bg-blue-200 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                                    </svg>
-                                    </button>
+                                    <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center">0Ltr</h1>
                                 </div>
-                                <div class="flex flex-col flex-1 mt-2">
-                                    <h1 class="text-gray-600 font-semibold">Mr. Sithum Basnayake</h1>
-                                    <p class="text-sm text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim, cumque.</p>
-                                    <p class="text-xs text-gray-500">Chicken Submarine XL x3, Chicken Subma...</p>
+
+                                <div class="flex items-center">
+                                    <h1 class="text-gray-500 font-semibold flex-1">Previous Stock</h1>
+                                    <p class="text-gray-500 font-semibold">10th Jul</p>
                                 </div>
                                 <div class="flex items-center mt-2 justify-between">
                                     <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        12.00 p.m
+                                        1Ltr
                                     </button>
 
                                     <div class="text-gray-500 text-xs flex items-center">
-                                        Delivering
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z" clip-rule="evenodd" />
+                                        Average Consumtion
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-red-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+                            
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="">
+                                        <h1 class="text-gray-600 font-semibold">Oat Milk Low..</h1>
+                                        <p class="text-sm text-gray-500 font-bold my-1">Highland Farms</p>
+                                        <p class="text-xs text-gray-400">+94 31 2 212 545</p>
+                                        <p class="text-xs text-gray-400">kelaniya@highland.com</p>
+                                    </div>
+                                    <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center">0Ltr</h1>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <h1 class="text-gray-500 font-semibold flex-1">Previous Stock</h1>
+                                    <p class="text-gray-500 font-semibold">10th Jul</p>
+                                </div>
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
+                                        1Ltr
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex items-center">
+                                        Average Consumtion
                                     </div>
                                 </div>
                                 <div class="absolute bottom-0 w-full h-1 bg-red-400 left-0"></div>
