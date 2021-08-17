@@ -388,7 +388,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Orders -->
-                <div class="moving-part orders glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-4">
+                <div class="moving-part orders glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-4" id="stickyContainer">
                     <div class="greeting flex w-full justify-between items-center">
                     
                         <h1 class="text-2xl text-gray-700 font-semibold flex items-center">Orders <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 cursor-pointer transform transition duration-200 hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -410,29 +410,46 @@ if (!isset($_SESSION['sessionId'])) {
                     </div>
                    <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
                        <ul class="flex items-center h-full">
-                           <li class="all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer" style="width: 20%;">All Orders</li>
-                           <li class="completed block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Completed</li>
-                           <li class="continuing block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Continuing</li>
-                           <li class="on-hold block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">On Hold</li>
-                           <li class="canceled block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Canceled</li>
+                           <li class="option all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer" style="width: 20%;">All Orders</li>
+                           <li class="option completed block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Completed</li>
+                           <li class="option continuing block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Continuing</li>
+                           <li class="option on-hold block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">On Hold</li>
+                           <li class="option canceled block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Canceled</li>
                        </ul>
-                       <span class="underline-slide absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition duration-500 rounded-xl" style="width: 20%;"></span>
+                       <span class="underline-slide absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 20%;"></span>
                    </div>
                    <!-- Search Field -->
-                   <div class="mt-5 flex items-center w-full sticky top-0">
-                        <input type="text" placeholder="Search for orderID, Customer, Order Status Or Something..." class="flex-1 bg-transparent border">
-                        <button class="flex items-center text-gray-500 mx-5">
+                   <div class="mt-5 flex items-center w-full sticky top-0" id="stickySearch">
+                        <input type="text" placeholder="Search for orderID, Customer, Order Status Or Something..." class="flex-1 bg-transparent border transform transition-colors duration-300">
+                        <button class="flex items-center text-gray-500 mx-5 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="filter">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
                             </svg>
                             Filters
                         </button>
-                        <button class="flex items-center text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
-                            </svg>
-                            Export
-                        </button>
+                        <div class="relative">
+                            <button class="flex items-center text-gray-500 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="export">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                </svg>
+                                Export
+                            </button>
+
+                            <div class="border border-gray-600 w-36 h-20 rounded-md absolute -bottom-24 right-0 flex-col shadow-md p-3 bg-gray-100 hidden exported">
+                                <button class="flex items-center text-gray-500 text-sm border-b border-gray-500 pb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                    </svg>
+                                    Export as .xlsx
+                                </button>
+                                <button class="flex items-center text-gray-500 text-sm mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                    </svg>
+                                    Export as .doc
+                                </button>
+                            </div>
+                        </div>
                    </div>
 
                    <!-- Table -->
@@ -587,6 +604,7 @@ if (!isset($_SESSION['sessionId'])) {
         </section>
     </main>
     <script src="./scripts/sidebar.js"></script>
+    <script src="./scripts/ordersNavigator.js"></script>
     <script>
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
