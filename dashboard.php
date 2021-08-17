@@ -67,26 +67,50 @@ if (!isset($_SESSION['sessionId'])) {
             width: auto !important;
             height: 350px !important;
         }
+        .z-3 {
+            z-index: 3;
+        }
+
+        .z-4 {
+            z-index: 4;
+        }
     </style>
 </head>
 <body>
     <main class="flex glass h-screen overflow-hidden">
         <aside class="hidden xl:flex flex-col border w-72 p-5 h-screen overflow-hidden">
             <div>
-                <h1 class="text-center font-semibold text-3xl text-blue-600">Dashboard</h1>
+                <h1 class="text-center font-semibold text-3xl text-blue-600" id="MainTitleChangable">Dashboard</h1>
                 <div class="flex flex-col items-center mt-4 2xl:mt-6">
+                    <?php 
+                                $sql = "SELECT name, position, photo FROM staff_member;";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+                                
+                                if($resultCheck > 0) {
+                                    while($row = mysqli_fetch_assoc($results)) {
+                                        
+                                        
+                                        
+                                        ?> 
                     <div class="overflow-hidden w-20 h-20 rounded-full mb-1 border-2 border-blue-600 p-1 cursor-pointer">
-                        <img class="w-full h-full object-cover rounded-full" src="https://images.unsplash.com/photo-1627660692856-bc032e058cc2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                         <img class="w-full h-full object-cover rounded-full" src="./photo_uploads/users/<?php echo $row['photo']; ?>" alt="Profile Picture">
                     </div>
-                <h2 class="text-base font-semibold text-gray-500">Bella</h2>
-                <h4 class="text-sm font-light text-gray-500">Manager</h4>
+                         
+                    <h2 class="text-base font-semibold text-gray-500"><?php echo $row['name']; ?></h2>
+                    <h4 class="text-sm font-light text-gray-500"><?php echo $row['position'] ?></h4>
+                         <?php               
+                                    }
+                                }
+                    ?>
+                        <!-- <img class="w-full h-full object-cover rounded-full" src="https://images.unsplash.com/photo-1627660692856-bc032e058cc2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="Profile Picture"> -->
                 </div>
             </div>
 
             <nav class="overflow-y-auto flex-1 mt-6 flex flex-col side-nav justify-between">
                 <ul>
                     <li>
-                        <button class="flex w-full px-4 rounded-lg bg-gray-900 py-3 mb-4 text-gray-200 transform transition duration-200 active:scale-95">
+                        <button class="flex w-full px-4 rounded-lg bg-gray-900 py-3 mb-4 text-gray-200 transform transition duration-200 active:scale-95" id="dashboardSide">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
@@ -94,7 +118,7 @@ if (!isset($_SESSION['sessionId'])) {
                         </button>
                     </li>
                     <li>
-                        <button class="flex w-full px-4 rounded-lg cursor-pointer py-3 mb-4 transform transition duration-300 hover:bg-gray-900 hover:text-gray-200">
+                        <button class="flex w-full px-4 rounded-lg cursor-pointer py-3 mb-4 transform transition duration-300 hover:bg-gray-900 hover:text-gray-200" id="ordersSide">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                               </svg>
@@ -203,134 +227,239 @@ if (!isset($_SESSION['sessionId'])) {
                     </a>
                 </div>
             </div>
-
-            <div class="moving-part glass rounded-3xl p-5 overflow-y-auto h-screen container mx-auto">
-                <div class="greeting flex w-full justify-between items-center">
-                    <h1 class="text-2xl text-gray-700 font-semibold">👋 Hello, Bella</h1>
-                    <div class="flex items-center">
-                        <a href="#" class="text-yellow-500 font-bold">View All</a>
-                       <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                            Add Widget
-                       </button>
-                    </div>
-                </div>
-                <div class="cards flex flex-wrap mt-5 2xl:mt-8">
-                    <!-- Random color array -->
-                    <div class="card cursor-pointer card-one rounded-2xl bg-white p-5 shadow-2xl transform transition duration-200 hover:scale-105">
-                        <div class="flex items-center justify-between">
-                            <h1 class="text-lg font-semibold text-gray-800">Day Crew</h1>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                              </svg>
-                        </div>
-                        <div class="circles my-2 flex">
-                            <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                            </div>
-                            <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1627754939597-ba460af0844f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                            </div>
-                            <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1628258946431-b99fbe144787?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                            </div>
-                        </div>
-                        <div class="info flex items-center justify-between">
-                            <div class="w-12 h-12 rounded-md bg-white shadow-md flex items-center justify-center text-xs font-bold text-gray-700 mr-2 p-1 text-center">
-                                64 More
-                            </div>
-                            <div class="info text-xs text-gray-700">
-                                Lorem ipsum dolor sit amet.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                        <div>
-                            <h1>Day Crew</h1>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            <div class="relative h-screen container mx-auto">
+                <div class="moving-part dashboard glass rounded-3xl p-5 overflow-y-auto h-full absolute top-0 right-0 left-0 z-4">
+                    <div class="greeting flex w-full justify-between items-center">
+                    <?php 
+                                    $sql = "SELECT name FROM staff_member;";
+                                    $results = mysqli_query($conn, $sql);
+                                    $resultCheck = mysqli_num_rows($results);
+                                    
+                                    if($resultCheck > 0) {
+                                        while($row = mysqli_fetch_assoc($results)) {
+                                            
+                                            
+                                            
+                                            ?> 
+                        <h1 class="text-2xl text-gray-700 font-semibold">👋 Hello, <?php echo $row['name']; ?></h1>
+                            <?php               
+                                        }
+                                    } else {
+                                        header("Location: ../signup.php?error=restricted");
+                                        exit();
+                                    }
+                        ?>
+                        
+                        <div class="flex items-center">
+                            <a href="#" class="text-yellow-500 font-bold">View All</a>
+                        <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                        </div>
-                        <div class="circles">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="info">
-                            <div>
-                                64 More
-                            </div>
-                            <div class="info">
-                                Lorem ipsum dolor sit amet.
-                            </div>
+                                Add Widget
+                        </button>
                         </div>
                     </div>
-                    <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                        <div>
-                            <h1>Day Crew</h1>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
+                    <div class="cards flex flex-wrap mt-5 2xl:mt-8">
+                        <!-- Random color array -->
+                        <div class="card cursor-pointer card-one rounded-2xl bg-white p-5 shadow-2xl transform transition duration-200 hover:scale-105">
+                            <div class="flex items-center justify-between">
+                                <h1 class="text-lg font-semibold text-gray-800">Day Crew</h1>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                </svg>
+                            </div>
+                            <div class="circles my-2 flex">
+                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                                </div>
+                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1627754939597-ba460af0844f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                                </div>
+                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1628258946431-b99fbe144787?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                                </div>
+                            </div>
+                            <div class="info flex items-center justify-between">
+                                <div class="w-12 h-12 rounded-md bg-white shadow-md flex items-center justify-center text-xs font-bold text-gray-700 mr-2 p-1 text-center">
+                                    64 More
+                                </div>
+                                <div class="info text-xs text-gray-700">
+                                    Lorem ipsum dolor sit amet.
+                                </div>
+                            </div>
                         </div>
-                        <div class="circles">
-                            <div class="circle"></div>
-                        </div>
-                        <div class="info">
+                        <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
                             <div>
-                                64 More
-                            </div>
-                            <div class="info">
-                                Lorem ipsum dolor sit amet.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="charts mt-10 flex p-3 mb-36">
-                    <div class="flex flex-col mr-2 flex-1">
-                        <div class="chart">
-                            <h1 class="text-2xl font-semibold text-gray-600 mb-5">Sales Overview</h1>
-                            <canvas id="myChart"></canvas>
-                        </div>
-                        <div class="recent-activities mt-5">
-                            <div class="row">
+                                <h1>Day Crew</h1>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
-                                <h2>Name</h2>
-                                <h2>Description</h2>
-                                <h2>Amount</h2>
-                                <h2>Status</h2>
+                            </div>
+                            <div class="circles">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="info">
+                                <div>
+                                    64 More
+                                </div>
+                                <div class="info">
+                                    Lorem ipsum dolor sit amet.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            <div>
+                                <h1>Day Crew</h1>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div class="circles">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="info">
+                                <div>
+                                    64 More
+                                </div>
+                                <div class="info">
+                                    Lorem ipsum dolor sit amet.
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="quick-orders-list p-5 rounded-2xl bg-gray-900 text-white w-96">
-                        <div class="flex items-center justify-between mb-5">
-                            <h3 class="text-xl font-semibold">Orders</h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                              </svg>
+                    <div class="charts mt-10 flex p-3 mb-36">
+                        <div class="flex flex-col mr-2 flex-1">
+                            <div class="chart">
+                                <h1 class="text-2xl font-semibold text-gray-600 mb-5">Sales Overview</h1>
+                                <canvas id="myChart"></canvas>
+                            </div>
+                            <div class="recent-activities mt-5">
+                                <div class="row">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                    <h2>Name</h2>
+                                    <h2>Description</h2>
+                                    <h2>Amount</h2>
+                                    <h2>Status</h2>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="headers flex items-center text-xs justify-between mb-6">
-                            <p>Table No</p>
-                            <p>Customer name</p>
-                            <p>Description</p>
-                            <p>Amount</p>
-                            <p>Status</p>
-                            <!-- Online or ... -->
-                            <p>Type</p>
+                        <div class="quick-orders-list p-5 rounded-2xl bg-gray-900 text-white w-96">
+                            <div class="flex items-center justify-between mb-5">
+                                <h3 class="text-xl font-semibold">Orders</h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                </svg>
+                            </div>
+
+                            <div class="headers flex items-center text-xs justify-between mb-6">
+                                <p>Table No</p>
+                                <p>Customer name</p>
+                                <p>Description</p>
+                                <p>Amount</p>
+                                <p>Status</p>
+                                <!-- Online or ... -->
+                                <p>Type</p>
+                            </div>
+
+                            <div class="order-component w-11/12 h-20 px-3 py-3 rounded-xl border mx-auto">
+
+                            </div>
                         </div>
-
-                        <div class="order-component w-11/12 h-20 px-3 py-3 rounded-xl border mx-auto">
-
+                    </div>
+                </div>
+                <div class="moving-part orders glass rounded-3xl p-5 overflow-y-auto h-full absolute top-0 right-0 left-0 z-3">
+                    <div class="greeting flex w-full justify-between items-center">
+                    
+                        <h1 class="text-2xl text-gray-700 font-semibold">Orders</h1>
+                        
+                        <div class="flex items-center">
+                            <a href="#" class="text-yellow-500 font-bold">View All</a>
+                        <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                                Add Widget
+                        </button>
+                        </div>
+                    </div>
+                    <div class="cards flex flex-wrap mt-5 2xl:mt-8">
+                        <!-- Random color array -->
+                        <div class="card cursor-pointer card-one rounded-2xl bg-white p-5 shadow-2xl transform transition duration-200 hover:scale-105">
+                            <div class="flex items-center justify-between">
+                                <h1 class="text-lg font-semibold text-gray-800">Day Crew</h1>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                </svg>
+                            </div>
+                            <div class="circles my-2 flex">
+                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                                </div>
+                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1627754939597-ba460af0844f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                                </div>
+                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1628258946431-b99fbe144787?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                                </div>
+                            </div>
+                            <div class="info flex items-center justify-between">
+                                <div class="w-12 h-12 rounded-md bg-white shadow-md flex items-center justify-center text-xs font-bold text-gray-700 mr-2 p-1 text-center">
+                                    64 More
+                                </div>
+                                <div class="info text-xs text-gray-700">
+                                    Lorem ipsum dolor sit amet.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            <div>
+                                <h1>Day Crew</h1>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div class="circles">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="info">
+                                <div>
+                                    64 More
+                                </div>
+                                <div class="info">
+                                    Lorem ipsum dolor sit amet.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            <div>
+                                <h1>Day Crew</h1>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div class="circles">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="info">
+                                <div>
+                                    64 More
+                                </div>
+                                <div class="info">
+                                    Lorem ipsum dolor sit amet.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+    <script src="./scripts/sidebar.js"></script>
     <script>
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
