@@ -67,12 +67,22 @@ if (!isset($_SESSION['sessionId'])) {
             width: auto !important;
             height: 350px !important;
         }
+        .dashboard {
+            transition: all 1 ease;
+            /* transform: scale(1); */
+        }
+        .orders {
+            transition: all 1 ease;
+            /* transform: scale(1); */
+        }
         .z-3 {
             z-index: 3;
+            /* transform: scale(.5); */
         }
 
         .z-4 {
             z-index: 4;
+            
         }
     </style>
 </head>
@@ -228,7 +238,10 @@ if (!isset($_SESSION['sessionId'])) {
                 </div>
             </div>
             <div class="relative h-screen container mx-auto">
-                <div class="moving-part dashboard glass rounded-3xl p-5 overflow-y-auto h-full absolute top-0 right-0 left-0 z-4">
+
+
+                <!-- Dashboard -->
+                <div class="moving-part dashboard glass rounded-3xl p-5 overflow-y-auto h-full absolute top-0 right-0 left-0 z-3">
                     <div class="greeting flex w-full justify-between items-center">
                     <?php 
                                     $sql = "SELECT name FROM staff_member;";
@@ -372,10 +385,15 @@ if (!isset($_SESSION['sessionId'])) {
                         </div>
                     </div>
                 </div>
-                <div class="moving-part orders glass rounded-3xl p-5 overflow-y-auto h-full absolute top-0 right-0 left-0 z-3">
+
+
+                <!-- Orders -->
+                <div class="moving-part orders glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-4">
                     <div class="greeting flex w-full justify-between items-center">
                     
-                        <h1 class="text-2xl text-gray-700 font-semibold">Orders</h1>
+                        <h1 class="text-2xl text-gray-700 font-semibold flex items-center">Orders <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 cursor-pointer transform transition duration-200 hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg></h1>
                         
                         <div class="flex items-center">
                             <a href="#" class="text-yellow-500 font-bold">View All</a>
@@ -387,74 +405,183 @@ if (!isset($_SESSION['sessionId'])) {
                         </button>
                         </div>
                     </div>
-                    <div class="cards flex flex-wrap mt-5 2xl:mt-8">
-                        <!-- Random color array -->
-                        <div class="card cursor-pointer card-one rounded-2xl bg-white p-5 shadow-2xl transform transition duration-200 hover:scale-105">
-                            <div class="flex items-center justify-between">
-                                <h1 class="text-lg font-semibold text-gray-800">Day Crew</h1>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                                </svg>
-                            </div>
-                            <div class="circles my-2 flex">
-                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                </div>
-                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1627754939597-ba460af0844f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                </div>
-                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1628258946431-b99fbe144787?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                </div>
-                            </div>
-                            <div class="info flex items-center justify-between">
-                                <div class="w-12 h-12 rounded-md bg-white shadow-md flex items-center justify-center text-xs font-bold text-gray-700 mr-2 p-1 text-center">
-                                    64 More
-                                </div>
-                                <div class="info text-xs text-gray-700">
-                                    Lorem ipsum dolor sit amet.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                            <div>
-                                <h1>Day Crew</h1>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                            </div>
-                            <div class="circles">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="info">
-                                <div>
-                                    64 More
-                                </div>
-                                <div class="info">
-                                    Lorem ipsum dolor sit amet.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                            <div>
-                                <h1>Day Crew</h1>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                            </div>
-                            <div class="circles">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="info">
-                                <div>
-                                    64 More
-                                </div>
-                                <div class="info">
-                                    Lorem ipsum dolor sit amet.
-                                </div>
-                            </div>
-                        </div>
+                    <div>
+                        <p class="mt-5 text-sm text-gray-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos quasi iure officia id, nam eum expedita dolores aliquid numquam quis minus non eligendi quibusdam inventore blanditiis assumenda tenetur voluptatibus. Animi.</p>
                     </div>
+                   <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
+                       <ul class="flex items-center h-full">
+                           <li class="all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer" style="width: 20%;">All Orders</li>
+                           <li class="completed block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Completed</li>
+                           <li class="continuing block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Continuing</li>
+                           <li class="on-hold block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">On Hold</li>
+                           <li class="canceled block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Canceled</li>
+                       </ul>
+                       <span class="underline-slide absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition duration-500 rounded-xl" style="width: 20%;"></span>
+                   </div>
+                   <!-- Search Field -->
+                   <div class="mt-5 flex items-center w-full sticky top-0">
+                        <input type="text" placeholder="Search for orderID, Customer, Order Status Or Something..." class="flex-1 bg-transparent border">
+                        <button class="flex items-center text-gray-500 mx-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
+                            </svg>
+                            Filters
+                        </button>
+                        <button class="flex items-center text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                            </svg>
+                            Export
+                        </button>
+                   </div>
+
+                   <!-- Table -->
+                   <table class="rounded-t-lg w-full bg-transparent text-gray-800 mt-8">
+                    <tr class="text-left border-b border-gray-500">
+                        <th class="px-4 py-3">Order ID</th>
+                        <th class="px-4 py-3">Customer</th>
+                        <th class="px-4 py-3">Order</th>
+                        <th class="px-4 py-3">Extra notes</th>
+                        <th class="px-4 py-3">Total</th>
+                        <th class="px-4 py-3">Delivery Method</th>
+                        <th class="px-4 py-3">Status</th>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                    <tr class="text-left border-b border-gray-500 text-sm">
+                        <td class="px-4 py-3">#7898</td>
+                        <td class="px-4 py-3">Sithum Basnayake</td>
+                        <td class="px-4 py-3">Chicken Burger XL x2</td>
+                        <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
+                        <td class="px-4 py-3">Rs. 980.00</td>
+                        <td class="px-4 py-3 text-center">Delivery</td>
+                        <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
+                    </tr>
+                   </table>
                 </div>
             </div>
         </section>
