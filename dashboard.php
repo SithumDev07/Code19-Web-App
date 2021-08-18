@@ -110,7 +110,7 @@ if (!isset($_SESSION['sessionId'])) {
                 <h1 class="text-center font-semibold text-3xl text-blue-600" id="MainTitleChangable">Dashboard</h1>
                 <div class="flex flex-col items-center mt-4 2xl:mt-6">
                     <?php 
-                                $sql = "SELECT name, position, photo FROM staff_member;";
+                                $sql = "SELECT name, position, photo FROM staff_member WHERE user_name='" . $_SESSION['sessionUser'] . "';";
                                 $results = mysqli_query($conn, $sql);
                                 $resultCheck = mysqli_num_rows($results);
                                 
@@ -246,30 +246,6 @@ if (!isset($_SESSION['sessionId'])) {
                         </svg> 
                         <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders 
                         </button>
-                        <!-- <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg> 
-                        </button>
-                        <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg> 
-                        </button>
-                        <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg> 
-                        </button>
-                        <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg> 
-                        </button>
-                        <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg> 
-                        </button>
-                        <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg> 
-                        </button> -->
                         
                     </div>
                 </div>
@@ -310,7 +286,8 @@ if (!isset($_SESSION['sessionId'])) {
                 <div class="moving-part Dashboard glass rounded-3xl p-5 overflow-y-auto h-full absolute top-0 right-0 left-0 z-base">
                     <div class="greeting flex w-full justify-between items-center">
                     <?php 
-                                    $sql = "SELECT name FROM staff_member;";
+                                    // $sql = "SELECT * FROM staff_member WHERE user_name=" . $_SESSION['sessionUser'] . ";";
+                                    $sql = "SELECT * FROM staff_member WHERE user_name='" . $_SESSION['sessionUser'] ."';";
                                     $results = mysqli_query($conn, $sql);
                                     $resultCheck = mysqli_num_rows($results);
                                     
@@ -1686,7 +1663,7 @@ if (!isset($_SESSION['sessionId'])) {
                         <div class="left-delivery flex-1 flex flex-wrap">
 
                         <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            <!-- <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
                             
                                 <div class="absolute top-2 right-2 rounded-full px-3 py-1 bg-black text-gray-200 text-sm bg-opacity-60">Day</div>
                                 <div class="flex justify-center mb-2">
@@ -1698,7 +1675,6 @@ if (!isset($_SESSION['sessionId'])) {
                                 <h1 class="text-gray-600 font-semibold text-center text-lg">Mr. Sithum Basnayake</h1>
                                 <div class="my-1 text-center">
                                     <h1 class="text-gray-500 font-semibold text-sm mb-1">Manager</h1>
-                                    <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
                                     <p class="text-xs text-gray-400">+94 76 6 108500</p>
                                     <p class="text-xs text-gray-400">sithum@icloud.com</p>
                                     
@@ -1725,13 +1701,13 @@ if (!isset($_SESSION['sessionId'])) {
                                     </div>
                                 </div>
                                 <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
-                            </div>
+                            </div> -->
 
                             <!-- End of card -->
 
 
                         <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            <!-- <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
                             
                             <div class="absolute top-2 right-2 rounded-full px-3 py-1 bg-black text-gray-200 text-sm bg-opacity-60">Night</div>
                                 <div class="flex justify-center mb-2">
@@ -1743,7 +1719,6 @@ if (!isset($_SESSION['sessionId'])) {
                                 <h1 class="text-gray-600 font-semibold text-center text-lg">Mrs. Mayuko Inoiue</h1>
                                 <div class="my-1 text-center">
                                     <h1 class="text-gray-500 font-semibold text-sm mb-1">Chief Chef</h1>
-                                    <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
                                     <p class="text-xs text-gray-400">+94 71 4 123 456</p>
                                     <p class="text-xs text-gray-400">mayuko@icloud.com</p>
                                     
@@ -1770,9 +1745,75 @@ if (!isset($_SESSION['sessionId'])) {
                                     </div>
                                 </div>
                                 <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
-                            </div>
+                            </div> -->
 
                             <!-- End of card -->
+
+                            <?php 
+                                $sql = "SELECT * FROM staff_member;";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+                                
+                                if($resultCheck > 0) {
+                                    while($row = mysqli_fetch_assoc($results)) {
+                                        
+                                        
+                                        
+                                        ?> 
+                    <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                            <div class="absolute top-2 right-2 rounded-full px-3 py-1 bg-black text-gray-200 text-sm bg-opacity-60"><?php echo $row['shift']; ?></div>
+                                <div class="flex justify-center mb-2">
+                                    <div class="overflow-hidden w-24 h-24 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/<?php echo $row['photo']; ?>" alt="SupplierImage">
+                                    </div>
+                                </div>
+                                
+                                <h1 class="text-gray-600 font-semibold text-center text-lg"><?php echo $row['name']; ?></h1>
+                                <div class="my-1 text-center">
+                                    <h1 class="text-gray-500 font-semibold text-sm mb-1"><?php echo $row['position']; ?></h1>
+                                    <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                    <p class="text-xs text-gray-400"><?php echo "+" . $row['personal_no']; ?></p>
+                                    <?php if($row['email'] !== null) {
+
+                                        ?> 
+                                            <p class="text-xs text-gray-400"><?php echo $row['email']; ?></p>
+                                        <?php
+                                    } ?>
+                                    
+                                </div>
+                                <p class="text-xs text-gray-400 mb-1 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>    
+                                    <?php echo $row['address']; ?>
+                                </p>
+
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        No Due
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex flex-col text-right">
+                                        <h3 class="text-xl font-semibold text-gray-500 text-left">Rs. 124,000.00</h3>
+                                        Total Salary - Every 15th
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
+                            </div>
+                         <?php               
+                                    }
+                                } else {
+
+                                    ?> 
+                                        <h1 class="text-center text-6xl font-semibold text-gray-400 w-full mt-6">No Results Found</h1>
+                                    <?php
+                                }
+                    ?>
 
                         </div>
                     </div>
