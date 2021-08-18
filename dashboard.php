@@ -98,6 +98,9 @@ if (!isset($_SESSION['sessionId'])) {
         .z-9 {
             z-index: 9; 
         }
+        .z-base {
+            z-index: 50; 
+        }
     </style>
 </head>
 <body>
@@ -271,7 +274,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Dashboard -->
-                <div class="moving-part dashboard glass rounded-3xl p-5 overflow-y-auto h-full absolute top-0 right-0 left-0 z-3">
+                <div class="moving-part Dashboard glass rounded-3xl p-5 overflow-y-auto h-full absolute top-0 right-0 left-0 z-3">
                     <div class="greeting flex w-full justify-between items-center">
                     <?php 
                                     $sql = "SELECT name FROM staff_member;";
@@ -418,7 +421,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Orders -->
-                <div class="moving-part orders glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-4" id="stickyContainer">
+                <div class="moving-part Orders glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-4" id="stickyContainer">
                     <div class="greeting flex w-full justify-between items-center">
                     
                         <h1 class="text-2xl text-gray-700 font-semibold flex items-center">Orders <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 cursor-pointer transform transition duration-200 hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -634,7 +637,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Deliveries -->
-                <div class="moving-part dashboard glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-5" id="stickyContainerDelivery">
+                <div class="moving-part Deliveries glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-5" id="stickyContainerDelivery">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">👋 Deliveries</h1>
                         
@@ -822,7 +825,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Inventory -->
-                <div class="moving-part dashboard glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-6" id="stickyContainerInventory">
+                <div class="moving-part Inventory glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-6" id="stickyContainerInventory">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">🏪 Inventory</h1>
 
@@ -1030,7 +1033,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                  <!-- Kitchen -->
-                 <div class="moving-part dashboard glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-7" id="stickyContainerKitchen">
+                 <div class="moving-part Kitchen glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-7" id="stickyContainerKitchen">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">👩‍🍳 Kitchen</h1>
 
@@ -1385,7 +1388,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Suppliers -->
-                <div class="moving-part dashboard glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-8" id="stickyContainerSuppliers">
+                <div class="moving-part Suppliers glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-8" id="stickyContainerSuppliers">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">👨‍💼 Suppliers</h1>
 
@@ -1618,7 +1621,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Crew -->
-                <div class="moving-part dashboard glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-9" id="stickyContainerCrew">
+                <div class="moving-part Crew glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-9" id="stickyContainerCrew">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">👨‍👨‍👦‍👦 Crew</h1>
 
@@ -1769,10 +1772,129 @@ if (!isset($_SESSION['sessionId'])) {
                         </div>
                     </div>
                 </div>
+
+
+                 <!-- Settings -->
+                 <div class="moving-part Settings glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-9" id="stickyContainerCrew">
+                    <div class="greeting flex w-full justify-between items-center">
+                        <h1 class="text-2xl text-gray-700 font-semibold">🛠 Settings</h1>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
+                       <ul class="flex items-center h-full">
+                           <li class="option-crew all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer transform transition-colors duration-500" style="width: 33%;">All Settings</li>
+                           <li class="option-crew completed block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Account</li>
+                           <li class="option-crew completed block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Backup</li>
+                       </ul>
+                       <span class="underline-slide-crew absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 33%;"></span>
+                   </div>
+
+                    <!-- Search Field -->
+                   <div class="mt-5 flex items-center w-full sticky top-0 z-50" id="stickySearchCrew">
+                        <input type="text" placeholder="Search for Settings..." class="flex-1 bg-transparent rounded-md border transform transition-colors duration-300 mx-16">
+                        
+                   </div>
+                   
+                    <div class="flex mt-5 mb-24">
+                        <div class="left-delivery flex-1 flex flex-wrap">
+
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                                <div class="absolute top-2 right-2 rounded-full px-3 py-1 bg-black text-gray-200 text-sm bg-opacity-60">Day</div>
+                                <div class="flex justify-center mb-2">
+                                    <div class="overflow-hidden w-24 h-24 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
+                                    </div>
+                                </div>
+                                
+                                <h1 class="text-gray-600 font-semibold text-center text-lg">Mr. Sithum Basnayake</h1>
+                                <div class="my-1 text-center">
+                                    <h1 class="text-gray-500 font-semibold text-sm mb-1">Manager</h1>
+                                    <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                    <p class="text-xs text-gray-400">+94 76 6 108500</p>
+                                    <p class="text-xs text-gray-400">sithum@icloud.com</p>
+                                    
+                                </div>
+                                <p class="text-xs text-gray-400 mb-1 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>    
+                                    Kandy Road, Badulla
+                                </p>
+
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        No Due
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex flex-col text-right">
+                                        <h3 class="text-xl font-semibold text-gray-500 text-left">Rs. 74,000.00</h3>
+                                        Total Salary - Every 30th
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+
+
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                            <div class="absolute top-2 right-2 rounded-full px-3 py-1 bg-black text-gray-200 text-sm bg-opacity-60">Night</div>
+                                <div class="flex justify-center mb-2">
+                                    <div class="overflow-hidden w-24 h-24 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/Mayuko.jpg" alt="SupplierImage">
+                                    </div>
+                                </div>
+                                
+                                <h1 class="text-gray-600 font-semibold text-center text-lg">Mrs. Mayuko Inoiue</h1>
+                                <div class="my-1 text-center">
+                                    <h1 class="text-gray-500 font-semibold text-sm mb-1">Chief Chef</h1>
+                                    <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                    <p class="text-xs text-gray-400">+94 71 4 123 456</p>
+                                    <p class="text-xs text-gray-400">mayuko@icloud.com</p>
+                                    
+                                </div>
+                                <p class="text-xs text-gray-400 mb-1 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>    
+                                    Kandy Road, Badulla
+                                </p>
+
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        No Due
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex flex-col text-right">
+                                        <h3 class="text-xl font-semibold text-gray-500 text-left">Rs. 124,000.00</h3>
+                                        Total Salary - Every 15th
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
-    <script src="./scripts/sidebar.js"></script>
+    <script src="./scripts/navigation.js"></script>
     <script src="./scripts/ordersNavigator.js"></script>
     <script>
 var ctx = document.getElementById('myChart').getContext('2d');
