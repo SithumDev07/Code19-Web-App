@@ -3,7 +3,7 @@ session_start();
 require_once './config.php';
 
 if (!isset($_SESSION['sessionId'])) {
-    header("Location: ./signup.php?error=restricted");
+    header("Location: ./login.php?error=restricted");
     exit();
 }
 
@@ -63,6 +63,11 @@ if (!isset($_SESSION['sessionId'])) {
         .card-one {
             background-image: linear-gradient(#FEC345, #FFB41A);
         }
+        .card-account {
+            background-image: linear-gradient(#2563EB, #1E40AF);
+        }
+
+
         canvas {
             width: auto !important;
             height: 350px !important;
@@ -218,7 +223,7 @@ if (!isset($_SESSION['sessionId'])) {
                     </span>
                 </ul>
 
-                <a href="" class="flex mb-12">
+                <a href="./login.php?clear" class="flex mb-12 mt-6">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                       </svg>
@@ -690,13 +695,12 @@ if (!isset($_SESSION['sessionId'])) {
 
                     <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
                        <ul class="flex items-center h-full">
-                           <li class="option-delivery all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer" style="width: 20%;">All Orders</li>
-                           <li class="option-delivery completed block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Completed</li>
-                           <li class="option-delivery continuing block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Continuing</li>
-                           <li class="option-delivery on-hold block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">On Hold</li>
-                           <li class="option-delivery canceled block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Canceled</li>
+                           <li class="option-delivery all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer" style="width: 25%;">All Deliveries</li>
+                           <li class="option-delivery completed block h-full text-center text-gray-500 cursor-pointer" style="width: 25%;">Completed</li>
+                           <li class="option-delivery continuing block h-full text-center text-gray-500 cursor-pointer" style="width: 25%;">On Going</li>
+                           <li class="option-delivery on-hold block h-full text-center text-gray-500 cursor-pointer" style="width: 25%;">Cancelled</li>
                        </ul>
-                       <span class="underline-slide-delivery absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 20%;"></span>
+                       <span class="underline-slide-delivery absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 25%;"></span>
                    </div>
 
                     <div class="flex mt-5 mb-24">
@@ -1783,11 +1787,11 @@ if (!isset($_SESSION['sessionId'])) {
                     <!-- Search -->
                     <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
                        <ul class="flex items-center h-full">
-                           <li class="option-crew all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer transform transition-colors duration-500" style="width: 33%;">All Settings</li>
-                           <li class="option-crew completed block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Account</li>
-                           <li class="option-crew completed block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Backup</li>
+                           <li class="option-settings all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer transform transition-colors duration-500" style="width: 33%;">All Settings</li>
+                           <li class="option-settings completed block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Account</li>
+                           <li class="option-settings completed block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Backup</li>
                        </ul>
-                       <span class="underline-slide-crew absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 33%;"></span>
+                       <span class="underline-slide-settings absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 33%;"></span>
                    </div>
 
                     <!-- Search Field -->
@@ -1799,94 +1803,66 @@ if (!isset($_SESSION['sessionId'])) {
                     <div class="flex mt-5 mb-24">
                         <div class="left-delivery flex-1 flex flex-wrap">
 
-                        <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                            
-                                <div class="absolute top-2 right-2 rounded-full px-3 py-1 bg-black text-gray-200 text-sm bg-opacity-60">Day</div>
-                                <div class="flex justify-center mb-2">
-                                    <div class="overflow-hidden w-24 h-24 rounded-full mb-1 cursor-pointer mr-2">
-                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
-                                    </div>
-                                </div>
-                                
-                                <h1 class="text-gray-600 font-semibold text-center text-lg">Mr. Sithum Basnayake</h1>
-                                <div class="my-1 text-center">
-                                    <h1 class="text-gray-500 font-semibold text-sm mb-1">Manager</h1>
-                                    <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
-                                    <p class="text-xs text-gray-400">+94 76 6 108500</p>
-                                    <p class="text-xs text-gray-400">sithum@icloud.com</p>
-                                    
-                                </div>
-                                <p class="text-xs text-gray-400 mb-1 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>    
-                                    Kandy Road, Badulla
-                                </p>
-
-                                <div class="flex items-center mt-2 justify-between">
-                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        No Due
-                                    </button>
-
-                                    <div class="text-gray-500 text-xs flex flex-col text-right">
-                                        <h3 class="text-xl font-semibold text-gray-500 text-left">Rs. 74,000.00</h3>
-                                        Total Salary - Every 30th
-                                    </div>
-                                </div>
-                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
+                        <!-- Card Account -->
+                        <div class="card w-64 cursor-pointer card-account rounded-2xl bg-white p-5 shadow-2xl transform transition duration-200 hover:scale-105">
+                            <div class="flex itmes-center text-gray-200 justify-between">
+                                <h1 class="text-lg font-semibold ">Account Settings</h1>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
                             </div>
-
-                            <!-- End of card -->
-
-
-                        <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                            
-                            <div class="absolute top-2 right-2 rounded-full px-3 py-1 bg-black text-gray-200 text-sm bg-opacity-60">Night</div>
-                                <div class="flex justify-center mb-2">
-                                    <div class="overflow-hidden w-24 h-24 rounded-full mb-1 cursor-pointer mr-2">
-                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/Mayuko.jpg" alt="SupplierImage">
+                            <div class="info flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                        <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                                    </div>
+                                    <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                        <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1627754939597-ba460af0844f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                                    </div>
+                                    <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                        <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1628258946431-b99fbe144787?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
                                     </div>
                                 </div>
-                                
-                                <h1 class="text-gray-600 font-semibold text-center text-lg">Mrs. Mayuko Inoiue</h1>
-                                <div class="my-1 text-center">
-                                    <h1 class="text-gray-500 font-semibold text-sm mb-1">Chief Chef</h1>
-                                    <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
-                                    <p class="text-xs text-gray-400">+94 71 4 123 456</p>
-                                    <p class="text-xs text-gray-400">mayuko@icloud.com</p>
-                                    
+                                <div class="info text-xs text-gray-200">
+                                    Authorize Persons
                                 </div>
-                                <p class="text-xs text-gray-400 mb-1 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>    
-                                    Kandy Road, Badulla
-                                </p>
-
-                                <div class="flex items-center mt-2 justify-between">
-                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        No Due
-                                    </button>
-
-                                    <div class="text-gray-500 text-xs flex flex-col text-right">
-                                        <h3 class="text-xl font-semibold text-gray-500 text-left">Rs. 124,000.00</h3>
-                                        Total Salary - Every 15th
-                                    </div>
-                                </div>
-                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
                             </div>
+                            <p class="text-sm text-gray-200 mt-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In maxime odio laboriosam!</p>
+                        </div>
 
-                            <!-- End of card -->
+
+                        <!-- Card Personalize -->
+                        <div class="card w-64 card-personalize cursor-pointer border border-gray-300 rounded-2xl p-5 transform transition duration-200 hover:bg-white hover:text-gray-300 hover:border-opacity-0 hover:shadow-2xl hover:scale-105 ml-5">
+                            <div class="flex itmes-center text-gray-600 justify-between">
+                                <h1 class="text-lg font-semibold ">Personalize</h1>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                </svg>
+                            </div>
+                            <div class="info flex items-center justify-between">
+                                <!-- <div class="flex items-center">
+                                    <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                        <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                                    </div>
+                                    <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                        <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1627754939597-ba460af0844f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                                    </div>
+                                    <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                        <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1628258946431-b99fbe144787?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
+                                    </div>
+                                </div> -->
+                                <div class="info text-xs text-gray-500">
+                                    Change Colors As your preference
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In maxime odio laboriosam!</p>
+                        </div>
+
+
+
+
+                        
 
                         </div>
                     </div>

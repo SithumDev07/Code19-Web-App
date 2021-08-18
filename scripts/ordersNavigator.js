@@ -21,25 +21,44 @@ const slideDelivery = document.querySelector('.underline-slide-delivery');
 
 const optionsCrew = document.querySelectorAll('.option-crew');
 const slideCrew = document.querySelector('.underline-slide-crew');
+
+
+const optionsSettings = document.querySelectorAll('.option-settings');
+const slideSettings = document.querySelector('.underline-slide-settings');
     
-tabNavigator(optionsCrew, slideCrew);
-tabNavigator(optionsDelivery, slideDelivery);
-tabNavigator(options, slide);
+tabNavigator(optionsCrew, slideCrew, 0);
+tabNavigator(optionsDelivery, slideDelivery, 0);
+tabNavigator(options, slide, 0);
+tabNavigator(optionsSettings, slideSettings, 0);
     
 let previous = 0;
-function tabNavigator(options, slide) {
+function tabNavigator(options, slide, start) {
     options.forEach((ele, index) => {
       ele.addEventListener('click', () => {
-        options[previous].classList.remove('text-yellow-500')
-        options[previous].classList.add('text-gray-500')
-        options[previous].classList.remove('font-bold')
-        ele.classList.remove('text-gray-500');
-        ele.classList.add('text-yellow-500');
-        ele.classList.add('font-bold');
-        slide.style.left = 100/options.length*index + '%';
-        previous = index;
+        if(start == 0) {
+          options[0].classList.remove('text-yellow-500')
+          options[0].classList.add('text-gray-500')
+          options[0].classList.remove('font-bold')
+          ele.classList.remove('text-gray-500');
+          ele.classList.add('text-yellow-500');
+          ele.classList.add('font-bold');
+          slide.style.left = 100/options.length*index + '%';
+          previous = index;
+          start = 1
+        } else {
+          options[previous].classList.remove('text-yellow-500')
+          options[previous].classList.add('text-gray-500')
+          options[previous].classList.remove('font-bold')
+          ele.classList.remove('text-gray-500');
+          ele.classList.add('text-yellow-500');
+          ele.classList.add('font-bold');
+          slide.style.left = 100/options.length*index + '%';
+          previous = index;
+          start = 1
+        }
       })
-  }) 
+    }) 
+
 }
 
 const optionsAside = document.querySelectorAll('.option-aside');

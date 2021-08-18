@@ -3,6 +3,14 @@
 require_once 'layouts/header.php';
 
 include 'config.php';
+
+session_start();
+
+if(isset($_GET['clear'])) {
+    session_unset();
+    // session_destroy();
+}
+
 ?>
 
 <header class="container mx-auto my-24">
