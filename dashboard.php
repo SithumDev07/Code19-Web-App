@@ -92,6 +92,12 @@ if (!isset($_SESSION['sessionId'])) {
         .z-7 {
             z-index: 7; 
         }
+        .z-8 {
+            z-index: 8; 
+        }
+        .z-9 {
+            z-index: 9; 
+        }
     </style>
 </head>
 <body>
@@ -429,7 +435,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                    <!-- Search Field -->
                    <div class="mt-5 flex items-center w-full sticky top-0" id="stickySearch">
-                        <input type="text" placeholder="Search for orderID, Customer, Order Status Or Something..." class="flex-1 bg-transparent border transform transition-colors duration-300">
+                        <input type="text" placeholder="Search for orderID, Customer, Order Status Or Something..." class="flex-1 rounded-md bg-transparent border transform transition-colors duration-300">
                         <button class="flex items-center text-gray-500 mx-5 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="filter">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
@@ -631,7 +637,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                     <!-- Search Field -->
                    <div class="mt-5 flex items-center w-full sticky top-0 z-50" id="stickySearchDelivery">
-                        <input type="text" placeholder="Search for orderID, Customer, Order Status Or Something..." class="flex-1 bg-transparent border transform transition-colors duration-300">
+                        <input type="text" placeholder="Search for orderID, Customer, Order Status Or Something..." class="flex-1 rounded-md bg-transparent border transform transition-colors duration-300">
                         <button class="flex items-center text-gray-500 mx-5 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="filterDelivery">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
@@ -832,7 +838,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                     <!-- Search Field -->
                    <div class="mt-5 flex items-center w-full sticky top-0 z-50" id="stickySearchInventory">
-                        <input type="text" placeholder="Search for IngredientID, Ingredient Name Or Supplier..." class="flex-1 bg-transparent border transform transition-colors duration-300">
+                        <input type="text" placeholder="Search for IngredientID, Ingredient Name Or Supplier..." class="flex-1 rounded-md bg-transparent border transform transition-colors duration-300">
                         <button class="flex items-center text-gray-500 mx-5 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="filterInventory">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
@@ -1040,7 +1046,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                     <!-- Search Field -->
                    <div class="mt-5 flex items-center w-full sticky top-0 z-50" id="stickySearchKitchen">
-                        <input type="text" placeholder="Search for FoodID, Food Name Or Category Name..." class="flex-1 bg-transparent border transform transition-colors duration-300">
+                        <input type="text" placeholder="Search for FoodID, Food Name Or Category Name..." class="flex-1 bg-transparent rounded-md border transform transition-colors duration-300">
                         <button class="flex items-center text-gray-500 mx-5 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="filterKitchen">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
@@ -1356,6 +1362,480 @@ if (!isset($_SESSION['sessionId'])) {
                             </div>
 
                             <!-- End of card -->
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Suppliers -->
+                <div class="moving-part dashboard glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-8" id="stickyContainerSuppliers">
+                    <div class="greeting flex w-full justify-between items-center">
+                        <h1 class="text-2xl text-gray-700 font-semibold">👨‍💼 Suppliers</h1>
+
+                        <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                                Add Food
+                        </button>
+                    </div>
+
+                    <!-- Search -->
+
+                    <!-- Search Field -->
+                   <div class="mt-5 flex items-center w-full sticky top-0 z-50" id="stickySearchSuppliers">
+                        <input type="text" placeholder="Search for SupplierID, Supplier Name Or Supplied Item..." class="flex-1 bg-transparent rounded-md border transform transition-colors duration-300">
+                        <button class="flex items-center text-gray-500 mx-5 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="filterSuppliers">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
+                            </svg>
+                            Filters
+                        </button>
+                        <div class="relative">
+                            <button class="flex items-center text-gray-500 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="exportSuppliers">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                </svg>
+                                Export
+                            </button>
+
+                            <div class="border border-gray-600 w-36 h-20 rounded-md absolute -bottom-24 right-0 flex-col shadow-md p-3 bg-gray-100 hidden exportedSuppliers">
+                                <button class="flex items-center text-gray-500 text-sm border-b border-gray-500 pb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                    </svg>
+                                    Export as .xlsx
+                                </button>
+                                <button class="flex items-center text-gray-500 text-sm mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                    </svg>
+                                    Export as .doc
+                                </button>
+                            </div>
+                        </div>
+                   </div>
+                   
+                    <div class="flex mt-5 mb-24">
+                        <div class="left-delivery flex-1 flex flex-wrap">
+
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
+                                    </div>
+                                    <div class="flex-1 ml-2">
+                                        <h1 class="text-gray-600 font-semibold text-sm">All Purpose Flour and 6+ more</h1>
+                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
+                                        <p class="text-xs text-gray-400">sithum@icloud.com</p>
+                                        
+                                    </div>
+                                </div>
+
+                                <h1 class="text-gray-600 font-semibold flex-1">Mr. Sithum Basnayeke</h1>
+                                <p class="text-xs text-gray-400 my-1 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>    
+                                    Kandy Road, Badulla
+                                </p>
+
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        No Due
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex flex-col">
+                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 74,000.00</h3>
+                                        Total Payments
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+
+
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
+                                    </div>
+                                    <div class="flex-1 ml-2">
+                                        <h1 class="text-gray-600 font-semibold text-sm">Carrots, Olives and 2+ more</h1>
+                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
+                                        <p class="text-xs text-gray-400">contact@randimafruits.com</p>
+                                        
+                                    </div>
+                                </div>
+
+                                <h1 class="text-gray-600 font-semibold flex-1">Randima Fruit House</h1>
+                                <p class="text-xs text-gray-400 my-1 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>    
+                                    Eriyawetiya, Kiribathgoda
+                                </p>
+
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-yellow-500 bg-yellow-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Due
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex flex-col">
+                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 12,736.00</h3>
+                                        Total Payments
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-yellow-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
+                                    </div>
+                                    <div class="flex-1 ml-2">
+                                        <h1 class="text-gray-600 font-semibold text-sm">Fresh Milk</h1>
+                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
+                                        <p class="text-xs text-gray-400">contact@highland.com</p>
+                                        
+                                    </div>
+                                </div>
+
+                                <h1 class="text-gray-600 font-semibold flex-1">Highland Milk Products</h1>
+                                <p class="text-xs text-gray-400 my-1 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>    
+                                    No.45, Viharagoda, Kiribathgoda
+                                </p>
+
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-red-500 bg-red-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Out
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex flex-col">
+                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 68,000.00</h3>
+                                        Total Payments
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-red-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
+                                    </div>
+                                    <div class="flex-1 ml-2">
+                                        <h1 class="text-gray-600 font-semibold text-sm">Carrots, Olives and 2+ more</h1>
+                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
+                                        <p class="text-xs text-gray-400">contact@randimafruits.com</p>
+                                        
+                                    </div>
+                                </div>
+
+                                <h1 class="text-gray-600 font-semibold flex-1">Randima Fruit House</h1>
+                                <p class="text-xs text-gray-400 my-1 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>    
+                                    Eriyawetiya, Kiribathgoda
+                                </p>
+
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-yellow-500 bg-yellow-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Due
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex flex-col">
+                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 12,736.00</h3>
+                                        Total Payments
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-yellow-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+
+
+                       
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Crew -->
+                <div class="moving-part dashboard glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-9" id="stickyContainerCrew">
+                    <div class="greeting flex w-full justify-between items-center">
+                        <h1 class="text-2xl text-gray-700 font-semibold">👨‍👨‍👦‍👦 Crew</h1>
+
+                        <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                                Recruit Employee
+                        </button>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
+                       <ul class="flex items-center h-full">
+                           <li class="option-crew all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer transform transition-colors duration-500" style="width: 33%;">All Employees</li>
+                           <li class="option-crew completed block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Day</li>
+                           <li class="option-crew completed block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Night</li>
+                       </ul>
+                       <span class="underline-slide-crew absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 33%;"></span>
+                   </div>
+
+                    <!-- Search Field -->
+                   <div class="mt-5 flex items-center w-full sticky top-0 z-50" id="stickySearchCrew">
+                        <input type="text" placeholder="Search for EmployeeID, Employee Name Or Shift..." class="flex-1 bg-transparent rounded-md border transform transition-colors duration-300">
+                        <button class="flex items-center text-gray-500 mx-5 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="filterCrew">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
+                            </svg>
+                            Filters
+                        </button>
+                        <div class="relative">
+                            <button class="flex items-center text-gray-500 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="exportCrew">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                </svg>
+                                Export
+                            </button>
+
+                            <div class="border border-gray-600 w-36 h-20 rounded-md absolute -bottom-24 right-0 flex-col shadow-md p-3 bg-gray-100 hidden exportedCrew">
+                                <button class="flex items-center text-gray-500 text-sm border-b border-gray-500 pb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                    </svg>
+                                    Export as .xlsx
+                                </button>
+                                <button class="flex items-center text-gray-500 text-sm mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
+                                    </svg>
+                                    Export as .doc
+                                </button>
+                            </div>
+                        </div>
+                   </div>
+                   
+                    <div class="flex mt-5 mb-24">
+                        <div class="left-delivery flex-1 flex flex-wrap">
+
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
+                                    </div>
+                                    <div class="flex-1 ml-2">
+                                        <h1 class="text-gray-600 font-semibold text-sm">All Purpose Flour and 6+ more</h1>
+                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
+                                        <p class="text-xs text-gray-400">sithum@icloud.com</p>
+                                        
+                                    </div>
+                                </div>
+
+                                <h1 class="text-gray-600 font-semibold flex-1">Mr. Sithum Basnayeke</h1>
+                                <p class="text-xs text-gray-400 my-1 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>    
+                                    Kandy Road, Badulla
+                                </p>
+
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        No Due
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex flex-col">
+                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 74,000.00</h3>
+                                        Total Payments
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+
+
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
+                                    </div>
+                                    <div class="flex-1 ml-2">
+                                        <h1 class="text-gray-600 font-semibold text-sm">Carrots, Olives and 2+ more</h1>
+                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
+                                        <p class="text-xs text-gray-400">contact@randimafruits.com</p>
+                                        
+                                    </div>
+                                </div>
+
+                                <h1 class="text-gray-600 font-semibold flex-1">Randima Fruit House</h1>
+                                <p class="text-xs text-gray-400 my-1 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>    
+                                    Eriyawetiya, Kiribathgoda
+                                </p>
+
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-yellow-500 bg-yellow-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Due
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex flex-col">
+                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 12,736.00</h3>
+                                        Total Payments
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-yellow-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
+                                    </div>
+                                    <div class="flex-1 ml-2">
+                                        <h1 class="text-gray-600 font-semibold text-sm">Fresh Milk</h1>
+                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
+                                        <p class="text-xs text-gray-400">contact@highland.com</p>
+                                        
+                                    </div>
+                                </div>
+
+                                <h1 class="text-gray-600 font-semibold flex-1">Highland Milk Products</h1>
+                                <p class="text-xs text-gray-400 my-1 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>    
+                                    No.45, Viharagoda, Kiribathgoda
+                                </p>
+
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-red-500 bg-red-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Out
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex flex-col">
+                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 68,000.00</h3>
+                                        Total Payments
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-red-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+
+                        <!-- Single Card -->
+                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            
+                                <div class="flex items-center flex-1 mb-2">
+                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
+                                    </div>
+                                    <div class="flex-1 ml-2">
+                                        <h1 class="text-gray-600 font-semibold text-sm">Carrots, Olives and 2+ more</h1>
+                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
+                                        <p class="text-xs text-gray-400">contact@randimafruits.com</p>
+                                        
+                                    </div>
+                                </div>
+
+                                <h1 class="text-gray-600 font-semibold flex-1">Randima Fruit House</h1>
+                                <p class="text-xs text-gray-400 my-1 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>    
+                                    Eriyawetiya, Kiribathgoda
+                                </p>
+
+                                <div class="flex items-center mt-2 justify-between">
+                                    <button class="text-yellow-500 bg-yellow-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Due
+                                    </button>
+
+                                    <div class="text-gray-500 text-xs flex flex-col">
+                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 12,736.00</h3>
+                                        Total Payments
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 w-full h-1 bg-yellow-400 left-0"></div>
+                            </div>
+
+                            <!-- End of card -->
+
+
+                       
 
                         </div>
                     </div>

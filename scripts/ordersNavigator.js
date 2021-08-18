@@ -1,29 +1,51 @@
+
+// options.forEach((ele, index) => {
+  //     ele.addEventListener('click', () => {
+    //       slide.style.left = 100/options.length*index + '%';
+    //     })
+    // })
+    
+    
+    
+    // optionsDelivery.forEach((ele, index) => {
+      //   ele.addEventListener('click', () => {
+        //     slideDelivery.style.left = 100/optionsDelivery.length*index + '%';
+        //   })
+        // }) 
+        
 const options = document.querySelectorAll('.option');
 const slide = document.querySelector('.underline-slide');
-
-options.forEach((ele, index) => {
-    ele.addEventListener('click', () => {
-      slide.style.left = 100/options.length*index + '%';
-    })
-})
-
 
 const optionsDelivery = document.querySelectorAll('.option-delivery');
 const slideDelivery = document.querySelector('.underline-slide-delivery');
 
-optionsDelivery.forEach((ele, index) => {
-    ele.addEventListener('click', () => {
-      slideDelivery.style.left = 100/optionsDelivery.length*index + '%';
-    })
-}) 
+const optionsCrew = document.querySelectorAll('.option-crew');
+const slideCrew = document.querySelector('.underline-slide-crew');
+    
+tabNavigator(optionsCrew, slideCrew);
+tabNavigator(optionsDelivery, slideDelivery);
+tabNavigator(options, slide);
+    
+let previous = 0;
+function tabNavigator(options, slide) {
+    options.forEach((ele, index) => {
+      ele.addEventListener('click', () => {
+        optionsCrew[previous].classList.remove('text-yellow-500')
+        optionsCrew[previous].classList.add('text-gray-500')
+        optionsCrew[previous].classList.remove('font-bold')
+        ele.classList.remove('text-gray-500');
+        ele.classList.add('text-yellow-500');
+        ele.classList.add('font-bold');
+        slide.style.left = 100/options.length*index + '%';
+        previous = index;
+      })
+  }) 
+}
+
+// Export Area
 
 const exportBtn = document.querySelector('#export');
 const exported = document.querySelector('.exported');
-
-// exportBtn.addEventListener('click', () => {
-//   exported.classList.toggle('hidden')
-//   exported.classList.toggle('flex')
-// })
 
 const exportDelivery = document.querySelector('#exportDelivery');
 const exportedDelivery = document.querySelector('.exportedDelivery');
@@ -34,6 +56,12 @@ const exportedInventory = document.querySelector('.exportedInventory');
 const exportKitchen = document.querySelector('#exportKitchen');
 const exportedKitchen = document.querySelector('.exportedKitchen');
 
+const exportSuppliers = document.querySelector('#exportSuppliers');
+const exportedSuppliers = document.querySelector('.exportedSuppliers');
+
+const exportCrew = document.querySelector('#exportCrew');
+const exportedCrew = document.querySelector('.exportedCrew');
+
 // exportDelivery.addEventListener('click', () => {
 //   exportedDelivery.classList.toggle('hidden')
 //   exportedDelivery.classList.toggle('flex')
@@ -43,6 +71,8 @@ exportDropDown(exportInventory, exportedInventory);
 exportDropDown(exportDelivery, exportedDelivery);
 exportDropDown(exportBtn, exported);
 exportDropDown(exportKitchen, exportedKitchen);
+exportDropDown(exportSuppliers, exportedSuppliers);
+exportDropDown(exportCrew, exportedCrew);
 
 
 function exportDropDown(button, menu) {
@@ -76,12 +106,18 @@ const stickySearchInventory = document.querySelector('#stickySearchInventory');
 const stickyContainerInventory = document.querySelector('#stickyContainerInventory');
 const stickySearchKitchen = document.querySelector('#stickySearchKitchen');
 const stickyContainerKitchen = document.querySelector('#stickyContainerKitchen');
+const stickySearchSuppliers = document.querySelector('#stickySearchSuppliers');
+const stickyContainerSuppliers = document.querySelector('#stickyContainerSuppliers');
+const stickySearchCrew = document.querySelector('#stickySearchCrew');
+const stickyContainerCrew = document.querySelector('#stickyContainerCrew');
 
 
 stickyHandler(stickySearch, stickyContainer, 128, 'filter', 'export');
 stickyHandler(stickySearchDelivery, stickyContainerDelivery, 128, 'filterDelivery', 'exportDelivery');
 stickyHandler(stickySearchInventory, stickyContainerInventory, 128, 'filterInventory', 'exportInventory');
 stickyHandler(stickySearchKitchen, stickyContainerKitchen, 128, 'filterKitchen', 'exportKitchen');
+stickyHandler(stickySearchSuppliers, stickyContainerSuppliers, 128, 'filterSuppliers', 'exportSuppliers');
+stickyHandler(stickySearchCrew, stickyContainerCrew, 128, 'filterCrew', 'exportCrew');
 
 
 function stickyHandler(stickyParent, stickyContainer, topValue, filterButton, exportButton) {
@@ -91,6 +127,7 @@ function stickyHandler(stickyParent, stickyContainer, topValue, filterButton, ex
 
     if(getPosition(stickyParent).y <= topValue) {
       stickyParent.querySelector('input').classList.add('bg-white');
+      stickyParent.querySelector('input').classList.add('bg-opacity-90');
       stickyParent.querySelector('input').classList.add('shadow-xl');
       stickyParent.querySelector('input').classList.remove('border');
   
@@ -109,6 +146,7 @@ function stickyHandler(stickyParent, stickyContainer, topValue, filterButton, ex
   
     } else {
       stickyParent.querySelector('input').classList.remove('bg-white');
+      stickyParent.querySelector('input').classList.remove('bg-opacity-90');
       stickyParent.querySelector('input').classList.remove('shadow-xl');
       stickyParent.querySelector('input').classList.add('border');
   
