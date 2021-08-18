@@ -1662,23 +1662,24 @@ if (!isset($_SESSION['sessionId'])) {
                         <div class="left-delivery flex-1 flex flex-wrap">
 
                         <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
                             
-                                <div class="flex items-center flex-1 mb-2">
-                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
+                                <div class="absolute top-2 right-2 rounded-full px-3 py-1 bg-black text-gray-200 text-sm bg-opacity-60">Day</div>
+                                <div class="flex justify-center mb-2">
+                                    <div class="overflow-hidden w-24 h-24 rounded-full mb-1 cursor-pointer mr-2">
                                         <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
                                     </div>
-                                    <div class="flex-1 ml-2">
-                                        <h1 class="text-gray-600 font-semibold text-sm">All Purpose Flour and 6+ more</h1>
-                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
-                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
-                                        <p class="text-xs text-gray-400">sithum@icloud.com</p>
-                                        
-                                    </div>
                                 </div>
-
-                                <h1 class="text-gray-600 font-semibold flex-1">Mr. Sithum Basnayeke</h1>
-                                <p class="text-xs text-gray-400 my-1 flex items-center">
+                                
+                                <h1 class="text-gray-600 font-semibold text-center text-lg">Mr. Sithum Basnayake</h1>
+                                <div class="my-1 text-center">
+                                    <h1 class="text-gray-500 font-semibold text-sm mb-1">Manager</h1>
+                                    <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                    <p class="text-xs text-gray-400">+94 76 6 108500</p>
+                                    <p class="text-xs text-gray-400">sithum@icloud.com</p>
+                                    
+                                </div>
+                                <p class="text-xs text-gray-400 mb-1 flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -1694,9 +1695,9 @@ if (!isset($_SESSION['sessionId'])) {
                                         No Due
                                     </button>
 
-                                    <div class="text-gray-500 text-xs flex flex-col">
-                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 74,000.00</h3>
-                                        Total Payments
+                                    <div class="text-gray-500 text-xs flex flex-col text-right">
+                                        <h3 class="text-xl font-semibold text-gray-500 text-left">Rs. 74,000.00</h3>
+                                        Total Salary - Every 30th
                                     </div>
                                 </div>
                                 <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
@@ -1706,136 +1707,48 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                         <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
                             
-                                <div class="flex items-center flex-1 mb-2">
-                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
-                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
-                                    </div>
-                                    <div class="flex-1 ml-2">
-                                        <h1 class="text-gray-600 font-semibold text-sm">Carrots, Olives and 2+ more</h1>
-                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
-                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
-                                        <p class="text-xs text-gray-400">contact@randimafruits.com</p>
-                                        
+                            <div class="absolute top-2 right-2 rounded-full px-3 py-1 bg-black text-gray-200 text-sm bg-opacity-60">Night</div>
+                                <div class="flex justify-center mb-2">
+                                    <div class="overflow-hidden w-24 h-24 rounded-full mb-1 cursor-pointer mr-2">
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/Mayuko.jpg" alt="SupplierImage">
                                     </div>
                                 </div>
-
-                                <h1 class="text-gray-600 font-semibold flex-1">Randima Fruit House</h1>
-                                <p class="text-xs text-gray-400 my-1 flex items-center">
+                                
+                                <h1 class="text-gray-600 font-semibold text-center text-lg">Mrs. Mayuko Inoiue</h1>
+                                <div class="my-1 text-center">
+                                    <h1 class="text-gray-500 font-semibold text-sm mb-1">Chief Chef</h1>
+                                    <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                    <p class="text-xs text-gray-400">+94 71 4 123 456</p>
+                                    <p class="text-xs text-gray-400">mayuko@icloud.com</p>
+                                    
+                                </div>
+                                <p class="text-xs text-gray-400 mb-1 flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>    
-                                    Eriyawetiya, Kiribathgoda
+                                    Kandy Road, Badulla
                                 </p>
 
                                 <div class="flex items-center mt-2 justify-between">
-                                    <button class="text-yellow-500 bg-yellow-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        Due
+                                        No Due
                                     </button>
 
-                                    <div class="text-gray-500 text-xs flex flex-col">
-                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 12,736.00</h3>
-                                        Total Payments
+                                    <div class="text-gray-500 text-xs flex flex-col text-right">
+                                        <h3 class="text-xl font-semibold text-gray-500 text-left">Rs. 124,000.00</h3>
+                                        Total Salary - Every 15th
                                     </div>
                                 </div>
-                                <div class="absolute bottom-0 w-full h-1 bg-yellow-400 left-0"></div>
+                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
                             </div>
 
                             <!-- End of card -->
-
-                        <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                            
-                                <div class="flex items-center flex-1 mb-2">
-                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
-                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
-                                    </div>
-                                    <div class="flex-1 ml-2">
-                                        <h1 class="text-gray-600 font-semibold text-sm">Fresh Milk</h1>
-                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
-                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
-                                        <p class="text-xs text-gray-400">contact@highland.com</p>
-                                        
-                                    </div>
-                                </div>
-
-                                <h1 class="text-gray-600 font-semibold flex-1">Highland Milk Products</h1>
-                                <p class="text-xs text-gray-400 my-1 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>    
-                                    No.45, Viharagoda, Kiribathgoda
-                                </p>
-
-                                <div class="flex items-center mt-2 justify-between">
-                                    <button class="text-red-500 bg-red-200 px-2 py-2 rounded-full flex items-center text-xs">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        Out
-                                    </button>
-
-                                    <div class="text-gray-500 text-xs flex flex-col">
-                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 68,000.00</h3>
-                                        Total Payments
-                                    </div>
-                                </div>
-                                <div class="absolute bottom-0 w-full h-1 bg-red-400 left-0"></div>
-                            </div>
-
-                            <!-- End of card -->
-
-                        <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                            
-                                <div class="flex items-center flex-1 mb-2">
-                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
-                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611bf48f3a44a2.49241929.png" alt="SupplierImage">
-                                    </div>
-                                    <div class="flex-1 ml-2">
-                                        <h1 class="text-gray-600 font-semibold text-sm">Carrots, Olives and 2+ more</h1>
-                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
-                                        <p class="text-xs text-gray-400">+94 76 6 108500</p>
-                                        <p class="text-xs text-gray-400">contact@randimafruits.com</p>
-                                        
-                                    </div>
-                                </div>
-
-                                <h1 class="text-gray-600 font-semibold flex-1">Randima Fruit House</h1>
-                                <p class="text-xs text-gray-400 my-1 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>    
-                                    Eriyawetiya, Kiribathgoda
-                                </p>
-
-                                <div class="flex items-center mt-2 justify-between">
-                                    <button class="text-yellow-500 bg-yellow-200 px-2 py-2 rounded-full flex items-center text-xs">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        Due
-                                    </button>
-
-                                    <div class="text-gray-500 text-xs flex flex-col">
-                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 12,736.00</h3>
-                                        Total Payments
-                                    </div>
-                                </div>
-                                <div class="absolute bottom-0 w-full h-1 bg-yellow-400 left-0"></div>
-                            </div>
-
-                            <!-- End of card -->
-
-
-                       
 
                         </div>
                     </div>
