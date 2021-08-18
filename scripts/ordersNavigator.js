@@ -167,9 +167,9 @@ function stickyHandler(stickyParent, stickyContainer, filterButton, exportButton
   
   stickyContainer.addEventListener('scroll', () => {
     
-    // console.log(getPosition(stickySearch));
+    console.log(topValue, " ", getPosition(stickyParent).y);
 
-    if(getPosition(stickyParent).y < topValue) {
+    if(getPosition(stickyParent).y + topValue/4 < topValue) {
       stickyParent.querySelector('input').classList.add('bg-white');
       stickyParent.querySelector('input').classList.add('bg-opacity-90');
       stickyParent.querySelector('input').classList.add('shadow-xl');

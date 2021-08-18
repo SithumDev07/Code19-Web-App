@@ -6,6 +6,7 @@ let previousSection = 0;
 
 sideBarNaviationLinks.forEach((ele, index) => {
     ele.addEventListener('click', () => {
+        document.querySelector('#MainTitleChangable').innerHTML = sections[index];
         document.querySelector(`.${sections[previousSection]}`).classList.remove('z-base');
         document.querySelector(`.${sections[previousSection]}`).classList.remove('overflow-y-auto');
         document.querySelector(`.${sections[previousSection]}`).classList.remove('overflow-hidden');

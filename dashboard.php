@@ -65,39 +65,28 @@ if (!isset($_SESSION['sessionId'])) {
             width: auto !important;
             height: 350px !important;
         }
-        .dashboard {
-            transition: all 1 ease;
-            /* transform: scale(1); */
-        }
-        .orders {
-            transition: all 1 ease;
-            /* transform: scale(1); */
-        }
         .z-3 {
             z-index: 3;
             /* transform: scale(.5); */
         }
-
-        .z-4 {
-            z-index: 4; 
-        }
-        .z-5 {
-            z-index: 5; 
-        }
-        .z-6 {
-            z-index: 6; 
-        }
-        .z-7 {
-            z-index: 7; 
-        }
-        .z-8 {
-            z-index: 8; 
-        }
-        .z-9 {
-            z-index: 9; 
-        }
         .z-base {
             z-index: 50; 
+        }
+
+        .scale-up {
+            animation: scale-title 0.2s ease forwards;
+        }
+        .scale-up-again {
+            animation: scale-title 0.2s ease forwards;
+        }
+
+        @keyframes scale-title {
+            from {
+                transform: scale(1);
+            }
+            to{
+                transform: scale(1.25);
+            }
         }
     </style>
 </head>
@@ -392,7 +381,11 @@ if (!isset($_SESSION['sessionId'])) {
                             </div>
                         </div>
 
-                        <div class="quick-orders-list p-5 rounded-2xl bg-gray-900 text-white w-96">
+                        <div>
+                            <canvas id="myChartBar"></canvas>
+                        </div>
+
+                        <!-- <div class="quick-orders-list p-5 rounded-2xl bg-gray-900 text-white w-96">
                             <div class="flex items-center justify-between mb-5">
                                 <h3 class="text-xl font-semibold">Orders</h3>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -406,14 +399,13 @@ if (!isset($_SESSION['sessionId'])) {
                                 <p>Description</p>
                                 <p>Amount</p>
                                 <p>Status</p>
-                                <!-- Online or ... -->
                                 <p>Type</p>
                             </div>
 
                             <div class="order-component w-11/12 h-20 px-3 py-3 rounded-xl border mx-auto">
 
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -422,11 +414,11 @@ if (!isset($_SESSION['sessionId'])) {
                 <div class="moving-part Orders glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainer">
                     <div class="greeting flex w-full justify-between items-center">
                     
-                        <h1 class="text-2xl text-gray-700 font-semibold flex items-center">Orders <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 cursor-pointer transform transition duration-200 hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <h1 class="text-2xl text-gray-700 font-semibold flex items-center">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 cursor-pointer transform transition duration-200 hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 </svg></h1>
                         
-                        <div class="flex items-center">
+                        <!-- <div class="flex items-center">
                             <a href="#" class="text-yellow-500 font-bold">View All</a>
                         <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -434,7 +426,7 @@ if (!isset($_SESSION['sessionId'])) {
                             </svg>
                                 Add Widget
                         </button>
-                        </div>
+                        </div> -->
                     </div>
                     <div>
                         <p class="mt-5 text-sm text-gray-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos quasi iure officia id, nam eum expedita dolores aliquid numquam quis minus non eligendi quibusdam inventore blanditiis assumenda tenetur voluptatibus. Animi.</p>
@@ -637,9 +629,9 @@ if (!isset($_SESSION['sessionId'])) {
                 <!-- Deliveries -->
                 <div class="moving-part Deliveries glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerDelivery">
                     <div class="greeting flex w-full justify-between items-center">
-                        <h1 class="text-2xl text-gray-700 font-semibold">👋 Deliveries</h1>
+                        <h1 class="text-2xl text-gray-700 font-semibold">🚚 Deliveries</h1>
                         
-                        <div class="flex items-center">
+                        <!-- <div class="flex items-center">
                             <a href="#" class="text-yellow-500 font-bold">View All</a>
                         <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -647,10 +639,19 @@ if (!isset($_SESSION['sessionId'])) {
                             </svg>
                                 Add Widget
                         </button>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Search -->
+                    <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
+                       <ul class="flex items-center h-full">
+                           <li class="option-delivery all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer" style="width: 25%;">All Deliveries</li>
+                           <li class="option-delivery completed block h-full text-center text-gray-500 cursor-pointer" style="width: 25%;">Completed</li>
+                           <li class="option-delivery continuing block h-full text-center text-gray-500 cursor-pointer" style="width: 25%;">On Going</li>
+                           <li class="option-delivery on-hold block h-full text-center text-gray-500 cursor-pointer" style="width: 25%;">Cancelled</li>
+                       </ul>
+                       <span class="underline-slide-delivery absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 25%;"></span>
+                   </div>
 
                     <!-- Search Field -->
                    <div class="mt-5 flex items-center w-full sticky top-0 z-50" id="stickySearchDelivery">
@@ -686,15 +687,7 @@ if (!isset($_SESSION['sessionId'])) {
                         </div>
                    </div>
 
-                    <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
-                       <ul class="flex items-center h-full">
-                           <li class="option-delivery all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer" style="width: 25%;">All Deliveries</li>
-                           <li class="option-delivery completed block h-full text-center text-gray-500 cursor-pointer" style="width: 25%;">Completed</li>
-                           <li class="option-delivery continuing block h-full text-center text-gray-500 cursor-pointer" style="width: 25%;">On Going</li>
-                           <li class="option-delivery on-hold block h-full text-center text-gray-500 cursor-pointer" style="width: 25%;">Cancelled</li>
-                       </ul>
-                       <span class="underline-slide-delivery absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 25%;"></span>
-                   </div>
+                   
 
                     <div class="flex mt-5 mb-24">
                         <div class="left-delivery flex-1 flex flex-wrap">
@@ -1400,7 +1393,7 @@ if (!isset($_SESSION['sessionId'])) {
                     <!-- Search -->
 
                     <!-- Search Field -->
-                   <div class="mt-5 flex items-center w-full sticky top-0 z-50" id="stickySearchSuppliers">
+                   <div class="mt-14 flex items-center w-full sticky top-0 z-50" id="stickySearchSuppliers">
                         <input type="text" placeholder="Search for SupplierID, Supplier Name Or Supplied Item..." class="flex-1 bg-transparent rounded-md border transform transition-colors duration-300">
                         <button class="flex items-center text-gray-500 mx-5 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="filterSuppliers">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
@@ -1902,7 +1895,42 @@ var myChart = new Chart(ctx, {
     }
 });
 
-console.log(myChart);
+var ctx = document.getElementById('myChartBar').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
 </script>
 </body>
 </html>
