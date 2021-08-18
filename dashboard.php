@@ -47,6 +47,16 @@ if (!isset($_SESSION['sessionId'])) {
             border-radius: 1.2em;
         }
 
+        .search-pop::-webkit-scrollbar {
+            width: 0.3em;
+            border-radius: 50%;
+        }
+
+        .search-pop::-webkit-scrollbar-thumb {
+            background-color: rgba(30, 30, 30, 0.3);
+            border-radius: 1.2em;
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -71,6 +81,9 @@ if (!isset($_SESSION['sessionId'])) {
         }
         .z-base {
             z-index: 50; 
+        }
+        .z-base-search {
+            z-index: 51; 
         }
 
         .scale-up {
@@ -221,11 +234,44 @@ if (!isset($_SESSION['sessionId'])) {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
 
-                <div class="search-box w-96 bg-white flex overflow-hidden rounded-full px-4 py-2 items-center drop-shadow-lg">
+                <div class="search-box w-96 bg-white flex rounded-full px-4 py-2 items-center drop-shadow-lg relative">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
-                    <input type="text" class="border-0 bg-transparent flex-1 p-1 outline-none" placeholder="Search">
+                    <input type="text" class="searchInputMain border-0 bg-transparent flex-1 p-1 outline-none" placeholder="Search">
+                    <div class="absolute top-16 left-0 w-full h-64 bg-gray-50 shadow-2xl z-base-search rounded-2xl px-2 py-2 overflow-y-auto text-black search-pop hidden">
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6 exit-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg> 
+                        <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders 
+                        </button>
+                        <!-- <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg> 
+                        </button>
+                        <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg> 
+                        </button>
+                        <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg> 
+                        </button>
+                        <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg> 
+                        </button>
+                        <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg> 
+                        </button>
+                        <button class="w-full h-12 border-b border-gray-600 p-2 flex items-center justify-between">📝 Orders <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg> 
+                        </button> -->
+                        
+                    </div>
                 </div>
 
                 <div class="buttons flex">
@@ -384,28 +430,6 @@ if (!isset($_SESSION['sessionId'])) {
                         <div>
                             <canvas id="myChartBar"></canvas>
                         </div>
-
-                        <!-- <div class="quick-orders-list p-5 rounded-2xl bg-gray-900 text-white w-96">
-                            <div class="flex items-center justify-between mb-5">
-                                <h3 class="text-xl font-semibold">Orders</h3>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                                </svg>
-                            </div>
-
-                            <div class="headers flex items-center text-xs justify-between mb-6">
-                                <p>Table No</p>
-                                <p>Customer name</p>
-                                <p>Description</p>
-                                <p>Amount</p>
-                                <p>Status</p>
-                                <p>Type</p>
-                            </div>
-
-                            <div class="order-component w-11/12 h-20 px-3 py-3 rounded-xl border mx-auto">
-
-                            </div>
-                        </div> -->
                     </div>
                 </div>
 
@@ -418,15 +442,6 @@ if (!isset($_SESSION['sessionId'])) {
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 </svg></h1>
                         
-                        <!-- <div class="flex items-center">
-                            <a href="#" class="text-yellow-500 font-bold">View All</a>
-                        <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                                Add Widget
-                        </button>
-                        </div> -->
                     </div>
                     <div>
                         <p class="mt-5 text-sm text-gray-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos quasi iure officia id, nam eum expedita dolores aliquid numquam quis minus non eligendi quibusdam inventore blanditiis assumenda tenetur voluptatibus. Animi.</p>
@@ -1858,6 +1873,7 @@ if (!isset($_SESSION['sessionId'])) {
     </main>
     <script src="./scripts/navigation.js"></script>
     <script src="./scripts/ordersNavigator.js"></script>
+    <script src="./scripts/search.js"></script>
     <script>
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
