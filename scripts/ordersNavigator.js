@@ -1,18 +1,4 @@
 
-// options.forEach((ele, index) => {
-  //     ele.addEventListener('click', () => {
-    //       slide.style.left = 100/options.length*index + '%';
-    //     })
-    // })
-    
-    
-    
-    // optionsDelivery.forEach((ele, index) => {
-      //   ele.addEventListener('click', () => {
-        //     slideDelivery.style.left = 100/optionsDelivery.length*index + '%';
-        //   })
-        // }) 
-        
 const options = document.querySelectorAll('.option');
 const slide = document.querySelector('.underline-slide');
 
@@ -70,12 +56,6 @@ let previousSide = 0;
 function sideNavigator(options, slide) {
   options.forEach((ele, index) => {
     ele.addEventListener('click', () => {
-      // options[previousSide].classList.remove('text-yellow-500')
-      // options[previousSide].classList.add('text-gray-500')
-      // options[previousSide].classList.remove('font-bold')
-      // ele.classList.remove('text-gray-500');
-      // ele.classList.add('text-yellow-500');
-      // ele.classList.add('font-bold');
       slide.style.top = 100/options.length*index + '%';
       previousSide = index;
     })
@@ -102,10 +82,6 @@ const exportedSuppliers = document.querySelector('.exportedSuppliers');
 const exportCrew = document.querySelector('#exportCrew');
 const exportedCrew = document.querySelector('.exportedCrew');
 
-// exportDelivery.addEventListener('click', () => {
-//   exportedDelivery.classList.toggle('hidden')
-//   exportedDelivery.classList.toggle('flex')
-// })
 
 exportDropDown(exportInventory, exportedInventory);
 exportDropDown(exportDelivery, exportedDelivery);
@@ -167,7 +143,7 @@ function stickyHandler(stickyParent, stickyContainer, filterButton, exportButton
   
   stickyContainer.addEventListener('scroll', () => {
     
-    console.log(topValue, " ", getPosition(stickyParent).y);
+    // console.log(topValue, " ", getPosition(stickyParent).y);
 
     if(getPosition(stickyParent).y + topValue/4 < topValue) {
       stickyParent.querySelector('input').classList.add('bg-white');
