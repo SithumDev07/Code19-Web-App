@@ -32,10 +32,6 @@ if (!isset($_SESSION['sessionId'])) {
             border-radius: 50%;
         }
 
-        .side-nav::-webkit-scrollbar-track {
-            /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
-        }
-
         .side-nav::-webkit-scrollbar-thumb {
             background-color: rgba(30, 30, 30, 0.3);
             border-radius: 1.2em;
@@ -45,9 +41,6 @@ if (!isset($_SESSION['sessionId'])) {
             border-radius: 50%;
         }
 
-        .moving-part::-webkit-scrollbar-track {
-            /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
-        }
 
         .moving-part::-webkit-scrollbar-thumb {
             background-color: rgba(30, 30, 30, 0.3);
@@ -258,7 +251,7 @@ if (!isset($_SESSION['sessionId'])) {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                           </svg>
                     </a>
-                    <a href="#" class="bg-white rounded-full p-2 shadow-lg ml-2 transform transition duration-200 active:scale-75">
+                    <a href="./dashboard.php" class="bg-white rounded-full p-2 shadow-lg ml-2 transform transition duration-200 active:scale-75">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                           </svg>
@@ -279,7 +272,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Dashboard -->
-                <div class="moving-part Dashboard glass rounded-3xl p-5 overflow-y-auto h-full absolute top-0 right-0 left-0 z-3">
+                <div class="moving-part Dashboard glass rounded-3xl p-5 overflow-y-auto h-full absolute top-0 right-0 left-0 z-base">
                     <div class="greeting flex w-full justify-between items-center">
                     <?php 
                                     $sql = "SELECT name FROM staff_member;";
@@ -426,7 +419,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Orders -->
-                <div class="moving-part Orders glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-4" id="stickyContainer">
+                <div class="moving-part Orders glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainer">
                     <div class="greeting flex w-full justify-between items-center">
                     
                         <h1 class="text-2xl text-gray-700 font-semibold flex items-center">Orders <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 cursor-pointer transform transition duration-200 hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -642,7 +635,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Deliveries -->
-                <div class="moving-part Deliveries glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-5" id="stickyContainerDelivery">
+                <div class="moving-part Deliveries glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerDelivery">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">👋 Deliveries</h1>
                         
@@ -829,7 +822,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Inventory -->
-                <div class="moving-part Inventory glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-6" id="stickyContainerInventory">
+                <div class="moving-part Inventory glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerInventory">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">🏪 Inventory</h1>
 
@@ -1037,7 +1030,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                  <!-- Kitchen -->
-                 <div class="moving-part Kitchen glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-7" id="stickyContainerKitchen">
+                 <div class="moving-part Kitchen glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerKitchen">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">👩‍🍳 Kitchen</h1>
 
@@ -1392,7 +1385,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Suppliers -->
-                <div class="moving-part Suppliers glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-8" id="stickyContainerSuppliers">
+                <div class="moving-part Suppliers glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerSuppliers">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">👨‍💼 Suppliers</h1>
 
@@ -1625,7 +1618,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Crew -->
-                <div class="moving-part Crew glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-9" id="stickyContainerCrew">
+                <div class="moving-part Crew glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerCrew">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">👨‍👨‍👦‍👦 Crew</h1>
 
@@ -1779,7 +1772,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                  <!-- Settings -->
-                 <div class="moving-part Settings glass rounded-3xl p-7 overflow-y-auto h-full absolute top-0 right-0 left-0 z-9" id="stickyContainerCrew">
+                 <div class="moving-part Settings glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerCrew">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">🛠 Settings</h1>
                     </div>

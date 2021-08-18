@@ -152,20 +152,24 @@ const stickySearchCrew = document.querySelector('#stickySearchCrew');
 const stickyContainerCrew = document.querySelector('#stickyContainerCrew');
 
 
-stickyHandler(stickySearch, stickyContainer, 128, 'filter', 'export');
-stickyHandler(stickySearchDelivery, stickyContainerDelivery, 128, 'filterDelivery', 'exportDelivery');
-stickyHandler(stickySearchInventory, stickyContainerInventory, 128, 'filterInventory', 'exportInventory');
-stickyHandler(stickySearchKitchen, stickyContainerKitchen, 128, 'filterKitchen', 'exportKitchen');
-stickyHandler(stickySearchSuppliers, stickyContainerSuppliers, 128, 'filterSuppliers', 'exportSuppliers');
-stickyHandler(stickySearchCrew, stickyContainerCrew, 128, 'filterCrew', 'exportCrew');
+const topValue = getPosition(stickySearch).y;
+
+stickyHandler(stickySearch, stickyContainer, 'filter', 'export');
+stickyHandler(stickySearchDelivery, stickyContainerDelivery, 'filterDelivery', 'exportDelivery');
+stickyHandler(stickySearchInventory, stickyContainerInventory, 'filterInventory', 'exportInventory');
+stickyHandler(stickySearchKitchen, stickyContainerKitchen, 'filterKitchen', 'exportKitchen');
+stickyHandler(stickySearchSuppliers, stickyContainerSuppliers, 'filterSuppliers', 'exportSuppliers');
+stickyHandler(stickySearchCrew, stickyContainerCrew, 'filterCrew', 'exportCrew');
 
 
-function stickyHandler(stickyParent, stickyContainer, topValue, filterButton, exportButton) {
 
+function stickyHandler(stickyParent, stickyContainer, filterButton, exportButton) {
+  
   stickyContainer.addEventListener('scroll', () => {
+    
+    // console.log(getPosition(stickySearch));
 
-
-    if(getPosition(stickyParent).y <= topValue) {
+    if(getPosition(stickyParent).y < topValue) {
       stickyParent.querySelector('input').classList.add('bg-white');
       stickyParent.querySelector('input').classList.add('bg-opacity-90');
       stickyParent.querySelector('input').classList.add('shadow-xl');
