@@ -18,4 +18,9 @@ $(document).ready(function() {
     $(".all-crew").click(function() {
         $(".left-crew").load("operations/get-all-crew.php", {});
     })
+
+    $("#InsertCrew").click(function() {
+        
+    })
 });
+
