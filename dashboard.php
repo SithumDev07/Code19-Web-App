@@ -18,6 +18,7 @@ if (!isset($_SESSION['sessionId'])) {
     <title>Document</title>
     <link rel="stylesheet" href="./public/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         body{
             background-color: #DFE1EE;
@@ -1618,9 +1619,9 @@ if (!isset($_SESSION['sessionId'])) {
                     <!-- Search -->
                     <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
                        <ul class="flex items-center h-full">
-                           <li class="option-crew all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer transform transition-colors duration-500" style="width: 33%;">All Employees</li>
-                           <li class="option-crew completed block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Day</li>
-                           <li class="option-crew completed block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Night</li>
+                           <li class="option-crew all-crew block h-full text-center text-yellow-500 font-bold cursor-pointer transform transition-colors duration-500" style="width: 33%;">All Employees</li>
+                           <li class="option-crew crew-day block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Day</li>
+                           <li class="option-crew crew-night block h-full text-center text-gray-500 cursor-pointer transform transition-colors duration-500" style="width: 33%;">Night</li>
                        </ul>
                        <span class="underline-slide-crew absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 33%;"></span>
                    </div>
@@ -1660,7 +1661,7 @@ if (!isset($_SESSION['sessionId'])) {
                    </div>
                    
                     <div class="flex mt-5 mb-24">
-                        <div class="left-delivery flex-1 flex flex-wrap">
+                        <div class="left-crew flex-1 flex flex-wrap">
 
                         <!-- Single Card -->
                             <!-- <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
@@ -1915,6 +1916,7 @@ if (!isset($_SESSION['sessionId'])) {
     <script src="./scripts/navigation.js"></script>
     <script src="./scripts/ordersNavigator.js"></script>
     <script src="./scripts/search.js"></script>
+    <script src="./scripts/crewAjax.js"></script>
     <script>
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
