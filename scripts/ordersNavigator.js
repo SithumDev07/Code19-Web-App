@@ -31,6 +31,9 @@ const exportedDelivery = document.querySelector('.exportedDelivery');
 const exportInventory = document.querySelector('#exportInventory');
 const exportedInventory = document.querySelector('.exportedInventory');
 
+const exportKitchen = document.querySelector('#exportKitchen');
+const exportedKitchen = document.querySelector('.exportedKitchen');
+
 // exportDelivery.addEventListener('click', () => {
 //   exportedDelivery.classList.toggle('hidden')
 //   exportedDelivery.classList.toggle('flex')
@@ -39,6 +42,7 @@ const exportedInventory = document.querySelector('.exportedInventory');
 exportDropDown(exportInventory, exportedInventory);
 exportDropDown(exportDelivery, exportedDelivery);
 exportDropDown(exportBtn, exported);
+exportDropDown(exportKitchen, exportedKitchen);
 
 
 function exportDropDown(button, menu) {
@@ -70,11 +74,14 @@ const stickySearchDelivery = document.querySelector('#stickySearchDelivery');
 const stickyContainerDelivery = document.querySelector('#stickyContainerDelivery');
 const stickySearchInventory = document.querySelector('#stickySearchInventory');
 const stickyContainerInventory = document.querySelector('#stickyContainerInventory');
+const stickySearchKitchen = document.querySelector('#stickySearchKitchen');
+const stickyContainerKitchen = document.querySelector('#stickyContainerKitchen');
 
 
 stickyHandler(stickySearch, stickyContainer, 128, 'filter', 'export');
 stickyHandler(stickySearchDelivery, stickyContainerDelivery, 128, 'filterDelivery', 'exportDelivery');
 stickyHandler(stickySearchInventory, stickyContainerInventory, 128, 'filterInventory', 'exportInventory');
+stickyHandler(stickySearchKitchen, stickyContainerKitchen, 128, 'filterKitchen', 'exportKitchen');
 
 
 function stickyHandler(stickyParent, stickyContainer, topValue, filterButton, exportButton) {
