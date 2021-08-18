@@ -30,9 +30,9 @@ let previous = 0;
 function tabNavigator(options, slide) {
     options.forEach((ele, index) => {
       ele.addEventListener('click', () => {
-        optionsCrew[previous].classList.remove('text-yellow-500')
-        optionsCrew[previous].classList.add('text-gray-500')
-        optionsCrew[previous].classList.remove('font-bold')
+        options[previous].classList.remove('text-yellow-500')
+        options[previous].classList.add('text-gray-500')
+        options[previous].classList.remove('font-bold')
         ele.classList.remove('text-gray-500');
         ele.classList.add('text-yellow-500');
         ele.classList.add('font-bold');
@@ -40,6 +40,27 @@ function tabNavigator(options, slide) {
         previous = index;
       })
   }) 
+}
+
+const optionsAside = document.querySelectorAll('.option-aside');
+const slideAside = document.querySelector('.slide-aside');
+
+sideNavigator(optionsAside, slideAside)
+
+let previousSide = 0;
+function sideNavigator(options, slide) {
+  options.forEach((ele, index) => {
+    ele.addEventListener('click', () => {
+      // options[previousSide].classList.remove('text-yellow-500')
+      // options[previousSide].classList.add('text-gray-500')
+      // options[previousSide].classList.remove('font-bold')
+      // ele.classList.remove('text-gray-500');
+      // ele.classList.add('text-yellow-500');
+      // ele.classList.add('font-bold');
+      slide.style.top = 100/options.length*index + '%';
+      previousSide = index;
+    })
+}) 
 }
 
 // Export Area
