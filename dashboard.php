@@ -669,15 +669,7 @@ if (!isset($_SESSION['sessionId'])) {
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">🚚 Deliveries</h1>
                         
-                        <!-- <div class="flex items-center">
-                            <a href="#" class="text-yellow-500 font-bold">View All</a>
-                        <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                                Add Widget
-                        </button>
-                        </div> -->
+                       
                     </div>
 
                     <!-- Search -->
@@ -1650,9 +1642,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                 <!-- Crew -->
                 <div class="crew-form-container glass rounded-t-3xl absolute top-24 left-0 z-base-search right-0 hidden h-full w-full">
-                    <!-- <form id="crew-form w-full" action="./operations/add-new-crew.php" method="post" enctype="multipart/form-data"> -->
-                        <div class="w-full h-full p-10 flex-col add-crew-form hidden overflow-y-auto">
-                                <!-- Card Account -->
+                        <!-- <div class="w-full h-full p-10 flex-col add-crew-form hidden overflow-y-auto">
                             <div class="flex items-center">
                                 <div class="flex-1 flex flex-col px-12">
                                     <input type="text" placeholder="Full Name" class="mb-5 flex-1 rounded-md bg-gray-50" id="crewName" name="name">
@@ -1685,9 +1675,7 @@ if (!isset($_SESSION['sessionId'])) {
                                             </label>
                                             <select class="px-3 py-2 w-28 rounded" id="crewPosition" name="position">
                                                 <option value="Chef">Chef</option>
-                                                <!-- <option value="Staff">Staff</option> -->
                                                 <option value="Helper">Helper</option>
-                                                <!-- <option value="Manager">Manager</option> -->
                                             </select>
                                         </div>
 
@@ -1725,8 +1713,7 @@ if (!isset($_SESSION['sessionId'])) {
                                         </button>
                                     </div>
                             </div>
-                        </div>
-                    <!-- </form> -->
+                        </div> -->
                 </div>
 
 

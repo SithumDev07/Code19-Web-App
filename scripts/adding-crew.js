@@ -1,24 +1,3 @@
-const recuitEmployee = document.querySelector('#recuitEmployee');
-// let statusOriginal = true;
-let toggleText = true;
-
-    recuitEmployee.addEventListener('click', () => {
-        document.querySelector('.transformin-icon').classList.toggle('translate-icon');
-        if(toggleText) {
-            document.querySelector('.change-text-crew').innerHTML = "Cancel";
-        } else {
-            document.querySelector('.change-text-crew').innerHTML = "Recruit Employee";
-        }
-        toggleText = !toggleText;
-        document.querySelector('.add-crew-form').classList.toggle('hidden');
-        document.querySelector('.add-crew-form').classList.toggle('flex');
-        document.querySelector('.crew-form-container').classList.toggle('hidden');
-        document.querySelector('.crew-form-container').classList.toggle('block');
-        console.log('Working');
-    })
-
-
-
 var date = new Date();
 var currentDate = date.toISOString().substring(0,10);
 var maximumDate = date.getFullYear() - 16;
@@ -26,17 +5,32 @@ var minimumDate = date.getFullYear() - 55;
 
 var newDate = currentDate.replace(date.getFullYear(), maximumDate);
 
+const recuitEmployee = document.querySelector('#recuitEmployee');
+// let statusOriginal = true;
+let toggleText = true;
 
-const crewBirthday = document.querySelector('#crewDOB')
+// recuitEmployee.addEventListener('click', () => {
+    
+//     document.querySelector('.transformin-icon').classList.toggle('translate-icon');
+//     if(toggleText) {
+//         document.querySelector('.change-text-crew').innerHTML = "Cancel";
+//     } else {
+//         document.querySelector('.change-text-crew').innerHTML = "Recruit Employee";
+//     }
+//     toggleText = !toggleText;
+//     document.querySelector('.add-crew-form').classList.toggle('hidden');
+//     document.querySelector('.add-crew-form').classList.toggle('flex');
+//     document.querySelector('.crew-form-container').classList.toggle('hidden');
+//     document.querySelector('.crew-form-container').classList.toggle('block');
+//     console.log('Working');
+// })
 
-if(crewBirthday !== null) {
-    // console.log('Working');
-    if(crewBirthday.value === '') {
-        crewBirthday.value = newDate;
-        crewBirthday.setAttribute("min", currentDate.replace(date.getFullYear(), minimumDate));
-        crewBirthday.setAttribute("max", currentDate);
-    }
-}
+
+
+
+
+
+
 
 const crewUploadProfile = document.querySelector('#crewUploadProfile')
 const CrewImageContainer = document.querySelector('.CrewImageContainer')
@@ -62,16 +56,7 @@ function setErrorOnInputs(ele, error){
     }
 }
 
-ListenOnInputChanges(document.querySelector('#crewName'))
-ListenOnInputChanges(document.querySelector('#crewEmail'))
-ListenOnInputChanges(document.querySelector('#crewAddress'))
-ListenOnInputChanges(document.querySelector('#crewPersonalNumber'))
-ListenOnInputChanges(document.querySelector('#crewLandLine'))
 
-
-//*  SALARY And Date Realtime Validate
-SalaryNDateInputListener(document.querySelector('#crewSalary'))
-SalaryNDateInputListener(document.querySelector('#crewPayDate'))
 
 function SalaryNDateInputListener(ele) {
     ele.addEventListener('keyup', () => {
@@ -111,20 +96,20 @@ function ListenOnInputChanges(ele) {
         })
 }
 
-function validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine, insert) {
+function validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine, insert, crewProfilePic) {
     let success = true;
     
     if(insert){
-        if(crewUploadProfile.files.length === 0) {
+        if(crewProfilePic.files.length === 0) {
             setErroOnCrewImage(true)
             success = false;
         } else {
-            if(!isValidExtention(crewUploadProfile)) {
+            if(!isValidExtention(crewProfilePic)) {
                 setErroOnCrewImage(true)
                 success = false;
             }
         
-            if(!isValidImageSize(crewUploadProfile)) {
+            if(!isValidImageSize(crewProfilePic)) {
                 setErroOnCrewImage(true)
                 success=false;
             }

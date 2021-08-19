@@ -95,7 +95,7 @@ function UpdateListener() {
             SalaryNDateInputListener(document.querySelector('#crewSalary'))
             SalaryNDateInputListener(document.querySelector('#crewPayDate'))
         
-        if(!(validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine, false))) {
+        if(!(validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine, false, document.querySelector('#crewUploadProfile')))) {
             console.log('Not Validated');
             $(".crew-error-message").removeClass("hidden");
         } else {
