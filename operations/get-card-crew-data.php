@@ -12,8 +12,8 @@
             
             
             
-            ?> 
-                <form id="crew-form" action="./operations/<?php echo 'update-crew'; ?>.php" method="post" enctype="multipart/form-data">
+            // ?> action="./operations/<?php echo 'update-crew'; ?>.php"
+                <!-- <form id="crew-form" method="post" enctype="multipart/form-data"> -->
                             <div class="w-full h-full glass rounded-3xl p-10 <?php echo $_POST['marginTop']; ?> left-0 z-base-search absolute flex-col <?php echo $flex; ?> add-crew-form overflow-y-auto">
                                     <!-- Card Account -->
                                 <div class="flex items-center">
@@ -27,7 +27,7 @@
                                     <div class="w-48 h-48 rounded-full overflow-hidden relative cursor-pointer profile-picture p-1 border-2 border-blue-600 CrewImageContainer shadow-2xl">
                                         <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl z-10"></i>
                                         <img id="crewUploadedProfile" class="opacity-80 rounded-full w-full h-full object-cover" src="./photo_uploads/users/<?php echo $row['photo']; ?>" alt="Crew Profile">
-                                        <input type="file" name="profileUpload" id="crewUploadProfile">
+                                        <input type="file" name="profileUpload" id="crewUploadProfile" value="">
                                     </div>
                                 </div>
                                 <div class="mb-24 mt-5">
@@ -47,9 +47,9 @@
                                                     Position
                                                 </label>
                                                 <select class="px-3 py-2 w-28 rounded" id="crewPosition" name="position">
-                                                    <option value="Chef">Chef</option>
+                                                    <option value="Chef" <?php if($row['position'] == 'Chef') { echo "selected='selected'"; } ?> >Chef</option>
                                                     <!-- <option value="Staff">Staff</option> -->
-                                                    <option value="Helper">Helper</option>
+                                                    <option value="Helper" <?php if($row['position'] == 'Helper') { echo "selected='selected'"; } ?> >Helper</option>
                                                     <!-- <option value="Manager">Manager</option> -->
                                                 </select>
                                             </div>
@@ -59,8 +59,8 @@
                                                     Shift
                                                 </label>
                                                 <select class="px-3 py-2 w-28 rounded" id="crewShift" name="shift">
-                                                    <option value="Day">Day</option>
-                                                    <option value="Night">Night</option>
+                                                    <option value="Day" <?php if($row['shift'] == 'Day') { echo "selected='selected'"; } ?> >Day</option>
+                                                    <option value="Night" <?php if($row['shift'] == 'Night') { echo "selected='selected'"; } ?> >Night</option>
                                                 </select>
                                             </div>
 
@@ -71,8 +71,10 @@
                                                     Pay Date
                                                 </label>
                                                 <div class="flex items-end">
-                                                    <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="crewPayDate" placeholder="Day" type="number" name="payDate" value="<?php echo $row['paydate']; ?>" required>
+                                                    <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="crewPayDate" placeholder="Day" type="number" name="payDate" value="<?php echo $row['pay_date']; ?>" required>
                                                     <p class="ml-2 text-gray-500">in every month</p>
+                                                    <input type="text" class="hidden" id="CrewId" name="id" value="<?php echo $row['id']; ?>">
+                                                    <input type="text" class="hidden" id="CrewPreviousProfile" name="prev_file" value="<?php echo $row['photo']; ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -87,13 +89,13 @@
                                             </a>
                                             <div class="flex items-center">
                                                 <p class="text-red-500 font-semibold text-sm hidden crew-error-message">Oops. It seems to be some inputs are not valid.</p>
-                                                <button class="flex items-center text-red-500 mx-5 bg-red-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-red-400 hover:text-gray-200" id="DeleteCrew" type="submit" name="crew-delete">
+                                                <button class="flex items-center text-red-500 mx-5 bg-red-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-red-400 hover:text-gray-200" id="DeleteCrew" name="crew-delete">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                     </svg>
                                                     Delete
                                                 </button>
-                                                <button class="flex items-center text-yellow-500 mx-5 bg-yellow-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-yellow-400 hover:text-gray-200" id="UpdateCrew" type="submit" name="crew-update">
+                                                <button class="flex items-center text-yellow-500 mx-5 bg-yellow-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-yellow-400 hover:text-gray-200" id="UpdateCrew" type="submit" name="crew-update" onclick="console.log('Working')">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                     </svg>
@@ -104,7 +106,7 @@
                                         </div>
                                 </div>
                             </div>
-                        </form>
+                        <!-- </form> -->
         <?php               
                 }
             } else {
