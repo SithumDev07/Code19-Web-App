@@ -2,8 +2,10 @@ $(document).ready(function() {
     var Shift = 'Day';
     $(".crew-day").click(function() {
         Shift = "Day";
+        const currentUser = $("#CurrentUser").val();
         $(".left-crew").load("operations/get-day-night-crew.php", {
-            Shift: Shift
+            Shift: Shift,
+            currentUser: currentUser
         }, function() {
             crewCards = document.querySelectorAll('.card-crew')
             updateCardsCrew();
@@ -13,8 +15,10 @@ $(document).ready(function() {
 
     $(".crew-night").click(function() {
         Shift = "Night";
+        const currentUser = $("#CurrentUser").val();
         $(".left-crew").load("operations/get-day-night-crew.php", {
-            Shift: Shift
+            Shift: Shift,
+            currentUser: currentUser
         }, function() {
             crewCards = document.querySelectorAll('.card-crew')
             updateCardsCrew();
@@ -24,7 +28,10 @@ $(document).ready(function() {
 
 
     $(".all-crew").click(function() {
-        $(".left-crew").load("operations/get-all-crew.php", {}, function() {
+        const currentUser = $("#CurrentUser").val();
+        $(".left-crew").load("operations/get-all-crew.php", {
+            currentUser: currentUser
+        }, function() {
             // * A;ways keep a flow, Trick is to load elements async
             crewCards = document.querySelectorAll('.card-crew')
             updateCardsCrew();

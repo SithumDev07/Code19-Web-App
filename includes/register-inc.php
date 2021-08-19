@@ -51,8 +51,20 @@ if (isset($_POST['final'])) {
                         mysqli_stmt_bind_param($statement, 'sssssssssss', $username, $fullName, $hashPass, $email, $address, $birthday, $position, $shift, $mobile, $landline, $fileNameNew);
                         mysqli_stmt_execute($statement);
 
+
+                        $sql = "SELECT id FROM staff_member WHERE user_name = '" . $username . "';";
+                        $results = mysqli_query($conn, $sql);
+                        $resultCheck = mysqli_num_rows($results);
+                        $userKey;
+
+                        if($resultCheck > 0) {
+                            while($row = mysqli_fetch_assoc($results)) {
+                                $userKey = $row['id'];
+                            }
+                        }
+
                         session_start();
-                        $_SESSION['sessionId'] = 1;
+                        $_SESSION['sessionId'] = $userKey;
                         $_SESSION['sessionUser'] = $username;
                         header("Location: ../dashboard.php?success=registered");
                         exit();

@@ -44,7 +44,7 @@ if(isset($_GET['clear'])) {
                 <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id='login' name="submit" value="Login" />
             </div>
             <p class="inline-block align-baseline font-bold text-sm text-gray-500">
-                Already have an account? <a href="" class="text-blue-500 hover:text-blue-800 ml-1">Sign in</a>
+                Don't have an account? <a href="./signup.php" class="text-blue-500 hover:text-blue-800 ml-1">Sign Up</a>
             </p>
         </form>
         <p class="text-center text-gray-500 text-xs">

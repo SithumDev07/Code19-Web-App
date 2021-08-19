@@ -1,16 +1,13 @@
 <?php
-
     include '../config.php';
 
-    $sql = "SELECT * FROM staff_member;";
+    $currentUser = $_POST['currentUser'];
+    $sql = "SELECT * FROM staff_member WHERE id != " . $currentUser . ";";
     $results = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($results);
 
     if($resultCheck > 0) {
         while($row = mysqli_fetch_assoc($results)) {
-            
-            
-            
             ?> 
                 <div class="card-crew mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
                 <p class="hidden card-crew-id"><?php echo $row['id']; ?></p>

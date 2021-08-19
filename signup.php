@@ -213,9 +213,9 @@ if (isset($_POST['submit'])) {
                       Position
                     </label>
                     <select class="px-3 py-2 w-28 rounded" id="position" name="position">
-                        <option value="Chef">Chef</option>
+                        <!-- <option value="Chef">Chef</option> -->
                         <option value="Staff">Staff</option>
-                        <option value="Helper">Helper</option>
+                        <!-- <option value="Helper">Helper</option> -->
                         <option value="Manager">Manager</option>
                       </select>
                     <p class="text-red-500 text-xs italic hidden">Position is required</p>

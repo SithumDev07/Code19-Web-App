@@ -3,8 +3,9 @@
     include '../config.php';
 
     $Shift = $_POST['Shift'];
+    $currentUser = $_POST['currentUser'];
 
-    $sql = "SELECT * FROM staff_member WHERE shift='" . $Shift . "';";
+    $sql = "SELECT * FROM staff_member WHERE shift='" . $Shift . "' AND id != " .$currentUser . ";";
     $results = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($results);
 

@@ -7,6 +7,7 @@ if (!isset($_SESSION['sessionId'])) {
     exit();
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -343,7 +344,9 @@ if (!isset($_SESSION['sessionId'])) {
                                             
                                             
                                             ?> 
-                        <h1 class="text-2xl text-gray-700 font-semibold">👋 Hello, <?php echo $row['name']; ?></h1>
+                        <h1 class="text-2xl text-gray-700 font-semibold">👋 Hello, <?php echo $row['name'] . " " . $_SESSION['sessionId']; ?></h1>
+                        <!-- Here We get the current User ID -->
+                        <input class="" id="CurrentUser" value="<?php echo $_SESSION['sessionId']; ?>"/>
                             <?php               
                                         }
                                     } else {
@@ -1779,7 +1782,7 @@ if (!isset($_SESSION['sessionId'])) {
                             <div class="left-crew flex-1 flex flex-wrap">
 
                                 <?php 
-                                    $sql = "SELECT * FROM staff_member;";
+                                    $sql = "SELECT * FROM staff_member WHERE id != " . $_SESSION['sessionId'] . ";";
                                     $results = mysqli_query($conn, $sql);
                                     $resultCheck = mysqli_num_rows($results);
                                     
