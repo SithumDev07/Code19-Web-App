@@ -25,7 +25,7 @@
                             <div class="my-1 text-center">
                                 <h1 class="text-gray-500 font-semibold text-sm mb-1"><?php echo $row['position']; ?></h1>
                                 <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
-                                <p class="text-xs text-gray-400"><?php echo "+" . $row['personal_no']; ?></p>
+                                <p class="text-xs text-gray-400"><?php echo $row['personal_no']; ?></p>
                                 <?php if($row['email'] !== null) {
 
                                     ?> 

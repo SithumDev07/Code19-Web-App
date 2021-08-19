@@ -1633,13 +1633,14 @@ if (!isset($_SESSION['sessionId'])) {
                 <!-- Crew -->
                 <div class="moving-part Crew glass rounded-3xl h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerCrew">
                     <div class="relative p-7">
+                        <form id="crew-form" action="./operations/add-new-crew.php" method="post" enctype="multipart/form-data">
                         <div class="w-full h-full glass rounded-3xl p-10 top-24 left-0 z-base-search absolute flex-col hidden add-crew-form">
                                 <!-- Card Account -->
                             <div class="flex items-center">
                                 <div class="flex-1 flex flex-col px-12">
-                                    <input type="text" placeholder="Full Name" class="mb-5 flex-1 rounded-md bg-gray-50" id="crewName">
-                                    <input type="email" placeholder="Email (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewEmail">
-                                    <textarea name="address" id="crewAddress" class="mb-5 appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-50 rounded-md transform transition-colors duration-300" placeholder="Address" id="crewAddress"></textarea>
+                                    <input type="text" placeholder="Full Name" class="mb-5 flex-1 rounded-md bg-gray-50" id="crewName" name="name">
+                                    <input type="email" placeholder="Email (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewEmail" name="email">
+                                    <textarea name="address" id="crewAddress" class="mb-5 appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-50 rounded-md transform transition-colors duration-300" placeholder="Address" id="crewAddress" name="address"></textarea>
                                     
                                    
                                 </div>
@@ -1654,10 +1655,10 @@ if (!isset($_SESSION['sessionId'])) {
                                         <label class="block text-gray-700 text-sm font-bold mb-2" for="birthday">
                                             Date of Birth
                                         </label>
-                                        <input class="shadow appearance-none border rounded flex-1 mx-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5" id="crewDOB" type="date" required>
+                                        <input class="shadow appearance-none border rounded flex-1 mx-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5" id="crewDOB" type="date" name="birthday" required>
                                         
-                                        <input type="number" placeholder="Personal Number" class="mx-4 mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewPersonalNumber">
-                                        <input type="number" placeholder="Land Number (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewLandLine">
+                                        <input type="number" placeholder="Personal Number" class="mx-4 mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewPersonalNumber" name="mobile">
+                                        <input type="number" placeholder="Land Number (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewLandLine" name="landline">
                                     </div>
 
                                     <div class="flex items-center mb-5">
@@ -1665,7 +1666,7 @@ if (!isset($_SESSION['sessionId'])) {
                                             <label class="block text-gray-700 text-sm font-bold mb-2" for="position">
                                                 Position
                                             </label>
-                                            <select class="px-3 py-2 w-28 rounded" id="crewPosition">
+                                            <select class="px-3 py-2 w-28 rounded" id="crewPosition" name="position">
                                                 <option value="Chef">Chef</option>
                                                 <!-- <option value="Staff">Staff</option> -->
                                                 <option value="Helper">Helper</option>
@@ -1677,20 +1678,20 @@ if (!isset($_SESSION['sessionId'])) {
                                             <label class="block text-gray-700 text-sm font-bold mb-2" for="shift">
                                                 Shift
                                             </label>
-                                            <select class="px-3 py-2 w-28 rounded" id="crewShift">
+                                            <select class="px-3 py-2 w-28 rounded" id="crewShift" name="shift">
                                                 <option value="Day">Day</option>
                                                 <option value="Night">Night</option>
                                             </select>
                                         </div>
 
-                                        <input type="number" placeholder="Salary" class="-mb-7 mx-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewSalary">
+                                        <input type="number" placeholder="Salary" class="-mb-7 mx-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewSalary" name="salary">
 
                                         <div class="flex flex-col">
                                             <label class="block text-gray-700 text-sm font-bold mb-2" for="payDate">
                                                 Pay Date
                                             </label>
                                             <div class="flex items-end">
-                                                <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="crewPayDate" placeholder="Day" type="number" required>
+                                                <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="crewPayDate" placeholder="Day" type="number" name="payDate" required>
                                                 <p class="ml-2 text-gray-500">in every month</p>
                                             </div>
                                         </div>
@@ -1699,7 +1700,7 @@ if (!isset($_SESSION['sessionId'])) {
                                     
                                     <div class="flex justify-end items-center">
                                         <p class="text-red-500 font-semibold text-sm hidden crew-error-message">Oops. It seems to be some inputs are not valid.</p>
-                                        <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="InsertCrew">
+                                        <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="InsertCrew" type="submit" name="crew-submit">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
@@ -1708,7 +1709,7 @@ if (!isset($_SESSION['sessionId'])) {
                                     </div>
                             </div>
                         </div>
-
+                    </form>
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">👨‍👨‍👦‍👦 Crew</h1>
 

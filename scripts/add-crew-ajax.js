@@ -1,5 +1,12 @@
 $(document).ready(function() {
-    $("#InsertCrew").click(function() {
+    $("#InsertCrew").click(function(e) {
+        e.preventDefault();
+
+        const form = document.querySelector('#crew-form');
+        const form_data = new FormData(form);
+        const image = $("#crewUploadProfile")[0].files;
+        console.log(image[0]);
+
         const name = $("#crewName").val();
         const email = $("#crewEmail").val();
         const address = $("#crewAddress").val();
@@ -12,12 +19,35 @@ $(document).ready(function() {
         const salary = $("#crewSalary").val();
         const payDate = $("#crewPayDate").val();
 
+        let toggleText = true;
         
         if(!(validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine))) {
             console.log('Not Validated');
             $(".crew-error-message").removeClass("hidden");
         } else {
             $(".crew-error-message").addClass("hidden");
+
+            form_data.append('profileUpload', image[0]);
+            $.ajax({
+                url: 'operations/add-new-crew.php',
+                type: 'post',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    // alert(response);
+                    console.log(response);
+                    document.querySelector('.transformin-icon').classList.toggle('translate-icon');
+                    if(toggleText) {
+                        document.querySelector('.change-text-crew').innerHTML = "Cancel";
+                    } else {
+                        document.querySelector('.change-text-crew').innerHTML = "Recruit Employee";
+                    }
+                    toggleText = !toggleText;
+                    document.querySelector('.add-crew-form').classList.toggle('hidden');
+                    document.querySelector('.add-crew-form').classList.toggle('flex');
+                }
+            });
         }
     })
 }) 
