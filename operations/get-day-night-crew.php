@@ -51,16 +51,24 @@
                                         $date = date('m/d/Y h:i:s a', time());
                                         $date = substr($date, 3, 2);
                                         $due;
+                                        $primaryColor;
+                                        $secondaryColor;
                                         if(($row['pay_date'] - $date) < 0) {
                                             $due = "Lost";
+                                            $primaryColor = 'text-red-500';
+                                            $secondaryColor = 'bg-red-200';
                                         }
                                         else if(($row['pay_date'] - $date) < 3 && ($row['pay_date'] - $date) > 0) {
                                             $due = "Hurry";
+                                            $primaryColor = 'text-yellow-500';
+                                            $secondaryColor = 'bg-yellow-200';
                                         } else {
                                             $due = "Fine";
+                                            $primaryColor = 'text-green-500';
+                                            $secondaryColor = 'bg-green-200';
                                         }
                                     ?>
-                                <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                <button class="<?php echo $primaryColor . " " . $secondaryColor; ?> px-2 py-2 rounded-full flex items-center text-xs">
                                     
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -70,22 +78,26 @@
 
                                 <div class="text-gray-500 text-xs flex flex-col text-right">
                                 <h3 class="text-xl font-semibold text-gray-500 text-left"><?php if($row['Salary'] != null) { echo 'Rs. ' . number_format($row['Salary'], 2, '.', ','); } else { echo 'Rs. 0.00'; } ?></h3>
-                                Monthly Salary - Every <?php 
-                                        $day = substr($row['pay_date'], 1, 2);
-                                        if($day == 1) {
-                                            echo $row['pay_date'] . "st";
-                                        } else if($day == 2) {
-                                            echo $row['pay_date'] . "nd";
-                                        } else if($day == 3) {
-                                            echo $row['pay_date'] . "rd";
+                                Monthly Salary - <?php 
+                                        if($row['pay_date'] != null) {
+                                            $day = substr($row['pay_date'], 1, 2);
+                                            if($day == 1) {
+                                                echo "Every " . $row['pay_date'] . "st";
+                                            } else if($day == 2) {
+                                                echo "Every " . $row['pay_date'] . "nd";
+                                            } else if($day == 3) {
+                                                echo "Every " . $row['pay_date'] . "rd";
+                                            } else {
+                                                echo "Every " . $row['pay_date'] . "th";
+                                            }
                                         } else {
-                                            echo $row['pay_date'] . "th";
+                                            echo 'Not set';
                                         }
                                         // echo $date;
                                     ?>
                                 </div>
                             </div>
-                            <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
+                            <div class="absolute bottom-0 w-full h-1 <?php echo $secondaryColor; ?> left-0"></div>
                         </div>
         <?php               
                 }
