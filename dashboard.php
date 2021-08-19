@@ -356,9 +356,9 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                         ?>
-                                <h1 class="text-2xl text-gray-700 font-semibold">👋 Hello, <?php echo $row['name'] . " " . $_SESSION['sessionId']; ?></h1>
+                                <h1 class="text-2xl text-gray-700 font-semibold">👋 Hello, <?php echo $row['name']; ?></h1>
                                 <!-- Here We get the current User ID -->
-                                <input class="" id="CurrentUser" value="<?php echo $_SESSION['sessionId']; ?>" />
+                                <input class="hidden" id="CurrentUser" value="<?php echo $_SESSION['sessionId']; ?>" />
                         <?php
                             }
                         } else {

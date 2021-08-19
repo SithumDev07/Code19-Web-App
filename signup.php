@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
         ?>
         
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="./signup.php?stepthree" method="POST">
-        <h1><?php  echo $_SESSION['emailadd'];?></h1>
+        
                   <div class="mb-4 relative">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">
                       First Name
