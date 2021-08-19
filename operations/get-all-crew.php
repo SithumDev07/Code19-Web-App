@@ -70,7 +70,7 @@
                                 </button>
 
                                 <div class="text-gray-500 text-xs flex flex-col text-right">
-                                    <h3 class="text-xl font-semibold text-gray-500 text-left"><?php if($row['Salary'] != null) { echo 'Rs. ' . number_format($row['Salary'], 2, '.', ','); } else { echo 'Rs. 0.00'; } ?></h3>
+                                    <h3 class="text-lg font-semibold text-gray-500 text-left"><?php if($row['Salary'] != null) { echo 'Rs. ' . number_format($row['Salary'], 2, '.', ','); } else { echo 'Rs. 0.00'; } ?></h3>
                                     Monthly Salary - <?php 
                                         if($row['pay_date'] != null) {
                                             $day = substr($row['pay_date'], 1, 2);

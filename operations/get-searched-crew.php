@@ -1,19 +1,13 @@
 <?php
-
 include '../config.php';
 
-$Shift = $_POST['Shift'];
-$currentUser = $_POST['currentUser'];
+$due;
+$primaryColor;
+$secondaryColor;
+function Render($results)
+{
 
-$sql = "SELECT * FROM staff_member WHERE shift='" . $Shift . "' AND id != " . $currentUser . ";";
-$results = mysqli_query($conn, $sql);
-$resultCheck = mysqli_num_rows($results);
-
-if ($resultCheck > 0) {
     while ($row = mysqli_fetch_assoc($results)) {
-
-
-
 ?>
         <div class="card-crew mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
             <p class="hidden card-crew-id"><?php echo $row['id']; ?></p>
@@ -28,7 +22,7 @@ if ($resultCheck > 0) {
             <div class="my-1 text-center">
                 <h1 class="text-gray-500 font-semibold text-sm mb-1"><?php echo $row['position']; ?></h1>
                 <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
-                <p class="text-xs text-gray-400"><?php echo "+" . $row['personal_no']; ?></p>
+                <p class="text-xs text-gray-400"><?php echo $row['personal_no']; ?></p>
                 <?php if ($row['email'] !== null) {
 
                 ?>
@@ -50,9 +44,7 @@ if ($resultCheck > 0) {
                 date_default_timezone_set('Asia/Colombo');
                 $date = date('m/d/Y h:i:s a', time());
                 $date = substr($date, 3, 2);
-                $due;
-                $primaryColor;
-                $secondaryColor;
+
                 if (($row['pay_date'] - $date) < 0) {
                     $due = "Lost";
                     $primaryColor = 'text-red-500';
@@ -68,7 +60,6 @@ if ($resultCheck > 0) {
                 }
                 ?>
                 <button class="<?php echo $primaryColor . " " . $secondaryColor; ?> px-2 py-2 rounded-full flex items-center text-xs">
-
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -96,18 +87,38 @@ if ($resultCheck > 0) {
                                         } else {
                                             echo 'Not set';
                                         }
-                                        // echo $date;
                                         ?>
+
                 </div>
             </div>
             <div class="absolute bottom-0 w-full h-1 <?php echo $secondaryColor; ?> left-0"></div>
         </div>
     <?php
     }
-} else {
+}
 
-    ?>
-    <h1 class="text-center text-6xl font-semibold text-gray-400 w-full mt-6">No Results Found</h1>
-<?php
+if (isset($_POST['query'])) {
+    $sql = "SELECT * FROM staff_member WHERE name LIKE '%" . $_POST['query'] . "%';";
+    $results = mysqli_query($conn, $sql);
+
+    if(mysqli_num_rows($results) > 0) {
+        $resultCheck = mysqli_num_rows($results);
+
+        if ($resultCheck > 0) {
+            Render($results);
+        } else {
+
+            ?>
+                <h1 class="text-center text-4xl font-semibold text-gray-400 w-full mt-6">No Results Found For <?php echo $_POST['query']; ?></h1>
+            <?php
+        }
+    } else {
+        ?>
+            <h1 class="text-center text-4xl font-semibold text-gray-400 w-full mt-6">No Results Found For <?php echo $_POST['query']; ?></h1>
+        <?php
+    }
+    
+} else {
+    echo 'Something went wrong';
 }
 ?>
