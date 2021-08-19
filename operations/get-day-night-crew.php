@@ -14,8 +14,8 @@
             
             
             ?> 
-                <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                        
+                <div class="card-crew mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                <p class="hidden card-crew-id"><?php echo $row['id']; ?></p>
                         <div class="absolute top-2 right-2 rounded-full px-3 py-1 bg-black text-gray-200 text-sm bg-opacity-60"><?php echo $row['shift']; ?></div>
                             <div class="flex justify-center mb-2">
                                 <div class="overflow-hidden w-24 h-24 rounded-full mb-1 cursor-pointer mr-2">
@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             
-                            <h1 class="text-gray-600 font-semibold text-center text-lg"><?php echo $row['name']; ?></h1>
+                            <h1 class="text-gray-600 font-semibold text-center text-lg crew-name-card"><?php echo $row['name']; ?></h1>
                             <div class="my-1 text-center">
                                 <h1 class="text-gray-500 font-semibold text-sm mb-1"><?php echo $row['position']; ?></h1>
                                 <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
@@ -36,13 +36,13 @@
                                 } ?>
                                 
                             </div>
-                            <p class="text-xs text-gray-400 mb-1 flex items-center justify-center">
+                            <div class="text-xs text-gray-400 mb-1 flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>    
-                                <?php echo $row['address']; ?>
-                            </p>
+                                <p class="crew-address-card"><?php echo $row['address']; ?></p>
+                            </div>
 
                             <div class="flex items-center mt-2 justify-between">
                                 <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">

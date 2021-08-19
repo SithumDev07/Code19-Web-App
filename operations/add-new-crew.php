@@ -2,7 +2,7 @@
 
 require '../config.php';
 
-
+// TODO reset isset function
 if (isset($_FILES['profileUpload'])) {
     $email = $_POST['email'];
     $fullname = $_POST['name'];

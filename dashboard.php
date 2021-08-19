@@ -58,6 +58,16 @@ if (!isset($_SESSION['sessionId'])) {
             background-color: rgba(30, 30, 30, 0.3);
             border-radius: 1.2em;
         }
+        
+
+        .add-crew-form::-webkit-scrollbar {
+            width: 0.6em;
+            border-radius: 50%;
+        }
+        .add-crew-form::-webkit-scrollbar-thumb {
+            background-color: rgba(30, 30, 30, 0.3);
+            border-radius: 1.2em;
+        }
 
         html {
             scroll-behavior: smooth;
@@ -1633,83 +1643,85 @@ if (!isset($_SESSION['sessionId'])) {
                 <!-- Crew -->
                 <div class="moving-part Crew glass rounded-3xl h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerCrew">
                     <div class="relative p-7">
+                        <div class="crew-form-container">
                         <form id="crew-form" action="./operations/add-new-crew.php" method="post" enctype="multipart/form-data">
-                        <div class="w-full h-full glass rounded-3xl p-10 top-24 left-0 z-base-search absolute flex-col hidden add-crew-form">
-                                <!-- Card Account -->
-                            <div class="flex items-center">
-                                <div class="flex-1 flex flex-col px-12">
-                                    <input type="text" placeholder="Full Name" class="mb-5 flex-1 rounded-md bg-gray-50" id="crewName" name="name">
-                                    <input type="email" placeholder="Email (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewEmail" name="email">
-                                    <textarea name="address" id="crewAddress" class="mb-5 appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-50 rounded-md transform transition-colors duration-300" placeholder="Address" id="crewAddress" name="address"></textarea>
-                                    
-                                   
-                                </div>
-                                <div class="w-48 h-48 rounded-full overflow-hidden relative cursor-pointer profile-picture p-1 border-2 border-blue-600 CrewImageContainer shadow-2xl">
-                                    <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl z-10"></i>
-                                    <img id="crewUploadedProfile" class="opacity-80 rounded-full w-full h-full object-cover" src="./photo_uploads/users/Mayuko.jpg" alt="Crew Profile">
-                                    <input type="file" name="profileUpload" id="crewUploadProfile">
-                                </div>
-                            </div>
-                            <div class="mb-24 mt-5">
-                                    <div class="flex items-center">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="birthday">
-                                            Date of Birth
-                                        </label>
-                                        <input class="shadow appearance-none border rounded flex-1 mx-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5" id="crewDOB" type="date" name="birthday" required>
+                            <div class="w-full h-full glass rounded-3xl p-10 top-24 left-0 z-base-search absolute flex-col hidden add-crew-form overflow-y-auto">
+                                    <!-- Card Account -->
+                                <div class="flex items-center">
+                                    <div class="flex-1 flex flex-col px-12">
+                                        <input type="text" placeholder="Full Name" class="mb-5 flex-1 rounded-md bg-gray-50" id="crewName" name="name">
+                                        <input type="email" placeholder="Email (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewEmail" name="email">
+                                        <textarea name="address" id="crewAddress" class="mb-5 appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-50 rounded-md transform transition-colors duration-300" placeholder="Address" id="crewAddress" name="address"></textarea>
                                         
-                                        <input type="number" placeholder="Personal Number" class="mx-4 mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewPersonalNumber" name="mobile">
-                                        <input type="number" placeholder="Land Number (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewLandLine" name="landline">
+                                    
                                     </div>
-
-                                    <div class="flex items-center mb-5">
-                                        <div class="flex flex-col">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="position">
-                                                Position
+                                    <div class="w-48 h-48 rounded-full overflow-hidden relative cursor-pointer profile-picture p-1 border-2 border-blue-600 CrewImageContainer shadow-2xl">
+                                        <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl z-10"></i>
+                                        <img id="crewUploadedProfile" class="opacity-80 rounded-full w-full h-full object-cover" src="./photo_uploads/users/Mayuko.jpg" alt="Crew Profile">
+                                        <input type="file" name="profileUpload" id="crewUploadProfile">
+                                    </div>
+                                </div>
+                                <div class="mb-24 mt-5">
+                                        <div class="flex items-center">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="birthday">
+                                                Date of Birth
                                             </label>
-                                            <select class="px-3 py-2 w-28 rounded" id="crewPosition" name="position">
-                                                <option value="Chef">Chef</option>
-                                                <!-- <option value="Staff">Staff</option> -->
-                                                <option value="Helper">Helper</option>
-                                                <!-- <option value="Manager">Manager</option> -->
-                                            </select>
+                                            <input class="shadow appearance-none border rounded flex-1 mx-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5" id="crewDOB" type="date" name="birthday" required>
+                                            
+                                            <input type="number" placeholder="Personal Number" class="mx-4 mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewPersonalNumber" name="mobile">
+                                            <input type="number" placeholder="Land Number (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewLandLine" name="landline">
                                         </div>
 
-                                        <div class="flex flex-col mx-5">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="shift">
-                                                Shift
-                                            </label>
-                                            <select class="px-3 py-2 w-28 rounded" id="crewShift" name="shift">
-                                                <option value="Day">Day</option>
-                                                <option value="Night">Night</option>
-                                            </select>
-                                        </div>
+                                        <div class="flex items-center mb-5">
+                                            <div class="flex flex-col">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="position">
+                                                    Position
+                                                </label>
+                                                <select class="px-3 py-2 w-28 rounded" id="crewPosition" name="position">
+                                                    <option value="Chef">Chef</option>
+                                                    <!-- <option value="Staff">Staff</option> -->
+                                                    <option value="Helper">Helper</option>
+                                                    <!-- <option value="Manager">Manager</option> -->
+                                                </select>
+                                            </div>
 
-                                        <input type="number" placeholder="Salary" class="-mb-7 mx-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewSalary" name="salary">
+                                            <div class="flex flex-col mx-5">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="shift">
+                                                    Shift
+                                                </label>
+                                                <select class="px-3 py-2 w-28 rounded" id="crewShift" name="shift">
+                                                    <option value="Day">Day</option>
+                                                    <option value="Night">Night</option>
+                                                </select>
+                                            </div>
 
-                                        <div class="flex flex-col">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="payDate">
-                                                Pay Date
-                                            </label>
-                                            <div class="flex items-end">
-                                                <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="crewPayDate" placeholder="Day" type="number" name="payDate" required>
-                                                <p class="ml-2 text-gray-500">in every month</p>
+                                            <input type="number" placeholder="Salary" class="-mb-7 mx-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewSalary" name="salary">
+
+                                            <div class="flex flex-col">
+                                                <label class="block text-gray-700 text-sm font-bold mb-2" for="payDate">
+                                                    Pay Date
+                                                </label>
+                                                <div class="flex items-end">
+                                                    <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="crewPayDate" placeholder="Day" type="number" name="payDate" required>
+                                                    <p class="ml-2 text-gray-500">in every month</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    
-                                    <div class="flex justify-end items-center">
-                                        <p class="text-red-500 font-semibold text-sm hidden crew-error-message">Oops. It seems to be some inputs are not valid.</p>
-                                        <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="InsertCrew" type="submit" name="crew-submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            Add
-                                        </button>
-                                    </div>
+                                        
+                                        <div class="flex justify-end items-center mb-48">
+                                            <p class="text-red-500 font-semibold text-sm hidden crew-error-message">Oops. It seems to be some inputs are not valid.</p>
+                                            <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="InsertCrew" type="submit" name="crew-submit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                Add
+                                            </button>
+                                        </div>
+                                </div>
                             </div>
+                        </form>
                         </div>
-                    </form>
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">👨‍👨‍👦‍👦 Crew</h1>
 
@@ -1779,8 +1791,8 @@ if (!isset($_SESSION['sessionId'])) {
                                             
                                             
                                             ?> 
-                        <div class="card-delivery mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                                
+                        <div class="card-crew mb-4 w-64 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                                <p class="hidden card-crew-id"><?php echo $row['id']; ?></p>
                                 <div class="absolute top-2 right-2 rounded-full px-3 py-1 bg-black text-gray-200 text-sm bg-opacity-60"><?php echo $row['shift']; ?></div>
                                     <div class="flex justify-center mb-2">
                                         <div class="overflow-hidden w-24 h-24 rounded-full mb-1 cursor-pointer mr-2">
@@ -1788,7 +1800,7 @@ if (!isset($_SESSION['sessionId'])) {
                                         </div>
                                     </div>
                                     
-                                    <h1 class="text-gray-600 font-semibold text-center text-lg"><?php echo $row['name']; ?></h1>
+                                    <h1 class="text-gray-600 font-semibold text-center text-lg crew-name-card"><?php echo $row['name']; ?></h1>
                                     <div class="my-1 text-center">
                                         <h1 class="text-gray-500 font-semibold text-sm mb-1"><?php echo $row['position']; ?></h1>
                                         <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
@@ -1801,13 +1813,13 @@ if (!isset($_SESSION['sessionId'])) {
                                         } ?>
                                         
                                     </div>
-                                    <p class="text-xs text-gray-400 mb-1 flex items-center justify-center">
+                                    <div class="text-xs text-gray-400 mb-1 flex items-center justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>    
-                                        <?php echo $row['address']; ?>
-                                    </p>
+                                        <p class="crew-address-card"><?php echo $row['address']; ?></p>
+                                    </div>
 
                                     <div class="flex items-center mt-2 justify-between">
                                         <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
@@ -1939,6 +1951,7 @@ if (!isset($_SESSION['sessionId'])) {
     <script src="./scripts/adding-crew.js"></script>
     <script src="./scripts/add-crew-ajax.js"></script>
     <script src="./scripts/common.js"></script>
+    <script src="./scripts/updating-crew.js"></script>
     <script>
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {

@@ -1,18 +1,20 @@
 const recuitEmployee = document.querySelector('#recuitEmployee');
-
+// let statusOriginal = true;
 let toggleText = true;
-recuitEmployee.addEventListener('click', () => {
-    console.log('Working');
-    document.querySelector('.transformin-icon').classList.toggle('translate-icon');
-    if(toggleText) {
-        document.querySelector('.change-text-crew').innerHTML = "Cancel";
-    } else {
-        document.querySelector('.change-text-crew').innerHTML = "Recruit Employee";
-    }
-    toggleText = !toggleText;
-    document.querySelector('.add-crew-form').classList.toggle('hidden');
-    document.querySelector('.add-crew-form').classList.toggle('flex');
-})
+
+    recuitEmployee.addEventListener('click', () => {
+        console.log('Working');
+        document.querySelector('.transformin-icon').classList.toggle('translate-icon');
+        if(toggleText) {
+            document.querySelector('.change-text-crew').innerHTML = "Cancel";
+        } else {
+            document.querySelector('.change-text-crew').innerHTML = "Recruit Employee";
+        }
+        toggleText = !toggleText;
+        document.querySelector('.add-crew-form').classList.toggle('hidden');
+        document.querySelector('.add-crew-form').classList.toggle('flex');
+    })
+
 
 
 var date = new Date();
