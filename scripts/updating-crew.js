@@ -1,30 +1,5 @@
-const crewCards = document.querySelectorAll('.card-crew')
+let crewCards = document.querySelectorAll('.card-crew')
 
-// crewCards.forEach((ele, index) => {
-//     ele.addEventListener('click', () => {
-//         document.querySelector('.add-crew-form').classList.toggle('hidden');
-//         document.querySelector('.add-crew-form').classList.toggle('flex');
-//         document.querySelector('.transformin-icon').classList.toggle('translate-icon');
-//         document.querySelector('.change-text-crew').innerHTML = "Cancel";
-//         document.querySelector('.Crew').classList.toggle('overflow-y-auto');
-//         document.querySelector('.Crew').classList.toggle('overflow-hidden');
-
-//         const dataArray = [];
-//         dataArray.push(ele.querySelector('.crew-name-card').innerHTML);
-//         dataArray.push(ele.querySelector('.crew-address-card').innerHTML);
-//         dataArray.push(ele.querySelector('.crew-address-card').innerHTML);
-
-//         dataCrewMapping(document.querySelector('.add-crew-form'), dataArray);
-
-//     })
-// })
-
-
-// function dataCrewMapping(ele, data) {
-//     data.forEach((prop, index) => {
-//         console.log(prop);
-//     })
-// }
 
 $(document).ready(function() {
     let id;
@@ -81,7 +56,7 @@ function UpdateListener() {
     // document.querySelector('.Crew').classList.toggle('overflow-y-auto');
     // document.querySelector('.Crew').classList.toggle('overflow-hidden');
     
-document.querySelector('#UpdateCrew').addEventListener('click', () => {
+    document.querySelector('#UpdateCrew').addEventListener('click', () => {
 
     
     // $("#UpdateCrew").click(function(e) {
@@ -152,6 +127,32 @@ document.querySelector('#UpdateCrew').addEventListener('click', () => {
                 }
             });
         }
+    })
+
+    document.querySelector("#DeleteCrew").addEventListener('click', () => {
+   
+        
+        let toggleText = true;
+        
+        const form_data = new FormData();
+        console.log('Triggereee Delete');
+        const CrewId = $("#CrewId").val();
+        const CrewPreviousProfile = $("#CrewPreviousProfile").val();
+        form_data.append('id', CrewId);
+        form_data.append('prev_file', CrewPreviousProfile);
+        $.ajax({
+            url: 'operations/delete-crew.php',
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                alert(response);
+                // console.log(response);
+                location.reload();
+            }
+        });
+
     })
 
 
