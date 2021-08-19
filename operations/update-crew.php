@@ -76,18 +76,18 @@ if (isset($_POST['id'])) {
     
                             if(empty($email)) {
                                 if(empty($landline)) {
-                                    mysqli_stmt_bind_param($statement, 'sssssssss', $fullname, $address, $birthday, $position, $shift, $mobile, $salary, $payDate, $fileNameNew);
+                                    mysqli_stmt_bind_param($statement, 'sssssssssi', $fullname, $address, $birthday, $position, $shift, $mobile, $salary, $payDate, $fileNameNew, $id);
                                     mysqli_stmt_execute($statement);
                                 } else {
-                                    mysqli_stmt_bind_param($statement, 'ssssssssss', $fullname, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $fileNameNew);
+                                    mysqli_stmt_bind_param($statement, 'ssssssssssi', $fullname, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $fileNameNew, $id);
                                     mysqli_stmt_execute($statement);
                                 }
                             } else {
                                 if(empty($landline)) {
-                                    mysqli_stmt_bind_param($statement, 'ssssssssss', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $salary, $payDate, $fileNameNew);  
+                                    mysqli_stmt_bind_param($statement, 'ssssssssssi', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $salary, $payDate, $fileNameNew, $id);  
                                     mysqli_stmt_execute($statement);  
                                 } else {
-                                    mysqli_stmt_bind_param($statement, 'sssssssssss', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $fileNameNew);
+                                    mysqli_stmt_bind_param($statement, 'sssssssssssi', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $fileNameNew, $id);
                                     mysqli_stmt_execute($statement);
                                 }
                             }
@@ -135,18 +135,18 @@ if (isset($_POST['id'])) {
 
                 if(empty($email)) {
                     if(empty($landline)) {
-                        mysqli_stmt_bind_param($statement, 'sssssssss', $fullname, $address, $birthday, $position, $shift, $mobile, $salary, $payDate, $prevFile);
+                        mysqli_stmt_bind_param($statement, 'sssssssssi', $fullname, $address, $birthday, $position, $shift, $mobile, $salary, $payDate, $prevFile, $id);
                         mysqli_stmt_execute($statement);
                     } else {
-                        mysqli_stmt_bind_param($statement, 'ssssssssss', $fullname, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $prevFile);
+                        mysqli_stmt_bind_param($statement, 'ssssssssssi', $fullname, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $prevFile, $id);
                         mysqli_stmt_execute($statement);
                     }
                 } else {
                     if(empty($landline)) {
-                        mysqli_stmt_bind_param($statement, 'ssssssssss', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $salary, $payDate, $prevFile);  
+                        mysqli_stmt_bind_param($statement, 'ssssssssssi', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $salary, $payDate, $prevFile, $id);  
                         mysqli_stmt_execute($statement);  
                     } else {
-                        mysqli_stmt_bind_param($statement, 'sssssssssss', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $prevFile);
+                        mysqli_stmt_bind_param($statement, 'sssssssssssi', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $prevFile, $id);
                         mysqli_stmt_execute($statement);
                     }
                 }

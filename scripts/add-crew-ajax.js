@@ -2,15 +2,15 @@ $(document).ready(function() {
     $("#InsertCrew").click(function(e) {
         e.preventDefault();
 
-        const form = document.querySelector('#crew-form');
-        const form_data = new FormData(form);
+        // const form = document.querySelector('#crew-form');
+        const form_data = new FormData();
         const image = $("#crewUploadProfile")[0].files;
         console.log(image[0]);
 
         const name = $("#crewName").val();
         const email = $("#crewEmail").val();
         const address = $("#crewAddress").val();
-        const crewUploadProfile = $("#crewUploadProfile").prop('files');
+        // const crewUploadProfile = $("#crewUploadProfile").prop('files');
         const birthday = $("#crewDOB").val();
         const personalNumber = $("#crewPersonalNumber").val();
         const landLine = $("#crewLandLine").val();
@@ -21,22 +21,32 @@ $(document).ready(function() {
 
         let toggleText = true;
         
-        if(!(validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine))) {
+        if(!(validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine, true))) {
             console.log('Not Validated');
             $(".crew-error-message").removeClass("hidden");
         } else {
             $(".crew-error-message").addClass("hidden");
 
             form_data.append('profileUpload', image[0]);
+            form_data.append('name', name);
+            form_data.append('email', email);
+            form_data.append('address', address);
+            form_data.append('birthday', birthday);
+            form_data.append('mobile', personalNumber);
+            form_data.append('landline', landLine);
+            form_data.append('position', position);
+            form_data.append('shift', shift);
+            form_data.append('salary', salary);
+            form_data.append('payDate', payDate);
             $.ajax({
                 url: 'operations/add-new-crew.php',
-                type: 'post',
+                type: 'POST',
                 data: form_data,
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    // alert(response);
-                    console.log(response);
+                    alert(response);
+                    // console.log(response);
                     document.querySelector('.transformin-icon').classList.toggle('translate-icon');
                     if(toggleText) {
                         document.querySelector('.change-text-crew').innerHTML = "Cancel";
@@ -44,8 +54,9 @@ $(document).ready(function() {
                         document.querySelector('.change-text-crew').innerHTML = "Recruit Employee";
                     }
                     toggleText = !toggleText;
-                    document.querySelector('.add-crew-form').classList.toggle('hidden');
-                    document.querySelector('.add-crew-form').classList.toggle('flex');
+                    document.querySelector('.crew-form-container').classList.toggle('hidden');
+                    document.querySelector('.crew-form-container').classList.toggle('flex');
+                    location.reload();
                 }
             });
         }
@@ -81,6 +92,8 @@ function dontRun() {
             const CrewPreviousProfile = $("#CrewPreviousProfile").val();
     
             let toggleText = true;
+
+            
             
             if(!(validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine))) {
                 console.log('Not Validated');

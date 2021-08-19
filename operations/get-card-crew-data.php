@@ -12,9 +12,9 @@
             
             
             
-            // ?> action="./operations/<?php echo 'update-crew'; ?>.php"
+            ?> 
                 <!-- <form id="crew-form" method="post" enctype="multipart/form-data"> -->
-                            <div class="w-full h-full glass rounded-3xl p-10 <?php echo $_POST['marginTop']; ?> left-0 z-base-search absolute flex-col <?php echo $flex; ?> add-crew-form overflow-y-auto">
+                            <div class="w-full h-full p-10 flex-col  hidden add-crew-form overflow-y-auto">
                                     <!-- Card Account -->
                                 <div class="flex items-center">
                                     <div class="flex-1 flex flex-col px-12">

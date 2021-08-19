@@ -3,7 +3,6 @@ const recuitEmployee = document.querySelector('#recuitEmployee');
 let toggleText = true;
 
     recuitEmployee.addEventListener('click', () => {
-        console.log('Working');
         document.querySelector('.transformin-icon').classList.toggle('translate-icon');
         if(toggleText) {
             document.querySelector('.change-text-crew').innerHTML = "Cancel";
@@ -13,6 +12,9 @@ let toggleText = true;
         toggleText = !toggleText;
         document.querySelector('.add-crew-form').classList.toggle('hidden');
         document.querySelector('.add-crew-form').classList.toggle('flex');
+        document.querySelector('.crew-form-container').classList.toggle('hidden');
+        document.querySelector('.crew-form-container').classList.toggle('block');
+        console.log('Working');
     })
 
 
@@ -73,6 +75,7 @@ SalaryNDateInputListener(document.querySelector('#crewPayDate'))
 
 function SalaryNDateInputListener(ele) {
     ele.addEventListener('keyup', () => {
+        console.log('Still');
         if(ele.value <= 0 || ele.value.length === 0) {
             setErrorOnInputs(ele,true)
         }else if(ele.value === 0) {
@@ -108,20 +111,23 @@ function ListenOnInputChanges(ele) {
         })
 }
 
-function validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine) {
+function validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine, insert) {
     let success = true;
-    if(crewUploadProfile.files.length === 0) {
-        setErroOnCrewImage(true)
-        success = false;
-    } else {
-        if(!isValidExtention(crewUploadProfile)) {
+    
+    if(insert){
+        if(crewUploadProfile.files.length === 0) {
             setErroOnCrewImage(true)
             success = false;
-        }
-    
-        if(!isValidImageSize(crewUploadProfile)) {
-            setErroOnCrewImage(true)
-            success=false;
+        } else {
+            if(!isValidExtention(crewUploadProfile)) {
+                setErroOnCrewImage(true)
+                success = false;
+            }
+        
+            if(!isValidImageSize(crewUploadProfile)) {
+                setErroOnCrewImage(true)
+                success=false;
+            }
         }
     }
 
@@ -168,11 +174,18 @@ function validateCrewForms(name, email, address, personalNumber, salary, payDate
         success = false;
     }
 
+    console.log(salary);
+    console.log(payDate);
+
     if(payDate.length === 0) {
         setErrorOnInputs(document.querySelector('#crewPayDate'),true)
         success = false;
     }else if(payDate > 31 || payDate <= 0) {
         success = false;
+    }
+
+    if(success){
+
     }
 
     return success;
