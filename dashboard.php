@@ -74,6 +74,15 @@ if (!isset($_SESSION['sessionId'])) {
             background-color: rgba(30, 30, 30, 0.3);
             border-radius: 1.2em;
         }
+        .add-supplier-form::-webkit-scrollbar {
+            width: 0.6em;
+            border-radius: 50%;
+        }
+
+        .add-supplier-form::-webkit-scrollbar-thumb {
+            background-color: rgba(30, 30, 30, 0.3);
+            border-radius: 1.2em;
+        }
 
         .crew-form-container::-webkit-scrollbar {
             width: 0.6em;
@@ -159,6 +168,20 @@ if (!isset($_SESSION['sessionId'])) {
         }
 
         #crewUploadProfile::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+        #SupplierUploadProfile {
+            position: absolute;
+            top: 0;
+            z-index: 10;
+            width: 6rem;
+            height: 6rem;
+            opacity: 0;
+            left: 0;
+            cursor: pointer;
+        }
+
+        #SupplierUploadProfile::-webkit-file-upload-button {
             visibility: hidden;
         }
 
@@ -1504,10 +1527,10 @@ if (!isset($_SESSION['sessionId'])) {
                         <h1 class="text-2xl text-gray-700 font-semibold">👨‍💼 Suppliers</h1>
 
                         <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95" id="AddSupplier">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 transformin-icon transform transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            Add Supplier
+                            <h3 class="change-text-supplier">Add Supplier</h3>
                         </button>
                     </div>
 

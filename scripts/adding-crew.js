@@ -35,12 +35,12 @@ let toggleText = true;
 const crewUploadProfile = document.querySelector('#crewUploadProfile')
 const CrewImageContainer = document.querySelector('.CrewImageContainer')
 
-function setErroOnCrewImage(error) {
+function setErroOnCrewImage(error, container) {
     if(error) {
-        CrewImageContainer.classList.remove('border-2')
-        CrewImageContainer.classList.add('border-4')
-        CrewImageContainer.classList.remove('border-blue-600')
-        CrewImageContainer.classList.add('border-red-500')
+        container.classList.remove('border-2')
+        container.classList.add('border-4')
+        container.classList.remove('border-blue-600')
+        container.classList.add('border-red-500')
     } else {
 
     }
@@ -48,9 +48,11 @@ function setErroOnCrewImage(error) {
 
 function setErrorOnInputs(ele, error){
     if(error) {
+        // console.log(ele.classList);
         ele.classList.add('border-red-500')
         ele.classList.remove('border-green-500')
     } else {
+        // console.log(ele.classList);
         ele.classList.add('border-green-500')
         ele.classList.remove('border-red-500')
     }
@@ -73,22 +75,23 @@ function SalaryNDateInputListener(ele) {
     })
 }
 
-function ListenOnInputChanges(ele) {
+function ListenOnInputChanges(ele, specificInput) {
         ele.addEventListener('keyup', () => {
             console.log(ele.value);
-            if(ele.id !== 'crewEmail' && ele.id !== 'crewLandLine' && ele.value.length === 0) {
+            // console.log(ele.id, '  ', specificInput);
+            if(ele.id !== `${specificInput}Email` && ele.id !== `${specificInput}LandLine` && ele.value.length === 0) {
                 setErrorOnInputs(ele,true)
-            }else if(ele.id === 'crewName' && validateSpecialCharacters(ele.value)) {
+            }else if(ele.id === `${specificInput}Name` && validateSpecialCharacters(ele.value)) {
                 setErrorOnInputs(ele,true)
-            }else if(ele.id === 'crewEmail' && ele.value.length === 0) {
+            }else if(ele.id === `${specificInput}Email` && ele.value.length === 0) {
                 setErrorOnInputs(ele,false)
-            } else if(ele.id === 'crewLandLine' && ele.value.length === 0) {
+            } else if(ele.id === `${specificInput}LandLine` && ele.value.length === 0) {
                 setErrorOnInputs(ele,false)
-            }else if(ele.id === 'crewEmail' && !isEmail(ele.value)) {
+            }else if(ele.id === `${specificInput}Email` && !isEmail(ele.value)) {
                     setErrorOnInputs(ele,true)
-            }else if(ele.id === 'crewPersonalNumber' && isValidPhonenumber(ele)) {
+            }else if(ele.id === `${specificInput}PersonalNumber` && isValidPhonenumber(ele)) {
                 setErrorOnInputs(ele,true)
-            }else if(ele.id === 'crewLandLine' && isValidPhonenumber(ele)) {
+            }else if(ele.id === `${specificInput}LandLine` && isValidPhonenumber(ele)) {
                 setErrorOnInputs(ele,true)
             }else {
                 setErrorOnInputs(ele,false)
@@ -96,78 +99,81 @@ function ListenOnInputChanges(ele) {
         })
 }
 
-function validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine, insert, crewProfilePic) {
+function validateCrewForms(name, email, address, personalNumber, salary = undefined, payDate = undefined, landLine, insert, crewProfilePic, imageContainer = undefined, type = undefined) {
     let success = true;
     
     if(insert){
         if(crewProfilePic.files.length === 0) {
-            setErroOnCrewImage(true)
+            setErroOnCrewImage(true, imageContainer)
             success = false;
         } else {
             if(!isValidExtention(crewProfilePic)) {
-                setErroOnCrewImage(true)
+                setErroOnCrewImage(true, imageContainer)
                 success = false;
             }
         
             if(!isValidImageSize(crewProfilePic)) {
-                setErroOnCrewImage(true)
+                setErroOnCrewImage(true, imageContainer)
                 success=false;
             }
         }
     }
 
     if(name.length === 0) {
-        setErrorOnInputs(document.querySelector('#crewName'),true)
+        setErrorOnInputs(document.querySelector(`#${type}Name`),true)
         success = false;
     }else if(validateSpecialCharacters(name)) {
-        setErrorOnInputs(document.querySelector('#crewName'),true)
+        setErrorOnInputs(document.querySelector(`#crewName`),true)
         success=false;
     }
 
     if(email.length !== 0) {
         if(!isEmail(email)) {
-            setErrorOnInputs(document.querySelector('#crewEmail'),true)
+            setErrorOnInputs(document.querySelector(`#${type}Email`),true)
             success = false;
         }
     }
 
     if(address.length === 0) {
-        setErrorOnInputs(document.querySelector('#crewAddress'),true)
+        setErrorOnInputs(document.querySelector(`#${type}Address`),true)
         success = false;
     }
 
     if(personalNumber.length === 0) {
-        setErrorOnInputs(document.querySelector('#crewPersonalNumber'),true)
+        setErrorOnInputs(document.querySelector(`#${type}PersonalNumber`),true)
         success = false;
-    } else if(isValidPhonenumber(document.querySelector('#crewPersonalNumber'))) {
-        setErrorOnInputs(document.querySelector('#crewPersonalNumber'),true)
+    } else if(isValidPhonenumber(document.querySelector(`#${type}PersonalNumber`))) {
+        setErrorOnInputs(document.querySelector(`#${type}PersonalNumber`),true)
         success = false;
     }
     
     if(landLine.length !== 0) {
-        if(isValidPhonenumber(document.querySelector('#crewLandLine'))) {
-            setErrorOnInputs(document.querySelector('#crewLandLine'),true)
+        if(isValidPhonenumber(document.querySelector(`#${type}LandLine`))) {
+            setErrorOnInputs(document.querySelector(`#${type}LandLine`),true)
             success = false;
         }
     }
 
-    if(salary.length === 0) {
-        setErrorOnInputs(document.querySelector('#crewSalary'),true)
-        success = false;
-    } else if(salary <= 0) {
-        setErrorOnInputs(document.querySelector('#crewSalary'),true)
-        success = false;
+    if(salary != undefined) {
+        if(salary.length === 0) {
+            setErrorOnInputs(document.querySelector(`#crewSalary`),true)
+            success = false;
+        } else if(salary <= 0) {
+            setErrorOnInputs(document.querySelector(`#crewSalary`),true)
+            success = false;
+        }
+    }
+    
+    if(payDate != undefined) {
+        if(payDate.length === 0) {
+            setErrorOnInputs(document.querySelector(`#crewPayDate`),true)
+            success = false;
+        }else if(payDate > 31 || payDate <= 0) {
+            success = false;
+        }
     }
 
-    console.log(salary);
-    console.log(payDate);
-
-    if(payDate.length === 0) {
-        setErrorOnInputs(document.querySelector('#crewPayDate'),true)
-        success = false;
-    }else if(payDate > 31 || payDate <= 0) {
-        success = false;
-    }
+    
 
     if(success){
 

@@ -1,6 +1,6 @@
 module.exports = {
   // mode: 'jit',
-  purge: { enabled: true, content: ['./index.php', './checkout.php', './customizeFoodMenu.php', './dashboard.php', './foodMain.php', './login.php', './signup.php', './page_not_found.php'], },
+  // purge: { enabled: true, content: ['./index.php', './checkout.php', './customizeFoodMenu.php', './dashboard.php', './foodMain.php', './login.php', './signup.php', './page_not_found.php'], },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},

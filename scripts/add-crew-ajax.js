@@ -25,11 +25,11 @@ function RecruitListener() {
         }
     }
 
-    ListenOnInputChanges(document.querySelector('#crewName'))
-    ListenOnInputChanges(document.querySelector('#crewEmail'))
-    ListenOnInputChanges(document.querySelector('#crewAddress'))
-    ListenOnInputChanges(document.querySelector('#crewPersonalNumber'))
-    ListenOnInputChanges(document.querySelector('#crewLandLine'))
+    ListenOnInputChanges(document.querySelector('#crewName'), 'crew')
+    ListenOnInputChanges(document.querySelector('#crewEmail'), 'crew')
+    ListenOnInputChanges(document.querySelector('#crewAddress'), 'crew')
+    ListenOnInputChanges(document.querySelector('#crewPersonalNumber'), 'crew')
+    ListenOnInputChanges(document.querySelector('#crewLandLine'), 'crew')
 
 
     //*  SALARY And Date Realtime Validate
@@ -77,8 +77,8 @@ function RecruitListener() {
         const payDate = $("#crewPayDate").val();
 
         let toggleText = true;
-        
-        if(!(validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine, true, document.querySelector('#crewUploadProfile')))) {
+        const CrewImageContainer = document.querySelector('.CrewImageContainer')
+        if(!(validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine, true, document.querySelector('#crewUploadProfile'), CrewImageContainer, 'crew'))) {
             console.log('Not Validated');
             $(".crew-error-message").removeClass("hidden");
         } else {
