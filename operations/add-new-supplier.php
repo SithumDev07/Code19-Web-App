@@ -35,22 +35,23 @@ if (isset($_FILES['profileUpload'])) {
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $sql;
 
-                    if(empty($email)) {
-                        if(empty($landline)) {
+                    if (empty($email)) {
+                        if (empty($landline)) {
                             $sql = "INSERT INTO supplier(name, address, photo) VALUES (?, ?, ?)";
                         } else {
                             $sql = "INSERT INTO supplier(name, address, photo) VALUES (?, ?, ?)";
                         }
                     } else {
-                        if(empty($landline)) {
+                        if (empty($landline)) {
                             $sql = "INSERT INTO supplier(name, email, address, photo) VALUES (?, ?, ?, ?)";
                         } else {
                             $sql = "INSERT INTO supplier(name, email, address, photo) VALUES (?, ?, ?, ?)";
                         }
                     }
-    
+
                     // $sql = "INSERT INTO staff_member(name, email, address, DOB, position, shift, personal_no, LAN_no, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     $statement = mysqli_stmt_init($conn);
+                    $statementContact = mysqli_stmt_init($conn);
 
                     if (!mysqli_stmt_prepare($statement, $sql)) {
                         // header("Location: ../dashboard.php?signup.php&error=sql_error");
@@ -58,32 +59,49 @@ if (isset($_FILES['profileUpload'])) {
                         exit();
                     } else {
 
-                        if(empty($email)) {
-                            if(empty($landline)) {
-                                mysqli_stmt_bind_param($statement, 'sss', $fullname, $address, $fileNameNew);
-                                mysqli_stmt_execute($statement);
-                            } else {
-                                mysqli_stmt_bind_param($statement, 'sss', $fullname, $address, $fileNameNew);
-                                mysqli_stmt_execute($statement);
-                            }
+                        if (empty($email)) {
+                            mysqli_stmt_bind_param($statement, 'sss', $fullname, $address, $fileNameNew);
+                            mysqli_stmt_execute($statement);
                         } else {
-                            if(empty($landline)) {
-                                mysqli_stmt_bind_param($statement, 'ssss', $fullname, $email, $address, $fileNameNew);  
-                                mysqli_stmt_execute($statement);  
-                            } else {
-                                mysqli_stmt_bind_param($statement, 'ssss', $fullname, $email, $address, $fileNameNew);
-                                mysqli_stmt_execute($statement);
-                            }
+                            mysqli_stmt_bind_param($statement, 'ssss', $fullname, $email, $address, $fileNameNew);
+                            mysqli_stmt_execute($statement);
                         }
-                        
+
+                        $sql = "SELECT id FROM supplier ORDER BY id DESC LIMIT 1;";
+                        $results = mysqli_query($conn, $sql);
+                        $resultCheck = mysqli_num_rows($results);
+                        $id;
+                        if ($resultCheck > 0) {
+                            while ($row = mysqli_fetch_assoc($results)) {
+                                $id = $row['id'];
+                            }
+                            $sqlContact = "INSERT INTO supplier_contact(id, contact_no) VALUES (?, ?)";
+                            if (!mysqli_stmt_prepare($statementContact, $sqlContact)) {
+                                echo "sql error";
+                                exit();
+                            } else {
+                                if(empty($landline)) {
+                                    mysqli_stmt_bind_param($statementContact, 'is', $id, $mobile);
+                                    mysqli_stmt_execute($statementContact);
+                                }else {
+                                    mysqli_stmt_bind_param($statementContact, 'is', $id, $mobile);
+                                    mysqli_stmt_execute($statementContact);
+                                    mysqli_stmt_bind_param($statementContact, 'is', $id, $landline);
+                                    mysqli_stmt_execute($statementContact);
+                                }
+                            }
+                            echo "success";
+                            exit();
+                        }else {
+                            echo "failed";
+                            exit();
+                        }
+
                         // mysqli_stmt_bind_param($statement, 'sssssssssss', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $fileNameNew);
                         // mysqli_stmt_execute($statement);
 
                         // header("Location: ../dashboard.php?success=employee_added");
-                        echo "success";
-                        exit();
                     }
-                
                 } else {
                     echo "File is too large.";
                 }

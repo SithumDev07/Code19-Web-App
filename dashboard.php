@@ -1781,7 +1781,7 @@ if (!isset($_SESSION['sessionId'])) {
                         <div class="flex mt-5 mb-24">
                             <div class="left-crew flex-1 flex flex-wrap">
 
-                                <?php
+                            <?php
                                 $sql = "SELECT * FROM staff_member WHERE id != " . $_SESSION['sessionId'] . ";";
                                 $results = mysqli_query($conn, $sql);
                                 $resultCheck = mysqli_num_rows($results);
