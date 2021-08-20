@@ -82,7 +82,7 @@ function UpdateListener() {
         const CrewId = $("#CrewId").val();
         const CrewPreviousProfile = $("#CrewPreviousProfile").val();
 
-        let toggleText = true;
+        toggleText = true;
 
             ListenOnInputChanges(document.querySelector('#crewName'), 'crew')
             ListenOnInputChanges(document.querySelector('#crewEmail'), 'crew')

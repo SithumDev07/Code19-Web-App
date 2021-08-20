@@ -1593,6 +1593,7 @@ if (!isset($_SESSION['sessionId'])) {
                                         <!-- TODO Update Photo Link -->
                                         <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/suppliers/<?php if($row != null) { echo $row['photo']; } else {echo "611f0f941fce68.26123095.png";} ?>" alt="SupplierImage">
                                     </div>
+                                    <p class="hidden card-supplier-id"><?php echo $row['id']; ?></p>
                                     <div class="flex-1 ml-2">
                                         <h1 class="text-gray-600 font-semibold text-sm">All Purpose Flour and 6+ more</h1>
                                         <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
@@ -2000,6 +2001,7 @@ if (!isset($_SESSION['sessionId'])) {
     <script src="./scripts/common.js"></script>
     <script src="./scripts/updating-crew.js"></script>
     <script src="./scripts/crew-search.js"></script>
+    <script src="./scripts/updating-supplier.js"></script>
     <!-- Suppliers -->
     <script src="./scripts/add-supplier.js"></script>
     <script>
