@@ -1581,8 +1581,17 @@ if (!isset($_SESSION['sessionId'])) {
                                 if ($resultCheck > 0) {
                                     while ($row = mysqli_fetch_assoc($results)) {
 
-
-
+                                        $sql = "SELECT * FROM supplier_contact WHERE id = 7 ORDER BY contact_no DESC LIMIT 1;";
+                                        $results = mysqli_query($conn, $sql);
+                                        $resultCheck = mysqli_num_rows($results);
+                                        $mobile;
+                                        if ($resultCheck > 0) {
+                                            while ($rowMobile = mysqli_fetch_assoc($results)) {
+                                                $mobile = $rowMobile['contact_no'];
+                                            }
+                                        } else {
+                                            $mobile = '';
+                                        }
                         ?>
 
                             <!-- Single Card -->
@@ -1597,7 +1606,7 @@ if (!isset($_SESSION['sessionId'])) {
                                     <div class="flex-1 ml-2">
                                         <h1 class="text-gray-600 font-semibold text-sm">All Purpose Flour and 6+ more</h1>
                                         <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
-                                        <p class="text-xs text-gray-500">+94 76 6 108500</p>
+                                        <p class="text-xs text-gray-500"><?php echo $mobile; ?></p>
                                         <p class="text-xs text-gray-500"><?php echo $row['email']; ?></p>
 
                                     </div>
