@@ -93,31 +93,49 @@ function Render($results)
             </div>
             <div class="absolute bottom-0 w-full h-1 <?php echo $secondaryColor; ?> left-0"></div>
         </div>
-    <?php
+        <?php
     }
 }
 
 if (isset($_POST['query'])) {
-    $sql = "SELECT * FROM staff_member WHERE name LIKE '%" . $_POST['query'] . "%';";
-    $results = mysqli_query($conn, $sql);
 
-    if(mysqli_num_rows($results) > 0) {
+    $sql;
+    $results;
+    $message;
+
+    if (is_numeric($_POST['query'])) {
+        $sql = "SELECT * FROM staff_member WHERE id =" . $_POST['query'] . " AND id !=" . $_POST['currentUser'] . ";";
+        $results = mysqli_query($conn, $sql);
+        $message = "No Results Found For ID-" . $_POST['query'];
+    } else if ($_POST['query'] == 'Day' || $_POST['query'] == 'Night') {
+
+        $sql = "SELECT * FROM staff_member WHERE (shift ='" . $_POST['query'] . "' OR name = '%" . $_POST['query'] . "%') AND id !=" . $_POST['currentUser'] . ";";
+        $results = mysqli_query($conn, $sql);
+        $message = "No Results Found For Shift - " . $_POST['query'];
+    } else {
+        $sql = "SELECT * FROM staff_member WHERE name LIKE '%" . $_POST['query'] . "%' AND id !=" . $_POST['currentUser'] . ";";
+        $results = mysqli_query($conn, $sql);
+        $message = "No Results Found For Name " . $_POST['query'];
+    }
+
+
+
+    if (mysqli_num_rows($results) > 0) {
         $resultCheck = mysqli_num_rows($results);
 
         if ($resultCheck > 0) {
             Render($results);
         } else {
 
-            ?>
-                <h1 class="text-center text-4xl font-semibold text-gray-400 w-full mt-6">No Results Found For <?php echo $_POST['query']; ?></h1>
-            <?php
+        ?>
+            <h1 class="text-center text-4xl font-semibold text-gray-400 w-full mt-6"><?php echo $message; ?></h1>
+        <?php
         }
     } else {
         ?>
-            <h1 class="text-center text-4xl font-semibold text-gray-400 w-full mt-6">No Results Found For <?php echo $_POST['query']; ?></h1>
-        <?php
+        <h1 class="text-center text-4xl font-semibold text-gray-400 w-full mt-6"><?php echo $message; ?></h1>
+<?php
     }
-    
 } else {
     echo 'Something went wrong';
 }

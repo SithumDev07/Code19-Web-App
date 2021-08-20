@@ -4,17 +4,21 @@ $(document).ready(function() {
     $("#crewSearchInput").keyup(function() {
         let value = $(this).val();
         if(value !== '') {
+            const currentUser = $("#CurrentUser").val();
             $.ajax({
                 url: 'operations/search-crew.php',
                 type: 'POST',
-                data: {query: value},
+                data: {query: value, currentUser: currentUser},
                 success: function(data, status) {
                     // alert(data);
                     // $(".left-crew").html(data);
+                    
 
                     $(".left-crew").load("operations/get-searched-crew.php", {
-                        query: value
+                        query: value,
+                        currentUser: currentUser
                     }, function() {
+                        // alert(currentUser)
                         crewCards = document.querySelectorAll('.card-crew')
                         updateCardsCrew();
                     });
