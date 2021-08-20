@@ -74,13 +74,20 @@ function Render($results)
                                                                                 } ?></h3>
                     Monthly Salary - <?php
                                         if ($row['pay_date'] != null) {
-                                            $day = substr($row['pay_date'], 1, 2);
+                                            // $day = substr($row['pay_date'], 1, 2);
+                                            $day = $row['pay_date'];
                                             if ($day == 1) {
                                                 echo "Every " . $row['pay_date'] . "st";
                                             } else if ($day == 2) {
                                                 echo "Every " . $row['pay_date'] . "nd";
                                             } else if ($day == 3) {
                                                 echo "Every " . $row['pay_date'] . "rd";
+                                            } else if($day == 11) {
+                                                echo "Every " . $row['pay_date'] . "th";
+                                            } else if($day == 12) {
+                                                echo "Every " . $row['pay_date'] . "th";
+                                            } else if($day == 13) {
+                                                echo "Every " . $row['pay_date'] . "th";
                                             } else {
                                                 echo "Every " . $row['pay_date'] . "th";
                                             }
