@@ -47,6 +47,35 @@ $(document).ready(function() {
                 $(".supplier-error-message").removeClass("hidden");
             }else {
                 $(".supplier-error-message").addClass("hidden");
+
+                form_data.append('profileUpload', image[0]);
+                form_data.append('name', name);
+                form_data.append('email', email);
+                form_data.append('address', address);
+                form_data.append('mobile', personalNumber);
+                form_data.append('landline', landLine);
+
+                $.ajax({
+                    url: 'operations/add-new-supplier.php',
+                    type: 'POST',
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        alert(response);
+                        // console.log(response);
+                        document.querySelector('.transformin-icon').classList.toggle('translate-icon');
+                        if(toggleText) {
+                            document.querySelector('.change-text-supplier').innerHTML = "Cancel";
+                        } else {
+                            document.querySelector('.change-text-supplier').innerHTML = "Add Supplier";
+                        }
+                        toggleText = !toggleText;
+                        document.querySelector('.supplier-form-container').classList.toggle('hidden');
+                        document.querySelector('.supplier-form-container').classList.toggle('flex');
+                        location.reload();
+                    }
+                });
             }
         })
 

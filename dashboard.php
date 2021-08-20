@@ -1590,7 +1590,8 @@ if (!isset($_SESSION['sessionId'])) {
 
                                 <div class="flex items-center flex-1 mb-2">
                                     <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
-                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/users/611c967ba72d52.50072731.jpg" alt="SupplierImage">
+                                        <!-- TODO Update Photo Link -->
+                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/suppliers/<?php if($row != null) { echo $row['photo']; } else {echo "611f0f941fce68.26123095.png";} ?>" alt="SupplierImage">
                                     </div>
                                     <div class="flex-1 ml-2">
                                         <h1 class="text-gray-600 font-semibold text-sm">All Purpose Flour and 6+ more</h1>
