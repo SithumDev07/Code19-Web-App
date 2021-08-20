@@ -91,6 +91,30 @@ $(document).ready(function() {
             }
         })
 
+        $("#DeleteSupplier").click(function() {
+            console.log('Deleting Supplier');
+
+            toggleText = true;
+        
+            const form_data = new FormData();
+            const SupplierId = $("#SupplierId").val();
+            const SupplierPreviousProfile = $("#SupplierPreviousProfile").val();
+            form_data.append('id', SupplierId);
+            form_data.append('prev_file', SupplierPreviousProfile);
+            $.ajax({
+                url: 'operations/delete-supplier.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert(response);
+                    // console.log(response);
+                    location.reload();
+                }
+            });
+        })
+
         $(function(){
        
             $('#SupplierUploadProfile').change(function(){

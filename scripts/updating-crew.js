@@ -132,7 +132,7 @@ function UpdateListener() {
     document.querySelector("#DeleteCrew").addEventListener('click', () => {
    
         
-        let toggleText = true;
+        toggleText = true;
         
         const form_data = new FormData();
         console.log('Triggereee Delete');
