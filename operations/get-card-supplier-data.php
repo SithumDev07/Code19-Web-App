@@ -9,7 +9,32 @@ $resultCheck = mysqli_num_rows($results);
 if ($resultCheck > 0) {
     while ($row = mysqli_fetch_assoc($results)) {
 
+        $sql = "SELECT * FROM supplier_contact WHERE id = $id ORDER BY contact_no DESC LIMIT 1;";
+        $resultsMobile = mysqli_query($conn, $sql);
+        $resultCheck = mysqli_num_rows($resultsMobile);
+        $currentMobile;
 
+        if ($resultCheck > 0) {
+            while ($rowMobile = mysqli_fetch_assoc($resultsMobile)) {
+                $currentMobile = $rowMobile['contact_no'];
+            }
+        }
+
+        $sql = "SELECT * FROM supplier_contact WHERE id = $id ORDER BY contact_no ASC LIMIT 1;";
+        $resultsLandline = mysqli_query($conn, $sql);
+        $resultCheck = mysqli_num_rows($resultsLandline);
+        $currentLandline;
+
+        if ($resultCheck > 0) {
+            while ($rowLandline = mysqli_fetch_assoc($resultsLandline)) {
+                $currentLandline = $rowLandline['contact_no'];
+            }
+
+            if($currentMobile == $currentLandline) {
+                // ? There is no landline
+                $currentLandline = '';
+            }
+        }
 
 ?>
         <!-- <form id="crew-form" method="post" enctype="multipart/form-data"> -->
@@ -34,8 +59,8 @@ if ($resultCheck > 0) {
             <div class="mb-24 mt-5">
 
                 <div class="flex items-center px-8">
-                    <input type="number" placeholder="Phone Number" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="supplierPersonalNumber" name="mobile" value="">
-                    <input type="number" placeholder="Land Line (Optional)" class="mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="supplierLandLine" name="landline" value="">
+                    <input type="number" placeholder="Phone Number" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="supplierPersonalNumber" name="mobile" value="<?php echo $currentMobile; ?>">
+                    <input type="number" placeholder="Land Line (Optional)" class="mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="supplierLandLine" name="landline" value="<?php echo $currentLandline; ?>">
                     <input type="text" class="hidden" id="SupplierId" name="id" value="<?php echo $row['id']; ?>">
                     <input type="text" class="hidden" id="SupplierPreviousProfile" name="prev_file" value="<?php echo $row['photo']; ?>">
                 </div>

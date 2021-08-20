@@ -80,10 +80,10 @@ if (isset($_FILES['profileUpload'])) {
                                 echo "sql error";
                                 exit();
                             } else {
-                                if(empty($landline)) {
+                                if (empty($landline)) {
                                     mysqli_stmt_bind_param($statementContact, 'is', $id, $mobile);
                                     mysqli_stmt_execute($statementContact);
-                                }else {
+                                } else {
                                     mysqli_stmt_bind_param($statementContact, 'is', $id, $mobile);
                                     mysqli_stmt_execute($statementContact);
                                     mysqli_stmt_bind_param($statementContact, 'is', $id, $landline);
@@ -92,7 +92,7 @@ if (isset($_FILES['profileUpload'])) {
                             }
                             echo "success";
                             exit();
-                        }else {
+                        } else {
                             echo "failed";
                             exit();
                         }

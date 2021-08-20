@@ -1581,12 +1581,13 @@ if (!isset($_SESSION['sessionId'])) {
                                 if ($resultCheck > 0) {
                                     while ($row = mysqli_fetch_assoc($results)) {
 
-                                        $sql = "SELECT * FROM supplier_contact WHERE id = 7 ORDER BY contact_no DESC LIMIT 1;";
-                                        $results = mysqli_query($conn, $sql);
-                                        $resultCheck = mysqli_num_rows($results);
+                                        $id = $row['id'];
+                                        $sql = "SELECT * FROM supplier_contact WHERE id = $id ORDER BY contact_no DESC LIMIT 1;";
+                                        $resultsMobile = mysqli_query($conn, $sql);
+                                        $resultCheckMobile = mysqli_num_rows($resultsMobile);
                                         $mobile;
-                                        if ($resultCheck > 0) {
-                                            while ($rowMobile = mysqli_fetch_assoc($results)) {
+                                        if ($resultCheckMobile > 0) {
+                                            while ($rowMobile = mysqli_fetch_assoc($resultsMobile)) {
                                                 $mobile = $rowMobile['contact_no'];
                                             }
                                         } else {
