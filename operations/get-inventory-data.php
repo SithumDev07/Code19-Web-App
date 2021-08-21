@@ -33,12 +33,12 @@ $resultCheck = mysqli_num_rows($results);
 
         
         <div class="flex items-center mb-10">
-            <input type="number" placeholder="Total Cost" class="mx-4 bg-gray-50 rounded-md transform transition-colors duration-300" id="inventoryCost" name="cost">
+            <input type="number" placeholder="Total Cost" class="mx-4 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientCost" name="cost">
             <label class="block text-gray-700 text-sm font-bold ml-4 mr-1" for="shift">
                     Paid
             </label>
             <label class="switch relative inline-block w-16 h-10 ml-4">
-                <input type="checkbox" class="toggle-switch hidden" name="paid">
+                <input type="checkbox" class="toggle-switch hidden" name="paid" id="isPaidInventory">
                 <span class="slider cursor-pointer top-0 left-0 right-0 bottom-0 absolute bg-gray-400 transform transition duration-300 rounded-full"></span>
             </label>
         </div>
@@ -48,7 +48,7 @@ $resultCheck = mysqli_num_rows($results);
             <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="shift">
                 Quantity Purchased in Kilos or Literes or Units
             </label>
-            <input type="number" placeholder="Quantity" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="inventoryQuantity" name="quantity">
+            <input type="number" placeholder="Quantity" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientQuantity" name="quantity">
         </div>
 
     </div>
@@ -66,7 +66,7 @@ $resultCheck = mysqli_num_rows($results);
             <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="birthday">
                 Purchase date
             </label>
-            <input type="date" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="inventoryPurchase" name="purchaseDate">
+            <input type="date" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientPurchase" name="purchaseDate">
 
 
             <div class="flex justify-end items-center">

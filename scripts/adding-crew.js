@@ -29,7 +29,7 @@ function setErroOnCrewImage(error, container) {
     }
 }
 
-function setErrorOnInputs(ele, error){
+window.setErrorOnInputs = function (ele, error){
     if(error) {
         // console.log(ele.classList);
         ele.classList.add('border-red-500')
