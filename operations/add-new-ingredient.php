@@ -3,7 +3,7 @@
 require '../config.php';
 
 // TODO reset isset function
-if (isset($_FILES['profileUpload'])) {
+if (isset($_POST['name'])) {
     $ingredientName = $_POST['name'];
     $supplier = $_POST['supplier'];
     $cost = $_POST['cost'];
@@ -14,59 +14,53 @@ if (isset($_FILES['profileUpload'])) {
     $purchaseDate = $_POST['purchaseDate'];
 
 
-    if (empty($name) || empty($supplier) || empty($cost) || empty($quantity) || empty($MFD) || empty($EXP) || empty($purchaseDate)) {
+    if (empty($ingredientName) || empty($supplier) || empty($cost) || empty($quantity) || empty($MFD) || empty($EXP) || empty($purchaseDate)) {
         // header("Location: ../dasboard.php?error=empty_fields");
-        echo "empty fields";
+        echo "empty fields $ingredientName $supplier $cost $quantity $MFD $EXP $purchaseDate";
         exit();
     } else {
-        $sql;
+        $ingredientId;
+        $currentUnits = 0;
+        $sql = "SELECT * FROM ingredient WHERE name='" . $ingredientName . "';";
+        $results = mysqli_query($conn, $sql);
+        $resultCheck = mysqli_num_rows($results);
 
-        if (empty($email)) {
-            if (empty($landline)) {
-                $sql = "INSERT INTO staff_member(name, address, DOB, position, shift, personal_no, Salary, pay_date, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            } else {
-                $sql = "INSERT INTO staff_member(name, address, DOB, position, shift, personal_no, LAN_no, Salary, pay_date, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        if ($resultCheck > 0) {
+            while ($row = mysqli_fetch_assoc($results)) {
+                $ingredientId = $row['id'];
+                $currentUnits = (int)$row['remaining_units'];
             }
+            $currentUnits = $currentUnits + (int)$quantity;
+            $sql = "UPDATE ingredient SET remaining_units = ? WHERE id=?;";
         } else {
-            if (empty($landline)) {
-                $sql = "INSERT INTO staff_member(name, email, address, DOB, position, shift, personal_no, Salary, pay_date, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            } else {
-                $sql = "INSERT INTO staff_member(name, email, address, DOB, position, shift, personal_no, LAN_no, Salary, pay_date, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            }
+            $sql = "INSERT INTO ingredient(name, remaining_units) VALUES (?, ?);";
         }
 
-        // $sql = "INSERT INTO staff_member(name, email, address, DOB, position, shift, personal_no, LAN_no, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $statement = mysqli_stmt_init($conn);
 
         if (!mysqli_stmt_prepare($statement, $sql)) {
-            // header("Location: ../dashboard.php?signup.php&error=sql_error");
             echo "sql error";
             exit();
         } else {
 
-            if (empty($email)) {
-                if (empty($landline)) {
-                    mysqli_stmt_bind_param($statement, 'sssssssss', $fullname, $address, $birthday, $position, $shift, $mobile, $salary, $payDate, $fileNameNew);
-                    mysqli_stmt_execute($statement);
-                } else {
-                    mysqli_stmt_bind_param($statement, 'ssssssssss', $fullname, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $fileNameNew);
-                    mysqli_stmt_execute($statement);
+            if($currentUnits == 0) {
+                $bindFailed = mysqli_stmt_bind_param($statement, 'si', $ingredientName, $quantity);
+                if($bindFailed === false) {
+                    echo htmlspecialchars($statement->error);
+                    exit();
                 }
+                mysqli_stmt_execute($statement);
             } else {
-                if (empty($landline)) {
-                    mysqli_stmt_bind_param($statement, 'ssssssssss', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $salary, $payDate, $fileNameNew);
-                    mysqli_stmt_execute($statement);
-                } else {
-                    mysqli_stmt_bind_param($statement, 'sssssssssss', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $fileNameNew);
-                    mysqli_stmt_execute($statement);
+                $bindFailed = mysqli_stmt_bind_param($statement, 'ii', $currentUnits, $ingredientId);
+                if($bindFailed === false) {
+                    echo htmlspecialchars($statement->error);
+                    exit();
                 }
+                mysqli_stmt_execute($statement);
+                mysqli_stmt_execute($statement);
             }
 
-            // mysqli_stmt_bind_param($statement, 'sssssssssss', $fullname, $email, $address, $birthday, $position, $shift, $mobile, $landline, $salary, $payDate, $fileNameNew);
-            // mysqli_stmt_execute($statement);
-
-            // header("Location: ../dashboard.php?success=employee_added");
-            echo "success";
+            echo "success $currentUnits";
             exit();
         }
     }

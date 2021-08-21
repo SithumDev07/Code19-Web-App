@@ -81,13 +81,13 @@ $(document).ready(function() {
                         alert(response);
                         document.querySelector('.transformin-icon').classList.toggle('translate-icon');
                         if(toggleText) {
-                            document.querySelector('.change-text-ingredient').innerHTML = "Cancel";
+                            document.querySelector('.change-text-inventory').innerHTML = "Cancel";
                         } else {
-                            document.querySelector('.change-text-ingredient').innerHTML = "Add Ingredient";
+                            document.querySelector('.change-text-inventory').innerHTML = "Add Ingredient";
                         }
                         toggleText = !toggleText;
-                        document.querySelector('.ingredient-form-container').classList.toggle('hidden');
-                        document.querySelector('.ingredient-form-container').classList.toggle('flex');
+                        document.querySelector('.inventory-form-container').classList.toggle('hidden');
+                        document.querySelector('.inventory-form-container').classList.toggle('flex');
                         location.reload();
                     }
                 });
