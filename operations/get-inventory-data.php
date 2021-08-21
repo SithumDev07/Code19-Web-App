@@ -58,11 +58,11 @@ $resultCheck = mysqli_num_rows($results);
             <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="birthday">
                 Manufacturing date
             </label>
-            <input type="date" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="inventoryMFD" name="mfd">
+            <input type="date" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientMFD" name="mfd">
             <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="birthday">
                 Expiring date
             </label>
-            <input type="date" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="inventoryEXP" name="exp">
+            <input type="date" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientEXP" name="exp">
             <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="birthday">
                 Purchase date
             </label>

@@ -15,8 +15,8 @@ $(document).ready(function() {
         var currentDate = date.toISOString().substring(0,10);
         console.log(currentDate);
         
-        const Manufacture = document.querySelector('#inventoryMFD')
-        const Expire = document.querySelector('#inventoryEXP')
+        const Manufacture = document.querySelector('#IngredientMFD')
+        const Expire = document.querySelector('#IngredientEXP')
         const Purchase = document.querySelector('#IngredientPurchase')
         
         ListenOnInputChangesInventory(document.querySelector('#IngredientName'), 'Ingredient');
@@ -49,15 +49,16 @@ $(document).ready(function() {
             const name = $("#IngredientName").val();
             const supplier = $("#inventorySupplier").val();
             const cost = $("#IngredientCost").val();
-            const paid = $("#isPaidInventory").val();
+            const paid = $("#isPaidInventory").is(":checked");
             const quantity = $("#IngredientQuantity").val();
-            const mfd = $("#inventoryMFD").val();
-            const exp = $("#inventoryEXP").val();
+            const mfd = $("#IngredientMFD").val();
+            const exp = $("#IngredientEXP").val();
             const purchaseDate = $("#IngredientPurchase").val();
     
             toggleText = true;
-            if(!(validateIngredients(name, cost, quantity, purchaseDate, 'Ingredient'))) {
+            if(!(validateIngredients(name, cost, quantity, purchaseDate, mfd, exp, 'Ingredient'))) {
                 console.log('Not Validated');
+                console.log(paid);
                 $(".inventory-error-message").removeClass("hidden");
             } else {
                 $(".inventory-error-message").addClass("hidden");
@@ -70,26 +71,26 @@ $(document).ready(function() {
                 form_data.append('mfd', mfd);
                 form_data.append('exp', exp);
                 form_data.append('purchaseDate', purchaseDate);
-                // $.ajax({
-                //     url: 'operations/add-new-crew.php',
-                //     type: 'POST',
-                //     data: form_data,
-                //     contentType: false,
-                //     processData: false,
-                //     success: function(response) {
-                //         alert(response);
-                //         document.querySelector('.transformin-icon').classList.toggle('translate-icon');
-                //         if(toggleText) {
-                //             document.querySelector('.change-text-crew').innerHTML = "Cancel";
-                //         } else {
-                //             document.querySelector('.change-text-crew').innerHTML = "Recruit Employee";
-                //         }
-                //         toggleText = !toggleText;
-                //         document.querySelector('.crew-form-container').classList.toggle('hidden');
-                //         document.querySelector('.crew-form-container').classList.toggle('flex');
-                //         location.reload();
-                //     }
-                // });
+                $.ajax({
+                    url: 'operations/add-new-ingredient.php',
+                    type: 'POST',
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        alert(response);
+                        document.querySelector('.transformin-icon').classList.toggle('translate-icon');
+                        if(toggleText) {
+                            document.querySelector('.change-text-ingredient').innerHTML = "Cancel";
+                        } else {
+                            document.querySelector('.change-text-ingredient').innerHTML = "Add Ingredient";
+                        }
+                        toggleText = !toggleText;
+                        document.querySelector('.ingredient-form-container').classList.toggle('hidden');
+                        document.querySelector('.ingredient-form-container').classList.toggle('flex');
+                        location.reload();
+                    }
+                });
             }
         })
     }
@@ -97,7 +98,7 @@ $(document).ready(function() {
 
 
 
-window.validateIngredients = function (name, cost, quantity, purchaseDate, type) {
+window.validateIngredients = function (name, cost, quantity, purchaseDate, Manufacture, Expireation, type) {
     let success = true;
 
     if(name.length === 0) {
@@ -137,6 +138,24 @@ window.validateIngredients = function (name, cost, quantity, purchaseDate, type)
             success = false;
         } else {
             setErrorOnInputs(document.querySelector(`#${type}Purchase`),false)
+        }
+    }
+
+    if(Manufacture != undefined) {
+        if(isFutureDate(Manufacture)) {
+            setErrorOnInputs(document.querySelector(`#${type}MFD`),true)
+            success = false;
+        } else {
+            setErrorOnInputs(document.querySelector(`#${type}MFD`),false)
+        }
+    }
+
+    if(Expireation != undefined) {
+        if(!isFutureDate(Expireation)) {
+            setErrorOnInputs(document.querySelector(`#${type}EXP`),true)
+            success = false;
+        } else {
+            setErrorOnInputs(document.querySelector(`#${type}EXP`),false)
         }
     }
 
