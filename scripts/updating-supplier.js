@@ -19,7 +19,7 @@ $(document).ready(function() {
         if(toggleText) {
             document.querySelector('.change-text-supplier').innerHTML = "Cancel";
         } else {
-            document.querySelector('.change-text-supplier').innerHTML = "Add Supplier";
+            document.querySelector('.change-text-supplier').innerHTML = "Recruit Employee";
         }
         toggleText = !toggleText;
         document.querySelector('.add-supplier-form').classList.toggle('hidden');
@@ -98,9 +98,9 @@ $(document).ready(function() {
         
             const form_data = new FormData();
             const SupplierId = $("#SupplierId").val();
-            const SupplierPreviousProfile = $("#SupplierPreviousProfile").val();
+            const PreviousProfile = $("#SupplierPreviousProfile").val();
             form_data.append('id', SupplierId);
-            form_data.append('prev_file', SupplierPreviousProfile);
+            form_data.append('prev_file', PreviousProfile);
             $.ajax({
                 url: 'operations/delete-supplier.php',
                 type: 'POST',

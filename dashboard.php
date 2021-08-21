@@ -1061,7 +1061,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                             ?>
                                     <div class="card-inventory mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-
+                                        <p class="hidden card-inventory-id"><?php echo $row['ingredient_id']; ?></p>
                                         <div class="flex items-center flex-1 mb-2">
                                             <div class="">
                                                 <h1 class="text-gray-600 font-semibold"><?php echo $row['name']; ?></h1>
@@ -2073,7 +2073,10 @@ if (!isset($_SESSION['sessionId'])) {
     <!-- Suppliers -->
     <script src="./scripts/add-supplier.js"></script>
     <script src="./scripts/supplier-search.js"></script>
+
+    <!-- Ingredients -->
     <script src="./scripts/add-ingredient.js"></script>
+    <script src="./scripts/deleting-ingredients.js"></script>
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {

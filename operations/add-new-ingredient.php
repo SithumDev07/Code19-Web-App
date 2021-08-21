@@ -66,16 +66,6 @@ if (isset($_POST['name'])) {
 
             // ? Inserting data into supplier_ingredient - Purchase Table
 
-            // $sql = "SELECT * FROM ingredient WHERE name = '$ingredientName';";
-            // $results = mysqli_query($conn, $sql);
-            // $resultCheck = mysqli_num_rows($results);
-            // $newIngredientId;
-
-            // if ($resultCheck > 0) {
-            //     while ($row = mysqli_fetch_assoc($results)) {
-            //         $newIngredientId = $row['id'];
-            //     }
-            // }
 
             if ($paid) {
                 $paid = 'yes';

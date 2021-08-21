@@ -31,7 +31,7 @@ $resultCheck = mysqli_num_rows($results);
             </select>
         </div>
 
-        <div class="ingredients-exists">
+        <div class="ingredients-exists hidden">
 
         </div>
         
