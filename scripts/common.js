@@ -270,3 +270,15 @@ function isValidImageSize(file) {
         return true;
     }
 }
+
+// TODO Take care of this - referencing adding-crew.js
+  function isValidPhonenumberCrew(input)
+{
+    let phone = /^[\+]?[(]?[0-9]{0,2}[)]?[-\s\.]?[0-9]{2,3}[-\s\.]?[0-9]{3,4}?[0-9]{3,4}$/im;;
+    if(input.match(phone)){
+      return false;
+    }
+    else {
+        return true;
+    }
+}

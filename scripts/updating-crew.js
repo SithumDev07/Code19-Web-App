@@ -15,25 +15,12 @@ $(document).ready(function() {
             }, function() {
                 UpdateListener();
             });
-            // document.querySelector('.add-crew-form').classList.toggle('hidden');
-            // document.querySelector('.add-crew-form').classList.toggle('flex');
-            // document.querySelector('.crew-form-container').classList.toggle('hidden');
-            
-
-            statusOriginal = false;
-
-            // $("#recuitEmployee").addClass("hidden");
-            // alert(id)
         })
     })
 
     
-
-    
-});
-
 toggleText = true;
-function UpdateListener() {
+window.UpdateListener = function () {
 
     document.querySelector('.transformin-icon').classList.toggle('translate-icon');
     if(toggleText) {
@@ -48,34 +35,31 @@ function UpdateListener() {
     document.querySelector('.crew-form-container').classList.toggle('block');
     console.log('Working Updated');
 
-    
-    // document.querySelector('.crew-form-container').classList.remove('hidden');
-    // document.querySelector('.crew-form-container').classList.add('block');
-    document.querySelector('.transformin-icon').classList.toggle('translate-icon');
-    document.querySelector('.change-text-crew').innerHTML = "Cancel";
-    // document.querySelector('.Crew').classList.toggle('overflow-y-auto');
-    // document.querySelector('.Crew').classList.toggle('overflow-hidden');
-    
-    document.querySelector('#UpdateCrew').addEventListener('click', () => {
+    ListenOnInputChanges(document.querySelector('#crewName'), 'crew')
+    ListenOnInputChanges(document.querySelector('#crewEmail'), 'crew')
+    ListenOnInputChanges(document.querySelector('#crewAddress'), 'crew')
+    ListenOnInputChanges(document.querySelector('#crewPersonalNumber'), 'crew')
+    ListenOnInputChanges(document.querySelector('#crewLandLine'), 'crew')
 
-    
-    // $("#UpdateCrew").click(function(e) {
-        // e.preventDefault();
 
-        // const form = document.querySelector('#crew-form');
+    //*  SALARY And Date Realtime Validate
+    SalaryNDateInputListener(document.querySelector('#crewSalary'))
+    SalaryNDateInputListener(document.querySelector('#crewPayDate'))
+    
+    $('#UpdateCrew').click(function() {
+
         const form_data = new FormData();
         const image = $("#crewUploadProfile")[0].files;
         console.log(image[0]);
-        console.log('Triggereee');
 
         const name = $("#crewName").val();
         const email = $("#crewEmail").val();
         const address = $("#crewAddress").val();
-        // const crewUploadProfile = $("#crewUploadProfile").prop('files');
         const birthday = $("#crewDOB").val();
         const personalNumber = $("#crewPersonalNumber").val();
         const landLine = $("#crewLandLine").val();
         const position = $("#crewPosition").val();
+        // console.log(name);
         const shift = $("#crewShift").val();
         const salary = $("#crewSalary").val();
         const payDate = $("#crewPayDate").val();
@@ -83,19 +67,7 @@ function UpdateListener() {
         const CrewPreviousProfile = $("#CrewPreviousProfile").val();
 
         toggleText = true;
-
-            ListenOnInputChanges(document.querySelector('#crewName'), 'crew')
-            ListenOnInputChanges(document.querySelector('#crewEmail'), 'crew')
-            ListenOnInputChanges(document.querySelector('#crewAddress'), 'crew')
-            ListenOnInputChanges(document.querySelector('#crewPersonalNumber'), 'crew')
-            ListenOnInputChanges(document.querySelector('#crewLandLine'), 'crew')
-
-
-            //*  SALARY And Date Realtime Validate
-            SalaryNDateInputListener(document.querySelector('#crewSalary'))
-            SalaryNDateInputListener(document.querySelector('#crewPayDate'))
-        
-        if(!(validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine, false, document.querySelector('#crewUploadProfile')))) {
+        if(!(validateCrewForms(name, email, address, personalNumber, salary, payDate, landLine, false, document.querySelector('#crewUploadProfile'), undefined))) {
             console.log('Not Validated');
             $(".crew-error-message").removeClass("hidden");
         } else {
@@ -122,20 +94,27 @@ function UpdateListener() {
                 processData: false,
                 success: function(response) {
                     alert(response);
-                    // console.log(response);
+                    document.querySelector('.transformin-icon').classList.toggle('translate-icon');
+                    if(toggleText) {
+                        document.querySelector('.change-text-crew').innerHTML = "Cancel";
+                    } else {
+                        document.querySelector('.change-text-crew').innerHTML = "Recruit Employee";
+                    }
+                    toggleText = !toggleText;
+                    document.querySelector('.crew-form-container').classList.toggle('hidden');
+                    document.querySelector('.crew-form-container').classList.toggle('flex');
                     location.reload();
                 }
             });
         }
     })
 
-    document.querySelector("#DeleteCrew").addEventListener('click', () => {
-   
+    $("#DeleteCrew").click(function() {
+        console.log('Deleting Crew Member');
         
         toggleText = true;
         
         const form_data = new FormData();
-        console.log('Triggereee Delete');
         const CrewId = $("#CrewId").val();
         const CrewPreviousProfile = $("#CrewPreviousProfile").val();
         form_data.append('id', CrewId);
@@ -182,3 +161,7 @@ function UpdateListener() {
         
 
 }
+
+    
+});
+

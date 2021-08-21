@@ -2005,11 +2005,11 @@ if (!isset($_SESSION['sessionId'])) {
     <script src="./scripts/navigation.js"></script>
     <script src="./scripts/ordersNavigator.js"></script>
     <script src="./scripts/search.js"></script>
-    <script src="./scripts/crewAjax.js"></script>
     <script src="./scripts/adding-crew.js"></script>
     <script src="./scripts/add-crew-ajax.js"></script>
     <script src="./scripts/common.js"></script>
     <script src="./scripts/updating-crew.js"></script>
+    <script src="./scripts/crewAjax.js"></script>
     <script src="./scripts/crew-search.js"></script>
     <script src="./scripts/updating-supplier.js"></script>
     <script src="./scripts/supplier-search.js"></script>

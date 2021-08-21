@@ -101,6 +101,7 @@ function ListenOnInputChanges(ele, specificInput) {
 
 function validateCrewForms(name, email, address, personalNumber, salary = undefined, payDate = undefined, landLine, insert, crewProfilePic, imageContainer = undefined, type = undefined) {
     let success = true;
+    console.log(personalNumber);
     
     if(insert){
         if(crewProfilePic.files.length === 0) {
@@ -142,13 +143,15 @@ function validateCrewForms(name, email, address, personalNumber, salary = undefi
     if(personalNumber.length === 0) {
         setErrorOnInputs(document.querySelector(`#${type}PersonalNumber`),true)
         success = false;
-    } else if(isValidPhonenumber(document.querySelector(`#${type}PersonalNumber`))) {
+    // } else if(isValidPhonenumber(document.querySelector(`#${type}PersonalNumber`))) {
+    } else if(isValidPhonenumberCrew(personalNumber)) {
         setErrorOnInputs(document.querySelector(`#${type}PersonalNumber`),true)
+        console.log('Triggered Number');
         success = false;
     }
     
     if(landLine.length !== 0) {
-        if(isValidPhonenumber(document.querySelector(`#${type}LandLine`))) {
+        if(isValidPhonenumberCrew(landLine)) {
             setErrorOnInputs(document.querySelector(`#${type}LandLine`),true)
             success = false;
         }
@@ -180,6 +183,7 @@ function validateCrewForms(name, email, address, personalNumber, salary = undefi
     }
 
     return success;
+    // return false;
 }
 
 function isEmail (email) {

@@ -19,7 +19,7 @@ $(document).ready(function() {
         if(toggleText) {
             document.querySelector('.change-text-supplier').innerHTML = "Cancel";
         } else {
-            document.querySelector('.change-text-supplier').innerHTML = "Recruit Employee";
+            document.querySelector('.change-text-supplier').innerHTML = "Add Supplier";
         }
         toggleText = !toggleText;
         document.querySelector('.add-supplier-form').classList.toggle('hidden');

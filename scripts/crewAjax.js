@@ -38,13 +38,7 @@ $(document).ready(function() {
         });
     })
 
-    $("#InsertCrew").click(function() {
-        
-    })
-});
-
-// crewCards = document.querySelectorAll('.card-crew')
-toggleText = true;
+    toggleText = true;
 
 function updateCardsCrew() {
     crewCards.forEach((ele, index) => {
@@ -71,3 +65,7 @@ function updateCardsCrew() {
         })
     })
 }
+
+});
+
+// crewCards = document.querySelectorAll('.card-crew')
