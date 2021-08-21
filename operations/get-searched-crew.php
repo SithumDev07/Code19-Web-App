@@ -82,11 +82,11 @@ function Render($results)
                                                 echo "Every " . $row['pay_date'] . "nd";
                                             } else if ($day == 3) {
                                                 echo "Every " . $row['pay_date'] . "rd";
-                                            } else if($day == 11) {
+                                            } else if ($day == 11) {
                                                 echo "Every " . $row['pay_date'] . "th";
-                                            } else if($day == 12) {
+                                            } else if ($day == 12) {
                                                 echo "Every " . $row['pay_date'] . "th";
-                                            } else if($day == 13) {
+                                            } else if ($day == 13) {
                                                 echo "Every " . $row['pay_date'] . "th";
                                             } else {
                                                 echo "Every " . $row['pay_date'] . "th";
