@@ -190,6 +190,27 @@ if (!isset($_SESSION['sessionId'])) {
         .translate-icon {
             transform: rotate(45deg);
         }
+
+        .slider::before{
+            position: absolute;
+            content: "";
+            width: 2rem;
+            height: 2rem;
+            left: 0.3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        .toggle-switch:checked + .slider {
+            background-color: rgba(16, 185, 129, 1);
+        }
+        .toggle-switch:checked + .slider::before {
+            left: unset;
+            right: 0.3rem;
+        }
     </style>
 </head>
 
@@ -965,11 +986,11 @@ if (!isset($_SESSION['sessionId'])) {
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">🏪 Inventory</h1>
 
-                        <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95" id="AddIngredient">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 transformin-icon transform transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            Add Ingredient
+                            <h3 class="change-text-inventory">Add Ingredient</h3>
                         </button>
                     </div>
 
@@ -2049,9 +2070,10 @@ if (!isset($_SESSION['sessionId'])) {
     <script src="./scripts/crewAjax.js"></script>
     <script src="./scripts/crew-search.js"></script>
     <script src="./scripts/updating-supplier.js"></script>
-    <script src="./scripts/supplier-search.js"></script>
     <!-- Suppliers -->
     <script src="./scripts/add-supplier.js"></script>
+    <script src="./scripts/supplier-search.js"></script>
+    <script src="./scripts/add-ingredient.js"></script>
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {

@@ -9,23 +9,6 @@ const recuitEmployee = document.querySelector('#recuitEmployee');
 // let statusOriginal = true;
 let toggleText = true;
 
-// recuitEmployee.addEventListener('click', () => {
-    
-//     document.querySelector('.transformin-icon').classList.toggle('translate-icon');
-//     if(toggleText) {
-//         document.querySelector('.change-text-crew').innerHTML = "Cancel";
-//     } else {
-//         document.querySelector('.change-text-crew').innerHTML = "Recruit Employee";
-//     }
-//     toggleText = !toggleText;
-//     document.querySelector('.add-crew-form').classList.toggle('hidden');
-//     document.querySelector('.add-crew-form').classList.toggle('flex');
-//     document.querySelector('.crew-form-container').classList.toggle('hidden');
-//     document.querySelector('.crew-form-container').classList.toggle('block');
-//     console.log('Working');
-// })
-
-
 
 
 
