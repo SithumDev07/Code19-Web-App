@@ -31,6 +31,9 @@ $resultCheck = mysqli_num_rows($results);
             </select>
         </div>
 
+        <div class="ingredients-exists">
+
+        </div>
         
         <div class="flex items-center mb-10">
             <input type="number" placeholder="Total Cost" class="mx-4 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientCost" name="cost">

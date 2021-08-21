@@ -7,7 +7,6 @@ $(document).ready(function() {
         });
     })
 
-
     window.InventoryLisener = function () {
 
         
@@ -40,6 +39,20 @@ $(document).ready(function() {
         document.querySelector('.inventory-form-container').classList.toggle('block');
         console.log('Working inventory');
 
+        let selectedIdIngredient = 0;
+
+        $("#IngredientName").keyup(function() {
+            let value = $(this).val();
+            if(value !== '') {
+                $(".ingredients-exists").load("operations/get-ingredients-exists.php", {
+                    query: value,
+                }, function() {
+                    selectedIdIngredient = getSelectedIngredientId();
+                });
+            }
+        })
+
+
         $("#InsertIngredient").click(function(e) {
             e.preventDefault();
 
@@ -59,6 +72,7 @@ $(document).ready(function() {
             if(!(validateIngredients(name, cost, quantity, purchaseDate, mfd, exp, 'Ingredient'))) {
                 console.log('Not Validated');
                 console.log(paid);
+                console.log("Selected", selectedIdIngredient);
                 $(".inventory-error-message").removeClass("hidden");
             } else {
                 $(".inventory-error-message").addClass("hidden");
@@ -71,6 +85,7 @@ $(document).ready(function() {
                 form_data.append('mfd', mfd);
                 form_data.append('exp', exp);
                 form_data.append('purchaseDate', purchaseDate);
+                form_data.append('selectedIngredient', selectedIdIngredient);
                 $.ajax({
                     url: 'operations/add-new-ingredient.php',
                     type: 'POST',
@@ -96,6 +111,16 @@ $(document).ready(function() {
     }
 })
 
+
+// let selectedIdIngredient;
+window.getSelectedIngredientId = function() {
+    if(document.querySelector('#SelectedIngredientId') !== null) {
+        let selectedIdIngredient = document.querySelector('#SelectedIngredientId').innerHTML;
+        return selectedIdIngredient;
+    }
+
+    return 0;
+}
 
 
 window.validateIngredients = function (name, cost, quantity, purchaseDate, Manufacture, Expireation, type) {

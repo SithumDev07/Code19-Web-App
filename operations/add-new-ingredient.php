@@ -12,6 +12,7 @@ if (isset($_POST['name'])) {
     $MFD = $_POST['mfd'];
     $EXP = $_POST['exp'];
     $purchaseDate = $_POST['purchaseDate'];
+    $selectedIngredient = $_POST['selectedIngredient'];
 
 
     if (empty($ingredientName) || empty($supplier) || empty($cost) || empty($quantity) || empty($MFD) || empty($EXP) || empty($purchaseDate)) {
@@ -24,6 +25,7 @@ if (isset($_POST['name'])) {
         $sql = "SELECT * FROM ingredient WHERE name='" . $ingredientName . "';";
         $results = mysqli_query($conn, $sql);
         $resultCheck = mysqli_num_rows($results);
+        $newIngredientIdGenerated = 'unset';
 
         if ($resultCheck > 0) {
             while ($row = mysqli_fetch_assoc($results)) {
@@ -43,24 +45,64 @@ if (isset($_POST['name'])) {
             exit();
         } else {
 
-            if($currentUnits == 0) {
+            if ($currentUnits == 0) {
                 $bindFailed = mysqli_stmt_bind_param($statement, 'si', $ingredientName, $quantity);
-                if($bindFailed === false) {
+                if ($bindFailed === false) {
                     echo htmlspecialchars($statement->error);
                     exit();
                 }
                 mysqli_stmt_execute($statement);
+                $newIngredientIdGenerated = mysqli_stmt_insert_id($statement);
             } else {
                 $bindFailed = mysqli_stmt_bind_param($statement, 'ii', $currentUnits, $ingredientId);
-                if($bindFailed === false) {
+                if ($bindFailed === false) {
                     echo htmlspecialchars($statement->error);
                     exit();
                 }
-                mysqli_stmt_execute($statement);
                 mysqli_stmt_execute($statement);
             }
 
-            echo "success $currentUnits";
+
+
+            // ? Inserting data into supplier_ingredient - Purchase Table
+
+            // $sql = "SELECT * FROM ingredient WHERE name = '$ingredientName';";
+            // $results = mysqli_query($conn, $sql);
+            // $resultCheck = mysqli_num_rows($results);
+            // $newIngredientId;
+
+            // if ($resultCheck > 0) {
+            //     while ($row = mysqli_fetch_assoc($results)) {
+            //         $newIngredientId = $row['id'];
+            //     }
+            // }
+
+            if ($paid) {
+                $paid = 'yes';
+            } else {
+                $paid = 'no';
+            }
+
+            $sql = "INSERT INTO supplier_ingredient(supplier_id, ingredient_id, cost, paid, quantity, MFD, EXP, purchase_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+
+            if (!mysqli_stmt_prepare($statement, $sql)) {
+                echo "sql error";
+                exit();
+            } else {
+                if ($currentUnits == 0) {
+                    $bindFailed = mysqli_stmt_bind_param($statement, 'iiisisss', $supplier, $newIngredientIdGenerated, $cost, $paid, $quantity, $MFD, $EXP, $purchaseDate);
+                } else {
+                    $bindFailed = mysqli_stmt_bind_param($statement, 'iiisisss', $supplier, $selectedIngredient, $cost, $paid, $quantity, $MFD, $EXP, $purchaseDate);
+                }
+
+                if ($bindFailed === false) {
+                    echo htmlspecialchars($statement->error);
+                    exit();
+                }
+                mysqli_stmt_execute($statement);
+            }
+
+            echo "success $newIngredientIdGenerated $currentUnits $supplier";
             exit();
         }
     }
