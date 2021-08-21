@@ -4,46 +4,51 @@ $(document).ready(function() {
     $("#searchSupplier").keyup(function() {
         let value = $(this).val();
         if(value !== '') {
-            // $.ajax({
-            //     url: 'operations/get-searched-crew.php',
-            //     type: 'POST',
-            //     data: {query: value, currentUser: currentUser},
-            //     success: function(data, status) {
-            //         // alert(data);
-            //         // $(".left-crew").html(data);
-
-            //         crewCards = document.querySelectorAll('.card-crew')
-            //             updateCardsCrew();
-                    
-
-            //         }
-            //     })
 
                 $(".left-suppliers").load("operations/get-searched-suppliers.php", {
                     query: value,
                 }, function() {
                     // alert(currentUser)
                     crewCards = document.querySelectorAll('.card-suppliers')
-                    // updateCardsCrew();
+                    updateCardsSupplier();
                 });
         }else {
             $(".left-suppliers").load("operations/get-all-suppliers.php", {}, function() {
                 // * A;ways keep a flow, Trick is to load elements async
-                crewCards = document.querySelectorAll('.card-suppliers')
-                // updateCardsCrew();
+                SupplierCards = document.querySelectorAll('.card-suppliers')
+                updateCardsSupplier(SupplierCards);
             });
         }
     })
+
+
+    toggleText = true;
+
+    function updateCardsSupplier(SupplierCards) {
+        SupplierCards.forEach((ele, index) => {
+            $(ele).click(function() {
+                // TODO Remove after log
+                console.log('update Cards Suppliers');
+                id = ele.querySelector('.card-supplier-id').innerHTML
+                
+                $(".supplier-form-container").load("operations/get-card-supplier-data.php", {
+                    id: id,
+                    flex: 'flex',
+                    marginTop: 'top-0'
+                }, function() {
+                    UpdateListenerSupplier();
+                });
+                // document.querySelector('.add-crew-form').classList.toggle('hidden');
+                // document.querySelector('.add-crew-form').classList.toggle('flex');
+                // document.querySelector('.crew-form-container').classList.toggle('hidden');
+                
+
+                statusOriginal = false;
+
+                // $("#recuitEmployee").addClass("hidden");
+                // alert(id)
+            })
+        })
+    }
     
 })
-// console.log(response);
-// document.querySelector('.transformin-icon').classList.toggle('translate-icon');
-// if(toggleText) {
-//     document.querySelector('.change-text-crew').innerHTML = "Cancel";
-// } else {
-//     document.querySelector('.change-text-crew').innerHTML = "Recruit Employee";
-// }
-// toggleText = !toggleText;
-// document.querySelector('.crew-form-container').classList.toggle('hidden');
-// document.querySelector('.crew-form-container').classList.toggle('flex');
-// location.reload();
