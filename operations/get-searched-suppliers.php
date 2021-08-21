@@ -83,7 +83,7 @@ if (isset($_POST['query'])) {
         $results = mysqli_query($conn, $sql);
         $message = "No Results Found For Contact Number - " . $_POST['query'];
     } else {
-        $sql = "SELECT * FROM supplier WHERE name LIKE '%" . $_POST['query'] . "%';";
+        // $sql = "SELECT * FROM supplier WHERE name LIKE '%" . $_POST['query'] . "%';";
         $sql = "SELECT * FROM supplier INNER JOIN supplier_contact ON supplier.id = supplier_contact.id WHERE supplier.name LIKE '%" . $_POST['query'] . "%' order by supplier_contact.contact_no desc limit 1;";
         $results = mysqli_query($conn, $sql);
         $message = "No Results Found For Name " . $_POST['query'];

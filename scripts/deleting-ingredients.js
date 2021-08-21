@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 
     toggleText = true;
-    function DeleteListenerInventory() {
+    window.DeleteListenerInventory = function() {
         document.querySelector('.transformin-icon').classList.toggle('translate-icon');
         if(toggleText) {
             document.querySelector('.change-text-inventory').innerHTML = "Cancel";
