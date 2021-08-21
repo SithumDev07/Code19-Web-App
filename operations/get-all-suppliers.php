@@ -1,7 +1,8 @@
 <?php
 include '../config.php';
 
-$sql = "SELECT * FROM supplier inner JOIN (select * from supplier_contact group by id order by contact_no desc) AS supplier_contact ON supplier.id = supplier_contact.id;";
+// $sql = "SELECT * FROM supplier inner JOIN (select * from supplier_contact group by id order by contact_no desc) AS supplier_contact ON supplier.id = supplier_contact.id;";
+$sql = "select id, max(contact_no) as contact from supplier_contact group by id order by contact_no asc;";
 $results = mysqli_query($conn, $sql);
 $resultCheck = mysqli_num_rows($results);
 

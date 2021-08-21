@@ -74,6 +74,7 @@ if (!isset($_SESSION['sessionId'])) {
             background-color: rgba(30, 30, 30, 0.3);
             border-radius: 1.2em;
         }
+
         .add-supplier-form::-webkit-scrollbar {
             width: 0.6em;
             border-radius: 50%;
@@ -170,6 +171,7 @@ if (!isset($_SESSION['sessionId'])) {
         #crewUploadProfile::-webkit-file-upload-button {
             visibility: hidden;
         }
+
         #SupplierUploadProfile {
             position: absolute;
             top: 0;
@@ -882,6 +884,82 @@ if (!isset($_SESSION['sessionId'])) {
                 </div>
 
 
+                <!-- Inventory Form -->
+                <div class="inventory-form-container glass rounded-t-3xl absolute top-24 left-0 z-base-search right-0 hidden h-full w-full">
+                    <!-- <div class="w-full h-full p-10 flex-col add-supplier-form hidden overflow-y-auto">
+                            <div class="flex items-center">
+                                <div class="flex-1 flex flex-col px-12">
+                                    <input type="text" placeholder="Full Name" class="mb-5 flex-1 rounded-md bg-gray-50" id="crewName" name="name">
+                                    <input type="email" placeholder="Email (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewEmail" name="email">
+                                    <textarea name="address" id="crewAddress" class="mb-5 appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-50 rounded-md transform transition-colors duration-300" placeholder="Address" id="crewAddress" name="address"></textarea>
+                                    
+                                
+                                </div>
+                                <div class="w-48 h-48 rounded-full overflow-hidden relative cursor-pointer profile-picture p-1 border-2 border-blue-600 CrewImageContainer shadow-2xl">
+                                    <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl z-10"></i>
+                                    <img id="crewUploadedProfile" class="opacity-80 rounded-full w-full h-full object-cover" src="./photo_uploads/users/Mayuko.jpg" alt="Crew Profile">
+                                    <input type="file" name="profileUpload" id="crewUploadProfile">
+                                </div>
+                            </div>
+                            <div class="mb-24 mt-5">
+                                    <div class="flex items-center">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="birthday">
+                                            Date of Birth
+                                        </label>
+                                        <input class="shadow appearance-none border rounded flex-1 mx-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5" id="crewDOB" type="date" name="birthday" required>
+                                        
+                                        <input type="number" placeholder="Personal Number" class="mx-4 mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewPersonalNumber" name="mobile">
+                                        <input type="number" placeholder="Land Number (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewLandLine" name="landline">
+                                    </div>
+
+                                    <div class="flex items-center mb-5">
+                                        <div class="flex flex-col">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="position">
+                                                Position
+                                            </label>
+                                            <select class="px-3 py-2 w-28 rounded" id="crewPosition" name="position">
+                                                <option value="Chef">Chef</option>
+                                                <option value="Helper">Helper</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="flex flex-col mx-5">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="shift">
+                                                Shift
+                                            </label>
+                                            <select class="px-3 py-2 w-28 rounded" id="crewShift" name="shift">
+                                                <option value="Day">Day</option>
+                                                <option value="Night">Night</option>
+                                            </select>
+                                        </div>
+
+                                        <input type="number" placeholder="Salary" class="-mb-7 mx-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewSalary" name="salary">
+
+                                        <div class="flex flex-col">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="payDate">
+                                                Pay Date
+                                            </label>
+                                            <div class="flex items-end">
+                                                <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="crewPayDate" placeholder="Day" type="number" name="payDate" required>
+                                                <p class="ml-2 text-gray-500">in every month</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="flex justify-end items-center mb-48">
+                                        <p class="text-red-500 font-semibold text-sm hidden crew-error-message">Oops. It seems to be some inputs are not valid.</p>
+                                        <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="InsertCrew" type="submit" name="crew-submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            Add
+                                        </button>
+                                    </div>
+                            </div>
+                        </div> -->
+                </div>
+
                 <!-- Inventory -->
                 <div class="moving-part Inventory glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerInventory">
                     <div class="greeting flex w-full justify-between items-center">
@@ -948,44 +1026,67 @@ if (!isset($_SESSION['sessionId'])) {
                     </div>
 
                     <div class="flex mt-5 mb-24">
-                        <div class="left-delivery flex-1 flex flex-wrap">
-
+                        <div class="left-inventory flex-1 flex flex-wrap">
                             <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
 
-                                <div class="flex items-center flex-1 mb-2">
-                                    <div class="">
-                                        <h1 class="text-gray-600 font-semibold">All Purpose Flour</h1>
-                                        <p class="text-sm text-gray-500 font-bold my-1">Ranathunga Stores</p>
-                                        <p class="text-xs text-gray-400">+94 76 6 108 500</p>
-                                        <p class="text-xs text-gray-400">ranathunga@gmail.com</p>
+                            <?php
+                            // $sql = "select ingredient.name as ingredient, supplier.name as supplier, supplier_contact.contact_no as contact, supplier.email as email, ingredient.remaining_units as remaining from ingredient join supplier_ingredient on ingredient.id = supplier_ingredient.ingredient_id join supplier on supplier.id = supplier_ingredient.supplier_id join supplier_contact on supplier_contact.id = supplier.id order by supplier_contact.contact_no desc limit 1;";
+                            $sql = "select * from ingredient join (select sum(cost) as total, ingredient_id, supplier_id from supplier_ingredient group by ingredient_id) as purchase on ingredient.id = purchase.ingredient_id join (select name as supplier, email, id from supplier) as supplier on supplier.id = purchase.supplier_id join (select max(contact_no) as contact, id as supplier_contact_id from supplier_contact group by supplier_contact_id) as communication on communication.supplier_contact_id = supplier.id;";
+                            $results = mysqli_query($conn, $sql);
+                            $resultCheck = mysqli_num_rows($results);
+
+                            if ($resultCheck > 0) {
+                                while ($row = mysqli_fetch_assoc($results)) {
+
+                            ?>
+                                    <div class="card-inventory mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+
+                                        <div class="flex items-center flex-1 mb-2">
+                                            <div class="">
+                                                <h1 class="text-gray-600 font-semibold"><?php echo $row['name']; ?></h1>
+                                                <p class="text-sm text-gray-500 font-bold my-1"><?php echo $row['supplier']; ?></p>
+                                                <p class="text-xs text-gray-400"><?php echo $row['contact']; ?></p>
+                                                <p class="text-xs text-gray-400"><?php echo $row['email']; ?></p>
+                                            </div>
+                                            <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center"><?php echo ($row['remaining_units']*0.01) ?>Kg</h1>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <h1 class="text-gray-500 font-semibold flex-1">Previous Stock</h1>
+                                            <p class="text-gray-500 font-semibold">12th Aug</p>
+                                        </div>
+                                        <div class="flex items-center mt-2 justify-between">
+                                            <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                13Kg
+                                            </button>
+
+                                            <div class="text-gray-500 text-xs flex items-center">
+                                                Average Consumtion
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-0 w-full h-1 bg-yellow-400 left-0"></div>
                                     </div>
-                                    <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center">48Kg</h1>
-                                </div>
 
-                                <div class="flex items-center">
-                                    <h1 class="text-gray-500 font-semibold flex-1">Previous Stock</h1>
-                                    <p class="text-gray-500 font-semibold">12th Aug</p>
-                                </div>
-                                <div class="flex items-center mt-2 justify-between">
-                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        13Kg
-                                    </button>
+                            <?php
 
-                                    <div class="text-gray-500 text-xs flex items-center">
-                                        Average Consumtion
-                                    </div>
-                                </div>
-                                <div class="absolute bottom-0 w-full h-1 bg-yellow-400 left-0"></div>
-                            </div>
+                                }
+                            } else {
+                                ?> 
+                                    <h1 class="text-center text-6xl font-semibold text-gray-400 w-full mt-6">No Results Found</h1>
+                                <?php
+                            }
+
+                            ?>
+
+
 
                             <!-- End of card -->
 
                             <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            <!-- <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
 
                                 <div class="flex items-center flex-1 mb-2">
                                     <div class="">
@@ -1014,75 +1115,7 @@ if (!isset($_SESSION['sessionId'])) {
                                     </div>
                                 </div>
                                 <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
-                            </div>
-
-                            <!-- End of card -->
-
-                            <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-
-                                <div class="flex items-center flex-1 mb-2">
-                                    <div class="">
-                                        <h1 class="text-gray-600 font-semibold">Oat Milk Low..</h1>
-                                        <p class="text-sm text-gray-500 font-bold my-1">Highland Farms</p>
-                                        <p class="text-xs text-gray-400">+94 31 2 212 545</p>
-                                        <p class="text-xs text-gray-400">kelaniya@highland.com</p>
-                                    </div>
-                                    <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center">0Ltr</h1>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <h1 class="text-gray-500 font-semibold flex-1">Previous Stock</h1>
-                                    <p class="text-gray-500 font-semibold">10th Jul</p>
-                                </div>
-                                <div class="flex items-center mt-2 justify-between">
-                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        1Ltr
-                                    </button>
-
-                                    <div class="text-gray-500 text-xs flex items-center">
-                                        Average Consumtion
-                                    </div>
-                                </div>
-                                <div class="absolute bottom-0 w-full h-1 bg-red-400 left-0"></div>
-                            </div>
-
-                            <!-- End of card -->
-
-                            <!-- Single Card -->
-                            <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-
-                                <div class="flex items-center flex-1 mb-2">
-                                    <div class="">
-                                        <h1 class="text-gray-600 font-semibold">Amiron Whole Chic...</h1>
-                                        <p class="text-sm text-gray-500 font-bold my-1">Keels Super</p>
-                                        <p class="text-xs text-gray-400">+94 31 2 789 145</p>
-                                        <p class="text-xs text-gray-400">vihaga@keelssuper.com</p>
-                                    </div>
-                                    <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center">12Kg</h1>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <h1 class="text-gray-500 font-semibold flex-1">Previous Stock</h1>
-                                    <p class="text-gray-500 font-semibold">Yesterday</p>
-                                </div>
-                                <div class="flex items-center mt-2 justify-between">
-                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        8Kg
-                                    </button>
-
-                                    <div class="text-gray-500 text-xs flex items-center">
-                                        Average Consumtion
-                                    </div>
-                                </div>
-                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
-                            </div>
+                            </div> -->
 
                             <!-- End of card -->
                         </div>
@@ -1445,7 +1478,7 @@ if (!isset($_SESSION['sessionId'])) {
                 </div>
 
 
-                 <!-- Suppliers -Form -->
+                <!-- Suppliers -Form -->
                 <div class="supplier-form-container glass rounded-t-3xl absolute top-24 left-0 z-base-search right-0 hidden h-full w-full">
                     <!-- <div class="w-full h-full p-10 flex-col add-supplier-form hidden overflow-y-auto">
                             <div class="flex items-center">
@@ -1519,7 +1552,7 @@ if (!isset($_SESSION['sessionId'])) {
                                     </div>
                             </div>
                         </div> -->
-                </div>               
+                </div>
 
                 <!-- Suppliers -->
                 <div class="moving-part Suppliers glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerSuppliers">
@@ -1573,77 +1606,81 @@ if (!isset($_SESSION['sessionId'])) {
                     <div class="flex mt-5 mb-24">
                         <div class="left-suppliers flex-1 flex flex-wrap">
 
-                        <?php
-                                $sql = "SELECT * FROM supplier;";
-                                $results = mysqli_query($conn, $sql);
-                                $resultCheck = mysqli_num_rows($results);
+                            <?php
+                            $sql = "SELECT * FROM supplier;";
+                            $results = mysqli_query($conn, $sql);
+                            $resultCheck = mysqli_num_rows($results);
 
-                                if ($resultCheck > 0) {
-                                    while ($row = mysqli_fetch_assoc($results)) {
+                            if ($resultCheck > 0) {
+                                while ($row = mysqli_fetch_assoc($results)) {
 
-                                        $id = $row['id'];
-                                        $sql = "SELECT * FROM supplier_contact WHERE id = $id ORDER BY contact_no DESC LIMIT 1;";
-                                        $resultsMobile = mysqli_query($conn, $sql);
-                                        $resultCheckMobile = mysqli_num_rows($resultsMobile);
-                                        $mobile;
-                                        if ($resultCheckMobile > 0) {
-                                            while ($rowMobile = mysqli_fetch_assoc($resultsMobile)) {
-                                                $mobile = $rowMobile['contact_no'];
-                                            }
-                                        } else {
-                                            $mobile = '';
+                                    $id = $row['id'];
+                                    $sql = "SELECT * FROM supplier_contact WHERE id = $id ORDER BY contact_no DESC LIMIT 1;";
+                                    $resultsMobile = mysqli_query($conn, $sql);
+                                    $resultCheckMobile = mysqli_num_rows($resultsMobile);
+                                    $mobile;
+                                    if ($resultCheckMobile > 0) {
+                                        while ($rowMobile = mysqli_fetch_assoc($resultsMobile)) {
+                                            $mobile = $rowMobile['contact_no'];
                                         }
-                        ?>
-
-                            <!-- Single Card -->
-                            <div class="card-suppliers mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-
-                                <div class="flex items-center flex-1 mb-2">
-                                    <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
-                                        <!-- TODO Update Photo Link -->
-                                        <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/suppliers/<?php if($row != null) { echo $row['photo']; } else {echo "611f0f941fce68.26123095.png";} ?>" alt="SupplierImage">
-                                    </div>
-                                    <p class="hidden card-supplier-id"><?php echo $row['id']; ?></p>
-                                    <div class="flex-1 ml-2">
-                                        <h1 class="text-gray-600 font-semibold text-sm">All Purpose Flour and 6+ more</h1>
-                                        <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
-                                        <p class="text-xs text-gray-500"><?php echo $mobile; ?></p>
-                                        <p class="text-xs text-gray-500"><?php echo $row['email']; ?></p>
-
-                                    </div>
-                                </div>
-
-                                <h1 class="text-gray-600 font-semibold flex-1"><?php echo $row['name']; ?></h1>
-                                <p class="text-xs text-gray-500 my-1 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                    <?php echo $row['address']; ?>
-                                </p>
-
-                                <div class="flex items-center mt-2 justify-between">
-                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        No Due
-                                    </button>
-
-                                    <div class="text-gray-500 text-xs flex flex-col">
-                                        <h3 class="text-xl font-semibold text-gray-500">Rs. 74,000.00</h3>
-                                        Total Payments
-                                    </div>
-                                </div>
-                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
-                            </div>
-                            
-
-                                <?php
-                                
+                                    } else {
+                                        $mobile = '';
                                     }
+                            ?>
+
+                                    <!-- Single Card -->
+                                    <div class="card-suppliers mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+
+                                        <div class="flex items-center flex-1 mb-2">
+                                            <div class="overflow-hidden w-16 h-16 rounded-full mb-1 cursor-pointer mr-2">
+                                                <!-- TODO Update Photo Link -->
+                                                <img class="object-cover w-full h-full rounded-full" src="./photo_uploads/suppliers/<?php if ($row != null) {
+                                                                                                                                        echo $row['photo'];
+                                                                                                                                    } else {
+                                                                                                                                        echo "611f0f941fce68.26123095.png";
+                                                                                                                                    } ?>" alt="SupplierImage">
+                                            </div>
+                                            <p class="hidden card-supplier-id"><?php echo $row['id']; ?></p>
+                                            <div class="flex-1 ml-2">
+                                                <h1 class="text-gray-600 font-semibold text-sm">All Purpose Flour and 6+ more</h1>
+                                                <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
+                                                <p class="text-xs text-gray-500"><?php echo $mobile; ?></p>
+                                                <p class="text-xs text-gray-500"><?php echo $row['email']; ?></p>
+
+                                            </div>
+                                        </div>
+
+                                        <h1 class="text-gray-600 font-semibold flex-1"><?php echo $row['name']; ?></h1>
+                                        <p class="text-xs text-gray-500 my-1 flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                            <?php echo $row['address']; ?>
+                                        </p>
+
+                                        <div class="flex items-center mt-2 justify-between">
+                                            <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                No Due
+                                            </button>
+
+                                            <div class="text-gray-500 text-xs flex flex-col">
+                                                <h3 class="text-xl font-semibold text-gray-500">Rs. 74,000.00</h3>
+                                                Total Payments
+                                            </div>
+                                        </div>
+                                        <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
+                                    </div>
+
+
+                            <?php
+
                                 }
-                                ?>
+                            }
+                            ?>
 
                             <!-- End of card -->
 
@@ -1729,7 +1766,7 @@ if (!isset($_SESSION['sessionId'])) {
                         </div> -->
                 </div>
 
-                                <!-- Crew -->
+                <!-- Crew -->
                 <div class="moving-part Crew glass rounded-3xl h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerCrew">
                     <div class=" p-7">
                         <!-- Where it was -->
@@ -1791,7 +1828,7 @@ if (!isset($_SESSION['sessionId'])) {
                         <div class="flex mt-5 mb-24">
                             <div class="left-crew flex-1 flex flex-wrap">
 
-                            <?php
+                                <?php
                                 $sql = "SELECT * FROM staff_member WHERE id != " . $_SESSION['sessionId'] . ";";
                                 $results = mysqli_query($conn, $sql);
                                 $resultCheck = mysqli_num_rows($results);
