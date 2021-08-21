@@ -110,6 +110,7 @@ if (isset($_POST['query'])) {
     $results;
     $message;
 
+    // TODO Implement for other parameters
     if (is_numeric($_POST['query'])) {
         $sql = "SELECT * FROM staff_member WHERE id =" . $_POST['query'] . " AND id !=" . $_POST['currentUser'] . ";";
         $results = mysqli_query($conn, $sql);
