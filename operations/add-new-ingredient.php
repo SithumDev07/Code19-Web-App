@@ -11,6 +11,7 @@ if (isset($_POST['name'])) {
     $quantity = $_POST['quantity'];
     $MFD = $_POST['mfd'];
     $EXP = $_POST['exp'];
+    $metric = $_POST['metric'];
     $purchaseDate = $_POST['purchaseDate'];
     $selectedIngredient = $_POST['selectedIngredient'];
 
@@ -20,6 +21,15 @@ if (isset($_POST['name'])) {
         echo "empty fields $ingredientName $supplier $cost $quantity $MFD $EXP $purchaseDate";
         exit();
     } else {
+
+        if($metric == 'Kg') {
+            $quantity = (int)$quantity * 1000;
+            $metric = 'g';
+        } else if($metric == 'Ltr') {
+            $quantity = (int)$quantity * 1000;
+            $metric = 'ml';
+        }
+
         $ingredientId;
         $currentUnits = 0;
         $sql = "SELECT * FROM ingredient WHERE name='" . $ingredientName . "';";
@@ -35,7 +45,7 @@ if (isset($_POST['name'])) {
             $currentUnits = $currentUnits + (int)$quantity;
             $sql = "UPDATE ingredient SET remaining_units = ? WHERE id=?;";
         } else {
-            $sql = "INSERT INTO ingredient(name, remaining_units) VALUES (?, ?);";
+            $sql = "INSERT INTO ingredient(name, remaining_units, type) VALUES (?, ?, ?);";
         }
 
         $statement = mysqli_stmt_init($conn);
@@ -46,7 +56,7 @@ if (isset($_POST['name'])) {
         } else {
 
             if ($currentUnits == 0) {
-                $bindFailed = mysqli_stmt_bind_param($statement, 'si', $ingredientName, $quantity);
+                $bindFailed = mysqli_stmt_bind_param($statement, 'sis', $ingredientName, $quantity, $metric);
                 if ($bindFailed === false) {
                     echo htmlspecialchars($statement->error);
                     exit();

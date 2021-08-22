@@ -34,11 +34,11 @@ $resultCheck = mysqli_num_rows($results);
         <div class="ingredients-exists hidden">
 
         </div>
-        
+
         <div class="flex items-center mb-10">
             <input type="number" placeholder="Total Cost" class="mx-4 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientCost" name="cost">
             <label class="block text-gray-700 text-sm font-bold ml-4 mr-1" for="shift">
-                    Paid
+                Paid
             </label>
             <label class="switch relative inline-block w-16 h-10 ml-4">
                 <input type="checkbox" class="toggle-switch hidden" name="paid" id="isPaidInventory">
@@ -47,11 +47,28 @@ $resultCheck = mysqli_num_rows($results);
         </div>
 
         <!-- // TODO Add counter later on -->
-        <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="shift">
-                Quantity Purchased in Kilos or Literes or Units
-            </label>
-            <input type="number" placeholder="Quantity" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientQuantity" name="quantity">
+        <div class="flex items-center">
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="shift">
+                    Quantity Purchased in Kilos or Literes or Units
+                </label>
+                <input type="number" placeholder="Quantity" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientQuantity" name="quantity">
+            </div>
+            <div class="flex flex-1 items-center ml-5">
+                <label class="block text-gray-700 text-sm font-bold mr-3" for="metricType">
+                    Type
+                </label>
+                <select class="px-3 py-2 w-auto rounded" id="inventoryMetricType" name="metricType">
+
+                    <option value="g">g</option>
+                    <option value="Kg">Kg</option>
+                    <option value="ml">ml</option>
+                    <option value="Ltr">Ltr</option>
+                    <option value="pieces">pieces</option>
+
+
+                </select>
+            </div>
         </div>
 
     </div>

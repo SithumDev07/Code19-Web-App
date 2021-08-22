@@ -12,7 +12,7 @@ $(document).ready(function() {
         
         var date = new Date();
         var currentDate = date.toISOString().substring(0,10);
-        console.log(currentDate);
+        // console.log(currentDate);
         
         const Manufacture = document.querySelector('#IngredientMFD')
         const Expire = document.querySelector('#IngredientEXP')
@@ -66,13 +66,14 @@ $(document).ready(function() {
             const quantity = $("#IngredientQuantity").val();
             const mfd = $("#IngredientMFD").val();
             const exp = $("#IngredientEXP").val();
+            const metric = $("#inventoryMetricType").val();
             const purchaseDate = $("#IngredientPurchase").val();
     
             toggleText = true;
             if(!(validateIngredients(name, cost, quantity, purchaseDate, mfd, exp, 'Ingredient'))) {
                 console.log('Not Validated');
-                console.log(paid);
-                console.log("Selected", selectedIdIngredient);
+                // console.log(paid);
+                // console.log("Selected", selectedIdIngredient);
                 $(".inventory-error-message").removeClass("hidden");
             } else {
                 $(".inventory-error-message").addClass("hidden");
@@ -85,6 +86,7 @@ $(document).ready(function() {
                 form_data.append('mfd', mfd);
                 form_data.append('exp', exp);
                 form_data.append('purchaseDate', purchaseDate);
+                form_data.append('metric', metric);
                 form_data.append('selectedIngredient', selectedIdIngredient);
                 $.ajax({
                     url: 'operations/add-new-ingredient.php',
