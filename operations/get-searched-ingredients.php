@@ -15,7 +15,27 @@ function Render($results)
                     <p class="text-xs text-gray-400"><?php echo $row['contact']; ?></p>
                     <p class="text-xs text-gray-400"><?php echo $row['email']; ?></p>
                 </div>
-                <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center"><?php echo ($row['remaining_units'] * 0.01) ?>Kg</h1>
+                <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center">
+                    <?php
+                    if ($row['type'] == 'g') {
+                        if ($row['remaining_units'] >= 1000) {
+                            echo ($row['remaining_units'] * 0.001) . "Kg";
+                        } else {
+                            echo ($row['remaining_units']) . "g";
+                        }
+                    } else if ($row['type'] == 'ml') {
+                        if ($row['remaining_units'] >= 1000) {
+                            echo ($row['remaining_units'] * 0.001) . "Ltr";
+                        } else {
+                            echo ($row['remaining_units']) . "ml";
+                        }
+                    } else if ($row['type'] == 'pieces') {
+                        echo ($row['remaining_units']) . "pcs";
+                    } else {
+                        echo ($row['remaining_units'] * 0.01);
+                    }
+                    ?>
+                </h1>
             </div>
 
             <div class="flex items-center">
@@ -51,16 +71,16 @@ if (isset($_POST['query'])) {
         $results = mysqli_query($conn, $sql);
         $message = "No Results Found For ID -" . $_POST['query'];
     } else if (filter_var($_POST['query'], FILTER_VALIDATE_EMAIL)) {
-        
+
         // ? search for MX Record
         // if (!checkdnsrr($domain, 'MX')) {
-            //     // domain is not valid
-            // }
-            
-            $sql = "select * from ingredient join (select sum(cost) as total, ingredient_id, supplier_id from supplier_ingredient group by ingredient_id) as purchase on ingredient.id = purchase.ingredient_id join (select name as supplier, email, id from supplier) as supplier on supplier.id = purchase.supplier_id join (select max(contact_no) as contact, id as supplier_contact_id from supplier_contact group by supplier_contact_id) as communication on communication.supplier_contact_id = supplier.id WHERE supplier.email = '" . $_POST['query'] ."';";
-            $results = mysqli_query($conn, $sql);
-            $message = "No Results Found For Email - " . $_POST['query'];
-        } else if (is_numeric($_POST['query']) && strlen($_POST['query']) == 10) {
+        //     // domain is not valid
+        // }
+
+        $sql = "select * from ingredient join (select sum(cost) as total, ingredient_id, supplier_id from supplier_ingredient group by ingredient_id) as purchase on ingredient.id = purchase.ingredient_id join (select name as supplier, email, id from supplier) as supplier on supplier.id = purchase.supplier_id join (select max(contact_no) as contact, id as supplier_contact_id from supplier_contact group by supplier_contact_id) as communication on communication.supplier_contact_id = supplier.id WHERE supplier.email = '" . $_POST['query'] . "';";
+        $results = mysqli_query($conn, $sql);
+        $message = "No Results Found For Email - " . $_POST['query'];
+    } else if (is_numeric($_POST['query']) && strlen($_POST['query']) == 10) {
         $sql = "select * from ingredient join (select sum(cost) as total, ingredient_id, supplier_id from supplier_ingredient group by ingredient_id) as purchase on ingredient.id = purchase.ingredient_id join (select name as supplier, email, id from supplier) as supplier on supplier.id = purchase.supplier_id join (select max(contact_no) as contact, id as supplier_contact_id from supplier_contact group by supplier_contact_id) as communication on communication.supplier_contact_id = supplier.id WHERE communication.contact = '" . $_POST['query'] . "';";
         $results = mysqli_query($conn, $sql);
         $message = "No Results Found For Contact Number - " . $_POST['query'];

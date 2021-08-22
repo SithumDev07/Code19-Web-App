@@ -191,7 +191,7 @@ if (!isset($_SESSION['sessionId'])) {
             transform: rotate(45deg);
         }
 
-        .slider::before{
+        .slider::before {
             position: absolute;
             content: "";
             width: 2rem;
@@ -204,10 +204,11 @@ if (!isset($_SESSION['sessionId'])) {
             border-radius: 50%;
         }
 
-        .toggle-switch:checked + .slider {
+        .toggle-switch:checked+.slider {
             background-color: rgba(16, 185, 129, 1);
         }
-        .toggle-switch:checked + .slider::before {
+
+        .toggle-switch:checked+.slider::before {
             left: unset;
             right: 0.3rem;
         }
@@ -1069,7 +1070,28 @@ if (!isset($_SESSION['sessionId'])) {
                                                 <p class="text-xs text-gray-400"><?php echo $row['contact']; ?></p>
                                                 <p class="text-xs text-gray-400"><?php echo $row['email']; ?></p>
                                             </div>
-                                            <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center"><?php echo ($row['remaining_units']*0.01) ?>Kg</h1>
+                                            <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center">
+                                                <?php
+                                                if ($row['type'] == 'g') {
+                                                    if ($row['remaining_units'] >= 1000) {
+                                                        echo ($row['remaining_units'] * 0.001) . "Kg";
+                                                    } else {
+                                                        echo ($row['remaining_units']) . "g";
+                                                    }
+                                                } else if ($row['type'] == 'ml') {
+                                                    if ($row['remaining_units'] >= 1000) {
+                                                        echo ($row['remaining_units'] * 0.001) . "Ltr";
+                                                    } else {
+                                                        echo ($row['remaining_units']) . "ml";
+                                                    }
+                                                } else if ($row['type'] == 'pieces') {
+                                                    echo ($row['remaining_units']) . "pcs";
+                                                } else {
+                                                    echo ($row['remaining_units'] * 0.01);
+                                                }
+                                                ?>
+                                            </h1>
+
                                         </div>
 
                                         <div class="flex items-center">
@@ -1091,13 +1113,13 @@ if (!isset($_SESSION['sessionId'])) {
                                         <div class="absolute bottom-0 w-full h-1 bg-yellow-400 left-0"></div>
                                     </div>
 
-                            <?php
+                                <?php
 
                                 }
                             } else {
-                                ?> 
-                                    <h1 class="text-center text-6xl font-semibold text-gray-400 w-full mt-6">No Results Found</h1>
-                                <?php
+                                ?>
+                                <h1 class="text-center text-6xl font-semibold text-gray-400 w-full mt-6">No Results Found</h1>
+                            <?php
                             }
 
                             ?>
