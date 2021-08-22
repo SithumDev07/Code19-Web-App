@@ -3,13 +3,13 @@ $(document).ready(function() {
     $("#AddKitchen").click(function() {
         
         $(".kitchen-form-container").load("operations/get-kitchen-data.php", {}, function() {
-            InventoryLisener();
+            KitchenLisener();
         });
     })
 
     
 
-    window.InventoryLisener = function () {
+    window.KitchenLisener = function () {
 
         
         // ListenOnInputChangesInventory(document.querySelector('#IngredientName'), 'Ingredient');
@@ -39,9 +39,9 @@ $(document).ready(function() {
         
 
         $("#searchIngredientNames").keyup(function() {
+            
             let value = $(this).val();
             if(value !== '') {
-                // console.log('Trigger Here');
                 $(".ingredient-list-food ").load("operations/get-required-ingredients-exists.php", {
                     query: value,
                     alreadyAdded: JSON.stringify(selectedIdIngredients)
@@ -52,23 +52,11 @@ $(document).ready(function() {
                     selctedIngredients(ingredientResults);
                     // selectedIdIngredients = selectedIdIngredients.concat(testArray);
                 });
-            } else {
-                // console.log('Trigger Here True');
-                // $(".ingredient-list-food ").load("operations/get-required-ingredients-exists-all.php", {
-                //     query: 'unset',
-                // }, function() {
-                //     const ingredientResults = document.querySelectorAll('.resulted-ingredients');
-                //     // selectedIdIngredients = selctedIngredients(ingredientResults);
-                //     selctedIngredients(ingredientResults);
-                // });
             }
-
-            // uniq = [...new Set(renderSelected)];
             
         })
 
         $("#FoodInsert").click(function() {
-            // console.log('Triggering');
             selectedIdIngredients.forEach((ele, index) => {
                 console.log("Value : ", ele);
             })
@@ -133,49 +121,70 @@ $(document).ready(function() {
         //             }
         //         });
         //     }
+
         window.selctedIngredients = function (ingredientResults) {
-            // let selectedIngredientArray = [];
             let added = false;
+            let addedId = false;
             ingredientResults.forEach((ele, index) => {
                 $(ele).click(function() {
+                    document.querySelector('.selectedText').classList.remove('hidden');
+                    document.querySelector('.selectedText').classList.add('flex');
                     ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
                     if(!(ele.querySelector('.isSelectedIngredient').classList.contains('hidden'))) {
-                        // selectedIdIngredients.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                        
                         let alreadyAdded = renderSelected.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
                         if(alreadyAdded === undefined){
                             renderSelected.push(ele)
                             added = true;
                         }
-                        console.log(alreadyAdded);
+                        // console.log(alreadyAdded);
                     } else {
-                        // selectedIdIngredients.pop();
-                        if(added) {
-                            renderSelected.pop();
+                        
                             added = false;
-                        }
+                            addedId = true;
+                            // }
+
+                            for(var i = 0; i < renderSelected.length; i++) {
+                                if(renderSelected[i].querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML) {
+                                    renderSelected.splice(i, 1);
+                                }
+                            }
+
+
+                            for(var i = 0; i < selectedIdIngredients.length; i++) {
+                                if(selectedIdIngredients[i] == ele.querySelector('.selectedIngredientId').innerHTML) {
+                                    selectedIdIngredients.splice(i, 1);
+                                }
+                            }
+
+                            ele.classList.remove('bg-green-400')
+                            ele.classList.add('bg-red-400')
+                            console.log('Popping \n');
+                        // }
+
                     }
 
                     
-                    // unique = renderSelected.filter((item, i, ar) => ar.indexOf(item) === i);
-                    
                     renderSelected.forEach((ele, index) => {
-                        document.querySelector('.ingredient-list-food-selected').appendChild(ele);
 
+                        document.querySelector('.ingredient-list-food-selected').appendChild(ele);
 
                         let alreadyAdded = selectedIdIngredients.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
                         if(alreadyAdded === undefined) {
-                            selectedIdIngredients.push(ele.querySelector('.selectedIngredientId').innerHTML)
+                            console.log('Pushing \n');
+                            ele.classList.remove('bg-red-400')
+                            ele.classList.add('bg-green-400')
+                            selectedIdIngredients.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                            addedId = false;
                         }
-                        // console.log(ele.querySelector('.selectedIngredientId').innerHTML);
+                        
+                        if(addedId) {
+                            // selectedIdIngredients.pop();
+                        }
                     })
                 })
-                // selectedIngredientArray.forEach((ele, index) => {
-                //     console.log(ele);
-                // })
             });
-            // return selectedIngredientArray;
         }
-        // })
     }
 })
 

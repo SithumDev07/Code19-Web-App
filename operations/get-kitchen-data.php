@@ -93,7 +93,7 @@
         </div>
     </div>
 
-    <div class="flex flex-col my-5 px-12">
+    <div class="flex-col my-5 px-12 hidden selectedText">
         <h2 class="text-3xl text-gray-400 font-semibold mb-4">Selected</h2>
         <div class="ingredient-list-food-selected flex flex-wrap">
             <!-- <button class="flex px-4 py-3 rounded-full bg-green-400 text-gray-100 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
@@ -105,16 +105,39 @@
         </div>
     </div>
 
+    <div class="flex flex-col my-5 px-12">
+        <h2 class="text-3xl text-gray-400 font-semibold mb-4">Select Toppings</h2>
+        <div class="flex items-center">
+            <input type="text" placeholder="Ingredient Name" class=" flex-1 mb-3 rounded-md bg-transparent" id="SearchToppingNames" name="name">
+            <h3 class="text-xl text-gray-400 font-semibold mx-3">Or</h3>
+            <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="ToppingAdd" type="submit" name="food-submit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Create
+            </button>
+        </div>
+
+        <div class="toppings-list-food flex flex-wrap">
+            <!-- <button class="flex px-4 py-3 rounded-full bg-green-400 text-gray-100 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                All Purpose Flour
+            </button> -->
+        </div>
+    </div>
+
     <div class="flex-1 mb-24">
-    <div class="flex justify-end items-center">
-                <p class="text-red-500 font-semibold text-sm hidden inventory-error-message">Oops. It seems to be some inputs are not filled.</p>
-                <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="FoodInsert" type="submit" name="food-submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Add
-                </button>
-            </div>
+        <div class="flex justify-end items-center">
+            <p class="text-red-500 font-semibold text-sm hidden inventory-error-message">Oops. It seems to be some inputs are not filled.</p>
+            <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="FoodInsert" type="submit" name="food-submit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Add
+            </button>
+        </div>
         <div class="flex flex-col mx-5 mb-10">
 
             <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="birthday">
