@@ -94,6 +94,15 @@ if (!isset($_SESSION['sessionId'])) {
             background-color: rgba(30, 30, 30, 0.3);
             border-radius: 1.2em;
         }
+        .add-kitchen-form::-webkit-scrollbar {
+            width: 0.6em;
+            border-radius: 50%;
+        }
+
+        .add-kitchen-form::-webkit-scrollbar-thumb {
+            background-color: rgba(30, 30, 30, 0.3);
+            border-radius: 1.2em;
+        }
 
         html {
             scroll-behavior: smooth;
@@ -1123,59 +1132,97 @@ if (!isset($_SESSION['sessionId'])) {
                             }
 
                             ?>
-
-
-
-                            <!-- End of card -->
-
-                            <!-- Single Card -->
-                            <!-- <div class="card-delivery mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-
-                                <div class="flex items-center flex-1 mb-2">
-                                    <div class="">
-                                        <h1 class="text-gray-600 font-semibold">Mozeralla Cheese</h1>
-                                        <p class="text-sm text-gray-500 font-bold my-1">Highland Farms</p>
-                                        <p class="text-xs text-gray-400">+94 31 2 212 545</p>
-                                        <p class="text-xs text-gray-400">kelaniya@highland.com</p>
-                                    </div>
-                                    <h1 class="flex-1 m-3 text-3xl font-semibold text-gray-600 text-center">100Kg</h1>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <h1 class="text-gray-500 font-semibold flex-1">Previous Stock</h1>
-                                    <p class="text-gray-500 font-semibold">Yesterday</p>
-                                </div>
-                                <div class="flex items-center mt-2 justify-between">
-                                    <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        5Kg
-                                    </button>
-
-                                    <div class="text-gray-500 text-xs flex items-center">
-                                        Average Consumtion
-                                    </div>
-                                </div>
-                                <div class="absolute bottom-0 w-full h-1 bg-green-400 left-0"></div>
-                            </div> -->
-
-                            <!-- End of card -->
                         </div>
                     </div>
                 </div>
 
+
+                <!-- Kitchen Form -->
+                <div class="kitchen-form-container glass rounded-t-3xl absolute top-24 left-0 z-base-search right-0 hidden h-full w-full">
+                    <!-- <div class="w-full h-full p-10 flex-col add-supplier-form hidden overflow-y-auto">
+                            <div class="flex items-center">
+                                <div class="flex-1 flex flex-col px-12">
+                                    <input type="text" placeholder="Full Name" class="mb-5 flex-1 rounded-md bg-gray-50" id="crewName" name="name">
+                                    <input type="email" placeholder="Email (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewEmail" name="email">
+                                    <textarea name="address" id="crewAddress" class="mb-5 appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-50 rounded-md transform transition-colors duration-300" placeholder="Address" id="crewAddress" name="address"></textarea>
+                                    
+                                
+                                </div>
+                                <div class="w-48 h-48 rounded-full overflow-hidden relative cursor-pointer profile-picture p-1 border-2 border-blue-600 CrewImageContainer shadow-2xl">
+                                    <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl z-10"></i>
+                                    <img id="crewUploadedProfile" class="opacity-80 rounded-full w-full h-full object-cover" src="./photo_uploads/users/Mayuko.jpg" alt="Crew Profile">
+                                    <input type="file" name="profileUpload" id="crewUploadProfile">
+                                </div>
+                            </div>
+                            <div class="mb-24 mt-5">
+                                    <div class="flex items-center">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="birthday">
+                                            Date of Birth
+                                        </label>
+                                        <input class="shadow appearance-none border rounded flex-1 mx-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5" id="crewDOB" type="date" name="birthday" required>
+                                        
+                                        <input type="number" placeholder="Personal Number" class="mx-4 mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewPersonalNumber" name="mobile">
+                                        <input type="number" placeholder="Land Number (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewLandLine" name="landline">
+                                    </div>
+
+                                    <div class="flex items-center mb-5">
+                                        <div class="flex flex-col">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="position">
+                                                Position
+                                            </label>
+                                            <select class="px-3 py-2 w-28 rounded" id="crewPosition" name="position">
+                                                <option value="Chef">Chef</option>
+                                                <option value="Helper">Helper</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="flex flex-col mx-5">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="shift">
+                                                Shift
+                                            </label>
+                                            <select class="px-3 py-2 w-28 rounded" id="crewShift" name="shift">
+                                                <option value="Day">Day</option>
+                                                <option value="Night">Night</option>
+                                            </select>
+                                        </div>
+
+                                        <input type="number" placeholder="Salary" class="-mb-7 mx-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewSalary" name="salary">
+
+                                        <div class="flex flex-col">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="payDate">
+                                                Pay Date
+                                            </label>
+                                            <div class="flex items-end">
+                                                <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="crewPayDate" placeholder="Day" type="number" name="payDate" required>
+                                                <p class="ml-2 text-gray-500">in every month</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="flex justify-end items-center mb-48">
+                                        <p class="text-red-500 font-semibold text-sm hidden crew-error-message">Oops. It seems to be some inputs are not valid.</p>
+                                        <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="InsertCrew" type="submit" name="crew-submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            Add
+                                        </button>
+                                    </div>
+                            </div>
+                        </div> -->
+                </div>
 
                 <!-- Kitchen -->
                 <div class="moving-part Kitchen glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerKitchen">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">👩‍🍳 Kitchen</h1>
 
-                        <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95" id="AddKitchen">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 transformin-icon transform transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            Add Food
+                            <h3 class="change-text-kitchen">Add Food</h3>
                         </button>
                     </div>
 
@@ -1922,6 +1969,9 @@ if (!isset($_SESSION['sessionId'])) {
     <script src="./scripts/add-ingredient.js"></script>
     <script src="./scripts/deleting-ingredients.js"></script>
     <script src="./scripts/inventory-search.js"></script>
+
+    <!-- Foods -->
+    <script src="./scripts/add-new-food.js"></script>
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
