@@ -43,8 +43,8 @@ $resultCheck = mysqli_num_rows($results);
                 </div>
             </div>
 
-            <p class="text-xs text-gray-400 my-1">Description</p>
-            <h1 class="text-gray-600 font-semibold flex-1">Food Name</h1>
+            <p class="text-xs text-gray-400 my-1 card-description">Description</p>
+            <h1 class="text-gray-600 font-semibold flex-1 card-foodName">Food Name</h1>
 
             <div class="flex items-center mt-2 justify-between">
                 <button class="text-green-500 bg-green-200 px-2 py-2 rounded-full flex items-center text-xs">
@@ -54,7 +54,8 @@ $resultCheck = mysqli_num_rows($results);
                     Low
                 </button>
 
-                <div class="text-gray-500 text-xs flex items-center">
+                <div class="text-gray-500 text-xs flex flex-col items-end">
+                    <h1 class="text-gray-600 font-semibold flex-1 card-foodName text-xl card-basicPrice">Rs.180.00</h1>
                     Disappearing Status
                 </div>
             </div>
@@ -103,7 +104,7 @@ $resultCheck = mysqli_num_rows($results);
     </div>
 
     <div class="flex-col my-5 px-12 hidden selectedText">
-        <h2 class="text-3xl text-gray-400 font-semibold mb-4">Selected</h2>
+        <h2 class="text-2xl text-gray-400 font-semibold mb-4">Selected</h2>
         <div class="ingredient-list-food-selected flex flex-wrap">
             <!-- <button class="flex px-4 py-3 rounded-full bg-green-400 text-gray-100 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -218,6 +219,19 @@ $resultCheck = mysqli_num_rows($results);
     <!-- // ? Topping List -->
     <div class="flex-col my-5 px-12 selectedTextToppingLast">
         <div class="topping-list flex flex-wrap">
+            <!-- <button class="flex px-4 py-3 rounded-full bg-green-400 text-gray-100 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                All Purpose Flour
+            </button> -->
+        </div>
+    </div>
+
+    <!-- // ? Selected Toppings List -->
+    <div class="flex-col my-5 px-12 hidden selectedTextToppinss">
+        <h2 class="text-2xl text-gray-400 font-semibold mb-4">Selected Toppings</h2>
+        <div class="toppingss-list-food-selected flex flex-wrap">
             <!-- <button class="flex px-4 py-3 rounded-full bg-green-400 text-gray-100 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />

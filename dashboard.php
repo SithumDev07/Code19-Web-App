@@ -176,8 +176,21 @@ if (!isset($_SESSION['sessionId'])) {
             left: 0;
             cursor: pointer;
         }
+        #foodPhotoUpload {
+            position: absolute;
+            top: 0;
+            z-index: 10;
+            width: 80rem;
+            height: 64rem;
+            opacity: 0;
+            left: 0;
+            cursor: pointer;
+        }
 
         #crewUploadProfile::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+        #foodPhotoUpload::-webkit-file-upload-button {
             visibility: hidden;
         }
 

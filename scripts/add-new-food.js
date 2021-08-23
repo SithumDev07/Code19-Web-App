@@ -41,10 +41,16 @@ $(document).ready(function() {
         let selectingElement = []
 
         let selectedToppings = [];
+
+        let renderListToppings = [];
+        let selectedToppingIds = [];
         
 
         $("#searchIngredientNames").keyup(function() {
-            
+            document.querySelector('.selectedTextToppingLast').classList.add('hidden');
+            document.querySelector('.selectedTextToppingLast').classList.remove('flex');
+            document.querySelector('.ingredient-list-food').classList.remove('hidden');
+            document.querySelector('.ingredient-list-food').classList.add('flex');
             let value = $(this).val();
             if(value !== '') {
                 $(".ingredient-list-food ").load("operations/get-required-ingredients-exists.php", {
@@ -85,8 +91,10 @@ $(document).ready(function() {
 
         // ? Search Topping Names
         $("#SearchToppingNames").keyup(function() {
-            document.querySelector('.ingredient-list-food').classList.toggle('hidden');
-            document.querySelector('.ingredient-list-food').classList.toggle('flex');
+            document.querySelector('.ingredient-list-food').classList.add('hidden');
+            document.querySelector('.ingredient-list-food').classList.remove('flex');
+            document.querySelector('.selectedTextToppingLast').classList.remove('hidden');
+            document.querySelector('.selectedTextToppingLast').classList.add('flex');
             let value = $(this).val();
             if(value !== '') {
                 console.log(value);
@@ -95,19 +103,61 @@ $(document).ready(function() {
                     alreadyAdded: JSON.stringify(selectedToppings)
                 }, function() {
                     const parentToppingResults = document.querySelector('.topping-list');
-                    const ingredientResultsForToppings = parentToppingResults.querySelectorAll('.resulted-ingredients');
-                    // selectedIdIngredients = selctedIngredients(ingredientResults);
-                    // selctedIngredients(ingredientResults);
-                    // selectedIngredientonTopping(ingredientResultsForToppings);
-                    // selectedIdIngredients = selectedIdIngredients.concat(testArray);
+                    const ResultsForToppings = parentToppingResults.querySelectorAll('.resulted-ingredients');
+                    selctedToppings(ResultsForToppings);
                 });
             }
             
         })
 
+        // ? Food Name render on card
+        $("#foodName").keyup(function() {
+        
+            let value = $(this).val();
+            if(value !== '') {
+                document.querySelector('.card-foodName').innerHTML = value;
+            } else {
+                document.querySelector('.card-foodName').innerHTML = 'Sample Food Name';
+            }
+        })
+
+        // ? Description render on card
+        $("#foodDescription").keyup(function() {
+        
+            let value = $(this).val();
+            if(value !== '') {
+                document.querySelector('.card-description').innerHTML = value;
+            } else {
+                document.querySelector('.card-description').innerHTML = 'Sample Food Name';
+            }
+        })
+
+
+        // ? Unit Price render on card
+        $("#unitPriceFood").keyup(function() {
+        
+            let value = $(this).val();
+            if(value !== '') {
+                if(value.includes('.')) {
+                    let numberArray = value.split('.');
+                    let decimal = numberArray.shift();
+                    let points = numberArray.join('.');
+                    document.querySelector('.card-basicPrice').innerHTML = "Rs." + decimal + "." + points;
+                } else {
+                    document.querySelector('.card-basicPrice').innerHTML = "Rs." + value + ".00";
+                }
+            } else {
+                document.querySelector('.card-basicPrice').innerHTML = 'Rs.0.00';
+            }
+        })
+
         $("#FoodInsert").click(function() {
             selectedIdIngredients.forEach((ele, index) => {
-                console.log("Value : ", ele);
+                console.log("I Id -  : ", ele);
+            })
+
+            selectedToppingIds.forEach((ele, index) => {
+                console.log('T ID - ', ele);
             })
             console.log("\n");
             
@@ -210,6 +260,13 @@ $(document).ready(function() {
         ListenOnInputChangesTopping(document.querySelector('#CreateToppingName'));
         ListenOnInputChangesTopping(document.querySelector('#ToppingPrice'));
         ListenOnInputChangesTopping(document.querySelector('#IngredientQuantityTopping'));
+
+
+        // ? Food Details
+        ListenOnInputChangesFood(document.querySelector('#foodName'))
+        ListenOnInputChangesFood(document.querySelector('#foodDescription'))
+        ListenOnInputChangesFood(document.querySelector('#unitPriceFood'))
+        ListenOnInputChangesFood(document.querySelector('#foodPrepTime'))
 
         let success = false;
         $("#AddtoListIngredient").click(function() {
@@ -350,6 +407,73 @@ $(document).ready(function() {
         //         });
         //     }
 
+
+        // ? Interacting with toppings
+        window.selctedToppings = function (toppingResults) {
+            let added = false;
+            let addedId = false;
+            toppingResults.forEach((ele, index) => {
+                $(ele).click(function() {
+                    document.querySelector('.selectedTextToppinss').classList.remove('hidden');
+                    document.querySelector('.selectedTextToppinss').classList.add('flex');
+                    ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
+                    if(!(ele.querySelector('.isSelectedIngredient').classList.contains('hidden'))) {
+                        
+                        let alreadyAdded = renderListToppings.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
+                        if(alreadyAdded === undefined){
+                            renderListToppings.push(ele)
+                            added = true;
+                        }
+                        // console.log(alreadyAdded);
+                    } else {
+
+                            added = false;
+                            addedId = true;
+                            // }
+
+                            for(var i = 0; i < renderListToppings.length; i++) {
+                                if(renderListToppings[i].querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML) {
+                                    renderListToppings.splice(i, 1);
+                                }
+                            }
+
+
+                            for(var i = 0; i < selectedToppingIds.length; i++) {
+                                if(selectedIdIngredients[i] == ele.querySelector('.selectedIngredientId').innerHTML) {
+                                    selectedToppingIds.splice(i, 1);
+                                }
+                            }
+
+                            ele.classList.remove('bg-green-400')
+                            ele.classList.add('bg-red-400')
+                            console.log('Popping \n');
+                        // }
+
+                    }
+
+                    
+                    renderListToppings.forEach((ele, index) => {
+
+                        document.querySelector('.toppingss-list-food-selected').appendChild(ele);
+
+                        let alreadyAdded = selectedToppingIds.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
+                        if(alreadyAdded === undefined) {
+                            console.log('Pushing \n');
+                            ele.classList.remove('bg-red-400')
+                            ele.classList.add('bg-green-400')
+                            selectedToppingIds.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                            addedId = false;
+                        }
+                        
+                        if(addedId) {
+                            // selectedIdIngredients.pop();
+                        }
+                    })
+                })
+            });
+        }
+
+
         window.selctedIngredients = function (ingredientResults) {
             let added = false;
             let addedId = false;
@@ -484,6 +608,34 @@ $(document).ready(function() {
                 })
             });
         }
+
+
+
+        
+        $(function(){
+       
+            $('#foodPhotoUpload').change(function(){
+                var input = this;
+                var url = $(this).val();
+                var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+                if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) 
+                 {
+                    var reader = new FileReader();
+            
+                    reader.onload = function (e) {
+                        $(".foodImageContainer").removeClass("border-blue-600")
+                        $(".foodImageContainer").removeClass("border-red-500")
+                        $(".foodImageContainer").addClass("border-green-500")
+                       $('#foodUploadedPhoto').attr('src', e.target.result);
+                    }
+                   reader.readAsDataURL(input.files[0]);
+                }
+                else
+                {
+                  $('#foodUploadedPhoto').attr('src', '/assets/no_preview.png');
+                }
+              });
+        });
     }
 })
 
@@ -593,6 +745,21 @@ window.ListenOnInputChangesTopping = function (ele) {
         }else if(ele.id !== `CreateToppingName` && ele.value <= 0 || ele.value.length === 0) {
             setErrorOnInputs(ele,true)
         }else if(ele.id !== `CreateToppingName` && ele.value === 0) {
+            setErrorOnInputs(ele,true)
+        }else {
+            setErrorOnInputs(ele,false)
+        }
+    })
+}
+
+window.ListenOnInputChangesFood = function (ele) {
+    ele.addEventListener('keyup', () => {
+        console.log(ele.value);
+        if(ele.id === `foodName` || ele.id === `foodDescription` && validateSpecialCharacters(ele.value)) {
+            setErrorOnInputs(ele,true)
+        }else if(ele.id !== `foodName` && ele.id !== `foodDescription` && ele.value <= 0 || ele.value.length === 0) {
+            setErrorOnInputs(ele,true)
+        }else if(ele.id !== `foodName` && ele.id !== `foodDescription` && ele.value === 0) {
             setErrorOnInputs(ele,true)
         }else {
             setErrorOnInputs(ele,false)
