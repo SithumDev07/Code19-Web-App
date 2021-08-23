@@ -40,24 +40,26 @@ if (isset($_POST['toppingName'])) {
 
             // ? Inserting into ingredient_filling
 
-            // $sql = "INSERT INTO ingredient_filling(ingredient_id, filling_id, no_of_units) VALUES (?, ?, ?);";
+            $sql = "INSERT INTO ingredient_filling(ingredient_id, filling_id, no_of_units) VALUES (?, ?, ?);";
 
-            // if (!mysqli_stmt_prepare($statement, $sql)) {
-            //     echo "sql error";
-            //     exit();
-            // } else {
+            if (!mysqli_stmt_prepare($statement, $sql)) {
+                echo "sql error";
+                exit();
+            } else {
 
+                for ($i=0; $i < count($ingredientIds); $i++) { 
+                    $bindFailed = mysqli_stmt_bind_param($statement, 'iii', $ingredientIds[$i], $newToppingIdGenerated, $quantityList[$i]);
+    
+                    if ($bindFailed === false) {
+                        echo htmlspecialchars($statement->error);
+                        exit();
+                    }
+                    mysqli_stmt_execute($statement);
+                }
 
-            //     $bindFailed = mysqli_stmt_bind_param($statement, 'iii', $supplier, $newToppingIdGenerated, $cost);
+            }
 
-            //     if ($bindFailed === false) {
-            //         echo htmlspecialchars($statement->error);
-            //         exit();
-            //     }
-            //     mysqli_stmt_execute($statement);
-            // }
-
-            echo "success $newToppingIdGenerated";
+            echo "success all $newToppingIdGenerated";
             exit();
         }
     }
