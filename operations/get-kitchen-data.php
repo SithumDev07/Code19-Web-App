@@ -206,7 +206,6 @@ $resultCheck = mysqli_num_rows($results);
 
 
         <div class="flex justify-end items-center mt-5">
-            <p class="text-red-500 font-semibold text-sm hidden topping-error-message">Oops. It seems to be some inputs are not filled.</p>
             <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="InsertTopping" type="submit" name="topping-submit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -241,42 +240,15 @@ $resultCheck = mysqli_num_rows($results);
         </div>
     </div>
 
-    <div class="flex-1 mb-24 mt-6">
+    <div class="flex-1 mb-56 mt-3 px-12">
         <div class="flex justify-end items-center">
-            <p class="text-red-500 font-semibold text-sm hidden inventory-error-message">Oops. It seems to be some inputs are not filled.</p>
+            <p class="text-red-500 font-semibold text-sm hidden food-error-message">Oops. It seems to be some inputs are not filled.</p>
             <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="FoodInsert" type="submit" name="food-submit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Add
+                Publish
             </button>
         </div>
-        <div class="flex flex-col mx-5 mb-10">
-
-            <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="birthday">
-                Manufacturing date
-            </label>
-            <input type="date" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientMFD" name="mfd">
-            <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="birthday">
-                Expiring date
-            </label>
-            <input type="date" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientEXP" name="exp">
-            <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="birthday">
-                Purchase date
-            </label>
-            <input type="date" class="mx-4 mb-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="IngredientPurchase" name="purchaseDate">
-
-
-            <!-- <div class="flex justify-end items-center">
-                <p class="text-red-500 font-semibold text-sm hidden inventory-error-message">Oops. It seems to be some inputs are not filled.</p>
-                <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="FoodInsert" type="submit" name="food-submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Add
-                </button>
-            </div> -->
-        </div>
-
     </div>
 </div>

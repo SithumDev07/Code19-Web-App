@@ -11,12 +11,6 @@ $(document).ready(function() {
 
     window.KitchenLisener = function () {
 
-        
-        // ListenOnInputChangesInventory(document.querySelector('#IngredientName'), 'Ingredient');
-        // ListenOnInputChangesInventory(document.querySelector('#IngredientCost'), 'Ingredient');
-        // ListenOnInputChangesInventory(document.querySelector('#IngredientQuantity'), 'Ingredient');
-
-        
 
         document.querySelector('.transformin-icon').classList.toggle('translate-icon');
         if(toggleText) {
@@ -160,23 +154,91 @@ $(document).ready(function() {
                 console.log('T ID - ', ele);
             })
             console.log("\n");
+
+            if(selectedIdIngredients.length == 0 && selectedToppingIds.length == 0) {
+                setErrorOnInputs(document.querySelector('#searchIngredientNames'),true);
+                setErrorOnInputs(document.querySelector('#SearchToppingNames'),true);
+            } else {
+                validateFoodDetils(document.querySelector('#foodName'));
+                validateFoodDetils(document.querySelector('#foodDescription'));
+                validateFoodDetils(document.querySelector('#unitPriceFood'));
+                validateFoodDetils(document.querySelector('#foodPrepTime'));
+                if(foodInputSuccess) {
+                    console.log("Done");
+
+            
+                    const form_data = new FormData();
+                    const image = $("#foodPhotoUpload")[0].files;
+                    console.log(image[0]);
+            
+                    const foodName = $("#foodName").val();
+                    const foodDescription = $("#foodDescription").val();
+                    const foodBasicPrice = $("#unitPriceFood").val();
+                    const foodPrepTime = $("#foodPrepTime").val();
+                    
+                    $(".food-error-message").addClass("hidden");
+        
+                    form_data.append('foodname', foodName);
+                    form_data.append('fooddescription', foodDescription);
+                    form_data.append('basicprice', foodBasicPrice);
+                    form_data.append('preptime', foodPrepTime);
+                    form_data.append('image', image[0]);
+                    form_data.append('ingredientIds', JSON.stringify(selectedIdIngredients));
+                    form_data.append('toppingIds', JSON.stringify(selectedToppingIds));
+                    
+                    $.ajax({
+                        url: 'operations/add-new-food.php',
+                        type: 'POST',
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            alert(response);
+                            // ? After Success
+                            alert(response);
+                            // console.log(response);
+                            document.querySelector('.transformin-icon').classList.toggle('translate-icon');
+                            if(toggleText) {
+                                document.querySelector('.change-text-kitchen').innerHTML = "Cancel";
+                            } else {
+                                document.querySelector('.change-text-kitchen').innerHTML = "Add Food";
+                            }
+                            toggleText = !toggleText;
+                            document.querySelector('.kitchen-form-container').classList.toggle('hidden');
+                            document.querySelector('.kitchen-form-container').classList.toggle('flex');
+                            location.reload();
+                        }
+                    });
+                    } else {
+                        $(".food-error-message").removeClass("hidden");
+                    }
+            }
             
         })
+
+        let foodInputSuccess = false;
+        function validateFoodDetils(ele) {
+            if(ele.id === `foodName` || ele.id === `foodDescription` && ele.value === '') {
+                setErrorOnInputs(ele,true)
+                foodInputSuccess = false;
+            }else if(ele.id !== `foodName` && ele.id !== `foodDescription` && ele.value <= 0 || ele.value.length === 0) {
+                setErrorOnInputs(ele,true)
+                foodInputSuccess = false;
+            }else if(ele.id !== `foodName` && ele.id !== `foodDescription` && ele.value === 0) {
+                setErrorOnInputs(ele,true)
+                foodInputSuccess = false;
+            }else {
+                setErrorOnInputs(ele,false)
+                foodInputSuccess = true;
+            }
+        }
 
 
         // ? Creating Topping
         let successTopping = false;
         $("#InsertTopping").click(function(e) {
             e.preventDefault();
-            selectedIdIngredientsToppings.forEach((ele, index) => {
-                console.log("ID : ", ele);
-            })
-            
-            quantityList.forEach((ele, index) => {
-                console.log("Quantity : ", ele);
-            })
-            console.log("\n");
-
+           
 
             if(quantityList.length == 0 && selectedIdIngredientsToppings.length == 0) {
                 setErrorOnInputs(document.querySelector('#SelectedIngredientNameDisabled'),true);
@@ -347,66 +409,7 @@ $(document).ready(function() {
             }
         }
 
-        
-
-
-        // $("#InsertIngredient").click(function(e) {
-        //     e.preventDefault();
-
-        //     // const form = document.querySelector('#crew-form');
-        //     const form_data = new FormData();
     
-        //     const name = $("#IngredientName").val();
-        //     const supplier = $("#inventorySupplier").val();
-        //     const cost = $("#IngredientCost").val();
-        //     const paid = $("#isPaidInventory").is(":checked");
-        //     const quantity = $("#IngredientQuantity").val();
-        //     const mfd = $("#IngredientMFD").val();
-        //     const exp = $("#IngredientEXP").val();
-        //     const metric = $("#inventoryMetricType").val();
-        //     const purchaseDate = $("#IngredientPurchase").val();
-    
-        //     toggleText = true;
-        //     if(!(validateIngredients(name, cost, quantity, purchaseDate, mfd, exp, 'Ingredient'))) {
-        //         console.log('Not Validated');
-        //         // console.log(paid);
-        //         // console.log("Selected", selectedIdIngredient);
-        //         $(".inventory-error-message").removeClass("hidden");
-        //     } else {
-        //         $(".inventory-error-message").addClass("hidden");
-    
-        //         form_data.append('name', name);
-        //         form_data.append('supplier', supplier);
-        //         form_data.append('cost', cost);
-        //         form_data.append('paid', paid);
-        //         form_data.append('quantity', quantity);
-        //         form_data.append('mfd', mfd);
-        //         form_data.append('exp', exp);
-        //         form_data.append('purchaseDate', purchaseDate);
-        //         form_data.append('metric', metric);
-        //         form_data.append('selectedIngredient', selectedIdIngredient);
-        //         $.ajax({
-        //             url: 'operations/add-new-ingredient.php',
-        //             type: 'POST',
-        //             data: form_data,
-        //             contentType: false,
-        //             processData: false,
-        //             success: function(response) {
-        //                 alert(response);
-        //                 document.querySelector('.transformin-icon').classList.toggle('translate-icon');
-        //                 if(toggleText) {
-        //                     document.querySelector('.change-text-inventory').innerHTML = "Cancel";
-        //                 } else {
-        //                     document.querySelector('.change-text-inventory').innerHTML = "Add Ingredient";
-        //                 }
-        //                 toggleText = !toggleText;
-        //                 document.querySelector('.inventory-form-container').classList.toggle('hidden');
-        //                 document.querySelector('.inventory-form-container').classList.toggle('flex');
-        //                 location.reload();
-        //             }
-        //         });
-        //     }
-
 
         // ? Interacting with toppings
         window.selctedToppings = function (toppingResults) {
@@ -424,7 +427,6 @@ $(document).ready(function() {
                             renderListToppings.push(ele)
                             added = true;
                         }
-                        // console.log(alreadyAdded);
                     } else {
 
                             added = false;
@@ -446,7 +448,6 @@ $(document).ready(function() {
 
                             ele.classList.remove('bg-green-400')
                             ele.classList.add('bg-red-400')
-                            console.log('Popping \n');
                         // }
 
                     }
@@ -466,7 +467,6 @@ $(document).ready(function() {
                         }
                         
                         if(addedId) {
-                            // selectedIdIngredients.pop();
                         }
                     })
                 })
@@ -489,7 +489,6 @@ $(document).ready(function() {
                             renderSelected.push(ele)
                             added = true;
                         }
-                        // console.log(alreadyAdded);
                     } else {
 
                             added = false;
@@ -511,7 +510,6 @@ $(document).ready(function() {
 
                             ele.classList.remove('bg-green-400')
                             ele.classList.add('bg-red-400')
-                            console.log('Popping \n');
                         // }
 
                     }
@@ -531,7 +529,6 @@ $(document).ready(function() {
                         }
                         
                         if(addedId) {
-                            // selectedIdIngredients.pop();
                         }
                     })
                 })
@@ -545,15 +542,7 @@ $(document).ready(function() {
             ingredientResults.forEach((ele, index) => {
                 $(ele).click(function() {
                     ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
-                    // console.log(ele.querySelector('.isSelectedIngredient').classList);
                     if(!(ele.querySelector('.isSelectedIngredient').classList.contains('hidden'))) {
-                        
-                        // let alreadyAdded = renderSelected.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
-                        // if(alreadyAdded === undefined){
-                        //     renderSelected.push(ele)
-                        //     added = true;
-                        // }
-
                         document.querySelector("#SelectedIngredientNameDisabled").value = ele.querySelector('.ingredient-name').innerHTML;
                         document.querySelector('#IngredientQuantityTopping').value = '';
                         selectingElement.push(ele);
@@ -564,45 +553,9 @@ $(document).ready(function() {
                     } else {
 
                         console.log("It goes here");
-                            // added = false;
-                            // addedId = true;
-
-                            // for(var i = 0; i < renderSelected.length; i++) {
-                            //     if(renderSelected[i].querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML) {
-                            //         renderSelected.splice(i, 1);
-                            //     }
-                            // }
-
-
-                            // for(var i = 0; i < selectedIdIngredients.length; i++) {
-                            //     if(selectedIdIngredients[i] == ele.querySelector('.selectedIngredientId').innerHTML) {
-                            //         selectedIdIngredients.splice(i, 1);
-                            //     }
-                            // }
-
-                            // ele.classList.remove('bg-green-400')
-                            // ele.classList.add('bg-red-400')
-                            // console.log('Popping \n');
-
+     
                     }
 
-                    
-                    // renderSelected.forEach((ele, index) => {
-
-                    //     document.querySelector('.ingredient-list-food-selected').appendChild(ele);
-
-                    //     let alreadyAdded = selectedIdIngredients.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
-                    //     if(alreadyAdded === undefined) {
-                    //         console.log('Pushing \n');
-                    //         ele.classList.remove('bg-red-400')
-                    //         ele.classList.add('bg-green-400')
-                    //         selectedIdIngredients.push(ele.querySelector('.selectedIngredientId').innerHTML);
-                    //         addedId = false;
-                    //     }
-                        
-                    //     if(addedId) {
-                    //     }
-                    // })
 
 
                 })
@@ -639,103 +592,6 @@ $(document).ready(function() {
     }
 })
 
-
-
-// let selectedIdIngredient;
-window.getSelectedIngredientId = function() {
-    if(document.querySelector('#SelectedIngredientId') !== null) {
-        let selectedIdIngredient = document.querySelector('#SelectedIngredientId').innerHTML;
-        return selectedIdIngredient;
-    }
-
-    return 0;
-}
-
-
-window.validateIngredients = function (name, cost, quantity, purchaseDate, Manufacture, Expireation, type) {
-    let success = true;
-
-    if(name.length === 0) {
-        setErrorOnInputs(document.querySelector(`#${type}Name`),true)
-        success = false;
-    }else if(validateSpecialCharacters(name)) {
-        setErrorOnInputs(document.querySelector(`#${type}Name`),true)
-        success=false;
-    }
-
-
-    if(cost != undefined) {
-        if(cost.length === 0) {
-            setErrorOnInputs(document.querySelector(`#${type}Cost`),true)
-            success = false;
-        } else if(cost <= 0) {
-            setErrorOnInputs(document.querySelector(`#${type}Cost`),true)
-            success = false;
-        }
-    }
-    
-    if(quantity != undefined) {
-        if(quantity.length === 0) {
-            setErrorOnInputs(document.querySelector(`#${type}Quantity`),true)
-            success = false;
-        } else if(quantity <= 0) {
-            setErrorOnInputs(document.querySelector(`#${type}Quantity`),true)
-            success = false;
-        }
-    }
-
-    console.log(isFutureDate(purchaseDate));
-
-    if(purchaseDate != undefined) {
-        if(isFutureDate(purchaseDate)) {
-            setErrorOnInputs(document.querySelector(`#${type}Purchase`),true)
-            success = false;
-        } else {
-            setErrorOnInputs(document.querySelector(`#${type}Purchase`),false)
-        }
-    }
-
-    if(Manufacture != undefined) {
-        if(isFutureDate(Manufacture)) {
-            setErrorOnInputs(document.querySelector(`#${type}MFD`),true)
-            success = false;
-        } else {
-            setErrorOnInputs(document.querySelector(`#${type}MFD`),false)
-        }
-    }
-
-    if(Expireation != undefined) {
-        if(!isFutureDate(Expireation)) {
-            setErrorOnInputs(document.querySelector(`#${type}EXP`),true)
-            success = false;
-        } else {
-            setErrorOnInputs(document.querySelector(`#${type}EXP`),false)
-        }
-    }
-
-    
-
-    if(success){
-
-    }
-
-    return success;
-    // return false;
-}
-
-// window.isFutureDate = function (currentDate){
-//     dateReg = /(0[1-9]|[12][0-9]|3[01])[\/](0[1-9]|1[012])[\/]201[4-9]|20[2-9][0-9]/;
-//     if(!dateReg.test(currentDate)){
-//         return true;            
-//     }
-//     var today = new Date().getTime(),
-//     currentDate = currentDate.split("-");
-
-//     // console.log("currentDate" ,currentDate);
-
-//     currentDate = new Date(currentDate[0], currentDate[1] - 1, currentDate[2]).getTime();
-//     return (today - currentDate) < 0;
-// }
 
 window.ListenOnInputChangesTopping = function (ele) {
     ele.addEventListener('keyup', () => {
