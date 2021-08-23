@@ -39,6 +39,8 @@ $(document).ready(function() {
         let renderSelected = [];
         let renderSelectedList = [];
         let selectingElement = []
+
+        let selectedToppings = [];
         
 
         $("#searchIngredientNames").keyup(function() {
@@ -59,6 +61,7 @@ $(document).ready(function() {
             
         })
 
+        // ? Search Avaliable Ingredients for Toopings
         $("#searchIngredientNamesOnTopping").keyup(function() {
             document.querySelector('.selectedTextTopping').classList.remove('hidden');
             let value = $(this).val();
@@ -73,6 +76,29 @@ $(document).ready(function() {
                     // selectedIdIngredients = selctedIngredients(ingredientResults);
                     // selctedIngredients(ingredientResults);
                     selectedIngredientonTopping(ingredientResultsForToppings);
+                    // selectedIdIngredients = selectedIdIngredients.concat(testArray);
+                });
+            }
+            
+        })
+
+
+        // ? Search Topping Names
+        $("#SearchToppingNames").keyup(function() {
+            document.querySelector('.ingredient-list-food').classList.toggle('hidden');
+            document.querySelector('.ingredient-list-food').classList.toggle('flex');
+            let value = $(this).val();
+            if(value !== '') {
+                console.log(value);
+                $(".topping-list").load("operations/get-required-toppings-exists.php", {
+                    query: value,
+                    alreadyAdded: JSON.stringify(selectedToppings)
+                }, function() {
+                    const parentToppingResults = document.querySelector('.topping-list');
+                    const ingredientResultsForToppings = parentToppingResults.querySelectorAll('.resulted-ingredients');
+                    // selectedIdIngredients = selctedIngredients(ingredientResults);
+                    // selctedIngredients(ingredientResults);
+                    // selectedIngredientonTopping(ingredientResultsForToppings);
                     // selectedIdIngredients = selectedIdIngredients.concat(testArray);
                 });
             }
@@ -136,17 +162,19 @@ $(document).ready(function() {
                         document.querySelector('.ingredient-list-food').classList.toggle('hidden');
                         document.querySelector('.ingredient-list-food').classList.toggle('flex');
                         if(!createToppingToggle) {
-                            $('.text-change-creating-topping').html("Creating");
+                            document.querySelector('.text-change-creating-topping').innerHTML =  "Creating";
+                            createToppingToggle = true;
                         } else {
-                            $('.text-change-creating-topping').html("Create");
+                            document.querySelector('.text-change-creating-topping').innerHTML =  "Create";
+                            createToppingToggle = false;
                         }
-                        $(this).toggleClass('text-green-500')
-                        $(this).toggleClass('bg-green-200')
-                        $(this).toggleClass('bg-yellow-200')
-                        $(this).toggleClass('text-yellow-500')
+                        $("#ToppingAdd").toggleClass('text-green-500')
+                        $("#ToppingAdd").toggleClass('bg-green-200')
+                        $("#ToppingAdd").toggleClass('bg-yellow-200')
+                        $("#ToppingAdd").toggleClass('text-yellow-500')
                         
-                        $(this).toggleClass('hover:bg-green-400')
-                        $(this).toggleClass('hover:bg-yellow-400')
+                        $("#ToppingAdd").toggleClass('hover:bg-green-400')
+                        $("#ToppingAdd").toggleClass('hover:bg-yellow-400')
                         document.querySelector('.creating-a-topping').classList.toggle('hidden')
                         document.querySelector('.creating-a-topping').classList.toggle('flex')
                     }
@@ -162,9 +190,11 @@ $(document).ready(function() {
             document.querySelector('.ingredient-list-food').classList.toggle('flex');
             console.log('trigg');
             if(!createToppingToggle) {
-                $('.text-change-creating-topping').html("Creating");
+                document.querySelector('.text-change-creating-topping').innerHTML =  "Creating";
+                createToppingToggle = true;
             } else {
-                $('.text-change-creating-topping').html("Create");
+                document.querySelector('.text-change-creating-topping').innerHTML =  "Create";
+                createToppingToggle = false;
             }
             $(this).toggleClass('text-green-500')
             $(this).toggleClass('bg-green-200')

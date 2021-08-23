@@ -215,6 +215,18 @@ $resultCheck = mysqli_num_rows($results);
         </div>
     </div>
 
+    <!-- // ? Topping List -->
+    <div class="flex-col my-5 px-12 selectedTextToppingLast">
+        <div class="topping-list flex flex-wrap">
+            <!-- <button class="flex px-4 py-3 rounded-full bg-green-400 text-gray-100 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                All Purpose Flour
+            </button> -->
+        </div>
+    </div>
+
     <div class="flex-1 mb-24 mt-6">
         <div class="flex justify-end items-center">
             <p class="text-red-500 font-semibold text-sm hidden inventory-error-message">Oops. It seems to be some inputs are not filled.</p>
