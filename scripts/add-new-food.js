@@ -90,7 +90,8 @@ $(document).ready(function() {
 
         // ? Creating Topping
         let successTopping = false;
-        $("#InsertTopping").click(function() {
+        $("#InsertTopping").click(function(e) {
+            e.preventDefault();
             selectedIdIngredientsToppings.forEach((ele, index) => {
                 console.log("ID : ", ele);
             })
@@ -109,6 +110,48 @@ $(document).ready(function() {
                 validateToppingFirstForm(document.querySelector('#ToppingPrice'));
             } else {
                 console.log("Good to go");
+
+        
+                const form_data = new FormData();
+        
+                const toppingName = $("#CreateToppingName").val();
+                const unitPrice = $("#ToppingPrice").val();
+                
+                $(".inventory-error-message").addClass("hidden");
+    
+                form_data.append('toppingName', toppingName);
+                form_data.append('unitprice', unitPrice);
+                form_data.append('ingredientIds', JSON.stringify(selectedIdIngredientsToppings));
+                form_data.append('quantityList', JSON.stringify(quantityList));
+                
+                $.ajax({
+                    url: 'operations/add-new-topping.php',
+                    type: 'POST',
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        alert(response);
+                        // ? After Success
+                        document.querySelector('.ingredient-list-food').classList.toggle('hidden');
+                        document.querySelector('.ingredient-list-food').classList.toggle('flex');
+                        if(!createToppingToggle) {
+                            $('.text-change-creating-topping').html("Creating");
+                        } else {
+                            $('.text-change-creating-topping').html("Create");
+                        }
+                        $(this).toggleClass('text-green-500')
+                        $(this).toggleClass('bg-green-200')
+                        $(this).toggleClass('bg-yellow-200')
+                        $(this).toggleClass('text-yellow-500')
+                        
+                        $(this).toggleClass('hover:bg-green-400')
+                        $(this).toggleClass('hover:bg-yellow-400')
+                        document.querySelector('.creating-a-topping').classList.toggle('hidden')
+                        document.querySelector('.creating-a-topping').classList.toggle('flex')
+                    }
+                });
+                
             }
         })
 

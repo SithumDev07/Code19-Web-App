@@ -148,7 +148,7 @@ $resultCheck = mysqli_num_rows($results);
                 <input type="number" placeholder="Unit Price" class="bg-transparent rounded-md transform transition-colors duration-300" id="ToppingPrice" name="cost">
             </div>
         </div>
-        <input type="text" placeholder="Ingredient Name" class="flex-1 rounded-md bg-transparent" id="searchIngredientNamesOnTopping" name="name">
+        <input type="text" placeholder="Search Ingredient Name" class="flex-1 rounded-md bg-transparent" id="searchIngredientNamesOnTopping" name="name">
 
         <div class="flex-col my-5 px-12 selectedTextTopping">
             <div class="topping-list-ingredient flex flex-wrap">
