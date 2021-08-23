@@ -1,3 +1,12 @@
+<?php
+include '../config.php';
+
+// $sql = "SELECT * FROM supplier inner JOIN (select * from supplier_contact group by id order by contact_no desc) AS supplier_contact ON supplier.id = supplier_contact.id;";
+$sql = "select * from ingredient;";
+$results = mysqli_query($conn, $sql);
+$resultCheck = mysqli_num_rows($results);
+?>
+
 <div class="w-full h-full add-kitchen-form hidden overflow-y-auto flex-col">
 
     <div class="flex mt-10 items-start">
@@ -108,13 +117,13 @@
     <div class="flex flex-col my-5 px-12">
         <h2 class="text-3xl text-gray-400 font-semibold mb-4">Select Toppings</h2>
         <div class="flex items-center">
-            <input type="text" placeholder="Ingredient Name" class=" flex-1 mb-3 rounded-md bg-transparent" id="SearchToppingNames" name="name">
+            <input type="text" placeholder="Topping Name" class=" flex-1 rounded-md bg-transparent" id="SearchToppingNames" name="name">
             <h3 class="text-xl text-gray-400 font-semibold mx-3">Or</h3>
-            <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="ToppingAdd" type="submit" name="food-submit">
+            <button class="flex items-center text-green-500 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="ToppingAdd" type="submit" name="food-submit">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Create
+                <h3 class="text-change-creating-topping">Create</h3>
             </button>
         </div>
 
@@ -128,7 +137,85 @@
         </div>
     </div>
 
-    <div class="flex-1 mb-24">
+    <div class="px-12 flex-col creating-a-topping hidden">
+        <h2 class="text-3xl text-gray-400 font-semibold mt-5">Creating a Topping</h2>
+        <div class="flex items-end mt-3 mb-3">
+            <input type="text" placeholder="Topping Name" class=" flex-1 rounded-md bg-transparent mr-5" id="CreateToppingName" name="name">
+            <div class="flex flex-col">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="ingredientName">
+                    Price in rupees
+                </label>
+                <input type="number" placeholder="Unit Price" class="bg-transparent rounded-md transform transition-colors duration-300" id="ToppingPrice" name="cost">
+            </div>
+        </div>
+        <input type="text" placeholder="Ingredient Name" class="flex-1 rounded-md bg-transparent" id="searchIngredientNamesOnTopping" name="name">
+
+        <div class="flex-col my-5 px-12 selectedTextTopping">
+            <div class="topping-list-ingredient flex flex-wrap">
+                <!-- <button class="flex px-4 py-3 rounded-full bg-green-400 text-gray-100 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                All Purpose Flour
+            </button> -->
+            </div>
+        </div>
+
+        <div class="flex items-end mt-5">
+            <input type="text" placeholder="Selected Ingredient Name" class="flex-1 rounded-md bg-transparent mr-5" id="SelectedIngredientNameDisabled" disabled name="name">
+            <div class=" flex items-center">
+                <div class="flex flex-col">
+                    <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="shift">
+                        Quantity to make
+                    </label>
+                    <input type="number" placeholder="Quantity" class="mx-4 bg-transparent rounded-md transform transition-colors duration-300" id="IngredientQuantityTopping" name="quantity">
+                </div>
+            </div>
+            <div class="flex flex-col ml-2">
+                <label class="block text-gray-700 text-sm font-bold mr-2 mb-2" for="metricType">
+                    Type
+                </label>
+                <select class="px-3 py-2 w-auto rounded bg-transparent" id="IngredientMetricTypeTopping" name="metricType">
+
+                    <option value="g">g</option>
+                    <option value="ml">ml</option>
+                    <option value="pieces">pieces</option>
+                </select>
+            </div>
+            <button class="flex items-center text-green-500 mx-5 mb-0 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="AddtoListIngredient" type="submit" name="addtolist">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Add to list
+            </button>
+        </div>
+
+        <div class="flex-col my-5 px-12 hidden selectedList">
+            <h2 class="text-3xl text-gray-400 font-semibold mb-4">Added List</h2>
+            <div class="ingredient-list-topping-selected flex flex-wrap">
+                <!-- <button class="flex px-4 py-3 rounded-full bg-green-400 text-gray-100 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                All Purpose Flour
+            </button> -->
+            </div>
+        </div>
+
+
+
+        <div class="flex justify-end items-center mt-5">
+            <p class="text-red-500 font-semibold text-sm hidden topping-error-message">Oops. It seems to be some inputs are not filled.</p>
+            <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="InsertTopping" type="submit" name="topping-submit">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Create
+            </button>
+        </div>
+    </div>
+
+    <div class="flex-1 mb-24 mt-6">
         <div class="flex justify-end items-center">
             <p class="text-red-500 font-semibold text-sm hidden inventory-error-message">Oops. It seems to be some inputs are not filled.</p>
             <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="FoodInsert" type="submit" name="food-submit">

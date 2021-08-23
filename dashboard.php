@@ -1972,6 +1972,9 @@ if (!isset($_SESSION['sessionId'])) {
 
     <!-- Foods -->
     <script src="./scripts/add-new-food.js"></script>
+
+    <!-- Toppings -->
+    <script src="./scripts/add-new-topping.js"></script>
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
