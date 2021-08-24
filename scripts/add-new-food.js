@@ -48,6 +48,11 @@ $(document).ready(function() {
             document.querySelector('.selectedTextToppingLast').classList.remove('flex');
             document.querySelector('.ingredient-list-food').classList.remove('hidden');
             document.querySelector('.ingredient-list-food').classList.add('flex');
+
+            document.querySelector('.food-ingredients-inputs').classList.remove('hidden')
+            document.querySelector('.food-ingredients-inputs').classList.add('flex')
+
+            document.querySelector('.topic-ingredient-food').classList.remove('hidden')
             let value = $(this).val();
             if(value !== '') {
                 $(".ingredient-list-food ").load("operations/get-required-ingredients-exists.php", {
@@ -254,7 +259,7 @@ $(document).ready(function() {
             e.preventDefault();
            
 
-            if(quantityList.length == 0 && selectedIdIngredientsToppings.length == 0) {
+            if(quantityList.length == 0 && confirmedIdIngredientsToppings.length == 0) {
                 setErrorOnInputs(document.querySelector('#SelectedIngredientNameDisabled'),true);
                 setErrorOnInputs(document.querySelector("#IngredientQuantityTopping"),true);
             } else if(!successTopping){
@@ -273,7 +278,7 @@ $(document).ready(function() {
     
                 form_data.append('toppingName', toppingName);
                 form_data.append('unitprice', unitPrice);
-                form_data.append('ingredientIds', JSON.stringify(selectedIdIngredientsToppings));
+                form_data.append('ingredientIds', JSON.stringify(confirmedIdIngredientsToppings));
                 form_data.append('quantityList', JSON.stringify(quantityList));
                 
                 $.ajax({
@@ -354,19 +359,15 @@ $(document).ready(function() {
                 console.log('Her we go');
                 $(".selectedList").removeClass('hidden');
             
+                // ? Adding quantity
                 quantityList.push(document.querySelector('#IngredientQuantityTopping').value);
-                // selectingElement = selectingElement.filter((el, index, arr) => {
-                //     return index < arr.length-1;
-                // })
-
+        
+                // ? getting last clicked ingredient button
                 confirmedIngredientsToppings.push(selectingElement.slice(-1)[0]);
                 document.querySelector("#SelectedIngredientNameDisabled").value = '';
                 document.querySelector('#IngredientQuantityTopping').value = '';
+                // ? Sending them to render on screen
                 renderList(confirmedIngredientsToppings);
-                // confirmedIngredientsToppings.forEach(ele => {
-                //     console.log(ele.querySelector('.selectedIngredientId').innerHTML);
-                // })
-                // console.log(confirmedIngredientsToppings[0].querySelector('.selectedIngredientId').innerHTML);
             }
         })
 
@@ -381,27 +382,23 @@ $(document).ready(function() {
                         renderSelectedList.push(ele);
                     }
                     added = true;
-                } else {
-                    // ? If need to slice
                 }
 
+                // ? Checking for already added if no then add to the final list - Sending List
                 let isConfirmedId = confirmedIdIngredientsToppings.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
                 if(isConfirmedId === undefined) {
                     confirmedIdIngredientsToppings.push(ele.querySelector('.selectedIngredientId').innerHTML);
                 }
 
+                // ? Render on screen method
                 renderSelectedList.forEach((ele, index) => {
 
                     document.querySelector('.ingredient-list-topping-selected').appendChild(ele);
 
+                    // ? Filtering database SQL Query
                     let alreadyAdded = selectedIdIngredientsToppings.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
-                    // let alreadyInOffedList =  confirmedIngredientsToppings.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
                     if(alreadyAdded === undefined) {
-                        // if(alreadyInOffedList === undefined) {
-                            // console.log("not in off list" ,alreadyInOffedList);
-                            selectedIdIngredientsToppings.push(ele.querySelector('.selectedIngredientId').innerHTML);
-                        // }
-                        // console.log('Pushing T \n');
+                        selectedIdIngredientsToppings.push(ele.querySelector('.selectedIngredientId').innerHTML);
                         addedId = false;
                     }
                     
@@ -574,10 +571,8 @@ $(document).ready(function() {
         }
 
 
-        // TODO Click and remove
+        // ? Ingredient Handler for toppings
         window.selectedIngredientonTopping = function (ingredientResults) {
-            let added = false;
-            let addedId = false;
             ingredientResults.forEach((ele, index) => {
                 $(ele).click(function() {
                     ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
@@ -588,43 +583,21 @@ $(document).ready(function() {
                         document.querySelector('#searchIngredientNamesOnTopping').value = '';
                         document.querySelector('.selectedTextTopping').classList.add('hidden');
 
+                        // ? Adding selected items to render on screen
                         let isInSelectingList = selectingElement.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
                         if(isInSelectingList === undefined) {
                             selectingElement.push(ele);
                         }
 
-                        
-                        // ? Get rendered List
-                        // let alreadyAdded = renderSelectedList.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
-                        // if(alreadyAdded === undefined){
-                        //     renderSelectedList.push(ele)
-                        //     added = true;
-                        // }
-                        // ele.classList.add('bg-green-400')
-                        // ele.classList.remove('bg-red-400')
 
-                        // console.log('Clicked Here');
                     } else {
 
                         // ? Removing selected element
-                        console.log("It goes here");
-
-                        // for(var i = 0; i < renderSelectedList.length; i++) {
-                        //     if(renderSelectedList[i].querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML) {
-                        //         renderSelectedList.splice(i, 1);
-                        //     }
-                        // }
-
-                        // for(var i = 0; i < confirmedIngredientsToppings.length; i++) {
-                        //     if(confirmedIngredientsToppings[i].querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML) {
-                        //         confirmedIngredientsToppings.splice(i, 1);
-                        //     }
-                        // }
-
-                        // ??
                         for(var i = 0; i < selectingElement.length; i++) {
                             if(selectingElement[i].querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML) {
                                 selectingElement.splice(i, 1);
+
+                                // ? Also updating sending list confirmed
                                 quantityList.splice(i, 1);
                                 confirmedIdIngredientsToppings.splice(i, 1);
                             }
@@ -633,13 +606,8 @@ $(document).ready(function() {
 
                         ele.classList.remove('bg-green-400')
                         ele.classList.add('bg-red-400')
-
-                       
      
                     }
-
-
-
                 })
             });
         }

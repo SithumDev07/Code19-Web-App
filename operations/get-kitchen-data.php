@@ -103,6 +103,37 @@ $resultCheck = mysqli_num_rows($results);
         </div>
     </div>
 
+    <h2 class="text-3xl text-gray-400 font-semibold my-4 px-12 hidden topic-ingredient-food">How much need from each ingredient?</h2>
+
+    <div class="items-end hidden food-ingredients-inputs px-12">
+            <input type="text" placeholder="Selected Ingredient Name" class="flex-1 rounded-md bg-transparent mr-5" id="IngredientNameFoodDisabled" disabled name="name">
+            <div class=" flex items-center">
+                <div class="flex flex-col">
+                    <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="Quantity">
+                        Quantity to make
+                    </label>
+                    <input type="number" placeholder="Quantity" class="mx-4 bg-transparent rounded-md transform transition-colors duration-300" id="IngredientQuantityFood" name="quantity">
+                </div>
+            </div>
+            <div class="flex flex-col ml-2">
+                <label class="block text-gray-700 text-sm font-bold mr-2 mb-2" for="metricType">
+                    Type
+                </label>
+                <select class="px-3 py-2 w-auto rounded bg-transparent" id="IngredientMetricTypeFood" name="metricType">
+
+                    <option value="g">g</option>
+                    <option value="ml">ml</option>
+                    <option value="pieces">pieces</option>
+                </select>
+            </div>
+            <button class="flex items-center text-green-500 mx-5 mb-0 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="AddtoListIngredientFood" type="submit" name="addtolist">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Add to list
+            </button>
+        </div>
+
     <div class="flex-col my-5 px-12 hidden selectedText">
         <h2 class="text-2xl text-gray-400 font-semibold mb-4">Selected</h2>
         <div class="ingredient-list-food-selected flex flex-wrap">
@@ -115,7 +146,10 @@ $resultCheck = mysqli_num_rows($results);
         </div>
     </div>
 
-    <div class="flex flex-col my-5 px-12">
+
+    <!-- // ? Toppings Area -->
+
+    <div class="flex flex-col mt-10 mb-5 px-12">
         <h2 class="text-3xl text-gray-400 font-semibold mb-4">Select Toppings</h2>
         <div class="flex items-center">
             <input type="text" placeholder="Topping Name" class=" flex-1 rounded-md bg-transparent" id="SearchToppingNames" name="name">
