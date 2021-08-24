@@ -41,6 +41,9 @@ $(document).ready(function() {
 
         let confirmedIngredientsToppings = [];
         let confirmedIdIngredientsToppings = [];
+
+
+        let removedList = [];
         
 
         $("#searchIngredientNames").keyup(function() {
@@ -61,7 +64,7 @@ $(document).ready(function() {
                 }, function() {
                     let testArray = [];
                     const ingredientResults = document.querySelectorAll('.resulted-ingredients');
-                    // selectedIdIngredients = selctedIngredients(ingredientResults);
+                    
                     selctedIngredients(ingredientResults);
                     // selectedIdIngredients = selectedIdIngredients.concat(testArray);
                 });
@@ -81,8 +84,7 @@ $(document).ready(function() {
                 }, function() {
                     const parentToppingResults = document.querySelector('.topping-list-ingredient');
                     const ingredientResultsForToppings = parentToppingResults.querySelectorAll('.resulted-ingredients');
-                    // selectedIdIngredients = selctedIngredients(ingredientResults);
-                    // selctedIngredients(ingredientResults);
+                    
                     selectedIngredientonTopping(ingredientResultsForToppings);
                     // selectedIdIngredients = selectedIdIngredients.concat(testArray);
                 });
@@ -164,14 +166,26 @@ $(document).ready(function() {
                 console.log('Quantity -', ele);
             })
             console.log("\n");
+            
+            console.log('Removing List - ');
+            if(removedList.length == 0) {
+                console.log('removing list is empty');
+            } else {
+                removedList.forEach(elemtn => {
+                    console.log(elemtn);
+                })
+            }
+            console.log("\n");
 
             // ?
                         
-            console.log('Selecting List \n');
-            selectingElement.forEach((ele, index) => {
-                console.log(ele.querySelector('.selectedIngredientId').innerHTML);
-            })
-            console.log("\n");
+            // console.log('Selecting List \n');
+            // selectingElement.forEach((ele, index) => {
+            //     console.log(ele.querySelector('.selectedIngredientId').innerHTML);
+            // })
+            // console.log("\n");
+
+            
 
             // TODO Inserting Part
             // if(selectedIdIngredients.length == 0 && selectedToppingIds.length == 0) {
@@ -349,67 +363,210 @@ $(document).ready(function() {
         ListenOnInputChangesFood(document.querySelector('#unitPriceFood'))
         ListenOnInputChangesFood(document.querySelector('#foodPrepTime'))
 
-        let success = false;
-        $("#AddtoListIngredient").click(function() {
-            validateAddtoList(document.querySelector("#SelectedIngredientNameDisabled"));
-            validateAddtoList(document.querySelector("#IngredientQuantityTopping"));
-            if(!success) {
-                console.log('Cant move');
-            }else {
-                console.log('Her we go');
-                $(".selectedList").removeClass('hidden');
-            
-                // ? Adding quantity
-                quantityList.push(document.querySelector('#IngredientQuantityTopping').value);
-        
-                // ? getting last clicked ingredient button
-                confirmedIngredientsToppings.push(selectingElement.slice(-1)[0]);
-                document.querySelector("#SelectedIngredientNameDisabled").value = '';
-                document.querySelector('#IngredientQuantityTopping').value = '';
-                // ? Sending them to render on screen
-                renderList(confirmedIngredientsToppings);
-            }
-        })
 
-        // ?? rendering list
-        function renderList(List) {
+        // ? Calling Add to listener Event Methods
+        addToListClickListener($("#AddtoListIngredient"), document.querySelector('#SelectedIngredientNameDisabled'), document.querySelector('#IngredientQuantityTopping'), $(".selectedList"), quantityList, selectingElement, confirmedIngredientsToppings, renderSelectedList, confirmedIdIngredientsToppings, document.querySelector('.ingredient-list-topping-selected'), selectedIdIngredientsToppings);
+
+        let success = false;
+        function addToListClickListener(ele, disabled, quantityInput, hiddenSelectedList, quantityList, currentlySelcted, confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter) {
+            // let sucessList = false;
+            $(ele).click(function() {
+                validateAddtoList(disabled);
+                validateAddtoList(quantityInput);
+                if(!success) {
+                    console.log("Can't move");
+                } else {
+                    console.log("here we go");
+
+                    $(hiddenSelectedList).removeClass('hidden');
+
+                    // ? Adding Quantity
+                    quantityList.push(quantityInput.value);
+
+                    // ? Getting last clicked ingredient button
+                    confirmedSelected.push(currentlySelcted.slice(-1)[0]);
+                    
+
+                    quantityInput.value = '';
+                    disabled.value = '';
+
+                    // renderListCommon(confirmedSelected);
+                    renderListCommon(confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter);
+
+                }
+            })
+        }
+
+        function renderListCommon(List, renderSelectedList, confirmedIds, renderElContainer, idFilter) {
+            console.log('List - ');
+            List.forEach(ele => {
+                console.log(ele.querySelector('.ingredient-name').innerHTML);
+            })
+            console.log('\n');
             List.forEach((ele, index) => {
-                let alreadyAdded = renderSelectedList.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
-                let alreadyInOffedList =  confirmedIngredientsToppings.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
-                if(alreadyAdded === undefined){
-                    if(alreadyInOffedList !== undefined) {
-                        console.log("not in off list" ,alreadyInOffedList);
+                // console.log("List - " ,ele.querySelector('.ingredient-name').innerHTML);
+
+                let alreadtAdded = renderSelectedList.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
+                let alreadtOffedList = List.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
+                
+                console.log('Offset - ', alreadtOffedList);
+
+                if(alreadtAdded === undefined) {
+                    if(alreadtOffedList !== undefined) {
+                        console.log("not in off list" ,alreadtOffedList);
                         renderSelectedList.push(ele);
                     }
-                    added = true;
                 }
 
                 // ? Checking for already added if no then add to the final list - Sending List
-                let isConfirmedId = confirmedIdIngredientsToppings.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
-                if(isConfirmedId === undefined) {
-                    confirmedIdIngredientsToppings.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                let isConfirmed = confirmedIds.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
+                let isRemovingItem = removedList.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
+                if(isConfirmed === undefined) {
+                    if(isRemovingItem === undefined) {
+                        console.log("added - ", isConfirmed);
+                        confirmedIds.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                        ele.classList.remove('bg-red-400');
+                        ele.classList.add('bg-green-400');
+                    } else {
+                    }
                 }
 
                 // ? Render on screen method
                 renderSelectedList.forEach((ele, index) => {
-
-                    document.querySelector('.ingredient-list-topping-selected').appendChild(ele);
+                    // document.querySelector('.ingredient-list-topping-selected').appendChild(ele);
+                    renderElContainer.appendChild(ele);
 
                     // ? Filtering database SQL Query
-                    let alreadyAdded = selectedIdIngredientsToppings.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
+                    let alreadyAdded = idFilter.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
                     if(alreadyAdded === undefined) {
-                        selectedIdIngredientsToppings.push(ele.querySelector('.selectedIngredientId').innerHTML);
-                        addedId = false;
+                        idFilter.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                        
                     }
-                    
-                    ele.classList.remove('bg-red-400')
-                    ele.classList.add('bg-green-400')
-                     
-                    if(addedId) {
+
+                })
+            })
+        }
+
+
+
+        // ? Ingredient Handler for toppings
+        window.selectedIngredientonTopping = function (ingredientResults) {
+            ingredientResults.forEach((ele, index) => {
+                $(ele).click(function() {
+                    ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
+                    if(!(ele.querySelector('.isSelectedIngredient').classList.contains('hidden'))) {
+                        document.querySelector("#SelectedIngredientNameDisabled").value = ele.querySelector('.ingredient-name').innerHTML;
+                        document.querySelector('#IngredientQuantityTopping').value = '';
+                        setErrorOnInputs(document.querySelector("#SelectedIngredientNameDisabled"),false)
+                        document.querySelector('#searchIngredientNamesOnTopping').value = '';
+                        document.querySelector('.selectedTextTopping').classList.add('hidden');
+
+                        // ? Adding selected items to render on screen
+                        // let isInSelectingList = selectingElement.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
+                        // if(isInSelectingList === undefined) {
+                        // }
+                        
+                        selectingElement.push(ele);
+
+                        let ifRemoved = removedList.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML)
+                        console.log('in r list? -', ifRemoved);
+                        if(ifRemoved !== undefined) {
+                            for(var i = 0; i < removedList.length; i++) {
+                                if(removedList[i] == ele.querySelector('.selectedIngredientId').innerHTML) {
+                                    removedList.splice(i, 1);
+                                }
+                            }
+                        }
+
+
+                        console.log("Trigger If");
+
+                    } else {
+                        console.log("Trigger Else");
+
+                        // ? Removing selected element
+                        // for(var i = 0; i < selectingElement.length; i++) {
+                        //     if(selectingElement[i].querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML) {
+                        //         selectingElement.splice(i, 1);
+
+                        //         console.log('Removing ', i);
+
+                        //         // ? Also updating sending list confirmed
+                        //         quantityList.splice(i, 1);
+                        //         confirmedIdIngredientsToppings.splice(i, 1);
+                        //     }
+                        // }
+
+                        let ifRemoved = removedList.find(element => element == document.querySelector('.selectedIngredientId').innerHTML)
+                        if(ifRemoved === undefined) {
+                            removedList.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                        }
+
+                        for(var i = 0; i < confirmedIdIngredientsToppings.length; i++) {
+                            if(confirmedIdIngredientsToppings[i] == ele.querySelector('.selectedIngredientId').innerHTML) {
+                                // selectingElement.splice(i, 1);
+
+                                console.log('Removing ', ele.querySelector(".ingredient-name").innerHTML, " and id ", i);
+
+                                // ? Also updating sending list confirmed
+                                quantityList.splice(i, 1);
+                                confirmedIdIngredientsToppings.splice(i, 1);
+                            }
+                        }
+
+
+                        ele.classList.remove('bg-green-400')
+                        ele.classList.add('bg-red-400')
+     
                     }
                 })
             });
         }
+
+
+        // // ?? rendering list
+        // function renderList(List) {
+        //     List.forEach((ele, index) => {
+
+
+        //         let alreadyAdded = renderSelectedList.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
+        //         let alreadyInOffedList =  confirmedIngredientsToppings.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
+        //         if(alreadyAdded === undefined){
+        //             if(alreadyInOffedList !== undefined) {
+        //                 console.log("not in off list" ,alreadyInOffedList);
+        //                 renderSelectedList.push(ele);
+        //             }
+        //             added = true;
+        //         }
+
+        //         // ? Checking for already added if no then add to the final list - Sending List
+        //         let isConfirmedId = confirmedIdIngredientsToppings.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
+        //         if(isConfirmedId === undefined) {
+        //             confirmedIdIngredientsToppings.push(ele.querySelector('.selectedIngredientId').innerHTML);
+        //         }
+
+                
+        //         // ? Render on screen method
+        //         renderSelectedList.forEach((ele, index) => {
+                    
+        //             document.querySelector('.ingredient-list-topping-selected').appendChild(ele);
+                    
+        //             console.log("Check");
+        //             // ? Filtering database SQL Query
+        //             let alreadyAdded = selectedIdIngredientsToppings.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
+        //             if(alreadyAdded === undefined) {
+        //                 selectedIdIngredientsToppings.push(ele.querySelector('.selectedIngredientId').innerHTML);
+        //                 addedId = false;
+        //             }
+                    
+        //             ele.classList.remove('bg-red-400')
+        //             ele.classList.add('bg-green-400')
+                     
+        //             if(addedId) {
+        //             }
+        //         })
+        //     });
+        // }
 
         function validateAddtoList(ele) {
             if(ele.id === `SelectedIngredientNameDisabled` && ele.value === '') {
@@ -517,13 +674,22 @@ $(document).ready(function() {
                     document.querySelector('.selectedText').classList.remove('hidden');
                     document.querySelector('.selectedText').classList.add('flex');
                     ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
+
                     if(!(ele.querySelector('.isSelectedIngredient').classList.contains('hidden'))) {
                         
-                        let alreadyAdded = renderSelected.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
-                        if(alreadyAdded === undefined){
-                            renderSelected.push(ele)
-                            added = true;
-                        }
+
+                        document.querySelector('#IngredientNameFoodDisabled').value = ele.querySelector('.ingredient-name').innerHTML;
+
+                        document.querySelector('#IngredientQuantityFood').value = '';
+                        setErrorOnInputs(document.querySelector("#IngredientNameFoodDisabled"),false)
+
+                        document.querySelector('#searchIngredientNames').value = '';
+
+                        // let alreadyAdded = renderSelected.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
+                        // if(alreadyAdded === undefined){
+                        //     renderSelected.push(ele)
+                        //     added = true;
+                        // }
                     } else {
 
                             added = false;
@@ -571,46 +737,7 @@ $(document).ready(function() {
         }
 
 
-        // ? Ingredient Handler for toppings
-        window.selectedIngredientonTopping = function (ingredientResults) {
-            ingredientResults.forEach((ele, index) => {
-                $(ele).click(function() {
-                    ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
-                    if(!(ele.querySelector('.isSelectedIngredient').classList.contains('hidden'))) {
-                        document.querySelector("#SelectedIngredientNameDisabled").value = ele.querySelector('.ingredient-name').innerHTML;
-                        document.querySelector('#IngredientQuantityTopping').value = '';
-                        setErrorOnInputs(document.querySelector("#SelectedIngredientNameDisabled"),false)
-                        document.querySelector('#searchIngredientNamesOnTopping').value = '';
-                        document.querySelector('.selectedTextTopping').classList.add('hidden');
-
-                        // ? Adding selected items to render on screen
-                        let isInSelectingList = selectingElement.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
-                        if(isInSelectingList === undefined) {
-                            selectingElement.push(ele);
-                        }
-
-
-                    } else {
-
-                        // ? Removing selected element
-                        for(var i = 0; i < selectingElement.length; i++) {
-                            if(selectingElement[i].querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML) {
-                                selectingElement.splice(i, 1);
-
-                                // ? Also updating sending list confirmed
-                                quantityList.splice(i, 1);
-                                confirmedIdIngredientsToppings.splice(i, 1);
-                            }
-                        }
-
-
-                        ele.classList.remove('bg-green-400')
-                        ele.classList.add('bg-red-400')
-     
-                    }
-                })
-            });
-        }
+        
 
 
 

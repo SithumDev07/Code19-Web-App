@@ -92,7 +92,7 @@ $resultCheck = mysqli_num_rows($results);
 
     <div class="flex flex-col my-5 px-12">
         <h2 class="text-3xl text-gray-400 font-semibold mb-4">Choose required ingredients</h2>
-        <input type="text" placeholder="Ingredient Name" class="mb-3 rounded-md bg-transparent" id="searchIngredientNames" name="name">
+        <input type="text" placeholder="Search for Ingredient Name" class="mb-3 rounded-md bg-transparent" id="searchIngredientNames" name="name">
         <div class="ingredient-list-food flex flex-wrap">
             <!-- <button class="flex px-4 py-3 rounded-full bg-green-400 text-gray-100 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
