@@ -26,15 +26,17 @@ $(document).ready(function() {
         // console.log('Working kitchen');
 
         let selectedIdIngredients = [];
+
         let selectedIdIngredientsToppings = [];
+        let selectedIdIngredientsFoods = [];
 
 
         let quantityList = [];
         let quantityListFood = [];
         // let selectedIdIngredientsFromSingle = [];
         // let selectedIdIngredientsFromAll = [];
-        let renderSelected = [];
         let renderSelectedList = [];
+        let renderSelectedListFood = [];
 
         let selectingElement = []
         let selectingElementFood = [];
@@ -47,6 +49,7 @@ $(document).ready(function() {
         let confirmedIngredientsToppings = [];
         let confirmedIdIngredientsToppings = [];
 
+        let confirmedIngredientsFood = [];
         let confirmedIngredientIdsFood = [];
 
         let removedList = [];
@@ -63,11 +66,13 @@ $(document).ready(function() {
             document.querySelector('.food-ingredients-inputs').classList.add('flex')
 
             document.querySelector('.topic-ingredient-food').classList.remove('hidden')
+
+            
             let value = $(this).val();
             if(value !== '') {
                 $(".ingredient-list-food ").load("operations/get-required-ingredients-exists.php", {
                     query: value,
-                    alreadyAdded: JSON.stringify(selectedIdIngredients)
+                    alreadyAdded: JSON.stringify(selectedIdIngredientsFoods)
                 }, function() {
                     let testArray = [];
                     const ingredientResults = document.querySelectorAll('.resulted-ingredients');
@@ -106,6 +111,10 @@ $(document).ready(function() {
             document.querySelector('.ingredient-list-food').classList.remove('flex');
             document.querySelector('.selectedTextToppingLast').classList.remove('hidden');
             document.querySelector('.selectedTextToppingLast').classList.add('flex');
+
+            document.querySelector('.topic-ingredient-food').classList.add('hidden');
+            document.querySelector('.food-ingredients-inputs').classList.add('hidden');
+            document.querySelector('.food-ingredients-inputs').classList.remove('flex');
             let value = $(this).val();
             if(value !== '') {
                 // console.log(value);
@@ -165,14 +174,24 @@ $(document).ready(function() {
         $("#FoodInsert").click(function() {
 
 
-            // console.log('Swending');
-            // confirmedIdIngredientsToppings.forEach((ele, index) => {
-            //     console.log('IID -', ele);
-            // })
-            // quantityList.forEach((ele, index) => {
-            //     console.log('Quantity -', ele);
-            // })
-            // console.log("\n");
+            console.log('Swending');
+            confirmedIdIngredientsToppings.forEach((ele, index) => {
+                console.log('IID -', ele);
+            })
+            quantityList.forEach((ele, index) => {
+                console.log('Quantity -', ele);
+            })
+            console.log("\n");
+
+
+            console.log('Sending from food');
+            confirmedIngredientIdsFood.forEach((ele, index) => {
+                console.log('IID -', ele);
+            })
+            quantityListFood.forEach((ele, index) => {
+                console.log('Quantity -', ele);
+            })
+            console.log("\n");
             
             // console.log('Removing List - ');
             // if(removedList.length == 0) {
@@ -200,11 +219,11 @@ $(document).ready(function() {
             //     console.log(ele.querySelector('.selectedIngredientId').innerHTML);
             // })
             // console.log("\n");
-            console.log('Selecting List \n');
-            selectingElementFood.forEach((ele, index) => {
-                console.log(ele.querySelector('.selectedIngredientId').innerHTML);
-            })
-            console.log("\n");
+            // console.log('Selecting List \n');
+            // selectingElementFood.forEach((ele, index) => {
+            //     console.log(ele.querySelector('.selectedIngredientId').innerHTML);
+            // })
+            // console.log("\n");
 
             
 
@@ -388,6 +407,8 @@ $(document).ready(function() {
         // ? Calling Add to listener Event Methods
         // let success = false;
         addToListClickListener($("#AddtoListIngredient"), document.querySelector('#SelectedIngredientNameDisabled'), document.querySelector('#IngredientQuantityTopping'), $(".selectedList"), quantityList, selectingElement, confirmedIngredientsToppings, renderSelectedList, confirmedIdIngredientsToppings, document.querySelector('.ingredient-list-topping-selected'), selectedIdIngredientsToppings, removedList);
+
+        addToListClickListener($("#AddtoListIngredientFood"), document.querySelector('#IngredientNameFoodDisabled'), document.querySelector('#IngredientQuantityFood'), $(".selectedTextFood"), quantityListFood, selectingElementFood, confirmedIngredientsFood, renderSelectedListFood, confirmedIngredientIdsFood, document.querySelector('.ingredient-list-food-selected'), selectedIdIngredientsFoods, removedListFood);
 
         function addToListClickListener(ele, disabled, quantityInput, hiddenSelectedList, quantityList, currentlySelcted, confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter, removedList) {
             

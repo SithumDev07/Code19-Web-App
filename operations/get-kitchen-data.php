@@ -134,7 +134,7 @@ $resultCheck = mysqli_num_rows($results);
             </button>
         </div>
 
-    <div class="flex-col my-5 px-12 hidden selectedText">
+    <div class="flex-col my-5 px-12 hidden selectedTextFood">
         <h2 class="text-2xl text-gray-400 font-semibold mb-4">Selected</h2>
         <div class="ingredient-list-food-selected flex flex-wrap">
             <!-- <button class="flex px-4 py-3 rounded-full bg-green-400 text-gray-100 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
