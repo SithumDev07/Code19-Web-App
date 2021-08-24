@@ -14,8 +14,8 @@ $resultCheck = mysqli_num_rows($results);
         <div class="card-kitchen mb-4 w-72 overflow-hidden relative flex flex-col cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
 
             <div class="flex items-center flex-1 mb-2">
-                <div class="w-16 h-16 overflow-hidden flex-1">
-                    <img class="object-contain w-full h-full" src="./assets/featured/featured-burger.png" alt="foodImage">
+                <div class="w-16 h-16 rounded-full overflow-hidden flex-1">
+                    <img class="object-contain w-full h-full rounded-full" src="./assets/featured/featured-burger.png" id="card-food-image" alt="foodImage">
                 </div>
                 <div>
                     <h1 class="text-gray-600 font-semibold text-sm">Consist of 12 ingredients</h1>

@@ -9,9 +9,11 @@ if (isset($_POST['foodname'])) {
     $basicprice = $_POST['basicprice'];
     $preptime = $_POST['preptime'];
     $ingredientIds = $_POST['ingredientIds'];
+    $ingredientQuantities = $_POST['ingredientQuantities'];
     $toppingIds = $_POST['toppingIds'];
 
     $ingredientIds = json_decode($ingredientIds);
+    $ingredientQuantities = json_decode($ingredientQuantities);
     $toppingIds = json_decode($toppingIds);
 
 
@@ -30,9 +32,9 @@ if (isset($_POST['foodname'])) {
     
 
 
-    if (empty($toppingName) || empty($unitprice) || empty($ingredientIds) || empty($quantityList)) {
+    if (empty($foodname) || empty($basicprice) || empty($ingredientIds) || empty($ingredientQuantities) || empty($toppingIds)) {
         // header("Location: ../dasboard.php?error=empty_fields");
-        echo "empty fields $toppingName $unitprice $ingredientIds $quantityList";
+        echo "empty fields $foodname $basicprice";
         exit();
     } else {
 
@@ -45,12 +47,12 @@ if (isset($_POST['foodname'])) {
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $sql;
 
-                    $sql = "INSERT INTO filling(name, basic_price, prep_time (mins), description, rating, photo) VALUES (?, ?, ?, ?, ?, ?);";
+                    $sql = "INSERT INTO food(name, basic_price, prep_time, description, rating, photo) VALUES (?, ?, ?, ?, ?, ?);";
 
                     $statement = mysqli_stmt_init($conn);
             
                     if (!mysqli_stmt_prepare($statement, $sql)) {
-                        echo "sql error";
+                        echo "sql error food part";
                         exit();
                     } else {
                         $rating = 0.0;
@@ -65,7 +67,7 @@ if (isset($_POST['foodname'])) {
             
                         // ? Inserting into ingredient_food
             
-                        $sql = "INSERT INTO ingredient_filling(ingredient_id, filling_id, no_of_units) VALUES (?, ?, ?);";
+                        $sql = "INSERT INTO ingredient_food(ingredient_id, food_id, no_of_units) VALUES (?, ?, ?);";
             
                         if (!mysqli_stmt_prepare($statement, $sql)) {
                             echo "sql error";
@@ -73,7 +75,7 @@ if (isset($_POST['foodname'])) {
                         } else {
             
                             for ($i=0; $i < count($ingredientIds); $i++) { 
-                                $bindFailed = mysqli_stmt_bind_param($statement, 'iii', $ingredientIds[$i], $newFoodIdGenerated, $quantityList[$i]);
+                                $bindFailed = mysqli_stmt_bind_param($statement, 'iii', $ingredientIds[$i], $newFoodIdGenerated, $ingredientQuantities[$i]);
                 
                                 if ($bindFailed === false) {
                                     echo htmlspecialchars($statement->error);
@@ -84,6 +86,7 @@ if (isset($_POST['foodname'])) {
             
                         }
             
+                        // TODO here
                         echo "success all $newFoodIdGenerated";
                         exit();
                     }
