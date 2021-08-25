@@ -34,7 +34,7 @@ if (isset($_POST['query'])) {
     $alreadAdded = implode("','", $alreadAdded);
 
     if(empty($alreadAdded)) {
-        $sql = "SELECT * FROM filling WHERE name LIKE '%" . $_POST['query'] . "%';";
+        $sql = "SELECT * FROM filling WHERE name LIKE '%" . $_POST['query'] . "%' LIMIT 25;";
         $message = "No Results Found For Filling - " . $_POST['query'];
     }else {
         $sql = "SELECT * FROM filling WHERE name LIKE '%" . $_POST['query'] . "%' AND id NOT IN ('$alreadAdded');";

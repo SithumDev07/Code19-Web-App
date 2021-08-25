@@ -120,7 +120,7 @@ $(document).ready(function() {
                 // console.log(value);
                 $(".topping-list").load("operations/get-required-toppings-exists.php", {
                     query: value,
-                    alreadyAdded: JSON.stringify(selectedToppings)
+                    alreadyAdded: JSON.stringify(selectedToppingIds)
                 }, function() {
                     const parentToppingResults = document.querySelector('.topping-list');
                     const ResultsForToppings = parentToppingResults.querySelectorAll('.resulted-ingredients');
@@ -172,47 +172,6 @@ $(document).ready(function() {
         })
 
         $("#FoodInsert").click(function() {
-
-
-            console.log('Swending');
-            confirmedIdIngredientsToppings.forEach((ele, index) => {
-                console.log('IID -', ele);
-            })
-            quantityList.forEach((ele, index) => {
-                console.log('Quantity -', ele);
-            })
-            console.log("\n");
-
-
-            console.log('Sending from food');
-            confirmedIngredientIdsFood.forEach((ele, index) => {
-                console.log('IID -', ele);
-            })
-            quantityListFood.forEach((ele, index) => {
-                console.log('Quantity -', ele);
-            })
-            console.log("\n");
-            
-            console.log('Toppings List - ');
-            if(selectedToppingIds.length == 0) {
-                console.log('toppings list is empty');
-            } else {
-                selectedToppingIds.forEach(elemtn => {
-                    console.log(elemtn);
-                })
-            }
-            console.log("\n");
-
-            console.log('Removing List Food - ');
-            if(removedListFood.length == 0) {
-                console.log('removing list is empty');
-            } else {
-                removedListFood.forEach(elemtn => {
-                    console.log(elemtn);
-                })
-            }
-            console.log("\n");
-
         
             // TODO Inserting Part
             if(confirmedIngredientIdsFood.length > 0 && selectedToppingIds.length > 0) {
