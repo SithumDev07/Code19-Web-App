@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +33,13 @@
             backdrop-filter: blur(2rem);
         }
 
+        .glass-dark {
+            /* background-color: white; */
+            background-image: linear-gradient(to right bottom, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.1));
+            z-index: 2;
+            backdrop-filter: blur(4rem);
+        }
+
         body::-webkit-scrollbar {
             width: 0.6em;
             border-radius: 50%;
@@ -48,6 +61,47 @@
 </head>
 
 <body>
+    <div class="w-full h-screen fixed glass-dark py-6 px-12 z-20">
+        <h1 class="text-6xl md:text-9xl font-extrabold selection:bg-red-500" style="-webkit-text-stroke: 2px; -webkit-text-stroke-color: rgb(229, 231, 235); color: transparent;">Signup</h1>
+
+        <div class=" flex justify-end w-full">
+            <div class="w-1/2 -mt-28">
+                <div class="flex items-center">
+                    <p class="font-semibold text-gray-300 flex-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae sunt asperiores distinctio vitae alias! Provident, necessitatibus! Eum quas quaerat ipsa.</p>
+                    <button class="bg-black p-5 rounded-full text-gray-100 ml-4 transform transition active:scale-90 duration-100" id="signup-close-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+                <img src="./assets/featured/featured-burger.png" class="object-cover w-full h-full" alt="Signup Featured">
+            </div>
+        </div>
+
+        <div class="signup fixed left-20 xl:top-2/3 2xl:top-1/2 transform -translate-y-1/2 w-4/12">
+            <div class="w-full h-full relative">
+
+                <div class="w-full h-96 rounded">
+                    <input type="text" placeholder="Username" class="rounded-md w-full px-3 py-3 mt-16 bg-transparent border border-gray-200 placeholder-gray-300" name="username">
+                    <div class=" flex items-center w-full">
+                        <input type="text" class="flex-1 rounded-md rounded-r-none px-3 py-3 mt-4 bg-transparent border border-gray-200 placeholder-gray-300" placeholder="First Name" name="firstname">
+                        <input type="text" class="flex-1 ml-2 rounded-md rounded-l-none px-3 py-3 mt-4 bg-transparent border border-gray-200 placeholder-gray-300" placeholder="Last Name" name="lastname">
+                    </div>
+                    <input type="password" placeholder="Password" class="rounded-md w-full px-3 py-3 mt-4 bg-transparent border border-gray-200 placeholder-gray-300" name="password">
+                    <button type="submit" class="relative w-full rounded-md mt-4 flex items-center justify-center bg-blue-600 p-3 text-gray-300 text-sm font-semibold h-14 hover:bg-blue-700 transition duration-300">
+                        Signup
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute top-1/2 right-5 transform -translate-y-1/2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="err-message absolute bottom-3 text-gray-200 bg-red-400 px-3 py-3 rounded-md">
+                    Oops! Seems to be you have entered in incorrect format.
+                </div>
+            </div>
+        </div>
+    </div>
     <main class="glass px-10 py-1">
         <nav class="flex justify-between container mx-auto items-center">
             <div class="logo w-24 h-20">
@@ -62,10 +116,22 @@
             </ul>
 
             <div class="flex items-center">
-                <a href="" class="mr-4 text-gray-100 font-semibold">Login</a>
-                <div class="signup w-28 flex items-center justify-center h-12 px-3 py-1 border border-gray-600 rounded-full cursor-pointer mr-4">
-                    signup
-                </div>
+                <?php
+
+                if (isset($_SESSION['sessionUser'])) {
+                ?>
+                    <a href="" class="mr-4 text-gray-100 font-semibold">Login</a>
+
+                <?php
+                } else {
+                ?>
+
+                    <a href="" class="signup w-28 flex items-center justify-center h-12 px-3 py-1 border border-gray-600 rounded-full cursor-pointer mr-4">
+                        signup
+                    </a>
+                <?php
+                }
+                ?>
                 <a href="./checkout.php" class="text-white mr-4 relative">
                     <div class="py-1 px-2 rounded-full bg-red-500 absolute -top-2 -right-2 text-xs">3</div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -78,6 +144,9 @@
 
             </div>
         </nav>
+
+
+
 
         <!-- Header -->
         <header class="grid grid-cols-2 xl:container xl:mx-auto">
