@@ -1332,7 +1332,7 @@ if (!isset($_SESSION['sessionId'])) {
                             ?>
 
                                     <div class="card-kitchen mb-4 w-72 overflow-hidden relative flex flex-col card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-
+                                        <p class="hidden card-food-id"><?php echo $row['id']; ?></p>
                                         <div class="flex items-center flex-1 mb-2">
                                             <div class="w-16 h-16 overflow-hidden flex-1">
                                                 <img class="object-contain w-full h-full" src="./assets/featured/featured-burger.png" alt="foodImage">
@@ -1985,6 +1985,7 @@ if (!isset($_SESSION['sessionId'])) {
 
     <!-- Foods -->
     <script src="./scripts/add-new-food.js"></script>
+    <script src="./scripts/updating-food.js"></script>
 
     <!-- Toppings -->
     <!-- <script src="./scripts/add-new-topping.js"></script> -->
