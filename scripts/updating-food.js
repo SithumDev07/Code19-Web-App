@@ -101,7 +101,8 @@ $(document).ready(function() {
         $(".ingredient-list-food-selected").load("operations/get-current-ingredients-exists.php", {
             id: foodId,
         }, function() {
-            const ingredientResults = document.querySelectorAll('.resulted-ingredients');
+            const ingredientParent = document.querySelector('.ingredient-list-food-selected');
+            const ingredientResults = ingredientParent.querySelectorAll('.resulted-ingredients');
             
             currentIngredients(ingredientResults);
         });
