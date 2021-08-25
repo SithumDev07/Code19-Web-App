@@ -11,35 +11,31 @@ $(document).ready(function() {
                     query: value,
                 }, function() {
                     // alert(currentUser)
-                    inventoryCards = document.querySelectorAll('.card-kitchen')
-                    deleteCardsIngredients(inventoryCards);
+                    const foodCards = document.querySelectorAll('.card-kitchen')
+                    OpenFoodCards(foodCards);
                 });
         }else {
             $(".left-kitchen").load("operations/get-all-foods.php", {}, function() {
                 // * A;ways keep a flow, Trick is to load elements async
-                InventoryCards = document.querySelectorAll('.card-kitchen')
-                deleteCardsIngredients(InventoryCards);
+                const foodCards = document.querySelectorAll('.card-kitchen')
+                OpenFoodCards(foodCards);
             });
         }
     })
 
 
     toggleText = true;
-
-    function deleteCardsIngredients(InventoryCards) {
-        InventoryCards.forEach((ele, index) => {
+    function OpenFoodCards(foodCards) {
+        let foodId;
+        foodCards.forEach((ele, index) => {
             $(ele).click(function() {
-                // TODO Remove after log
-                console.log('delete Cards Ingredients');
-                id = ele.querySelector('.card-inventory-id').innerHTML
+                foodId = ele.querySelector('.card-food-id').innerHTML;
                 
-                $(".inventory-form-container").load("operations/get-card-inventory-data.php", {
-                    id: id,
+                $(".kitchen-form-container").load("operations/get-kitchen-data-update.php", {
+                    id: foodId,
                 }, function() {
-                    DeleteListenerInventory();
+                    UpdateListenerKitchen(foodId);
                 });
-                
-                statusOriginal = false;
             })
         })
     }
