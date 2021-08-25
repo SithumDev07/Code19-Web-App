@@ -222,6 +222,28 @@ $(document).ready(function() {
                     }
             }
         })
+
+
+        $("#FoodDelete").click(function() {
+            console.log('Deleting Food');
+
+            toggleText = true;
+        
+            const form_data = new FormData();
+            form_data.append('id', foodId);
+            $.ajax({
+                url: 'operations/delete-food.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert(response);
+                    // console.log(response);
+                    location.reload();
+                }
+            });
+        })
         
 
         function currentIngredients(List) {
