@@ -49,6 +49,54 @@ $(document).ready(function() {
         let selectedToppingIds = [];
 
 
+         // ? Food Details
+         ListenOnInputChangesFood(document.querySelector('#foodName'))
+         ListenOnInputChangesFood(document.querySelector('#foodDescription'))
+         ListenOnInputChangesFood(document.querySelector('#unitPriceFood'))
+         ListenOnInputChangesFood(document.querySelector('#foodPrepTime'))
+
+            // ? Food Name render on card
+        $("#foodName").keyup(function() {
+        
+            let value = $(this).val();
+            if(value !== '') {
+                document.querySelector('.card-foodName').innerHTML = value;
+            } else {
+                document.querySelector('.card-foodName').innerHTML = 'Sample Food Name';
+            }
+        })
+
+        // ? Description render on card
+        $("#foodDescription").keyup(function() {
+        
+            let value = $(this).val();
+            if(value !== '') {
+                document.querySelector('.card-description').innerHTML = value;
+            } else {
+                document.querySelector('.card-description').innerHTML = 'Sample Food Name';
+            }
+        })
+
+
+        // ? Unit Price render on card
+        $("#unitPriceFood").keyup(function() {
+        
+            let value = $(this).val();
+            if(value !== '') {
+                if(value.includes('.')) {
+                    let numberArray = value.split('.');
+                    let decimal = numberArray.shift();
+                    let points = numberArray.join('.');
+                    document.querySelector('.card-basicPrice').innerHTML = "Rs." + decimal + "." + points;
+                } else {
+                    document.querySelector('.card-basicPrice').innerHTML = "Rs." + value + ".00";
+                }
+            } else {
+                document.querySelector('.card-basicPrice').innerHTML = 'Rs.0.00';
+            }
+        })
+
+
         // ? Preloading ingredients
         $(".ingredient-list-food-selected").load("operations/get-current-ingredients-exists.php", {
             id: foodId,
@@ -70,6 +118,122 @@ $(document).ready(function() {
         });
 
 
+        $("#FoodUpdate").click(function() {
+            console.log('Current List');
+            confirmedIds.forEach(ele => {
+                console.log(ele);
+            })
+            console.log('\n');
+
+
+            console.log('Quantity List');
+            currentIngredientsQuantities.forEach(ele => {
+                console.log(ele);
+            })
+            console.log('\n');
+
+
+            console.log('Removing List');
+            removeListIngredients.forEach(ele => {
+                console.log(ele);
+            })
+            console.log('\n');
+
+
+            console.log('Selecting List');
+            selectingElementFood.forEach(ele => {
+                console.log(ele.querySelector('.ingredient-name').innerHTML);
+            })
+            console.log('\n');
+
+             // TODO Updating part check for toppings array empty
+             if(confirmedIds.length > 0 && currentIngredientsQuantities.length > 0) {
+                setErrorOnInputs(document.querySelector('#searchIngredientNames'),false);
+                setErrorOnInputs(document.querySelector('#SearchToppingNames'),false);
+            }
+
+            if(document.querySelector('#foodPhotoUpload').files.length === 0) {
+                setErroOnCrewImage(true, document.querySelector('.foodImageContainer'))
+                foodInputSuccess = false;
+                $(".food-error-message").removeClass("hidden");
+            }
+
+            if(!isValidExtention(document.querySelector('#foodPhotoUpload'))) {
+                setErroOnCrewImage(true, document.querySelector('.foodImageContainer'))
+                foodInputSuccess = false;
+            }
+
+            if(!isValidImageSize(document.querySelector('#foodPhotoUpload'))) {
+                setErroOnCrewImage(true, document.querySelector('.foodImageContainer'))
+                foodInputSuccess=false;
+            }
+
+            // ? Most required validations
+
+            if(confirmedIngredientIdsFood.length == 0 || selectedToppingIds.length == 0) {
+                setErrorOnInputs(document.querySelector('#searchIngredientNames'),true);
+                setErrorOnInputs(document.querySelector('#SearchToppingNames'),true);
+                foodInputSuccess = false;
+                $(".food-error-message").removeClass("hidden");
+            } 
+             else {
+                validateFoodDetils(document.querySelector('#foodName'));
+                validateFoodDetils(document.querySelector('#foodDescription'));
+                validateFoodDetils(document.querySelector('#unitPriceFood'));
+                validateFoodDetils(document.querySelector('#foodPrepTime'));
+
+                setErrorOnInputs(document.querySelector('#searchIngredientNames'),false);
+                setErrorOnInputs(document.querySelector('#SearchToppingNames'),false);
+                if(foodInputSuccess) {
+                    console.log("Done");
+
+            
+                    const form_data = new FormData();
+                    const image = $("#foodPhotoUpload")[0].files;
+                    console.log(image[0]);
+            
+                    const foodName = $("#foodName").val();
+                    const foodDescription = $("#foodDescription").val();
+                    const foodBasicPrice = $("#unitPriceFood").val();
+                    const foodPrepTime = $("#foodPrepTime").val();
+                    
+                    $(".food-error-message").addClass("hidden");
+        
+                    form_data.append('foodname', foodName);
+                    form_data.append('fooddescription', foodDescription);
+                    form_data.append('basicprice', foodBasicPrice);
+                    form_data.append('preptime', foodPrepTime);
+                    form_data.append('image', image[0]);
+                    form_data.append('id', foodId);
+                    form_data.append('ingredientIds', JSON.stringify(confirmedIngredientIdsFood));
+                    form_data.append('ingredientQuantities', JSON.stringify(currentIngredientsQuantities));
+                    form_data.append('toppingIds', JSON.stringify(selectedToppingIds));
+                    
+                    $.ajax({
+                        url: 'operations/update-food.php',
+                        type: 'POST',
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            alert(response);
+                            document.querySelector('.transformin-icon').classList.toggle('translate-icon');
+                            if(toggleText) {
+                                document.querySelector('.change-text-kitchen').innerHTML = "Cancel";
+                            } else {
+                                document.querySelector('.change-text-kitchen').innerHTML = "Add Food";
+                            }
+                            toggleText = !toggleText;
+                            document.querySelector('.kitchen-form-container').classList.toggle('hidden');
+                            document.querySelector('.kitchen-form-container').classList.toggle('flex');
+                            location.reload();
+                        }
+                    });
+                    } else {
+                        $(".food-error-message").removeClass("hidden");
+                    }
+            }
+        })
         
 
         function currentIngredients(List) {
@@ -157,34 +321,7 @@ $(document).ready(function() {
             addToListClickListener($("#AddtoListIngredientFood"), document.querySelector('#IngredientNameFoodDisabled'), document.querySelector('#IngredientQuantityFood'), $('.selectedTextFood'), currentIngredientsQuantities, selectingElementFood, confirmedSelected, renderSelectedList, confirmedIds, document.querySelector('.ingredient-list-food-selected'), selectedIdIngredientsFoods, removeListIngredients);
 
 
-            $("#FoodUpdate").click(function() {
-                console.log('Current List');
-                confirmedIds.forEach(ele => {
-                    console.log(ele);
-                })
-                console.log('\n');
-
-
-                console.log('Quantity List');
-                currentIngredientsQuantities.forEach(ele => {
-                    console.log(ele);
-                })
-                console.log('\n');
-
-
-                console.log('Removing List');
-                removeListIngredients.forEach(ele => {
-                    console.log(ele);
-                })
-                console.log('\n');
-
-
-                console.log('Selecting List');
-                selectingElementFood.forEach(ele => {
-                    console.log(ele.querySelector('.ingredient-name').innerHTML);
-                })
-                console.log('\n');
-            })
+            
         }
 
         function currentToppings(List) {

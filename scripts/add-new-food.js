@@ -243,9 +243,6 @@ $(document).ready(function() {
                         processData: false,
                         success: function(response) {
                             alert(response);
-                            // ? After Success
-                            alert(response);
-                            // console.log(response);
                             document.querySelector('.transformin-icon').classList.toggle('translate-icon');
                             if(toggleText) {
                                 document.querySelector('.change-text-kitchen').innerHTML = "Cancel";
@@ -516,26 +513,6 @@ $(document).ready(function() {
                 })
             });
         }
-
-
-        // window.validateAddtoList = function(ele) {
-        //     let success = true;
-        //     if(ele.id === `SelectedIngredientNameDisabled` && ele.value === '') {
-        //         setErrorOnInputs(ele,true)
-        //         success = false;
-        //     }else if(ele.id !== `SelectedIngredientNameDisabled` && ele.value <= 0 || ele.value.length === 0) {
-        //         setErrorOnInputs(ele,true)
-        //         success = false;
-        //     }else if(ele.id !== `SelectedIngredientNameDisabled` && ele.value === 0) {
-        //         setErrorOnInputs(ele,true)
-        //         success = false;
-        //     }else {
-        //         setErrorOnInputs(ele,false)
-        //         success = true;
-        //     }
-
-        //     return success;
-        // }
 
 
         function validateToppingFirstForm(ele) {
