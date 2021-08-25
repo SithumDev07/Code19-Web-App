@@ -386,31 +386,7 @@ $(document).ready(function() {
 
         addToListClickListener($("#AddtoListIngredientFood"), document.querySelector('#IngredientNameFoodDisabled'), document.querySelector('#IngredientQuantityFood'), $(".selectedTextFood"), quantityListFood, selectingElementFood, confirmedIngredientsFood, renderSelectedListFood, confirmedIngredientIdsFood, document.querySelector('.ingredient-list-food-selected'), selectedIdIngredientsFoods, removedListFood);
 
-        function addToListClickListener (ele, disabled, quantityInput, hiddenSelectedList, quantityList, currentlySelcted, confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter, removedList) {
-            
-            $(ele).click(function() {
-                if(!validateAddtoList(disabled) || !validateAddtoList(quantityInput)) {
-                    console.log("Can't move");
-                } else {
-                    console.log("here we go");
-
-                    $(hiddenSelectedList).removeClass('hidden');
-
-                    // ? Adding Quantity
-                    quantityList.push(quantityInput.value);
-
-                    // ? Getting last clicked ingredient button
-                    confirmedSelected.push(currentlySelcted.slice(-1)[0]);
-                    
-
-                    quantityInput.value = '';
-                    disabled.value = '';
-
-                    renderListCommon(confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter, removedList);
-
-                }
-            })
-        }
+        
 
 
         // ? Interacting with food Ingredients
@@ -671,6 +647,32 @@ $(document).ready(function() {
         });
     }
 })
+
+window.addToListClickListener = function (ele, disabled, quantityInput, hiddenSelectedList, quantityList, currentlySelcted, confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter, removedList) {
+            
+    $(ele).click(function() {
+        if(!validateAddtoList(disabled) || !validateAddtoList(quantityInput)) {
+            console.log("Can't move");
+        } else {
+            console.log("here we go");
+
+            $(hiddenSelectedList).removeClass('hidden');
+
+            // ? Adding Quantity
+            quantityList.push(quantityInput.value);
+
+            // ? Getting last clicked ingredient button
+            confirmedSelected.push(currentlySelcted.slice(-1)[0]);
+            
+
+            quantityInput.value = '';
+            disabled.value = '';
+
+            renderListCommon(confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter, removedList);
+
+        }
+    })
+}
 
 window.renderListCommon = function(List, renderSelectedList, confirmedIds, renderElContainer, idFilter, removedList) {
            

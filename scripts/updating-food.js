@@ -31,6 +31,9 @@ $(document).ready(function() {
 
         let selectedIdIngredientsFoods = [];
         let currentIngredientsQuantities = [];
+        
+        
+        let selectedIdsToppings = [];
 
         let selectingElementFood = [];
 
@@ -39,10 +42,14 @@ $(document).ready(function() {
         let confirmedSelected = [];
 
         let renderSelectedList = [];
+        let renderListToppings = [];
 
         let confirmedIds = [];
 
+        let selectedToppingIds = [];
 
+
+        // ? Preloading ingredients
         $(".ingredient-list-food-selected").load("operations/get-current-ingredients-exists.php", {
             id: foodId,
         }, function() {
@@ -50,6 +57,19 @@ $(document).ready(function() {
             
             currentIngredients(ingredientResults);
         });
+
+
+        // ? Preloading Toppings
+        $(".toppingss-list-food-selected").load("operations/get-current-toppings-exists.php", {
+            id: foodId,
+        }, function() {
+            const parentToppingResults = document.querySelector('.topping-list');
+            const ResultsForToppings = parentToppingResults.querySelectorAll('.resulted-ingredients');
+            
+            currentToppings(ResultsForToppings);
+        });
+
+
         
 
         function currentIngredients(List) {
@@ -136,31 +156,6 @@ $(document).ready(function() {
 
             addToListClickListener($("#AddtoListIngredientFood"), document.querySelector('#IngredientNameFoodDisabled'), document.querySelector('#IngredientQuantityFood'), $('.selectedTextFood'), currentIngredientsQuantities, selectingElementFood, confirmedSelected, renderSelectedList, confirmedIds, document.querySelector('.ingredient-list-food-selected'), selectedIdIngredientsFoods, removeListIngredients);
 
-            function addToListClickListener (ele, disabled, quantityInput, hiddenSelectedList, quantityList, currentlySelcted, confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter, removedList) {
-            
-                $(ele).click(function() {
-                    if(!validateAddtoList(disabled) || !validateAddtoList(quantityInput)) {
-                        console.log("Can't move");
-                    } else {
-                        console.log("here we go");
-    
-                        $(hiddenSelectedList).removeClass('hidden');
-    
-                        // ? Adding Quantity
-                        quantityList.push(quantityInput.value);
-    
-                        // ? Getting last clicked ingredient button
-                        confirmedSelected.push(currentlySelcted.slice(-1)[0]);
-                        
-    
-                        quantityInput.value = '';
-                        disabled.value = '';
-    
-                        renderListCommon(confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter, removedList);
-    
-                    }
-                })
-            }
 
             $("#FoodUpdate").click(function() {
                 console.log('Current List');
@@ -190,6 +185,90 @@ $(document).ready(function() {
                 })
                 console.log('\n');
             })
+        }
+
+        function currentToppings(List) {
+
+            List.forEach(ele => {
+
+            })
+            
+
+              // ? Search Topping Names
+            $("#SearchToppingNames").keyup(function() {
+
+                document.querySelector('.selectedTextToppingLast').classList.remove('hidden');
+                document.querySelector('.selectedTextToppingLast').classList.add('flex');
+
+                let value = $(this).val();
+                if(value !== '') {
+                    // console.log(value);
+                    $(".topping-list").load("operations/get-required-toppings-exists.php", {
+                        query: value,
+                        alreadyAdded: JSON.stringify(selectedIdsToppings)
+                    }, function() {
+                        const parentToppingResults = document.querySelector('.topping-list');
+                        const ResultsForToppings = parentToppingResults.querySelectorAll('.resulted-ingredients');
+                        addExtraToppings(ResultsForToppings);
+                    });
+                }
+                
+            })
+
+            // ? Interacting with toppings add and remove
+            function addExtraToppings(List) {
+                List.forEach((ele, index) => {
+                    $(ele).click(function () {
+                        ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
+                        if(!(ele.querySelector('.isSelectedIngredient').classList.contains('hidden'))) {
+                            
+                            let alreadyAdded = renderListToppings.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
+                            if(alreadyAdded === undefined){
+                                renderListToppings.push(ele)
+                                added = true;
+                            }
+                        } else {
+    
+                                added = false;
+                                addedId = true;
+                                // }
+    
+                                for(var i = 0; i < renderListToppings.length; i++) {
+                                    if(renderListToppings[i].querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML) {
+                                        renderListToppings.splice(i, 1);
+                                    }
+                                }
+    
+                                // TODO make list
+                                // for(var i = 0; i < selectedToppingIds.length; i++) {
+                                //     if(selectedIdIngredients[i] == ele.querySelector('.selectedIngredientId').innerHTML) {
+                                //         selectedToppingIds.splice(i, 1);
+                                //     }
+                                // }
+    
+                                ele.classList.remove('bg-green-400')
+                                ele.classList.add('bg-red-400')
+                            // }
+    
+                        }
+    
+                        
+                        renderListToppings.forEach((ele, index) => {
+    
+                            document.querySelector('.toppingss-list-food-selected').appendChild(ele);
+    
+                            let alreadyAdded = selectedToppingIds.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
+                            if(alreadyAdded === undefined) {
+                                // console.log('Pushing \n');
+                                ele.classList.remove('bg-red-400')
+                                ele.classList.add('bg-green-400')
+                                selectedToppingIds.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                                addedId = false;
+                            }
+                        })
+                    })
+                })
+            }
         }
         
 
