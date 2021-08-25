@@ -1278,7 +1278,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                     <!-- Search Field -->
                     <div class="mt-5 flex items-center w-full sticky top-0 z-50" id="stickySearchKitchen">
-                        <input type="text" placeholder="Search for FoodID, Food Name Or Category Name..." class="flex-1 bg-transparent rounded-md border transform transition-colors duration-300">
+                        <input type="text" placeholder="Search for FoodID, Food Name Or Category Name..." class="flex-1 bg-transparent rounded-md border transform transition-colors duration-300" id="FoodSearch">
                         <button class="flex items-center text-gray-500 mx-5 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="filterKitchen">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
@@ -1986,6 +1986,7 @@ if (!isset($_SESSION['sessionId'])) {
     <!-- Foods -->
     <script src="./scripts/add-new-food.js"></script>
     <script src="./scripts/updating-food.js"></script>
+    <script src="./scripts/food-search.js"></script>
 
     <!-- Toppings -->
     <!-- <script src="./scripts/add-new-topping.js"></script> -->
