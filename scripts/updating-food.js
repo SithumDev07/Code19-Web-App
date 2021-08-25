@@ -118,7 +118,8 @@ $(document).ready(function() {
         });
 
 
-        $("#FoodUpdate").click(function() {
+        $("#FoodUpdate").click(function(e) {
+            e.preventDefault();
             console.log('Current List');
             confirmedIds.forEach(ele => {
                 console.log(ele);
@@ -129,20 +130,6 @@ $(document).ready(function() {
             console.log('Quantity List');
             currentIngredientsQuantities.forEach(ele => {
                 console.log(ele);
-            })
-            console.log('\n');
-
-
-            console.log('Removing List');
-            removeListIngredients.forEach(ele => {
-                console.log(ele);
-            })
-            console.log('\n');
-
-
-            console.log('Selecting List');
-            selectingElementFood.forEach(ele => {
-                console.log(ele.querySelector('.ingredient-name').innerHTML);
             })
             console.log('\n');
 
@@ -170,7 +157,7 @@ $(document).ready(function() {
 
             // ? Most required validations
 
-            if(confirmedIngredientIdsFood.length == 0 || selectedToppingIds.length == 0) {
+            if(confirmedIds.length == 0 || currentIngredientsQuantities.length == 0) {
                 setErrorOnInputs(document.querySelector('#searchIngredientNames'),true);
                 setErrorOnInputs(document.querySelector('#SearchToppingNames'),true);
                 foodInputSuccess = false;
@@ -205,7 +192,7 @@ $(document).ready(function() {
                     form_data.append('preptime', foodPrepTime);
                     form_data.append('image', image[0]);
                     form_data.append('id', foodId);
-                    form_data.append('ingredientIds', JSON.stringify(confirmedIngredientIdsFood));
+                    form_data.append('ingredientIds', JSON.stringify(confirmedIds));
                     form_data.append('ingredientQuantities', JSON.stringify(currentIngredientsQuantities));
                     form_data.append('toppingIds', JSON.stringify(selectedToppingIds));
                     
@@ -407,11 +394,28 @@ $(document).ready(function() {
                 })
             }
         }
+
+        let foodInputSuccess = false;
+        function validateFoodDetils(ele) {
+            if(ele.id === `foodName` || ele.id === `foodDescription` && ele.value === '') {
+                setErrorOnInputs(ele,true)
+                foodInputSuccess = false;
+            }else if(ele.id !== `foodName` && ele.id !== `foodDescription` && ele.value <= 0 || ele.value.length === 0) {
+                setErrorOnInputs(ele,true)
+                foodInputSuccess = false;
+            }else if(ele.id !== `foodName` && ele.id !== `foodDescription` && ele.value === 0) {
+                setErrorOnInputs(ele,true)
+                foodInputSuccess = false;
+            }else {
+                setErrorOnInputs(ele,false)
+                foodInputSuccess = true;
+            }
+        }
         
 
         $(function(){
        
-            $('#SupplierUploadProfile').change(function(){
+            $('#foodPhotoUpload').change(function(){
                 var input = this;
                 var url = $(this).val();
                 var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
@@ -420,16 +424,17 @@ $(document).ready(function() {
                     var reader = new FileReader();
             
                     reader.onload = function (e) {
-                        $(".SupplierImageContainer").removeClass("border-blue-600")
-                        $(".SupplierImageContainer").removeClass("border-red-500")
-                        $(".SupplierImageContainer").addClass("border-green-500")
-                       $('#supplierUploadedProfile').attr('src', e.target.result);
+                        $(".foodImageContainer").removeClass("border-blue-600")
+                        $(".foodImageContainer").removeClass("border-red-500")
+                        $(".foodImageContainer").addClass("border-green-500")
+                       $('#foodUploadedPhoto').attr('src', e.target.result);
+                       $('#card-food-image').attr('src', e.target.result);
                     }
                    reader.readAsDataURL(input.files[0]);
                 }
                 else
                 {
-                  $('#SupplierUploadProfile').attr('src', '/assets/no_preview.png');
+                  $('#foodUploadedPhoto').attr('src', '/assets/no_preview.png');
                 }
               });
         });

@@ -72,6 +72,7 @@ if (isset($_POST['id'])) {
          while ($row = mysqli_fetch_assoc($results)) {
              array_push($currentIngredientIds, $row['ingredient_id']);
              array_push($currentUnits, $row['no_of_units']);
+             $prevFile = $row['photo'];
          }
      }
      // ?
@@ -120,7 +121,8 @@ if (isset($_POST['id'])) {
     }
 
 
-    if (empty($foodId) ||empty($foodname) || empty($basicprice) || empty($ingredientIds) || empty($ingredientQuantities) || empty($toppingIds)) {
+    // TODO Add validation on toppings ids later
+    if (empty($foodId) ||empty($foodname) || empty($basicprice) || empty($ingredientIds) || empty($ingredientQuantities)) {
         // header("Location: ../dasboard.php?error=empty_fields");
         echo "empty fields $foodId $foodname $basicprice";
         exit();
@@ -141,7 +143,7 @@ if (isset($_POST['id'])) {
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $sql;
 
-                    $sql = "UPDATE food SET name=?, basic_price=?, prep_time=?, description=?, photo=? WHERE id=" . $foodId .";";
+                    $sql = "UPDATE food SET name=?, basic_price=?, prep_time=?, description=?, photo=? WHERE id=?;";
 
                     $statement = mysqli_stmt_init($conn);
             
@@ -150,7 +152,7 @@ if (isset($_POST['id'])) {
                         exit();
                     } else {
                         $rating = 0.0;
-                        $bindFailed = mysqli_stmt_bind_param($statement, 'siisis', $foodname, $basicprice, $preptime, $fooddescription, $fileNameNew);
+                        $bindFailed = mysqli_stmt_bind_param($statement, 'siissi', $foodname, $basicprice, $preptime, $fooddescription, $fileNameNew, $foodId);
                         if ($bindFailed === false) {
                             echo htmlspecialchars($statement->error);
                             exit();
@@ -212,7 +214,7 @@ if (isset($_POST['id'])) {
                         } else {
             
                             for ($i=0; $i < count($deletingIds); $i++) { 
-                                $bindFailed = mysqli_stmt_bind_param($statement, 'iii', $deletingIds[$i]);
+                                $bindFailed = mysqli_stmt_bind_param($statement, 'i', $deletingIds[$i]);
                 
                                 if ($bindFailed === false) {
                                     echo htmlspecialchars($statement->error);
