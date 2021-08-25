@@ -386,7 +386,7 @@ $(document).ready(function() {
 
         addToListClickListener($("#AddtoListIngredientFood"), document.querySelector('#IngredientNameFoodDisabled'), document.querySelector('#IngredientQuantityFood'), $(".selectedTextFood"), quantityListFood, selectingElementFood, confirmedIngredientsFood, renderSelectedListFood, confirmedIngredientIdsFood, document.querySelector('.ingredient-list-food-selected'), selectedIdIngredientsFoods, removedListFood);
 
-        function addToListClickListener(ele, disabled, quantityInput, hiddenSelectedList, quantityList, currentlySelcted, confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter, removedList) {
+        function addToListClickListener (ele, disabled, quantityInput, hiddenSelectedList, quantityList, currentlySelcted, confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter, removedList) {
             
             $(ele).click(function() {
                 if(!validateAddtoList(disabled) || !validateAddtoList(quantityInput)) {
@@ -412,46 +412,6 @@ $(document).ready(function() {
             })
         }
 
-        function renderListCommon(List, renderSelectedList, confirmedIds, renderElContainer, idFilter, removedList) {
-           
-            List.forEach((ele, index) => {
-
-                let alreadtAdded = renderSelectedList.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
-                let alreadtOffedList = List.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
-                
-
-                if(alreadtAdded === undefined) {
-                    if(alreadtOffedList !== undefined) {
-                        renderSelectedList.push(ele);
-                    }
-                }
-
-                // ? Checking for already added if no then add to the final list - Sending List
-                let isConfirmed = confirmedIds.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
-                let isRemovingItem = removedList.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
-                if(isConfirmed === undefined) {
-                    if(isRemovingItem === undefined) {
-                        confirmedIds.push(ele.querySelector('.selectedIngredientId').innerHTML);
-                        ele.classList.remove('bg-red-400');
-                        ele.classList.add('bg-green-400');
-                    } else {
-                    }
-                }
-
-                // ? Render on screen method
-                renderSelectedList.forEach((ele, index) => {
-                    renderElContainer.appendChild(ele);
-
-                    // ? Filtering database SQL Query
-                    let alreadyAdded = idFilter.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
-                    if(alreadyAdded === undefined) {
-                        idFilter.push(ele.querySelector('.selectedIngredientId').innerHTML);
-                        
-                    }
-
-                })
-            })
-        }
 
         // ? Interacting with food Ingredients
         window.selctedIngredients = function (ingredientResults) {
@@ -582,24 +542,24 @@ $(document).ready(function() {
         }
 
 
-        function validateAddtoList(ele) {
-            let success = true;
-            if(ele.id === `SelectedIngredientNameDisabled` && ele.value === '') {
-                setErrorOnInputs(ele,true)
-                success = false;
-            }else if(ele.id !== `SelectedIngredientNameDisabled` && ele.value <= 0 || ele.value.length === 0) {
-                setErrorOnInputs(ele,true)
-                success = false;
-            }else if(ele.id !== `SelectedIngredientNameDisabled` && ele.value === 0) {
-                setErrorOnInputs(ele,true)
-                success = false;
-            }else {
-                setErrorOnInputs(ele,false)
-                success = true;
-            }
+        // window.validateAddtoList = function(ele) {
+        //     let success = true;
+        //     if(ele.id === `SelectedIngredientNameDisabled` && ele.value === '') {
+        //         setErrorOnInputs(ele,true)
+        //         success = false;
+        //     }else if(ele.id !== `SelectedIngredientNameDisabled` && ele.value <= 0 || ele.value.length === 0) {
+        //         setErrorOnInputs(ele,true)
+        //         success = false;
+        //     }else if(ele.id !== `SelectedIngredientNameDisabled` && ele.value === 0) {
+        //         setErrorOnInputs(ele,true)
+        //         success = false;
+        //     }else {
+        //         setErrorOnInputs(ele,false)
+        //         success = true;
+        //     }
 
-            return success;
-        }
+        //     return success;
+        // }
 
 
         function validateToppingFirstForm(ele) {
@@ -711,6 +671,66 @@ $(document).ready(function() {
         });
     }
 })
+
+window.renderListCommon = function(List, renderSelectedList, confirmedIds, renderElContainer, idFilter, removedList) {
+           
+    List.forEach((ele, index) => {
+
+        let alreadtAdded = renderSelectedList.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
+        let alreadtOffedList = List.find(element => element.querySelector('.selectedIngredientId').innerHTML == ele.querySelector('.selectedIngredientId').innerHTML);
+        
+
+        if(alreadtAdded === undefined) {
+            if(alreadtOffedList !== undefined) {
+                renderSelectedList.push(ele);
+            }
+        }
+
+        // ? Checking for already added if no then add to the final list - Sending List
+        let isConfirmed = confirmedIds.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
+        let isRemovingItem = removedList.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
+        if(isConfirmed === undefined) {
+            if(isRemovingItem === undefined) {
+                confirmedIds.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                ele.classList.remove('bg-red-400');
+                ele.classList.add('bg-green-400');
+            } else {
+            }
+        }
+
+        // ? Render on screen method
+        renderSelectedList.forEach((ele, index) => {
+            renderElContainer.appendChild(ele);
+
+            // ? Filtering database SQL Query
+            let alreadyAdded = idFilter.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
+            if(alreadyAdded === undefined) {
+                idFilter.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                
+            }
+
+        })
+    })
+}
+
+window.validateAddtoList = function(ele) {
+    let success = true;
+    if(ele.id === `SelectedIngredientNameDisabled` && ele.value === '') {
+        setErrorOnInputs(ele,true)
+        success = false;
+    }else if(ele.id !== `SelectedIngredientNameDisabled` && ele.value <= 0 || ele.value.length === 0) {
+        setErrorOnInputs(ele,true)
+        success = false;
+    }else if(ele.id !== `SelectedIngredientNameDisabled` && ele.value === 0) {
+        setErrorOnInputs(ele,true)
+        success = false;
+    }else {
+        setErrorOnInputs(ele,false)
+        success = true;
+    }
+
+    return success;
+}
 
 
 window.ListenOnInputChangesTopping = function (ele) {

@@ -36,30 +36,37 @@ $(document).ready(function() {
 
         let removeListIngredients = [];
 
+        let confirmedSelected = [];
 
-        $(".ingredient-list-food-selected ").load("operations/get-current-ingredients-exists.php", {
+        let renderSelectedList = [];
+
+        let confirmedIds = [];
+
+
+        $(".ingredient-list-food-selected").load("operations/get-current-ingredients-exists.php", {
             id: foodId,
         }, function() {
             const ingredientResults = document.querySelectorAll('.resulted-ingredients');
             
             currentIngredients(ingredientResults);
         });
-
-        // ListenOnInputChanges(document.querySelector('#supplierName'), 'supplier')
-        // ListenOnInputChanges(document.querySelector('#supplierEmail'), 'supplier')
-        // ListenOnInputChanges(document.querySelector('#supplierAddress'), 'supplier')
-        // ListenOnInputChanges(document.querySelector('#supplierPersonalNumber'), 'supplier')
-        // ListenOnInputChanges(document.querySelector('#supplierLandLine'), 'supplier')    // ? searchIngredientNames
         
 
         function currentIngredients(List) {
 
             List.forEach(ele => {
-                selectedIdIngredientsFoods.push(ele.querySelector('.IngredientId').innerHTML);
+                confirmedIds.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                selectedIdIngredientsFoods.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                selectingElementFood.push(ele);
                 currentIngredientsQuantities.push(ele.querySelector('.quantityFromIngredient').innerHTML);
             })
 
+            selectingElementFood.forEach(ele => {
+                ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
+            })
+
             $("#searchIngredientNames").keyup(function() {
+                document.querySelector('.ingredient-list-food').classList.remove('hidden');
                 let value = $(this).val();
                 if(value !== '') {
                     $(".ingredient-list-food ").load("operations/get-required-ingredients-exists.php", {
@@ -69,15 +76,95 @@ $(document).ready(function() {
                         const newIngredientResults = document.querySelectorAll('.resulted-ingredients');
                         
                         addExtraIngredients(newIngredientResults);
-                        // selectedIdIngredients = selectedIdIngredients.concat(testArray);
                     });
                 }
             })
 
 
+
+
+            // ? Interacting with food Ingredients
+            function addExtraIngredients(List) {
+                List.forEach((ele, index) => {
+                    $(ele).click(function () {
+                        ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
+                        if(!(ele.querySelector('.isSelectedIngredient').classList.contains('hidden'))) {
+                            document.querySelector('.ingredient-list-food').classList.add('hidden');
+                            document.querySelector('#IngredientNameFoodDisabled').value = ele.querySelector('.ingredient-name').innerHTML;
+                            document.querySelector('#IngredientQuantityFood').value = '';
+                            setErrorOnInputs(document.querySelector("#IngredientNameFoodDisabled"),false)
+                            document.querySelector('#searchIngredientNames').value = '';
+
+
+                            document.querySelector('.food-ingredients-inputs').classList.remove('hidden');
+                            document.querySelector('.food-ingredients-inputs').classList.add('flex');
+                            
+                            // ? Adding selected items to render on screen
+                
+                            selectingElementFood.push(ele);
+
+                            let ifRemoved = removeListIngredients.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML);
+                            if(ifRemoved !== undefined) {
+                                for(var i =0; i < removeListIngredients.length; i++) {
+                                    if(removeListIngredients[i] == ele.querySelector('.selectedIngredientId').innerHTML) {
+                                        removeListIngredients.splice(i, 1);
+                                    }
+                                }
+                            }
+
+
+                        } else {
+                            let ifRemoved = removeListIngredients.find(element => element == document.querySelector('.selectedIngredientId').innerHTML);
+                            if(ifRemoved === undefined) {
+                                removeListIngredients.push(ele.querySelector('.selectedIngredientId').innerHTML);
+                            }
+
+                            for(var i = 0; i < confirmedIds.length; i++) {
+                                if(confirmedIds[i] == ele.querySelector('.selectedIngredientId').innerHTML) {
+                                    console.log('Removing ', ele.querySelector(".ingredient-name").innerHTML, " and id ", i);
+                                    confirmedIds.splice(i, 1);
+                                    currentIngredientsQuantities.splice(i, 1);
+                                }
+                            }
+
+                            ele.classList.remove('bg-green-400');
+                            ele.classList.add('bg-red-400');
+                        }
+                    })
+                })
+            }
+
+            addToListClickListener($("#AddtoListIngredientFood"), document.querySelector('#IngredientNameFoodDisabled'), document.querySelector('#IngredientQuantityFood'), $('.selectedTextFood'), currentIngredientsQuantities, selectingElementFood, confirmedSelected, renderSelectedList, confirmedIds, document.querySelector('.ingredient-list-food-selected'), selectedIdIngredientsFoods, removeListIngredients);
+
+            function addToListClickListener (ele, disabled, quantityInput, hiddenSelectedList, quantityList, currentlySelcted, confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter, removedList) {
+            
+                $(ele).click(function() {
+                    if(!validateAddtoList(disabled) || !validateAddtoList(quantityInput)) {
+                        console.log("Can't move");
+                    } else {
+                        console.log("here we go");
+    
+                        $(hiddenSelectedList).removeClass('hidden');
+    
+                        // ? Adding Quantity
+                        quantityList.push(quantityInput.value);
+    
+                        // ? Getting last clicked ingredient button
+                        confirmedSelected.push(currentlySelcted.slice(-1)[0]);
+                        
+    
+                        quantityInput.value = '';
+                        disabled.value = '';
+    
+                        renderListCommon(confirmedSelected, renderSelectedList, confirmIds, renderElContainer, idFilter, removedList);
+    
+                    }
+                })
+            }
+
             $("#FoodUpdate").click(function() {
                 console.log('Current List');
-                selectedIdIngredientsFoods.forEach(ele => {
+                confirmedIds.forEach(ele => {
                     console.log(ele);
                 })
                 console.log('\n');
@@ -95,196 +182,16 @@ $(document).ready(function() {
                     console.log(ele);
                 })
                 console.log('\n');
+
+
+                console.log('Selecting List');
+                selectingElementFood.forEach(ele => {
+                    console.log(ele.querySelector('.ingredient-name').innerHTML);
+                })
+                console.log('\n');
             })
-
-            // ? Interacting with food Ingredients
-            function addExtraIngredients(List) {
-                List.forEach((ele, index) => {
-                    $(ele).click(function () {
-                        ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
-                        if(!(ele.querySelector('.isSelectedIngredient').classList.contains('hidden'))) {
-                            document.querySelector('.ingredient-list-food').classList.add('hidden');
-                            document.querySelector('#IngredientNameFoodDisabled').value = ele.querySelector('.ingredient-name').innerHTML;
-                            document.querySelector('#IngredientQuantityFood').value = '';
-                            setErrorOnInputs(document.querySelector("#IngredientNameFoodDisabled"),false)
-                            document.querySelector('#searchIngredientNames').value = '';
-                            
-                            // ? Adding selected items to render on screen
-                
-                            selectingElementFood.push(ele);
-
-                            let ifRemoved = removeListIngredients.find(element => element == document.querySelector('.IngredientId').innerHTML);
-                            if(ifRemoved !== undefined) {
-                                for(var i =0; i < removeListIngredients.length; i++) {
-                                    if(removeListIngredients[i] == ele.querySelector('.IngredientId').innerHTML) {
-                                        removeListIngredients.splice(i, 1);
-                                    }
-                                }
-                            }
-
-
-                        } else {
-                            let ifRemoved = removeListIngredients.find(element => element == document.querySelector('.IngredientId').innerHTML);
-                            if(ifRemoved === undefined) {
-                                removeListIngredients.push(ele.querySelector('.IngredientId').innerHTML);
-                            }
-
-                            // TODO make db filtering ingredients id array
-
-                            ele.classList.remove('bg-green-400');
-                            ele.classList.add('bg-red-400');
-                        }
-                    })
-                })
-            }
-            
-            
-            
-            
-            window.selctedIngredients = function (ingredientResults) {
-                ingredientResults.forEach((ele, index) => {
-                    $(ele).click(function() {
-                        // document.querySelector('.selectedText').classList.remove('hidden');
-                        
-                        ele.querySelector('.isSelectedIngredient').classList.toggle('hidden');
-                    if(!(ele.querySelector('.isSelectedIngredient').classList.contains('hidden'))) {
-                        
-                        document.querySelector('.ingredient-list-food').classList.add('hidden');
-                        
-                        document.querySelector('#IngredientNameFoodDisabled').value = ele.querySelector('.ingredient-name').innerHTML;
-
-                        document.querySelector('#IngredientQuantityFood').value = '';
-                        setErrorOnInputs(document.querySelector("#IngredientNameFoodDisabled"),false)
-
-                        document.querySelector('#searchIngredientNames').value = '';
-                        
-                       // ? Adding selected items to render on screen
-
-                       selectingElementFood.push(ele);
-
-                       let ifRemoved = removedListFood.find(element => element == ele.querySelector('.selectedIngredientId').innerHTML)
-                        console.log('in r food list? -', ifRemoved);
-                        if(ifRemoved !== undefined) {
-                            for(var i = 0; i < removedListFood.length; i++) {
-                                if(removedListFood[i] == ele.querySelector('.selectedIngredientId').innerHTML) {
-                                    removedListFood.splice(i, 1);
-                                }
-                            }
-                        }
-
-                        console.log('triggered if');
-                    } else {
-                        console.log("Triggered Else");
-
-                        // ? Removing selected element
-
-                        let ifRemoved = removedListFood.find(element => element == document.querySelector('.selectedIngredientId').innerHTML)
-                        if(ifRemoved === undefined) {
-                            removedListFood.push(ele.querySelector('.selectedIngredientId').innerHTML);
-                        }
-
-                        for(var i = 0; i < confirmedIngredientIdsFood.length; i++) {
-                            if(confirmedIngredientIdsFood[i] == ele.querySelector('.selectedIngredientId').innerHTML) {
-                                // selectingElement.splice(i, 1);
-
-                                console.log('Removing ', ele.querySelector(".ingredient-name").innerHTML, " and id ", i);
-
-                                // ? Also updating sending list confirmed
-                                quantityListFood.splice(i, 1);
-                                confirmedIngredientIdsFood.splice(i, 1);
-                            }
-                        }
-
-
-                        ele.classList.remove('bg-green-400')
-                        ele.classList.add('bg-red-400')
-                        
-
-                    }
-                })
-            });
-        }
         }
         
-        // $("#UpdateSupplier").click(function(){
-        //     console.log('Update Clicked');
-        //     const form_data = new FormData();
-        //     const image = $("#SupplierUploadProfile")[0].files;
-        //     console.log(image[0]);
-
-        //     const name = $("#supplierName").val();
-        //     const email = $("#supplierEmail").val();
-        //     const address = $("#supplierAddress").val();
-
-        //     const personalNumber = $("#supplierPersonalNumber").val();
-        //     const landLine = $("#supplierLandLine").val();
-        //     const supplierId = $("#SupplierId").val();
-        //     const SupplierPreviousProfile = $("#SupplierPreviousProfile").val();
-
-        //     toggleText = true;
-        //     const SupplierImageContainer = document.querySelector('.SupplierImageContainer')
-        //     if(!(validateCrewForms(name, email, address, personalNumber, undefined, undefined, landLine, false, document.querySelector('#SupplierUploadProfile'), SupplierImageContainer, 'supplier'))) {
-        //         console.log('Not Validated');
-        //         $(".supplier-error-message").removeClass("hidden");
-        //     }else {
-        //         console.log('Validated');
-        //         $(".supplier-error-message").addClass("hidden");
-
-        //         form_data.append('profileUpload', image[0]);
-        //         form_data.append('name', name);
-        //         form_data.append('email', email);
-        //         form_data.append('address', address);
-        //         form_data.append('mobile', personalNumber);
-        //         form_data.append('landline', landLine);
-        //         form_data.append('id', supplierId);
-        //         form_data.append('prev_file', SupplierPreviousProfile);
-
-        //         $.ajax({
-        //             url: 'operations/update-supplier.php',
-        //             type: 'POST',
-        //             data: form_data,
-        //             contentType: false,
-        //             processData: false,
-        //             success: function(response) {
-        //                 alert(response);
-        //                 document.querySelector('.transformin-icon').classList.toggle('translate-icon');
-        //                 if(toggleText) {
-        //                     document.querySelector('.change-text-supplier').innerHTML = "Cancel";
-        //                 } else {
-        //                     document.querySelector('.change-text-supplier').innerHTML = "Add Supplier";
-        //                 }
-        //                 toggleText = !toggleText;
-        //                 document.querySelector('.supplier-form-container').classList.toggle('hidden');
-        //                 document.querySelector('.supplier-form-container').classList.toggle('flex');
-        //                 location.reload();
-        //             }
-        //         });
-        //     }
-        // })
-
-        // $("#DeleteSupplier").click(function() {
-        //     console.log('Deleting Supplier');
-
-        //     toggleText = true;
-        
-        //     const form_data = new FormData();
-        //     const SupplierId = $("#SupplierId").val();
-        //     const PreviousProfile = $("#SupplierPreviousProfile").val();
-        //     form_data.append('id', SupplierId);
-        //     form_data.append('prev_file', PreviousProfile);
-        //     $.ajax({
-        //         url: 'operations/delete-supplier.php',
-        //         type: 'POST',
-        //         data: form_data,
-        //         contentType: false,
-        //         processData: false,
-        //         success: function(response) {
-        //             alert(response);
-        //             // console.log(response);
-        //             location.reload();
-        //         }
-        //     });
-        // })
 
         $(function(){
        

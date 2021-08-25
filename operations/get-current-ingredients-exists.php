@@ -14,7 +14,7 @@ function Render($results)
             </svg>
             <h3 class="ingredient-name"><?php echo $row['name']; ?></h3>
             
-            <p class="hidden IngredientId"><?php echo $row['id']; ?></p>
+            <p class="hidden selectedIngredientId"><?php echo $row['id']; ?></p>
             <p class="hidden quantityFromIngredient"><?php echo $row['no_of_units']; ?></p>
         </button>
 
