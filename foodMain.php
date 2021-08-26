@@ -231,6 +231,9 @@ if (isset($_GET['clear'])) {
             </svg>
         </button>
 
+        <div class="w-full h-full hidden items-center justify-center empty-cart">
+            <h1 class="text-6xl md:text-9xl font-extrabold selection:bg-red-500" style="-webkit-text-stroke: 2px; -webkit-text-stroke-color: rgb(229, 231, 235); color: transparent;">Cart is empty.</h1>
+        </div>
         
 
         <!-- Header -->
