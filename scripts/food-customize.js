@@ -21,6 +21,8 @@ $(document).ready(function() {
         })
     })
     let selectedToppingsIds = [];
+    
+    let finalOrder = [];
 
     toggleText = true;
     function customizeMenuHandler (foodId) {
@@ -66,11 +68,37 @@ $(document).ready(function() {
             if(parseInt(document.querySelector(".quantity-customize").innerHTML) >= 1)
             document.querySelector(".quantity-customize").innerHTML = parseInt(document.querySelector(".quantity-customize").innerHTML) - 1;
             proceedCheck = parseInt(document.querySelector(".quantity-customize").innerHTML);
-            // listenOnProceed();
             listenOnProceed();
         })
 
         $("#takeAway").click(function(e) {
+            
+            $(".popupmenu").addClass('scale-0');
+            $(".popupmenu-stay").removeClass('scale-0');
+
+            
+        })
+
+
+        $("#keepOrder").click(function() {
+            $(".popupmenu-stay").addClass('scale-0');
+            let foodOrder= [];
+
+            var toppingsCurrent = [];
+            toppingsCurrent = JSON.parse(JSON.stringify(selectedToppingsIds));
+            
+            foodOrder.push(foodId);
+            foodOrder.push(proceedCheck);
+            foodOrder.push(toppingsCurrent);
+            
+            setCartData(foodOrder);
+            
+            toppingsCurrent = [];
+            selectedToppingsIds = [];
+        })
+
+
+        $("#checkoutTakeaway").click(function(e) {
             e.preventDefault();
 
             const form_data = new FormData();
@@ -91,6 +119,9 @@ $(document).ready(function() {
                 success: function(response) {
 
                     alert(response);
+
+                    // setCartData();
+
                     $(".customize-menu").addClass("scale-0");
                     window.location.replace("foodMain.php");
                 }
@@ -110,6 +141,7 @@ $(document).ready(function() {
     function toppingsListHandler(List) {
         List.forEach(element => {
             $(element).click(function() {
+
                 if(!(element.querySelector('svg').classList.contains('hidden'))) {
 
                     let ifRemoved = selectedToppingsIds.find(ele => ele == element.querySelector('.fillingId').innerHTML)
@@ -139,3 +171,17 @@ $(document).ready(function() {
         })
     }
 })
+
+
+counter = 0;
+
+// ? Declaring the arrays
+let OrderCart = [];
+
+window.setCartData = function(OrderDetails) {
+    OrderCart = [...OrderCart, OrderDetails];
+}
+
+window.getCartData = function() {
+    return OrderCart;
+}

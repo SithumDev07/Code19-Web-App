@@ -89,22 +89,44 @@ if (isset($_GET['clear'])) {
             }
         }
 
-        .toppings::-webkit-scrollbar, .customize-menu::-webkit-scrollbar {
+        .toppings::-webkit-scrollbar,
+        .customize-menu::-webkit-scrollbar {
             width: 0.6em;
             border-radius: 50%;
         }
 
-        .toppings::-webkit-scrollbar-track, .customize-menu::-webkit-scrollbar-track {
+        .toppings::-webkit-scrollbar-track,
+        .customize-menu::-webkit-scrollbar-track {
             box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         }
 
-        .toppings::-webkit-scrollbar-thumb, .customize-menu::-webkit-scrollbar-thumb {
+        .toppings::-webkit-scrollbar-thumb,
+        .customize-menu::-webkit-scrollbar-thumb {
             background-color: rgba(30, 30, 30, 0.7);
             border-radius: 1.2em;
         }
 
-        .toppings, .customize-menu {
+        .toppings,
+        .customize-menu {
             -webkit-overflow-scrolling: touch;
+        }
+
+        .cart-cards::-webkit-scrollbar, .cart::-webkit-scrollbar, .checkout-menu::-webkit-scrollbar {
+            width: 0.6em;
+            border-radius: 50%;
+        }
+
+        .cart-cards::-webkit-scrollbar-track, .cart::-webkit-scrollbar-track, .checkout-menu::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-cards::-webkit-scrollbar-thumb, .cart::-webkit-scrollbar-thumb, .checkout-menu::-webkit-scrollbar-thumb {
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 1.2em;
+        }
+
+        .add-card-active {
+            height: auto;
         }
     </style>
 </head>
@@ -195,7 +217,118 @@ if (isset($_GET['clear'])) {
     <!--  // ? Food Customize Menu -->
     <section class="glass-dark px-3 md:px-10 py-1 h-screen fixed top-0 right-0 left-0 bottom-0 z-30 transform scale-0 duration-200 customize-menu overflow-y-auto xl:overflow-hidden">
 
+
+    </section>
+
+    <!-- // ?Cart -->
+
+    <section class="glass-dark px-3 md:px-10 py-1 h-full fixed top-0 right-0 left-0 bottom-0 z-30 transform scale-0 duration-200 checkout-menu overflow-y-auto xl:overflow-hidden">
+
+
+        <button class="fixed h-14 w-14 rounded-full bg-black top-1 md:top-6 left-1 md:left-6 flex justify-center items-center text-white cursor-pointer z-50" id="CartClose">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+
         
+
+        <!-- Header -->
+        <header class="flex flex-col xl:flex-row xl:container xl:mx-auto h-screen cart-header">
+            <div class="left flex flex-col xl:flex-1 px-2">
+                <h1 class="text-6xl md:text-9xl font-extrabold selection:bg-red-500" style="-webkit-text-stroke: 2px; -webkit-text-stroke-color: rgb(229, 231, 235); color: transparent;">Checkout</h1>
+
+                <div class="cart overflow-y-auto">
+                    <div class="payment w-full h-auto border rounded-md p-6 my-4">
+                        <div class="flex flex-col overflow-hidden h-48 add-card">
+                            <div class="flex">
+                                <div class="credit-card w-72 h-44 rounded-2xl flex flex-col p-3 justify-between bg-primary relative overflow-hidden">
+                                    <div class="flex justify-between relative">
+                                        <div class="w-6 h-6 rounded-full bg-gray-50 opacity-40"></div>
+                                        <div class="w-6 h-6 rounded-full bg-gray-50 absolute top-0 left-4 z-10"></div>
+                                        <h4 class="uppercase font-semibold text-gray-100 text-xl">visa</h4>
+                                    </div>
+                                    <h3 class="font-semibold text-2xl text-gray-200">8956 1254 8995</h3>
+                                    <div class="flex justify-between">
+                                        <h3 class="uppercase font-semibold text-gray-200 text-sm">Your Name</h3>
+                                        <h3 class="uppercase font-semibold text-gray-200 text-sm z-20">09/23</h3>
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-48 w-48 absolute -bottom-20 -right-16 text-blue-400 z-10" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                                    </svg>
+                                </div>
+
+                                <div class="w-44 h-44 rounded-2xl border-dotted border-2 border-gray-200 ml-5 flex items-center justify-center">
+                                    <div class="w-12 h-12 rounded-xl bg-gray-100 bg-opacity-10 flex items-center justify-center text-gray-100">
+                                        <button class="transform transition duration-200 hover:scale-110" onclick="activateAddSection()">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col my-4">
+                                <h1 class='text-gray-200 text-2xl font-semibold mb-3'>Add new card</h1>
+                                <form action="">
+                                    <input type="text" name="nameOnCard" id="nameOnCard" placeholder="Name on card" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-full mb-3">
+                                    <div class="flex justify-between">
+                                        <input type="text" name="cardNumber" id="cardNumber" placeholder="Card number" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-80 mb-3">
+                                        <input type="text" name="expireDate" id="expireDate" placeholder="Expiration date" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 mb-3">
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <input type="text" name="CVC" id="CVC" placeholder="CVC" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-64 mb-3">
+                                        <p class="text-base text-gray-200 font-thin ml-5">By clicking confirm "I agree to the company's <a href="terms.html" class='text-black font-medium'>terms and services.</a></p>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <button class="px-5 py-3 text-red-600 rounded-md ml-4" onclick="activateAddSection()">Cancel</button>
+                                        <button class="px-5 py-3 bg-black rounded-md ml-4 text-white transition duration-150 hover:shadow-lg">Confirm</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input type="text" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4" placeholder="Discount Code">
+                        <button class="px-5 py-3 bg-black rounded-md ml-4 text-white transition duration-150 hover:shadow-lg" id="ApplyCoupen">Apply</button>
+                    </div>
+
+                    <div class="flex flex-col my-4 text-gray-100 text-xl bg-gray-800 bg-opacity-20 p-3 rounded-xl">
+                        <div class="flex justify-between border-b py-3">
+                            <h3>Total</h3>
+                            <h3>$490</h3>
+                        </div>
+                        <div class="flex justify-between my-2">
+                            <h3>Delivery Charges</h3>
+                            <h3 class="text-green-500">+ $20</h3>
+                        </div>
+                        <div class="flex justify-between border-b py-3">
+                            <h3>Discount</h3>
+                            <h3 class="text-red-500">- $490</h3>
+                        </div>
+                        <div class="flex justify-between mt-3 text-3xl font-bold">
+                            <h2>Total Amount</h2>
+                            <h2>$560</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="right relative flex xl:justify-center flex-col flex-1 p-2">
+                <div class="cart-cards w-full h-auto border rounded-md p-6 overflow-y-auto">
+
+                    <!-- // ?End of card -->
+
+                </div>
+            </div>
+
+            <button class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50">Confirm Payment $560 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg></button>
+        </header>
     </section>
 
     <!-- // ? Home Menu -->
@@ -213,18 +346,22 @@ if (isset($_GET['clear'])) {
             </ul>
 
             <div class="flex items-center">
-                <p class="sessionId"><?php if(isset($_SESSION['sessionId'])) { echo $_SESSION['sessionId']; } else { echo "NotAUser"; } ?></p>
+                <p class="sessionId"><?php if (isset($_SESSION['sessionId'])) {
+                                            echo $_SESSION['sessionId'];
+                                        } else {
+                                            echo "NotAUser";
+                                        } ?></p>
                 <?php
 
                 if (isset($_SESSION['sessionUser'])) {
                 ?>
                     <a href="" class="mr-4 text-gray-100 font-semibold sessionUsername"><?php echo $_SESSION['sessionUser']; ?></a>
-                    <a href="./checkout.php" class="text-white mr-4 relative">
+                    <button class="text-white mr-4 relative" id="Cart">
                         <div class="py-1 px-2 rounded-full bg-red-500 absolute -top-2 -right-2 text-xs">3</div>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
-                    </a>
+                    </button>
                     <a href="" class="w-14 h-14 rounded-full overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" class="w-full h-full object-cover" alt="">
                     </a>
@@ -415,6 +552,7 @@ if (isset($_GET['clear'])) {
     <script src="./scripts/customer-signup.js"></script>
     <script src="./scripts/common.js"></script>
     <script src="./scripts/food-customize.js"></script>
+    <script src="./scripts/cart.js"></script>
 </body>
 
 </html>
