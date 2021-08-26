@@ -69,11 +69,12 @@ function Render($results, $conn)
 
                     ?>
 
-                            <button class="flex px-3 py-2 rounded-full border border-gray-300 text-gray-200 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
+                            <button class="toppings-buttons flex px-3 py-2 rounded-full border border-gray-300 text-gray-200 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-3 mt-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="hidden h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
-                                <?php echo $rowFilling['name'];  ?>
+                                <p class="hidden fillingId"><?php echo $rowFilling['id']; ?></p>
+                                <h2 class="fillingName"><?php echo $rowFilling['name'];  ?></h2>
                             </button>
 
                     <?php
@@ -97,7 +98,7 @@ function Render($results, $conn)
                             </svg>
                         </button>
                     </div>
-                    <h2 class="text-4xl text-gray-100 font-semibold">Rs.<?php echo $row['basic_price']; ?>/<span class="text-sm">each</span></h2>
+                    <h2 class="text-4xl text-gray-100 font-semibold basicPrice">Rs.<?php echo $row['basic_price']; ?>/<span class="text-sm">each</span></h2>
                 </div>
                 <!-- // TODO Take care of disabled -->
                 <button disabled class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="GoCheckout">Add to cart<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -213,11 +213,12 @@ if (isset($_GET['clear'])) {
             </ul>
 
             <div class="flex items-center">
+                <p class="sessionId"><?php if(isset($_SESSION['sessionId'])) { echo $_SESSION['sessionId']; } else { echo "NotAUser"; } ?></p>
                 <?php
 
                 if (isset($_SESSION['sessionUser'])) {
                 ?>
-                    <a href="" class="mr-4 text-gray-100 font-semibold"><?php echo $_SESSION['sessionUser']; ?></a>
+                    <a href="" class="mr-4 text-gray-100 font-semibold sessionUsername"><?php echo $_SESSION['sessionUser']; ?></a>
                     <a href="./checkout.php" class="text-white mr-4 relative">
                         <div class="py-1 px-2 rounded-full bg-red-500 absolute -top-2 -right-2 text-xs">3</div>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
