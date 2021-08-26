@@ -15,11 +15,15 @@ $(document).ready(function() {
         // $(".signup-form").removeClass("top-full");
     })
 
-
+    // ? Register
     LiveListerOnCustomerValidations(document.querySelector("#UsernameCustomer"));
     LiveListerOnCustomerValidations(document.querySelector("#FirstNameCustomer"));
     LiveListerOnCustomerValidations(document.querySelector("#LastNameCustomer"));
     LiveListerOnCustomerValidations(document.querySelector("#PasswordCustomer"));
+
+    // ? Login 
+    LiveListerOnCustomerValidations(document.querySelector("#UsernameCustomerLogin"));
+    LiveListerOnCustomerValidations(document.querySelector("#PasswordCustomerLogin"));
 
 
     $("#SignupCustomer").click(function(e) {
@@ -49,10 +53,54 @@ $(document).ready(function() {
                         setErrorOnInputs(document.querySelector("#UsernameCustomer"),true);
                         document.querySelector("#UsernameCustomer").value = ''
                         document.querySelector("#PasswordCustomer").value = ''
-                    } else {
+                    } else if(response == 'Successfully Registered') {
                         alert(response);
                         $(".signup-form").addClass("scale-0");
-                        location.reload();
+                        window.location.replace("foodMain.php");
+                    }
+                }
+            });
+        }
+    })
+
+
+    $("#LoginCustomer").click(function(e) {
+        e.preventDefault();
+        const form_data = new FormData();
+        const username = $("#UsernameCustomerLogin").val();
+        const password = $("#PasswordCustomerLogin").val();
+        if(isValidatedLogin()) {
+
+            form_data.append('username', username);
+            form_data.append('password', password);
+            $.ajax({
+                url: 'operations/login-customer.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    if(response == 'User Not Found') {
+                        alert(response);
+                        document.querySelector(".err-message-login").innerHTML = "Sorry, User is not found. Please try again.";
+                        document.querySelector(".err-message-login").classList.remove('hidden');
+                        setErrorOnInputs(document.querySelector("#UsernameCustomerLogin"),true);
+                        document.querySelector("#UsernameCustomerLogin").value = ''
+                        document.querySelector("#PasswordCustomerLogin").value = ''
+                    } else if(response == 'Wrong Password') {
+                        alert(response);
+                        document.querySelector(".err-message-login").innerHTML = "Wrong Password. Please try again.";
+                        document.querySelector(".err-message-login").classList.remove('hidden');
+                        setErrorOnInputs(document.querySelector("#PasswordCustomerLogin"),true);
+                        document.querySelector("#PasswordCustomerLogin").value = ''
+                    } else if(response == 'Success'){
+                        $(".login-form").addClass("scale-0");
+                        window.location.replace("foodMain.php");
+                        // location.reload();
+                    } else if(response == 'Restricted' || response == 'SQL Server Error') {
+                        alert(response);
+                        window.location.replace("page_not_found.php");
                     }
                 }
             });
@@ -88,6 +136,29 @@ $(document).ready(function() {
         }
 
         return successSignup;
+    }
+
+
+    let successLogin = false;
+    function isValidatedLogin() {
+        if(!validateSpecialCharacters(document.querySelector("#UsernameCustomerLogin").value) && document.querySelector("#UsernameCustomerLogin").value == '') {
+            document.querySelector(".err-message-login").innerHTML = "Username is not filled correctly";
+            document.querySelector(".err-message-login").classList.remove('hidden');
+            setErrorOnInputs(document.querySelector("#UsernameCustomerLogin"),true);
+            successLogin = false;
+        } else if(document.querySelector("#PasswordCustomerLogin").value == '' && document.querySelector("#PasswordCustomerLogin").value.length < 8) {
+            document.querySelector(".err-message-login").innerHTML = "Password should contain at least 8 characters";
+            document.querySelector(".err-message-login").classList.remove('hidden');
+            setErrorOnInputs(document.querySelector("#PasswordCustomerLogin"),true);
+            successLogin = false;
+        } else {
+            document.querySelector(".err-message-login").classList.add('hidden');
+            setErrorOnInputs(document.querySelector("#UsernameCustomerLogin"),false);
+            setErrorOnInputs(document.querySelector("#PasswordCustomerLogin"),false);
+            successLogin = true;
+        }
+
+        return successLogin;
     }
 
 })

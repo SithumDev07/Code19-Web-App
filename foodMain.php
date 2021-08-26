@@ -141,7 +141,7 @@ if (isset($_GET['clear'])) {
                 </button>
                 </div>
 
-                <div class="err-message hidden text-sm xl:text-base absolute -top-10 xl:bottom-3 xl:top-auto text-gray-200 bg-red-400 px-3 py-3 rounded-md">
+                <div class="err-message-login hidden text-sm xl:text-base absolute -top-10 xl:bottom-3 xl:top-auto text-gray-200 bg-red-400 px-3 py-3 rounded-md">
                     Oops! Seems to be you have entered in incorrect format.
                 </div>
             </div>
