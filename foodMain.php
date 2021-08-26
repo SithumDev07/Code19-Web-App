@@ -66,6 +66,7 @@ if (isset($_GET['clear'])) {
 </head>
 
 <body>
+    <!-- // ? Reister -->
     <div class="w-full h-screen fixed glass-dark py-6 px-12 transform scale-0 duration-200 signup-form">
         <h1 class="text-6xl md:text-9xl font-extrabold selection:bg-red-500" style="-webkit-text-stroke: 2px; -webkit-text-stroke-color: rgb(229, 231, 235); color: transparent;">Signup</h1>
 
@@ -107,6 +108,45 @@ if (isset($_GET['clear'])) {
             </div>
         </div>
     </div>
+
+    <!-- // ? Login -->
+    <div class="w-full h-screen fixed glass-dark py-6 px-12 transform scale-0 duration-200 login-form">
+        <h1 class="text-6xl md:text-9xl font-extrabold selection:bg-red-500" style="-webkit-text-stroke: 2px; -webkit-text-stroke-color: rgb(229, 231, 235); color: transparent;">Login</h1>
+
+        <div class="flex justify-start xl:justify-end w-full">
+            <div class="w-1/2 xl:w-1/2 mt-10 xl:-mt-28">
+                <div class="flex items-center">
+                    <p class="hidden xl:block font-semibold text-gray-300 flex-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae sunt asperiores distinctio vitae alias! Provident, necessitatibus! Eum quas quaerat ipsa.</p>
+                    <button class="bg-black p-5 rounded-full text-gray-100 ml-4 transform transition active:scale-90 duration-100" id="login-close-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+                <img src="./assets/featured/featured-burger.png" class="object-cover w-full h-full" alt="Signup Featured">
+            </div>
+        </div>
+
+        <div class="signup fixed left-1/2 xl:left-20 top-1/2 xl:top-2/3 2xl:top-1/2 transform -translate-y-1/2 w-4/12">
+            <div class="w-full h-full relative">
+
+                <div class="w-full h-96 rounded">
+                    <input type="text" placeholder="Username" class="text-gray-200 rounded-md w-full px-3 py-3 mt-16 bg-transparent border border-gray-200 placeholder-gray-300" id="UsernameCustomerLogin" name="username">
+                    <input type="password" placeholder="Password" class="text-gray-200 rounded-md w-full px-3 py-3 mt-4 bg-transparent border border-gray-200 placeholder-gray-300" name="password" id="PasswordCustomerLogin">
+                    <button type="submit" class="relative w-full rounded-md mt-4 flex items-center justify-center bg-blue-600 p-3 text-gray-300 text-sm font-semibold h-14 hover:bg-blue-700 transition duration-300" id="LoginCustomer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                    </svg>
+                    Login
+                </button>
+                </div>
+
+                <div class="err-message hidden text-sm xl:text-base absolute -top-10 xl:bottom-3 xl:top-auto text-gray-200 bg-red-400 px-3 py-3 rounded-md">
+                    Oops! Seems to be you have entered in incorrect format.
+                </div>
+            </div>
+        </div>
+    </div>
     <main class="glass px-10 py-1">
         <nav class="flex justify-between container mx-auto items-center">
             <div class="logo w-24 h-20">
@@ -136,14 +176,24 @@ if (isset($_GET['clear'])) {
                         <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" class="w-full h-full object-cover" alt="">
                     </a>
 
-                <?php
+                    <?php
                 } else {
-                ?>
+                    if (isset($_GET['login'])) {
+                    ?>
+                        <button class="signup w-28 flex items-center justify-center h-12 px-3 py-1 border border-gray-600 rounded-full cursor-pointer mr-4" id="loginPop">
+                            login
+                        </button>
+                    <?php
+                    } else {
 
-                    <button class="signup w-28 flex items-center justify-center h-12 px-3 py-1 border border-gray-600 rounded-full cursor-pointer mr-4" id="signUpPop">
-                        signup
-                    </button>
+
+                    ?>
+
+                        <button class="signup w-28 flex items-center justify-center h-12 px-3 py-1 border border-gray-600 rounded-full cursor-pointer mr-4" id="signUpPop">
+                            signup
+                        </button>
                 <?php
+                    }
                 }
                 ?>
 

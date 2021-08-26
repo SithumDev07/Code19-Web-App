@@ -9,6 +9,12 @@ $(document).ready(function() {
         $(".signup-form").addClass("scale-0");
         // $(".signup-form").addClass("top-full");
     })
+    
+    $("#loginPop").click(function() {
+        $(".login-form").removeClass("scale-0");
+        // $(".signup-form").removeClass("top-full");
+    })
+
 
     LiveListerOnCustomerValidations(document.querySelector("#UsernameCustomer"));
     LiveListerOnCustomerValidations(document.querySelector("#FirstNameCustomer"));
