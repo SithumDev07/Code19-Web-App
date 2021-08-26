@@ -80,6 +80,7 @@ $(document).ready(function() {
             form_data.append('sessionId', sessionId);
             form_data.append('deliveryMethod', deliveryMethod);
             form_data.append('basicPrice', basicPrice);
+            form_data.append('quantity', proceedCheck);
             form_data.append('toppingsList', JSON.stringify(selectedToppingsIds));
             $.ajax({
                 url: 'operations/take-away-order.php',

@@ -7,6 +7,7 @@ if (isset($_POST['sessionId'])) {
     $userid = $_POST['sessionId'];
     $deliveryMethod = $_POST['deliveryMethod'];
     $basicPrice = $_POST['basicPrice'];
+    $quantity = $_POST['quantity'];
     $toppingsList = $_POST['toppingsList'];
 
     $status = "active";
@@ -42,7 +43,7 @@ if (isset($_POST['sessionId'])) {
             }
         }
 
-        $finalAmount = (int)$basicPrice + $totalPriceforSelectedToppings;
+        $finalAmount = (int)$basicPrice * (int)$quantity + $totalPriceforSelectedToppings * (int)$quantity;
 
 
         $sql = "INSERT INTO customer_order(customer_id, date, time, status, delivery_method, total_amount) VALUES (?, ?, ?, ?, ?, ?);";
@@ -65,7 +66,7 @@ if (isset($_POST['sessionId'])) {
             // TODO Insert into filling order and food order
             
 
-            echo "success all $newOrderIdGenerated";
+            echo "success all $newOrderIdGenerated $basicPrice $finalAmount";
             exit();
         }
     }

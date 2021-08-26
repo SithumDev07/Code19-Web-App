@@ -98,7 +98,8 @@ function Render($results, $conn)
                             </svg>
                         </button>
                     </div>
-                    <h2 class="text-4xl text-gray-100 font-semibold basicPrice">Rs.<?php echo $row['basic_price']; ?>/<span class="text-sm">each</span></h2>
+                    <p class="hidden basicPrice"><?php echo $row['basic_price']; ?></p>
+                    <h2 class="text-4xl text-gray-100 font-semibold">Rs.<?php echo $row['basic_price']; ?>/<span class="text-sm">each</span></h2>
                 </div>
                 <!-- // TODO Take care of disabled -->
                 <button disabled class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="GoCheckout">Add to cart<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
