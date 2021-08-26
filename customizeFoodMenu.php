@@ -30,18 +30,6 @@
             bottom: 2rem;
         }
 
-        /* @keyframes popup {
-            0% {
-                transform: translateY(-100%);
-                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-            }
-
-            100% {
-                transform: translateY(20%);
-                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-            }
-        } */
-
         .bounce-err {
             animation: bounce 0.5s infinite;
         }
