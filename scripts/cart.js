@@ -29,6 +29,7 @@ window.renderOrder = function () {
         let selectedToppingsButtons = [];
         let totalToppingsElements = [];
         let eachToppingPrice = [];
+        let totalEachPrice;
 
         completeOrder = getCartData();
 
@@ -66,13 +67,14 @@ window.renderOrder = function () {
                 document.querySelector('.amount-button-confirm').innerHTML = "Rs." + total;
                 document.querySelector('.pre-total').innerHTML = "Rs." + total;
 
-                
+                UpdateTotalPrice();
             })
         }
 
         let orderDetails = [];
         let toppingIdsByOrder = [];
         let toppingPriceByOrder = [];
+        let EachFoodPriceByOrder = [];
 
         // ? Handling all removing and adding parts of single cart card
         function CartCardHandler(List) {
@@ -81,7 +83,7 @@ window.renderOrder = function () {
                 console.log('Current Toppings');
                 $(remove).click(function (){
                     if(orderDetails.length != 0) {
-                        toppingPriceByOrder.forEach(ele => {
+                        EachFoodPriceByOrder.forEach(ele => {
                             console.log(ele);
                         })
                     } else {
@@ -114,6 +116,11 @@ window.renderOrder = function () {
                 })
 
                 toppingPriceByOrder = [...toppingPriceByOrder, eachToppingPrice];
+
+
+                // ? Getting all the each food prices
+                totalEachPrice = ele.querySelector(".eachFoodPrice").innerHTML;
+                EachFoodPriceByOrder.push(totalEachPrice);
 
                 // ? Handling Toppings
                 const toppingsCurrent = ele.querySelectorAll('.toppingAtCart');
@@ -157,6 +164,8 @@ window.renderOrder = function () {
                         topping.classList.toggle('bg-black');
                         topping.classList.toggle('border');
                         topping.classList.toggle('border-gray-300');
+
+                        UpdateTotalPrice();
                     })
                 })
 
@@ -165,6 +174,7 @@ window.renderOrder = function () {
                     orderDetails[index][1]++;
                     document.querySelector('.DisplayingQuantity').innerHTML = orderDetails[index][1];
                     console.log('Plus');
+                    UpdateTotalPrice();
                 })
                 
                 
@@ -174,10 +184,28 @@ window.renderOrder = function () {
                         orderDetails[index][1]--;
                         document.querySelector('.DisplayingQuantity').innerHTML = orderDetails[index][1];
                         console.log('Minus');
+                        UpdateTotalPrice();
                     }
                 })
 
+
             })
+        }
+
+        // ? Maintaing Total Price of whole order
+        function UpdateTotalPrice() {
+
+            // ? Counting Total Extra Topping Amount of whole Order
+            let totalSelectedToppingPrice = 0;
+            for (let index = 0; index < toppingPriceByOrder.length; index++) {
+
+                for (let i = 0; i < toppingPriceByOrder[index].length; i++) {
+
+                    totalSelectedToppingPrice = totalSelectedToppingPrice + parseFloat(toppingPriceByOrder[index][i]);
+                }
+
+            }
+            document.querySelector('.totalExtraToppings').innerHTML = `+ Rs.${totalSelectedToppingPrice}`;
         }
 
 

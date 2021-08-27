@@ -34,7 +34,7 @@ function Render($results, $quantity, $toppings, $toppingPrices, $toppingIds)
                     }
                     ?>
                 </div>
-                <div class="">
+                <div class="hidden">
                     <?php
                     foreach ($toppingPrices as $toppingPrice) {
                     ?>
@@ -45,6 +45,7 @@ function Render($results, $quantity, $toppings, $toppingPrices, $toppingIds)
                 </div>
             </div>
             <div class="pricing flex flex-col pl-3 items-center">
+                <p class="hidden eachFoodPrice"><?php echo $row['basic_price']; ?></p>
                 <h1 class="text-gray-100 font-semibold text-2xl">Rs.<?php 
                     if(substr($row['basic_price'], (int)strpos($row['basic_price'], '.') + 1) == 0) {
                         echo substr($row['basic_price'], 0, (int)strpos($row['basic_price'], '.'));
