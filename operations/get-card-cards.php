@@ -27,13 +27,14 @@ function Render($results, $quantity, $toppings, $toppingPrices, $toppingIds)
                             <h3 class="tooping-name"><?php echo $toppings[$i]; ?></h3>
                             <h3 class="tooping-id hidden"><?php echo $toppingIds[$i]; ?></h3>
                             <h3 class="food-id hidden"><?php echo $row['id']; ?></h3>
+                            <h3 class="topping-price hidden"><?php echo $toppingPrices[$i]; ?></h3>
                             <h3 class="quantity-food-topping hidden"><?php echo $quantity; ?></h3>
                         </button>
                     <?php
                     }
                     ?>
                 </div>
-                <div class="hidden">
+                <div class="">
                     <?php
                     foreach ($toppingPrices as $toppingPrice) {
                     ?>
@@ -44,15 +45,22 @@ function Render($results, $quantity, $toppings, $toppingPrices, $toppingIds)
                 </div>
             </div>
             <div class="pricing flex flex-col pl-3 items-center">
-                <h1 class="text-gray-100 font-semibold text-2xl">Rs.<?php echo $row['basic_price']; ?>/<span class="text-sm">each</span></h1>
+                <h1 class="text-gray-100 font-semibold text-2xl">Rs.<?php 
+                    if(substr($row['basic_price'], (int)strpos($row['basic_price'], '.') + 1) == 0) {
+                        echo substr($row['basic_price'], 0, (int)strpos($row['basic_price'], '.'));
+                        // echo "\nprice has no decimal";
+                    } else {
+                        echo $row['basic_price'];
+                    }
+                ?>/<span class="text-sm">each</span></h1>
                 <div class="p-3 w-auto h-auto flex items-center text-gray-200 active:scale-90 mt-3 text-xs">
-                    <button class="transition duration-150 hover:shadow-lg">
+                    <button class="transition duration-150 hover:shadow-lg" id="PlusQuantity">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                         </svg>
                     </button>
-                    <p class="mx-3 font-bold text-xl"><?php echo $quantity; ?></p>
-                    <button class="transition duration-150 hover:shadow-lg">
+                    <p class="mx-3 font-bold text-xl DisplayingQuantity"><?php echo $quantity; ?></p>
+                    <button class="transition duration-150 hover:shadow-lg" id="MinusQuantity">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
                         </svg>

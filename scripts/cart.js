@@ -27,6 +27,8 @@ window.renderOrder = function () {
 
         let selectedToppings = [];
         let selectedToppingsButtons = [];
+        let totalToppingsElements = [];
+        let eachToppingPrice = [];
 
         completeOrder = getCartData();
 
@@ -60,12 +62,17 @@ window.renderOrder = function () {
                     total = total + parseInt(ele.innerHTML);
                     console.log(ele.innerHTML);
                 })
-                document.querySelector('.amount-button').innerHTML = "Rs." + total;
+                document.querySelector('.amount-button-takeaway').innerHTML = "Rs." + total;
+                document.querySelector('.amount-button-confirm').innerHTML = "Rs." + total;
+                document.querySelector('.pre-total').innerHTML = "Rs." + total;
+
+                
             })
         }
 
         let orderDetails = [];
         let toppingIdsByOrder = [];
+        let toppingPriceByOrder = [];
 
         // ? Handling all removing and adding parts of single cart card
         function CartCardHandler(List) {
@@ -74,7 +81,7 @@ window.renderOrder = function () {
                 console.log('Current Toppings');
                 $(remove).click(function (){
                     if(orderDetails.length != 0) {
-                        orderDetails.forEach(ele => {
+                        toppingPriceByOrder.forEach(ele => {
                             console.log(ele);
                         })
                     } else {
@@ -100,6 +107,14 @@ window.renderOrder = function () {
 
                 orderDetails = [...orderDetails, orderTest];
 
+                // ? Calculating Topping Prices
+                totalToppingsElements = ele.querySelectorAll('.toppingPrices');
+                totalToppingsElements.forEach(ele => {
+                    eachToppingPrice.push(ele.innerHTML);
+                })
+
+                toppingPriceByOrder = [...toppingPriceByOrder, eachToppingPrice];
+
                 // ? Handling Toppings
                 const toppingsCurrent = ele.querySelectorAll('.toppingAtCart');
                 toppingsCurrent.forEach(topping => {
@@ -114,22 +129,52 @@ window.renderOrder = function () {
                             if(isSelected === undefined) {
                                 orderDetails[index][2].push(topping.querySelector('.tooping-id').innerHTML);
                             }
+
+                            // ? Searching for the topping price if it is already in the aray
+                            let isAddedToppingPrice = toppingPriceByOrder[index].find(element => element == topping.querySelector('.topping-price').innerHTML);
+                            if(isAddedToppingPrice === undefined) {
+                                toppingPriceByOrder[index].push(topping.querySelector('.topping-price').innerHTML);
+                            }
+
                         } else {
                             console.log('In-Active');
-
-                            // orderDetails[index][2];
     
                             for(var i = 0; i < orderDetails[index][2].length; i++) {
                                 if(orderDetails[index][2][i] == topping.querySelector('.tooping-id').innerHTML) {
                                     orderDetails[index][2].splice(i, 1);
                                 }
                             }
+                            
+                            // ? Removing deselected topping price from toppingPrices array
+                            for(var i = 0; i < toppingPriceByOrder[index].length; i++) {
+                                if(toppingPriceByOrder[index][i] == topping.querySelector('.topping-price').innerHTML) {
+                                    toppingPriceByOrder[index].splice(i, 1);
+                                }
+                            }
+
                         }
     
                         topping.classList.toggle('bg-black');
                         topping.classList.toggle('border');
                         topping.classList.toggle('border-gray-300');
                     })
+                })
+
+                // ? Adding more quantity
+                $("#PlusQuantity").click(function() {
+                    orderDetails[index][1]++;
+                    document.querySelector('.DisplayingQuantity').innerHTML = orderDetails[index][1];
+                    console.log('Plus');
+                })
+                
+                
+                // ? Reducing quantity
+                $("#MinusQuantity").click(function() {
+                    if(parseInt(orderDetails[index][1]) > 1 ) {
+                        orderDetails[index][1]--;
+                        document.querySelector('.DisplayingQuantity').innerHTML = orderDetails[index][1];
+                        console.log('Minus');
+                    }
                 })
 
             })

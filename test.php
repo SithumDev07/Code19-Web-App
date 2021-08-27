@@ -5,14 +5,17 @@ require './config.php';
 // TODO reset isset function
 if (isset($_GET['id'])) {
 
-    date_default_timezone_set('Asia/Colombo');
-    $date = date('m/d/Y h:i:s a', time());
+    $price = "480.75";
+    $priceN = "480.00";
 
-    
-    $time = substr( $date,-11, 5);
-    $date = substr($date, 0, 10);
-    echo $date . "<br>";
-    echo $time;
+    echo substr($priceN, (int)strpos($price, '.') + 1);
+
+    if(substr($priceN, (int)strpos($price, '.') + 1) == 0) {
+        echo substr($price, 0, (int)strpos($price, '.'));
+        // echo "\nprice has no decimal";
+    } else {
+        echo "price has a decimal";
+    }
     
 } else {
     // header("Location: ../dashboard.php?error=accessforbidden");

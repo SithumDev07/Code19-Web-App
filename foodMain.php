@@ -345,15 +345,15 @@ if (isset($_GET['clear'])) {
                     <div class="flex flex-col my-4 text-gray-100 text-xl bg-gray-800 bg-opacity-20 p-3 rounded-xl total-container">
                         <div class="flex justify-between border-b py-3">
                             <h3>Total</h3>
-                            <h3>$490</h3>
+                            <h3 class="pre-total">$490</h3>
                         </div>
                         <div class="flex justify-between my-2">
                             <h3>Delivery Charges</h3>
-                            <h3 class="text-green-500">+ $20</h3>
+                            <h3 class="text-green-500">+ Rs.100</h3>
                         </div>
                         <div class="flex justify-between border-b py-3">
-                            <h3>Discount</h3>
-                            <h3 class="text-red-500">- $490</h3>
+                            <h3>Extra Toppings</h3>
+                            <h3 class="text-green-500">+ Rs.0</h3>
                         </div>
                         <div class="flex justify-between mt-3 text-3xl font-bold">
                             <h2>Total Amount</h2>
@@ -374,7 +374,7 @@ if (isset($_GET['clear'])) {
 
             <!-- // ? Online Pay Button -->
             <button class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="onlinePay">
-                Confirm Payment <h3 class="amount-button ml-3">$560</h3>
+                Confirm Payment <h3 class="amount-button-confirm ml-3">$560</h3>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -382,7 +382,7 @@ if (isset($_GET['clear'])) {
 
             <!-- // ? Takeaway Button -->
             <button class="rounded-br-none fixed bottom-5 right-10 explore hidden text-gray-100 bg-black py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="confirmTakeaway">
-                Place Order <h3 class="amount-button ml-3">$560</h3>
+                Place Order <h3 class="amount-button-takeaway ml-3">$560</h3>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
