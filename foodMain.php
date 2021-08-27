@@ -357,7 +357,7 @@ if (isset($_GET['clear'])) {
                         </div>
                         <div class="flex justify-between mt-3 text-3xl font-bold">
                             <h2>Total Amount</h2>
-                            <h2>$560</h2>
+                            <h2 class="grandTotal">$560</h2>
                         </div>
                     </div>
                 </div>

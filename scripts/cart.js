@@ -61,10 +61,9 @@ window.renderOrder = function () {
                 let total = 0;
                 PriceContainers.forEach(ele => {
                     total = total + parseInt(ele.innerHTML);
-                    console.log(ele.innerHTML);
+                    // console.log(ele.innerHTML);
                 })
-                document.querySelector('.amount-button-takeaway').innerHTML = "Rs." + total;
-                document.querySelector('.amount-button-confirm').innerHTML = "Rs." + total;
+                
                 document.querySelector('.pre-total').innerHTML = "Rs." + total;
 
                 UpdateTotalPrice();
@@ -206,6 +205,14 @@ window.renderOrder = function () {
 
             }
             document.querySelector('.totalExtraToppings').innerHTML = `+ Rs.${totalSelectedToppingPrice}`;
+
+            // ? Update Total Price
+            let grandTotal = parseFloat(document.querySelector('.pre-total').innerHTML.substr(3)) + totalSelectedToppingPrice;
+            document.querySelector('.grandTotal').innerHTML = `Rs.${grandTotal}`;
+            
+            document.querySelector('.amount-button-takeaway').innerHTML = `Rs.${grandTotal}`;
+            document.querySelector('.amount-button-confirm').innerHTML = `Rs.${grandTotal}`;
+            
         }
 
 
