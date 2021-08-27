@@ -65,15 +65,16 @@ window.renderOrder = function () {
         }
 
         let orderDetails = [];
+        let toppingIdsByOrder = [];
 
         // ? Handling all removing and adding parts of single cart card
         function CartCardHandler(List) {
-            List.forEach(ele => {
+            List.forEach((ele, index) => {
                 let remove = ele.querySelector('#CartCardRemove');
                 console.log('Current Toppings');
                 $(remove).click(function (){
                     if(orderDetails.length != 0) {
-                        selectedToppings.forEach(ele => {
+                        orderDetails.forEach(ele => {
                             console.log(ele);
                         })
                     } else {
@@ -87,20 +88,22 @@ window.renderOrder = function () {
                     selectedToppings.push(ele.querySelector('.tooping-id').innerHTML);
                 })
 
+                toppingIdsByOrder = [...toppingIdsByOrder, selectedToppings];
+
+                selectedToppings = [];
+
+                let orderTest = [];
+                orderTest.push(ele.querySelector('.food-id').innerHTML);
+                orderTest.push(ele.querySelector('.quantity-food-topping').innerHTML);
+                
+                orderTest.push(toppingIdsByOrder[index]);
+
+                orderDetails = [...orderDetails, orderTest];
 
                 // ? Handling Toppings
                 const toppingsCurrent = ele.querySelectorAll('.toppingAtCart');
                 toppingsCurrent.forEach(topping => {
 
-                    let orderTest = [];
-                    orderTest.push(topping.querySelector('.food-id').innerHTML);
-                    orderTest.push(topping.querySelector('.quantity-food-topping').innerHTML);
-
-                    var toppingsCurrentTest = [];
-                    toppingsCurrentTest = JSON.parse(JSON.stringify(selectedToppings));
-                    orderTest.push(toppingsCurrentTest);
-
-                    orderDetails = [...orderDetails, orderTest];
 
                     $(topping).click(function () {
                         topping.querySelector('svg').classList.toggle('hidden');
