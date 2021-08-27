@@ -3,7 +3,7 @@
 include '../config.php';
 
 
-function Render($results, $quantity, $toppings, $toppingPrices)
+function Render($results, $quantity, $toppings, $toppingPrices, $toppingIds)
 {
 
     while ($row = mysqli_fetch_assoc($results)) {
@@ -17,14 +17,15 @@ function Render($results, $quantity, $toppings, $toppingPrices)
                 <h1 class="text-xl font-bold text-gray-100 food-name"><?php echo $row['name'] ?></h1>
                 <div class="flex flex-wrap">
                     <?php
-                    foreach ($toppings as $topping) {
+                    for ($i=0; $i < count($toppings); $i++) { 
                     ?>
 
-                        <button class="flex px-3 py-2 rounded-full bg-black text-gray-200 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-1 mt-3 text-xs">
+                        <button class="flex px-3 py-2 rounded-full bg-black text-gray-200 items-center active:scale-90 transition duration-150 hover:shadow-lg mr-1 mt-3 text-xs toppingAtCart">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
-                            <?php echo $topping; ?>
+                            <h3 class="tooping-name"><?php echo $toppings[$i]; ?></h3>
+                            <h3 class="tooping-id hidden"><?php echo $toppingIds[$i]; ?></h3>
                         </button>
                     <?php
                     }
@@ -81,7 +82,7 @@ if (isset($_POST['completeOrder'])) {
 
         $toppingsNames = array();
         $toppingPrices = array();
-        $foodPrices = array();
+        $toppingIds = array();
 
         if (mysqli_num_rows($results) > 0) {
             $resultCheck = mysqli_num_rows($results);
@@ -103,12 +104,13 @@ if (isset($_POST['completeOrder'])) {
                         while ($row = mysqli_fetch_assoc($resultsToppings)) {
                             array_push($toppingsNames, $row['name']);
                             array_push($toppingPrices, $row['price']);
+                            array_push($toppingIds, $row['id']);
                         }
                     }
                 }
 
 
-                Render($results, $order[1], $toppingsNames, $toppingPrices);
+                Render($results, $order[1], $toppingsNames, $toppingPrices, $toppingIds);
 
 
                 // while ($rowPrices = mysqli_fetch_assoc($results)) {

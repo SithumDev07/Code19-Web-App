@@ -24,6 +24,9 @@ $(document).ready(function() {
 })
 
 window.renderOrder = function () {
+
+        let selectedToppings = [];
+
         completeOrder = getCartData();
 
         if(completeOrder.length == 0) {
@@ -62,6 +65,41 @@ window.renderOrder = function () {
                 toppingPrices.forEach(ele => {
                     console.log(ele.innerHTML);
                 })
+
+
+                
+                cartCards.forEach(ele => {
+                    let toppings = ele.querySelectorAll('.toppingAtCart');
+                    toppingsHander(toppings);
+                })
+            })
+        }
+
+        function toppingsHander (List) {
+            List.forEach(ele => {
+                $(ele).click(function() {
+                    ele.querySelector('svg').classList.toggle('hidden');
+                    if(!(ele.querySelector('svg').classList.contains('hidden'))) {
+                        console.log('Active');
+
+                        let isSelected = selectedToppings.find(element => element == ele.querySelector('.tooping-id').innerHTML);
+                        if(isSelected === undefined) {
+                            selectedToppings.push(ele.querySelector('.tooping-id').innerHTML);
+                        }
+                    } else {
+                        console.log('In-Active');
+
+                        for(var i = 0; i < selectedToppings.length; i++) {
+                            if(selectedToppings[i] == ele.querySelector('.tooping-id').innerHTML) {
+                                selectedToppings.splice(i, 1);
+                            }
+                        }
+                    }
+
+                    ele.classList.toggle('bg-black');
+                    ele.classList.toggle('border');
+                    ele.classList.toggle('border-gray-300');
+                })
             })
         }
 
@@ -69,8 +107,11 @@ window.renderOrder = function () {
         function CartCardHandler(List) {
             List.forEach(ele => {
                 let remove = ele.querySelector('#CartCardRemove');
+                console.log('Current Toppings');
                 $(remove).click(function (){
-                    console.log(ele.querySelector('.food-name').innerHTML);
+                    selectedToppings.forEach(ele => {
+                        console.log(ele);
+                    })
                 })
             })
         }
