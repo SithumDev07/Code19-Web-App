@@ -26,6 +26,7 @@ $(document).ready(function() {
 window.renderOrder = function () {
 
         let selectedToppings = [];
+        let selectedToppingsButtons = [];
 
         completeOrder = getCartData();
 
@@ -63,20 +64,44 @@ window.renderOrder = function () {
             })
         }
 
+        let orderDetails = [];
+
         // ? Handling all removing and adding parts of single cart card
         function CartCardHandler(List) {
             List.forEach(ele => {
                 let remove = ele.querySelector('#CartCardRemove');
                 console.log('Current Toppings');
                 $(remove).click(function (){
-                    getFinalOrder().forEach(ele => {
-                        console.log(ele);
-                    })
+                    if(orderDetails.length != 0) {
+                        selectedToppings.forEach(ele => {
+                            console.log(ele);
+                        })
+                    } else {
+                        console.log('List is empty');
+                    }
                 })
+
+                selectedToppingsButtons = ele.querySelectorAll('.toppingAtCart');
+                
+                selectedToppingsButtons.forEach(ele => {
+                    selectedToppings.push(ele.querySelector('.tooping-id').innerHTML);
+                })
+
 
                 // ? Handling Toppings
                 const toppingsCurrent = ele.querySelectorAll('.toppingAtCart');
                 toppingsCurrent.forEach(topping => {
+
+                    let orderTest = [];
+                    orderTest.push(topping.querySelector('.food-id').innerHTML);
+                    orderTest.push(topping.querySelector('.quantity-food-topping').innerHTML);
+
+                    var toppingsCurrentTest = [];
+                    toppingsCurrentTest = JSON.parse(JSON.stringify(selectedToppings));
+                    orderTest.push(toppingsCurrentTest);
+
+                    orderDetails = [...orderDetails, orderTest];
+
                     $(topping).click(function () {
                         topping.querySelector('svg').classList.toggle('hidden');
                         if(!(topping.querySelector('svg').classList.contains('hidden'))) {
@@ -112,8 +137,16 @@ window.renderOrder = function () {
     
                         // order = [];
                         // selectedToppings = [];
+
+                        if(orderDetails.length !== 0) {
+                            if(orderDetails[orderDetails.length - 1][0] != topping.querySelector('.food-id').innerHTML) {
+                                console.log('wrokign');
+                                orderDetails = [...orderDetails, order];
+                            }
+                        }
                     })
                 })
+
             })
         }
 
