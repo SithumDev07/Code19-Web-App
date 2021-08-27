@@ -63,8 +63,8 @@ window.renderOrder = function () {
                     total = total + parseInt(ele.innerHTML);
                     // console.log(ele.innerHTML);
                 })
-                
-                document.querySelector('.pre-total').innerHTML = "Rs." + total;
+                let preTotal = parseInt(document.querySelector('.DisplayingQuantity').innerHTML) * total;
+                // document.querySelector('.pre-total').innerHTML = "Rs." + preTotal;
 
                 UpdateTotalPrice();
             })
@@ -81,13 +81,33 @@ window.renderOrder = function () {
                 let remove = ele.querySelector('#CartCardRemove');
                 console.log('Current Toppings');
                 $(remove).click(function (){
+                    console.log('Before');
                     if(orderDetails.length != 0) {
-                        EachFoodPriceByOrder.forEach(ele => {
+                        orderDetails.forEach(ele => {
                             console.log(ele);
                         })
                     } else {
                         console.log('List is empty');
                     }
+                    console.log("\n");
+                    
+                    // for(var i = 0; i < orderDetails.length; i++) {
+                    // }
+                    orderDetails.splice(index, 1);
+                    toppingPriceByOrder.splice(index, 1);
+                    EachFoodPriceByOrder.splice(index, 1);
+                        
+                    $(ele).addClass('hidden');
+                    console.log('After');
+                    if(orderDetails.length != 0) {
+                        orderDetails.forEach(ele => {
+                            console.log(ele);
+                        })
+                    } else {
+                        console.log('List is empty');
+                    }
+
+                    UpdateTotalPrice();
                 })
 
                 selectedToppingsButtons = ele.querySelectorAll('.toppingAtCart');
@@ -169,19 +189,21 @@ window.renderOrder = function () {
                 })
 
                 // ? Adding more quantity
-                $("#PlusQuantity").click(function() {
+                const PlusButton = ele.querySelector(".PlusQuantity");
+                $(PlusButton).click(function() {
                     orderDetails[index][1]++;
-                    document.querySelector('.DisplayingQuantity').innerHTML = orderDetails[index][1];
+                    ele.querySelector('.DisplayingQuantity').innerHTML = orderDetails[index][1];
                     console.log('Plus');
                     UpdateTotalPrice();
                 })
                 
                 
                 // ? Reducing quantity
-                $("#MinusQuantity").click(function() {
+                const MinusButton = ele.querySelector(".MinusQuantity");
+                $(MinusButton).click(function() {
                     if(parseInt(orderDetails[index][1]) > 1 ) {
                         orderDetails[index][1]--;
-                        document.querySelector('.DisplayingQuantity').innerHTML = orderDetails[index][1];
+                        ele.querySelector('.DisplayingQuantity').innerHTML = orderDetails[index][1];
                         console.log('Minus');
                         UpdateTotalPrice();
                     }
@@ -205,6 +227,14 @@ window.renderOrder = function () {
 
             }
             document.querySelector('.totalExtraToppings').innerHTML = `+ Rs.${totalSelectedToppingPrice}`;
+
+            // ? Counting total each price of foods
+            let totalPriceEachOrder = 0;
+            for (let index = 0; index < EachFoodPriceByOrder.length; index++) {
+                totalPriceEachOrder = totalPriceEachOrder + orderDetails[index][1] * EachFoodPriceByOrder[index];
+            }
+
+            document.querySelector('.pre-total').innerHTML = "Rs." + totalPriceEachOrder;
 
             // ? Update Total Price
             let grandTotal = parseFloat(document.querySelector('.pre-total').innerHTML.substr(3)) + totalSelectedToppingPrice;

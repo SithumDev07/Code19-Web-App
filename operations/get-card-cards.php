@@ -55,13 +55,13 @@ function Render($results, $quantity, $toppings, $toppingPrices, $toppingIds)
                     }
                 ?>/<span class="text-sm">each</span></h1>
                 <div class="p-3 w-auto h-auto flex items-center text-gray-200 active:scale-90 mt-3 text-xs">
-                    <button class="transition duration-150 hover:shadow-lg" id="PlusQuantity">
+                    <button class="transition duration-150 hover:shadow-lg PlusQuantity" id="PlusQuantity">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                         </svg>
                     </button>
                     <p class="mx-3 font-bold text-xl DisplayingQuantity"><?php echo $quantity; ?></p>
-                    <button class="transition duration-150 hover:shadow-lg" id="MinusQuantity">
+                    <button class="transition duration-150 hover:shadow-lg MinusQuantity" id="MinusQuantity">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 bg-black p-1 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6" />
                         </svg>
