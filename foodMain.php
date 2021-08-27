@@ -349,7 +349,7 @@ if (isset($_GET['clear'])) {
                         </div>
                         <div class="flex justify-between my-2">
                             <h3>Delivery Charges</h3>
-                            <h3 class="text-green-500">+ Rs.100</h3>
+                            <h3 class="text-green-500 deliveryCharges">+ Rs.100</h3>
                         </div>
                         <div class="flex justify-between border-b py-3">
                             <h3>Extra Toppings</h3>

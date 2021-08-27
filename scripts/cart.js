@@ -208,10 +208,20 @@ window.renderOrder = function () {
 
             // ? Update Total Price
             let grandTotal = parseFloat(document.querySelector('.pre-total').innerHTML.substr(3)) + totalSelectedToppingPrice;
-            document.querySelector('.grandTotal').innerHTML = `Rs.${grandTotal}`;
-            
-            document.querySelector('.amount-button-takeaway').innerHTML = `Rs.${grandTotal}`;
-            document.querySelector('.amount-button-confirm').innerHTML = `Rs.${grandTotal}`;
+
+            if(document.querySelector('.deliveryCharges').innerHTML != '+ Rs.0') {
+                console.log('Working in Delivery');
+                document.querySelector('.grandTotal').innerHTML = `Rs.${grandTotal+100}`;
+                
+                document.querySelector('.amount-button-takeaway').innerHTML = `Rs.${grandTotal+100}`;
+                document.querySelector('.amount-button-confirm').innerHTML = `Rs.${grandTotal+100}`;
+            } else {
+                document.querySelector('.grandTotal').innerHTML = `Rs.${grandTotal}`;
+                
+                document.querySelector('.amount-button-takeaway').innerHTML = `Rs.${grandTotal}`;
+                document.querySelector('.amount-button-confirm').innerHTML = `Rs.${grandTotal}`;
+            }
+
             
         }
 
@@ -224,6 +234,13 @@ window.renderOrder = function () {
 
             $("#confirmTakeaway").toggleClass("hidden");
             $("#confirmTakeaway").toggleClass("flex");
+
+            if(document.querySelector('.deliveryCharges').innerHTML == "+ Rs.0") {
+                document.querySelector('.deliveryCharges').innerHTML = "+ Rs.100";
+            } else {
+                document.querySelector('.deliveryCharges').innerHTML = "+ Rs.0";
+            }
+            UpdateTotalPrice();
         })
 
         $("#confirmTakeaway").click(function(e) {
