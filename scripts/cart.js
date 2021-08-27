@@ -95,7 +95,7 @@ window.renderOrder = function () {
                 let orderTest = [];
                 orderTest.push(ele.querySelector('.food-id').innerHTML);
                 orderTest.push(ele.querySelector('.quantity-food-topping').innerHTML);
-                
+
                 orderTest.push(toppingIdsByOrder[index]);
 
                 orderDetails = [...orderDetails, orderTest];
@@ -110,16 +110,18 @@ window.renderOrder = function () {
                         if(!(topping.querySelector('svg').classList.contains('hidden'))) {
                             console.log('Active');
     
-                            let isSelected = selectedToppings.find(element => element == topping.querySelector('.tooping-id').innerHTML);
+                            let isSelected = orderDetails[index][2].find(element => element == topping.querySelector('.tooping-id').innerHTML);
                             if(isSelected === undefined) {
-                                selectedToppings.push(topping.querySelector('.tooping-id').innerHTML);
+                                orderDetails[index][2].push(topping.querySelector('.tooping-id').innerHTML);
                             }
                         } else {
                             console.log('In-Active');
+
+                            // orderDetails[index][2];
     
-                            for(var i = 0; i < selectedToppings.length; i++) {
-                                if(selectedToppings[i] == topping.querySelector('.tooping-id').innerHTML) {
-                                    selectedToppings.splice(i, 1);
+                            for(var i = 0; i < orderDetails[index][2].length; i++) {
+                                if(orderDetails[index][2][i] == topping.querySelector('.tooping-id').innerHTML) {
+                                    orderDetails[index][2].splice(i, 1);
                                 }
                             }
                         }
@@ -127,26 +129,6 @@ window.renderOrder = function () {
                         topping.classList.toggle('bg-black');
                         topping.classList.toggle('border');
                         topping.classList.toggle('border-gray-300');
-    
-                        let order = [];
-                        order.push(topping.querySelector('.food-id').innerHTML);
-                        order.push(topping.querySelector('.quantity-food-topping').innerHTML);
-                        
-                        var toppingsCurrent = [];
-                        toppingsCurrent = JSON.parse(JSON.stringify(selectedToppings));
-                        order.push(toppingsCurrent);
-    
-                        setToppingsAtCart(order);
-    
-                        // order = [];
-                        // selectedToppings = [];
-
-                        if(orderDetails.length !== 0) {
-                            if(orderDetails[orderDetails.length - 1][0] != topping.querySelector('.food-id').innerHTML) {
-                                console.log('wrokign');
-                                orderDetails = [...orderDetails, order];
-                            }
-                        }
                     })
                 })
 
