@@ -3,12 +3,13 @@
 include '../config.php';
 
 
-function Render($results, $quantity, $toppings)
+function Render($results, $quantity, $toppings, $toppingPrices)
 {
 
     while ($row = mysqli_fetch_assoc($results)) {
 ?>
         <div class="cart-card w-full h-auto rounded-lg border flex items-center px-3 py-4 pr-5 mb-6">
+            <p class="hidden totalPriceRes"><?php echo (int)$row['basic_price'] * $quantity; ?></p>
             <div class="w-32 h-32">
                 <img src="./photo_uploads/foods/<?php echo $row['photo']; ?>" class="w-full h-full object-contain" alt="Food Image">
             </div>
@@ -25,6 +26,15 @@ function Render($results, $quantity, $toppings)
                             </svg>
                             <?php echo $topping; ?>
                         </button>
+                    <?php
+                    }
+                    ?>
+                </div>
+                <div class="hidden">
+                    <?php
+                    foreach ($toppingPrices as $toppingPrice) {
+                    ?>
+                        <p class="toppingPrices"><?php echo $toppingPrice; ?></p>
                     <?php
                     }
                     ?>
@@ -47,6 +57,7 @@ function Render($results, $quantity, $toppings)
                 </div>
                 <button class="text-red-600 text-lg font-bold shadow-sm" id="CartCardRemove">Remove</button>
             </div>
+
         </div>
 
 
@@ -79,32 +90,30 @@ if (isset($_POST['completeOrder'])) {
 
                 foreach ($order[2] as $toppings) {
 
-                    
 
 
-                        $sqlToppings = "SELECT * FROM filling WHERE id = $toppings;";
-    
-                        $resultsToppings = mysqli_query($conn, $sqlToppings);
-    
-                        $resultCheckToppings = mysqli_num_rows($resultsToppings);
-    
-                        if ($resultCheckToppings > 0) {
-                            while ($row = mysqli_fetch_assoc($resultsToppings)) {
-                                array_push($toppingsNames, $row['name']);
-                                array_push($toppingPrices, $row['price']);
-                            }
+
+                    $sqlToppings = "SELECT * FROM filling WHERE id = $toppings;";
+
+                    $resultsToppings = mysqli_query($conn, $sqlToppings);
+
+                    $resultCheckToppings = mysqli_num_rows($resultsToppings);
+
+                    if ($resultCheckToppings > 0) {
+                        while ($row = mysqli_fetch_assoc($resultsToppings)) {
+                            array_push($toppingsNames, $row['name']);
+                            array_push($toppingPrices, $row['price']);
                         }
-                    
-
+                    }
                 }
 
 
-                Render($results, $order[1], $toppingsNames);
+                Render($results, $order[1], $toppingsNames, $toppingPrices);
 
 
-                while ($rowPrices = mysqli_fetch_assoc($results)) {
-                    array_push($foodPrices, $rowPrices['basic_price']);
-                }
+                // while ($rowPrices = mysqli_fetch_assoc($results)) {
+                //     array_push($foodPrices, $rowPrices['basic_price']);
+                // }
             } else {
 
         ?>
@@ -114,20 +123,9 @@ if (isset($_POST['completeOrder'])) {
         } else {
             ?>
             <h1 class="text-center text-xs font-semibold text-gray-400 w-full mt-6"><?php echo $message; ?></h1>
-        <?php
+<?php
         }
-        $totalPrice = 0;
-        foreach ($foodPrices as $foodPrice) {
-            $totalPrice = $totalPrice + (float)$foodPrice;
-        }
-
-        ?> 
-            <p id="totalPriceRes"><?php echo $totalPrice; ?></p>
-        <?php
     }
-    
-
-    
 } else {
     echo 'Something went wrong';
 }

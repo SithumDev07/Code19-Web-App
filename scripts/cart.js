@@ -45,12 +45,23 @@ window.renderOrder = function () {
 
             $(".cart-cards").load("operations/get-card-cards.php", {
                 completeOrder: JSON.stringify(completeOrder),
-            }, function(response) {
+            }, function() {
                 const cartCards = document.querySelectorAll('.cart-card');
                 CartCardHandler(cartCards);
-                var $resData = $(response);
-                // alert($resData);
-                document.querySelector('.amount-button').innerHTML = $resData.filter("#totalPriceRes").text();
+                
+                let PriceContainers = document.querySelectorAll('.totalPriceRes');
+
+                let total = 0;
+                PriceContainers.forEach(ele => {
+                    total = total + parseInt(ele.innerHTML);
+                    console.log(ele.innerHTML);
+                })
+                document.querySelector('.amount-button').innerHTML = "Rs." + total;
+
+                let toppingPrices = document.querySelectorAll('.toppingPrices');
+                toppingPrices.forEach(ele => {
+                    console.log(ele.innerHTML);
+                })
             })
         }
 
