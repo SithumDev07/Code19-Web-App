@@ -60,46 +60,6 @@ window.renderOrder = function () {
                     console.log(ele.innerHTML);
                 })
                 document.querySelector('.amount-button').innerHTML = "Rs." + total;
-
-                let toppingPrices = document.querySelectorAll('.toppingPrices');
-                toppingPrices.forEach(ele => {
-                    console.log(ele.innerHTML);
-                })
-
-
-                
-                cartCards.forEach(ele => {
-                    let toppings = ele.querySelectorAll('.toppingAtCart');
-                    toppingsHander(toppings);
-                })
-            })
-        }
-
-        function toppingsHander (List) {
-            List.forEach(ele => {
-                $(ele).click(function() {
-                    ele.querySelector('svg').classList.toggle('hidden');
-                    if(!(ele.querySelector('svg').classList.contains('hidden'))) {
-                        console.log('Active');
-
-                        let isSelected = selectedToppings.find(element => element == ele.querySelector('.tooping-id').innerHTML);
-                        if(isSelected === undefined) {
-                            selectedToppings.push(ele.querySelector('.tooping-id').innerHTML);
-                        }
-                    } else {
-                        console.log('In-Active');
-
-                        for(var i = 0; i < selectedToppings.length; i++) {
-                            if(selectedToppings[i] == ele.querySelector('.tooping-id').innerHTML) {
-                                selectedToppings.splice(i, 1);
-                            }
-                        }
-                    }
-
-                    ele.classList.toggle('bg-black');
-                    ele.classList.toggle('border');
-                    ele.classList.toggle('border-gray-300');
-                })
             })
         }
 
@@ -109,8 +69,49 @@ window.renderOrder = function () {
                 let remove = ele.querySelector('#CartCardRemove');
                 console.log('Current Toppings');
                 $(remove).click(function (){
-                    selectedToppings.forEach(ele => {
+                    getFinalOrder().forEach(ele => {
                         console.log(ele);
+                    })
+                })
+
+                // ? Handling Toppings
+                const toppingsCurrent = ele.querySelectorAll('.toppingAtCart');
+                toppingsCurrent.forEach(topping => {
+                    $(topping).click(function () {
+                        topping.querySelector('svg').classList.toggle('hidden');
+                        if(!(topping.querySelector('svg').classList.contains('hidden'))) {
+                            console.log('Active');
+    
+                            let isSelected = selectedToppings.find(element => element == topping.querySelector('.tooping-id').innerHTML);
+                            if(isSelected === undefined) {
+                                selectedToppings.push(topping.querySelector('.tooping-id').innerHTML);
+                            }
+                        } else {
+                            console.log('In-Active');
+    
+                            for(var i = 0; i < selectedToppings.length; i++) {
+                                if(selectedToppings[i] == topping.querySelector('.tooping-id').innerHTML) {
+                                    selectedToppings.splice(i, 1);
+                                }
+                            }
+                        }
+    
+                        topping.classList.toggle('bg-black');
+                        topping.classList.toggle('border');
+                        topping.classList.toggle('border-gray-300');
+    
+                        let order = [];
+                        order.push(topping.querySelector('.food-id').innerHTML);
+                        order.push(topping.querySelector('.quantity-food-topping').innerHTML);
+                        
+                        var toppingsCurrent = [];
+                        toppingsCurrent = JSON.parse(JSON.stringify(selectedToppings));
+                        order.push(toppingsCurrent);
+    
+                        setToppingsAtCart(order);
+    
+                        // order = [];
+                        // selectedToppings = [];
                     })
                 })
             })
@@ -156,4 +157,14 @@ window.renderOrder = function () {
                 }
             });
         })
+}
+
+let finalOrder = [];
+
+window.setToppingsAtCart = function (order) {
+    finalOrder = [...finalOrder, order];
+}
+
+window.getFinalOrder = function () {
+    return finalOrder;
 }

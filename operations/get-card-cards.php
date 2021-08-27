@@ -26,6 +26,8 @@ function Render($results, $quantity, $toppings, $toppingPrices, $toppingIds)
                             </svg>
                             <h3 class="tooping-name"><?php echo $toppings[$i]; ?></h3>
                             <h3 class="tooping-id hidden"><?php echo $toppingIds[$i]; ?></h3>
+                            <h3 class="food-id hidden"><?php echo $row['id']; ?></h3>
+                            <h3 class="quantity-food-topping hidden"><?php echo $quantity; ?></h3>
                         </button>
                     <?php
                     }
