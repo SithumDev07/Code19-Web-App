@@ -111,22 +111,57 @@ if (isset($_GET['clear'])) {
             -webkit-overflow-scrolling: touch;
         }
 
-        .cart-cards::-webkit-scrollbar, .cart::-webkit-scrollbar, .checkout-menu::-webkit-scrollbar {
+        .cart-cards::-webkit-scrollbar,
+        .cart::-webkit-scrollbar,
+        .checkout-menu::-webkit-scrollbar {
             width: 0.6em;
             border-radius: 50%;
         }
 
-        .cart-cards::-webkit-scrollbar-track, .cart::-webkit-scrollbar-track, .checkout-menu::-webkit-scrollbar-track {
+        .cart-cards::-webkit-scrollbar-track,
+        .cart::-webkit-scrollbar-track,
+        .checkout-menu::-webkit-scrollbar-track {
             box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         }
 
-        .cart-cards::-webkit-scrollbar-thumb, .cart::-webkit-scrollbar-thumb, .checkout-menu::-webkit-scrollbar-thumb {
+        .cart-cards::-webkit-scrollbar-thumb,
+        .cart::-webkit-scrollbar-thumb,
+        .checkout-menu::-webkit-scrollbar-thumb {
             background-color: rgba(30, 30, 30, 0.7);
             border-radius: 1.2em;
         }
 
         .add-card-active {
             height: auto;
+        }
+
+        .slider::before {
+            position: absolute;
+            content: "";
+            width: 2rem;
+            height: 2rem;
+            left: 0.3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+            --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: var(--tw-shadow, 0 0 #0000), var(--tw-shadow, 0 0 #0000), var(--tw-shadow);
+        }
+
+        .toggle-switch:checked+.slider {
+            background-color: rgba(52, 61, 255, 1);
+        }
+
+        .toggle-switch:checked+.slider::before {
+            left: unset;
+            right: 0.3rem;
+            background-color: white;
+        }
+
+        .translate-icon {
+            transform: rotate(45deg);
         }
     </style>
 </head>
@@ -234,7 +269,15 @@ if (isset($_GET['clear'])) {
         <div class="w-full h-full hidden items-center justify-center empty-cart">
             <h1 class="text-6xl md:text-9xl font-extrabold selection:bg-red-500" style="-webkit-text-stroke: 2px; -webkit-text-stroke-color: rgb(229, 231, 235); color: transparent;">Cart is empty.</h1>
         </div>
-        
+
+        <div class="flex items-center absolute top-10 right-10 z-40">
+            <h3 class="text-2xl font-semibold text-gray-100 mr-3">Take Away</h3>
+            <label class="switch relative inline-block w-16 h-10 ml-4">
+                <input type="checkbox" class="toggle-switch hidden" name="paid" id="isTakeaway">
+                <span class="slider cursor-pointer top-0 left-0 right-0 bottom-0 absolute bg-gray-50 transform transition duration-300 rounded-full"></span>
+            </label>
+        </div>
+
 
         <!-- Header -->
         <header class="flex flex-col xl:flex-row xl:container xl:mx-auto h-screen cart-header">
@@ -293,12 +336,13 @@ if (isset($_GET['clear'])) {
                         </div>
                     </div>
 
-                    <div class="flex items-center">
+                    <!--  // TODO Take Care of this later -->
+                    <div class="items-center hidden">
                         <input type="text" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4" placeholder="Discount Code">
                         <button class="px-5 py-3 bg-black rounded-md ml-4 text-white transition duration-150 hover:shadow-lg" id="ApplyCoupen">Apply</button>
                     </div>
 
-                    <div class="flex flex-col my-4 text-gray-100 text-xl bg-gray-800 bg-opacity-20 p-3 rounded-xl">
+                    <div class="flex flex-col my-4 text-gray-100 text-xl bg-gray-800 bg-opacity-20 p-3 rounded-xl total-container">
                         <div class="flex justify-between border-b py-3">
                             <h3>Total</h3>
                             <h3>$490</h3>
@@ -328,9 +372,21 @@ if (isset($_GET['clear'])) {
                 </div>
             </div>
 
-            <button class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50">Confirm Payment $560 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <!-- // ? Online Pay Button -->
+            <button class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="onlinePay">
+                Confirm Payment <h3 class="amount-button ml-3">$560</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg></button>
+                </svg>
+            </button>
+
+            <!-- // ? Takeaway Button -->
+            <button class="rounded-br-none fixed bottom-5 right-10 explore hidden text-gray-100 bg-black py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="confirmTakeaway">
+                Place Order <h3 class="amount-button ml-3">$560</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+            </button>
         </header>
     </section>
 

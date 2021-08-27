@@ -9,7 +9,7 @@ function Render($results, $conn)
     while ($row = mysqli_fetch_assoc($results)) {
 ?>
 
-        <div class="popupmenu scale-0 w-96 h-56 rounded-md shadow-xl bg-gray-100 bg-opacity-80 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition duration-200">
+        <!-- <div class="popupmenu scale-0 w-96 h-56 rounded-md shadow-xl bg-gray-100 bg-opacity-80 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition duration-200">
             <button class="fixed h-8 w-8 rounded-full bg-black top-1 md:top-4 right-1 md:right-4 flex justify-center items-center text-white z-50 transform transition active:scale-90 duration-150" id="CloseConfirmMenu">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -34,7 +34,7 @@ function Render($results, $conn)
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="popupmenu-stay scale-0 w-96 h-56 rounded-md shadow-xl bg-gray-100 bg-opacity-80 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition duration-200">
             <button class="fixed h-8 w-8 rounded-full bg-black top-1 md:top-4 right-1 md:right-4 flex justify-center items-center text-white z-50 transform transition active:scale-90 duration-150" id="CloseConfirmMenu">

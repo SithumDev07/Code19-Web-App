@@ -13,7 +13,7 @@ function Render($results, $quantity, $toppings)
                 <img src="./photo_uploads/foods/<?php echo $row['photo']; ?>" class="w-full h-full object-contain" alt="Food Image">
             </div>
             <div class="conetent flex flex-col flex-1 border-l border-r px-3">
-                <h1 class="text-xl font-bold text-gray-100"><?php echo $row['name'] ?></h1>
+                <h1 class="text-xl font-bold text-gray-100 food-name"><?php echo $row['name'] ?></h1>
                 <div class="flex flex-wrap">
                     <?php
                     foreach ($toppings as $topping) {
@@ -45,7 +45,7 @@ function Render($results, $quantity, $toppings)
                         </svg>
                     </button>
                 </div>
-                <button class="text-red-600 text-lg font-bold shadow-sm">Remove</button>
+                <button class="text-red-600 text-lg font-bold shadow-sm" id="CartCardRemove">Remove</button>
             </div>
         </div>
 
@@ -69,6 +69,8 @@ if (isset($_POST['completeOrder'])) {
         $results = mysqli_query($conn, $sql);
 
         $toppingsNames = array();
+        $toppingPrices = array();
+        $foodPrices = array();
 
         if (mysqli_num_rows($results) > 0) {
             $resultCheck = mysqli_num_rows($results);
@@ -89,6 +91,7 @@ if (isset($_POST['completeOrder'])) {
                         if ($resultCheckToppings > 0) {
                             while ($row = mysqli_fetch_assoc($resultsToppings)) {
                                 array_push($toppingsNames, $row['name']);
+                                array_push($toppingPrices, $row['price']);
                             }
                         }
                     
@@ -97,6 +100,11 @@ if (isset($_POST['completeOrder'])) {
 
 
                 Render($results, $order[1], $toppingsNames);
+
+
+                while ($rowPrices = mysqli_fetch_assoc($results)) {
+                    array_push($foodPrices, $rowPrices['basic_price']);
+                }
             } else {
 
         ?>
@@ -106,9 +114,20 @@ if (isset($_POST['completeOrder'])) {
         } else {
             ?>
             <h1 class="text-center text-xs font-semibold text-gray-400 w-full mt-6"><?php echo $message; ?></h1>
-<?php
+        <?php
         }
+        $totalPrice = 0;
+        foreach ($foodPrices as $foodPrice) {
+            $totalPrice = $totalPrice + (float)$foodPrice;
+        }
+
+        ?> 
+            <p id="totalPriceRes"><?php echo $totalPrice; ?></p>
+        <?php
     }
+    
+
+    
 } else {
     echo 'Something went wrong';
 }

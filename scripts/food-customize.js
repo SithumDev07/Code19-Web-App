@@ -20,9 +20,8 @@ $(document).ready(function() {
             })
         })
     })
+
     let selectedToppingsIds = [];
-    
-    let finalOrder = [];
 
     toggleText = true;
     function customizeMenuHandler (foodId) {
@@ -47,7 +46,8 @@ $(document).ready(function() {
             })
             console.log('\n');
             console.log(proceedCheck);
-            $(".popupmenu").removeClass('scale-0');
+            // $(".popupmenu").removeClass('scale-0');
+            $(".popupmenu-stay").removeClass('scale-0');
         })
         
         // ? Close Confirmation
@@ -76,57 +76,45 @@ $(document).ready(function() {
             $(".popupmenu").addClass('scale-0');
             $(".popupmenu-stay").removeClass('scale-0');
 
+            // makeOrder();
             
         })
 
 
         $("#keepOrder").click(function() {
             $(".popupmenu-stay").addClass('scale-0');
-            let foodOrder= [];
-
-            var toppingsCurrent = [];
-            toppingsCurrent = JSON.parse(JSON.stringify(selectedToppingsIds));
+            makeOrder();
             
-            foodOrder.push(foodId);
-            foodOrder.push(proceedCheck);
-            foodOrder.push(toppingsCurrent);
-            
-            setCartData(foodOrder);
-            
-            toppingsCurrent = [];
-            selectedToppingsIds = [];
         })
 
 
         $("#checkoutTakeaway").click(function(e) {
-            e.preventDefault();
-
-            const form_data = new FormData();
-            const sessionId = document.querySelector('.sessionId').innerHTML;
-            const deliveryMethod = 'takeaway';
-            const basicPrice = document.querySelector('.basicPrice').innerHTML;
-            form_data.append('sessionId', sessionId);
-            form_data.append('deliveryMethod', deliveryMethod);
-            form_data.append('basicPrice', basicPrice);
-            form_data.append('quantity', proceedCheck);
-            form_data.append('toppingsList', JSON.stringify(selectedToppingsIds));
-            $.ajax({
-                url: 'operations/take-away-order.php',
-                type: 'POST',
-                data: form_data,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-
-                    alert(response);
-
-                    // setCartData();
-
-                    $(".customize-menu").addClass("scale-0");
-                    window.location.replace("foodMain.php");
-                }
-            });
+            $(".customize-menu").addClass("scale-0");
+            $(".checkout-menu").removeClass("scale-0");
+            $("body").addClass("overflow-hidden");
+            makeOrder();
+            renderOrder();
         })
+
+
+    }
+
+
+    function makeOrder() {
+        console.log('adding data');
+        let foodOrder= [];
+
+        var toppingsCurrent = [];
+        toppingsCurrent = JSON.parse(JSON.stringify(selectedToppingsIds));
+        
+        foodOrder.push(foodId);
+        foodOrder.push(proceedCheck);
+        foodOrder.push(toppingsCurrent);
+        
+        setCartData(foodOrder);
+        
+        toppingsCurrent = [];
+        selectedToppingsIds = [];
     }
 
     function listenOnProceed() {
