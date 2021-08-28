@@ -18,7 +18,17 @@ function Render($results, $address, $phone)
             </div>
             <div class="w-48 h-48 rounded-full overflow-hidden relative cursor-pointer profile-picture-customer">
                 <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl z-10"></i>
-                <img id="UploadedProfile" class="transform transition hover:opacity-50 duration-300 w-full h-full rounded-full object-cover" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="Profile">
+                <?php
+                if ($row['photo'] == null) {
+                ?>
+                    <img id="UploadedProfile" class="transform transition hover:opacity-50 duration-300 w-full h-full rounded-full object-cover" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="Profile">
+                        <?php
+                } else {
+                    ?> 
+                    <img id="UploadedProfile" class="transform transition hover:opacity-50 duration-300 w-full h-full rounded-full object-cover" src="./photo_uploads/customers/<?php echo $row['photo']; ?>" alt="Profile">
+                    <?php
+                }
+                ?>
                 <input type="file" name="profileUploadCustomer" id="UploadProfileCustomer">
             </div>
         </div>

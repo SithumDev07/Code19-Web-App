@@ -98,7 +98,7 @@ if (isset($_GET['clear'])) {
         }
 
         .toppings::-webkit-scrollbar-track,
-        .customize-menu::-webkit-scrollbar-track, 
+        .customize-menu::-webkit-scrollbar-track,
         .profile-data::-webkit-scrollbar-track {
             box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         }
@@ -117,20 +117,23 @@ if (isset($_GET['clear'])) {
 
         .cart-cards::-webkit-scrollbar,
         .cart::-webkit-scrollbar,
-        .checkout-menu::-webkit-scrollbar {
+        .checkout-menu::-webkit-scrollbar,
+        .customer-profile::-webkit-scrollbar {
             width: 0.6em;
             border-radius: 50%;
         }
 
         .cart-cards::-webkit-scrollbar-track,
         .cart::-webkit-scrollbar-track,
-        .checkout-menu::-webkit-scrollbar-track {
+        .checkout-menu::-webkit-scrollbar-track,
+        .customer-profile::-webkit-scrollbar-track {
             box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         }
 
         .cart-cards::-webkit-scrollbar-thumb,
         .cart::-webkit-scrollbar-thumb,
-        .checkout-menu::-webkit-scrollbar-thumb {
+        .checkout-menu::-webkit-scrollbar-thumb,
+        .customer-profile::-webkit-scrollbar-thumb {
             background-color: rgba(30, 30, 30, 0.7);
             border-radius: 1.2em;
         }
@@ -246,7 +249,7 @@ if (isset($_GET['clear'])) {
             <div class="w-1/2 xl:w-1/2 mt-10 xl:-mt-28">
                 <div class="flex items-center">
                     <p class="hidden xl:block font-semibold text-gray-300 flex-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae sunt asperiores distinctio vitae alias! Provident, necessitatibus! Eum quas quaerat ipsa.</p>
-                    <button class="bg-black p-5 rounded-full text-gray-100 ml-4 transform transition active:scale-90 duration-100" id="login-close-button">
+                    <button class="bg-black p-5 rounded-full text-gray-100 ml-4 transform transition active:scale-90 duration-100" id="loginCloseButton">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
@@ -486,7 +489,7 @@ if (isset($_GET['clear'])) {
             </div>
 
             <div class="right py-4 px-10 profile-data xl:overflow-y-scroll 2xl:overflow-hidden flex-1 2xl:flex 2xl:justify-center 2xl:flex-col">
-                
+
             </div>
         </header>
     </section>
@@ -517,14 +520,44 @@ if (isset($_GET['clear'])) {
                 ?>
                     <a href="" class="mr-4 text-gray-100 font-semibold sessionUsername"><?php echo $_SESSION['sessionUser']; ?></a>
                     <button class="text-white mr-4 relative" id="Cart">
-                        <div class="py-1 px-2 rounded-full bg-red-500 absolute -top-2 -right-2 text-xs cart-counter">3</div>
+                        <div class="py-1 px-2 rounded-full bg-red-500 absolute -top-2 -right-2 text-xs cart-counter"></div>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
                     </button>
-                    <button class="w-14 h-14 rounded-full overflow-hidden transform transition active:scale-75 duration-150 hover:scale-105" id="CustomerProfile">
-                        <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" class="w-full h-full object-cover" alt="">
-                    </button>
+                    <?php
+                    if (isset($_SESSION['sessionId'])) {
+                        $sql = "SELECT * FROM customer WHERE id = " . $_SESSION['sessionId'] . ";";
+                        $results = mysqli_query($conn, $sql);
+                        $resultCheck = mysqli_num_rows($results);
+
+                        if ($resultCheck > 0) {
+                            while ($row = mysqli_fetch_assoc($results)) {
+                                if ($row['photo'] != null) {
+                    ?>
+                                    <button class="w-14 h-14 rounded-full overflow-hidden transform transition active:scale-75 duration-150 hover:scale-105" id="CustomerProfile">
+                                        <img src="./photo_uploads/customers/<?php echo $row['photo']; ?>" class="w-full h-full object-cover" alt="">
+                                    </button>
+                                <?php
+                                } else {
+                                ?>
+                                    <button class="w-14 h-14 rounded-full overflow-hidden transform transition active:scale-75 duration-150 hover:scale-105" id="CustomerProfile">
+                                        <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" class="w-full h-full object-cover" alt="">
+                                    </button>
+                        <?php
+                                }
+                            }
+                        }
+                    } else {
+                        ?>
+                        <button class="w-14 h-14 rounded-full overflow-hidden transform transition active:scale-75 duration-150 hover:scale-105" id="CustomerProfile">
+                            <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" class="w-full h-full object-cover" alt="">
+                        </button>
+                    <?php
+                    }
+
+                    ?>
+
 
                     <?php
                 } else {
@@ -711,7 +744,14 @@ if (isset($_GET['clear'])) {
     </main>
     <script src="./scripts/customer-signup.js"></script>
     <script src="./scripts/common.js"></script>
-    <script src="./scripts/food-customize.js"></script>
+    <?php
+    if (isset($_SESSION['sessionId'])) {
+    ?>
+        <script src="./scripts/food-customize.js"></script>
+
+    <?php
+    }
+    ?>
     <script src="./scripts/cart.js"></script>
     <script src="./scripts/customer-profile.js"></script>
 </body>

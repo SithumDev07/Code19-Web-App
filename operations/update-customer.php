@@ -57,13 +57,13 @@ if (isset($_POST['sessionId'])) {
         echo "EMPTY FIELDS $id $fullname $phone $address";
         exit();
     } else {
-        if (isset($_FILES['profileUpload']['name'])) {
-            $file = $_FILES['profileUpload'];
-            $fileName = $_FILES['profileUpload']['name'];
-            $fileTmpName = $_FILES['profileUpload']['tmp_name'];
-            $fileSize = $_FILES['profileUpload']['size'];
-            $fileError = $_FILES['profileUpload']['error'];
-            $fileType = $_FILES['profileUpload']['type'];
+        if (isset($_FILES['profileCustomer']['name'])) {
+            $file = $_FILES['profileCustomer'];
+            $fileName = $_FILES['profileCustomer']['name'];
+            $fileTmpName = $_FILES['profileCustomer']['tmp_name'];
+            $fileSize = $_FILES['profileCustomer']['size'];
+            $fileError = $_FILES['profileCustomer']['error'];
+            $fileType = $_FILES['profileCustomer']['type'];
 
             $fileExt = explode('.', $fileName);
             $fileActualExt = strtolower(end($fileExt));

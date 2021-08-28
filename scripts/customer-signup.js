@@ -15,6 +15,12 @@ $(document).ready(function() {
         // $(".signup-form").removeClass("top-full");
     })
 
+
+    $("#loginCloseButton").click(function() {
+        $(".login-form").addClass("scale-0");
+        // $(".signup-form").addClass("top-full");
+    })
+
     // ? Register
     LiveListerOnCustomerValidations(document.querySelector("#UsernameCustomer"));
     LiveListerOnCustomerValidations(document.querySelector("#FirstNameCustomer"));

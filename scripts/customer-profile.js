@@ -38,7 +38,12 @@ $(document).ready(function() {
                 $(".err-message-update-profile").addClass("hidden");
 
                 const sessionId = document.querySelector('.sessionId').innerHTML;
-                const fullname = $("#FirstNameCustomerProfile").val() + " " + $("#LastNameCustomerProfile").val();
+                let fullname = '';
+                if(document.querySelector("#LastNameCustomerProfile").value.length === 0) {
+                    fullname = $("#FirstNameCustomerProfile").val();
+                } else {
+                    fullname = $("#FirstNameCustomerProfile").val() + " " + $("#LastNameCustomerProfile").val();
+                }
                 const phone = $("#CustomerPersonalNumber").val();
                 const address = $("#AddressCustomerProfile").val();
                 const image = $("#UploadProfileCustomer")[0].files;
@@ -49,20 +54,19 @@ $(document).ready(function() {
                 form_data.append('phone', phone);
                 form_data.append('address', address);
                 form_data.append('profileCustomer', image[0]);
-                // TODO 
-                // $.ajax({
-                //     url: 'operations/update-customer.php',
-                //     type: 'POST',
-                //     data: form_data,
-                //     contentType: false,
-                //     processData: false,
-                //     success: function(response) {
-                //         alert(response);
+                $.ajax({
+                    url: 'operations/update-customer.php',
+                    type: 'POST',
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        alert(response);
     
-                //         $(".ustomer-profile").addClass("scale-0");
-                //         window.location.replace("foodMain.php");
-                //     }
-                // });
+                        $(".ustomer-profile").addClass("scale-0");
+                        window.location.replace("foodMain.php");
+                    }
+                });
             } else {
                 console.log("Not Validated");
                 setErrorsOnUpdateButton(true);
@@ -76,6 +80,7 @@ $(document).ready(function() {
 
         // TODO Logout
         $("#LogOutCustomerProfile").click(function() {
+            window.location.replace("foodMain.php?clear");
         })
 
 
