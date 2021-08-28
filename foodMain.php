@@ -365,7 +365,7 @@ if (isset($_GET['clear'])) {
             </div>
 
             <div class="right relative flex xl:justify-center flex-col flex-1 p-2">
-                <div class="cart-cards w-full h-auto border rounded-md p-6 overflow-y-auto">
+                <div class="cart-cards w-full h-auto border rounded-md p-6 overflow-y-auto mt-20">
 
                     <!-- // ?End of card -->
 

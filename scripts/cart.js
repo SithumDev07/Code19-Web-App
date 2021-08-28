@@ -249,27 +249,9 @@ window.renderOrder = function () {
 
 
      
-            // $("#isTakeaway").click(function() {
-            //     $(".payment").toggleClass("hidden");
-            //     $(".total-container").toggleClass("mt-14");
-            //     $("#onlinePay").toggleClass("hidden");
-            //     $("#onlinePay").toggleClass("flex");
-    
-            //     $("#confirmTakeaway").toggleClass("hidden");
-            //     $("#confirmTakeaway").toggleClass("flex");
-    
-            //     if(document.querySelector('.deliveryCharges').innerHTML == "+ Rs.0") {
-            //         document.querySelector('.deliveryCharges').innerHTML = "+ Rs.100";
-            //     } else {
-            //         console.log('Here');
-            //         document.querySelector('.deliveryCharges').innerHTML = "+ Rs.0";
-            //     }
-            //     console.log(document.querySelector('.deliveryCharges'));
-            //     UpdateTotalPrice();
-            // })
 
-        $('body').on('click', '#isTakeaway', function() {
-            $(".payment").toggleClass("hidden");
+        $('#isTakeaway').unbind().click(function() {
+                $(".payment").toggleClass("hidden");
                 $(".total-container").toggleClass("mt-14");
                 $("#onlinePay").toggleClass("hidden");
                 $("#onlinePay").toggleClass("flex");
@@ -283,7 +265,7 @@ window.renderOrder = function () {
                     console.log('Here');
                     document.querySelector('.deliveryCharges').innerHTML = "+ Rs.0";
                 }
-                console.log(document.querySelector('.deliveryCharges'));
+                // console.log(document.querySelector('.deliveryCharges'));
                 UpdateTotalPrice();
         })
     
