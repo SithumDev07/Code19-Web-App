@@ -270,18 +270,19 @@ window.renderOrder = function () {
         })
     
 
-        $("#confirmTakeaway").click(function(e) {
+        $("#confirmTakeaway").unbind().click(function(e) {
             e.preventDefault();
+            let deliveryCharges = 0.0;
+            if(document.querySelector('.deliveryCharges').innerHTML == "+ Rs.100") {
+                deliveryCharges = 100.00;
+            }
+
+            const sessionId = document.querySelector('.sessionId').innerHTML;
 
             const form_data = new FormData();
-            const sessionId = document.querySelector('.sessionId').innerHTML;
-            const deliveryMethod = 'takeaway';
-            const basicPrice = document.querySelector('.basicPrice').innerHTML;
             form_data.append('sessionId', sessionId);
-            form_data.append('deliveryMethod', deliveryMethod);
-            form_data.append('basicPrice', basicPrice);
-            form_data.append('quantity', proceedCheck);
-            form_data.append('toppingsList', JSON.stringify(selectedToppingsIds));
+            form_data.append('deliverycharges', deliveryCharges);
+            form_data.append('finalOrder', JSON.stringify(completeOrder));
             $.ajax({
                 url: 'operations/take-away-order.php',
                 type: 'POST',
@@ -291,13 +292,15 @@ window.renderOrder = function () {
                 success: function(response) {
 
                     alert(response);
-
-                    // setCartData();
+                    clearCartData();
+                    updateCartCounter();
 
                     $(".customize-menu").addClass("scale-0");
                     window.location.replace("foodMain.php");
                 }
             });
+            console.log("Call me Once");
+            console.log(completeOrder);
         })
 }
 
