@@ -14,14 +14,9 @@ $(document).ready(function() {
         $("body").removeClass("overflow-hidden");
     })
 
-    $("#ApplyCoupen").click(function() {
-        console.log("Order details");
-        completeOrder.forEach(ele => {
-            console.log(ele);
-        })
-        console.log("\n");
-    })
+    
 })
+
 
 window.renderOrder = function () {
 
@@ -61,51 +56,37 @@ window.renderOrder = function () {
                 let total = 0;
                 PriceContainers.forEach(ele => {
                     total = total + parseInt(ele.innerHTML);
-                    // console.log(ele.innerHTML);
                 })
-                let preTotal = parseInt(document.querySelector('.DisplayingQuantity').innerHTML) * total;
-                // document.querySelector('.pre-total').innerHTML = "Rs." + preTotal;
 
                 UpdateTotalPrice();
             })
         }
 
-        let orderDetails = [];
         let toppingIdsByOrder = [];
         let toppingPriceByOrder = [];
         let EachFoodPriceByOrder = [];
 
+        $("#onlinePay").click(function () {
+            console.log('Current Complete Order');
+            getCartData().forEach(ele => {
+                console.log(ele);
+            })
+
+            console.log(document.querySelector('.grandTotal').innerHTML);
+        })
+
+       
+
         // ? Handling all removing and adding parts of single cart card
         function CartCardHandler(List) {
             List.forEach((ele, index) => {
+
+                // ? Removing Specific Order 
                 let remove = ele.querySelector('#CartCardRemove');
-                console.log('Current Toppings');
                 $(remove).click(function (){
-                    console.log('Before');
-                    if(orderDetails.length != 0) {
-                        orderDetails.forEach(ele => {
-                            console.log(ele);
-                        })
-                    } else {
-                        console.log('List is empty');
-                    }
-                    console.log("\n");
-                    
-                    // for(var i = 0; i < orderDetails.length; i++) {
-                    // }
-                    orderDetails.splice(index, 1);
+                    completeOrder.splice(index, 1);
                     toppingPriceByOrder.splice(index, 1);
                     EachFoodPriceByOrder.splice(index, 1);
-                        
-                    $(ele).addClass('hidden');
-                    console.log('After');
-                    if(orderDetails.length != 0) {
-                        orderDetails.forEach(ele => {
-                            console.log(ele);
-                        })
-                    } else {
-                        console.log('List is empty');
-                    }
 
                     UpdateTotalPrice();
                 })
@@ -120,13 +101,6 @@ window.renderOrder = function () {
 
                 selectedToppings = [];
 
-                let orderTest = [];
-                orderTest.push(ele.querySelector('.food-id').innerHTML);
-                orderTest.push(ele.querySelector('.quantity-food-topping').innerHTML);
-
-                orderTest.push(toppingIdsByOrder[index]);
-
-                orderDetails = [...orderDetails, orderTest];
 
                 // ? Calculating Topping Prices
                 totalToppingsElements = ele.querySelectorAll('.toppingPrices');
@@ -135,6 +109,8 @@ window.renderOrder = function () {
                 })
 
                 toppingPriceByOrder = [...toppingPriceByOrder, eachToppingPrice];
+
+                eachToppingPrice = [];
 
 
                 // ? Getting all the each food prices
@@ -149,11 +125,10 @@ window.renderOrder = function () {
                     $(topping).click(function () {
                         topping.querySelector('svg').classList.toggle('hidden');
                         if(!(topping.querySelector('svg').classList.contains('hidden'))) {
-                            console.log('Active');
     
-                            let isSelected = orderDetails[index][2].find(element => element == topping.querySelector('.tooping-id').innerHTML);
+                            let isSelected = completeOrder[index][2].find(element => element == topping.querySelector('.tooping-id').innerHTML);
                             if(isSelected === undefined) {
-                                orderDetails[index][2].push(topping.querySelector('.tooping-id').innerHTML);
+                                completeOrder[index][2].push(topping.querySelector('.tooping-id').innerHTML);
                             }
 
                             // ? Searching for the topping price if it is already in the aray
@@ -163,11 +138,10 @@ window.renderOrder = function () {
                             }
 
                         } else {
-                            console.log('In-Active');
     
-                            for(var i = 0; i < orderDetails[index][2].length; i++) {
-                                if(orderDetails[index][2][i] == topping.querySelector('.tooping-id').innerHTML) {
-                                    orderDetails[index][2].splice(i, 1);
+                            for(var i = 0; i < completeOrder[index][2].length; i++) {
+                                if(completeOrder[index][2][i] == topping.querySelector('.tooping-id').innerHTML) {
+                                    completeOrder[index][2].splice(i, 1);
                                 }
                             }
                             
@@ -191,9 +165,8 @@ window.renderOrder = function () {
                 // ? Adding more quantity
                 const PlusButton = ele.querySelector(".PlusQuantity");
                 $(PlusButton).click(function() {
-                    orderDetails[index][1]++;
-                    ele.querySelector('.DisplayingQuantity').innerHTML = orderDetails[index][1];
-                    console.log('Plus');
+                    completeOrder[index][1]++;
+                    ele.querySelector('.DisplayingQuantity').innerHTML = completeOrder[index][1];
                     UpdateTotalPrice();
                 })
                 
@@ -201,10 +174,9 @@ window.renderOrder = function () {
                 // ? Reducing quantity
                 const MinusButton = ele.querySelector(".MinusQuantity");
                 $(MinusButton).click(function() {
-                    if(parseInt(orderDetails[index][1]) > 1 ) {
-                        orderDetails[index][1]--;
-                        ele.querySelector('.DisplayingQuantity').innerHTML = orderDetails[index][1];
-                        console.log('Minus');
+                    if(parseInt(completeOrder[index][1]) > 1 ) {
+                        completeOrder[index][1]--;
+                        ele.querySelector('.DisplayingQuantity').innerHTML = completeOrder[index][1];
                         UpdateTotalPrice();
                     }
                 })
@@ -225,13 +197,14 @@ window.renderOrder = function () {
                     totalSelectedToppingPrice = totalSelectedToppingPrice + parseFloat(toppingPriceByOrder[index][i]);
                 }
 
+                totalSelectedToppingPrice = totalSelectedToppingPrice * completeOrder[index][1];
             }
             document.querySelector('.totalExtraToppings').innerHTML = `+ Rs.${totalSelectedToppingPrice}`;
 
             // ? Counting total each price of foods
             let totalPriceEachOrder = 0;
             for (let index = 0; index < EachFoodPriceByOrder.length; index++) {
-                totalPriceEachOrder = totalPriceEachOrder + orderDetails[index][1] * EachFoodPriceByOrder[index];
+                totalPriceEachOrder = totalPriceEachOrder + completeOrder[index][1] * EachFoodPriceByOrder[index];
             }
 
             document.querySelector('.pre-total').innerHTML = "Rs." + totalPriceEachOrder;
@@ -240,7 +213,6 @@ window.renderOrder = function () {
             let grandTotal = parseFloat(document.querySelector('.pre-total').innerHTML.substr(3)) + totalSelectedToppingPrice;
 
             if(document.querySelector('.deliveryCharges').innerHTML != '+ Rs.0') {
-                console.log('Working in Delivery');
                 document.querySelector('.grandTotal').innerHTML = `Rs.${grandTotal+100}`;
                 
                 document.querySelector('.amount-button-takeaway').innerHTML = `Rs.${grandTotal+100}`;
@@ -256,22 +228,45 @@ window.renderOrder = function () {
         }
 
 
-        $("#isTakeaway").click(function() {
+     
+            // $("#isTakeaway").click(function() {
+            //     $(".payment").toggleClass("hidden");
+            //     $(".total-container").toggleClass("mt-14");
+            //     $("#onlinePay").toggleClass("hidden");
+            //     $("#onlinePay").toggleClass("flex");
+    
+            //     $("#confirmTakeaway").toggleClass("hidden");
+            //     $("#confirmTakeaway").toggleClass("flex");
+    
+            //     if(document.querySelector('.deliveryCharges').innerHTML == "+ Rs.0") {
+            //         document.querySelector('.deliveryCharges').innerHTML = "+ Rs.100";
+            //     } else {
+            //         console.log('Here');
+            //         document.querySelector('.deliveryCharges').innerHTML = "+ Rs.0";
+            //     }
+            //     console.log(document.querySelector('.deliveryCharges'));
+            //     UpdateTotalPrice();
+            // })
+
+        $('body').on('click', '#isTakeaway', function() {
             $(".payment").toggleClass("hidden");
-            $(".total-container").toggleClass("mt-14");
-            $("#onlinePay").toggleClass("hidden");
-            $("#onlinePay").toggleClass("flex");
-
-            $("#confirmTakeaway").toggleClass("hidden");
-            $("#confirmTakeaway").toggleClass("flex");
-
-            if(document.querySelector('.deliveryCharges').innerHTML == "+ Rs.0") {
-                document.querySelector('.deliveryCharges').innerHTML = "+ Rs.100";
-            } else {
-                document.querySelector('.deliveryCharges').innerHTML = "+ Rs.0";
-            }
-            UpdateTotalPrice();
+                $(".total-container").toggleClass("mt-14");
+                $("#onlinePay").toggleClass("hidden");
+                $("#onlinePay").toggleClass("flex");
+    
+                $("#confirmTakeaway").toggleClass("hidden");
+                $("#confirmTakeaway").toggleClass("flex");
+    
+                if(document.querySelector('.deliveryCharges').innerHTML == "+ Rs.0") {
+                    document.querySelector('.deliveryCharges').innerHTML = "+ Rs.100";
+                } else {
+                    console.log('Here');
+                    document.querySelector('.deliveryCharges').innerHTML = "+ Rs.0";
+                }
+                console.log(document.querySelector('.deliveryCharges'));
+                UpdateTotalPrice();
         })
+    
 
         $("#confirmTakeaway").click(function(e) {
             e.preventDefault();

@@ -15,6 +15,8 @@ function Render($results, $quantity, $toppings, $toppingPrices, $toppingIds)
             </div>
             <div class="conetent flex flex-col flex-1 border-l border-r px-3">
                 <h1 class="text-xl font-bold text-gray-100 food-name"><?php echo $row['name'] ?></h1>
+                <h3 class="food-id hidden"><?php echo $row['id']; ?></h3>
+                <h3 class="quantity-food-topping hidden"><?php echo $quantity; ?></h3>
                 <div class="flex flex-wrap">
                     <?php
                     for ($i=0; $i < count($toppings); $i++) { 
@@ -26,9 +28,9 @@ function Render($results, $quantity, $toppings, $toppingPrices, $toppingIds)
                             </svg>
                             <h3 class="tooping-name"><?php echo $toppings[$i]; ?></h3>
                             <h3 class="tooping-id hidden"><?php echo $toppingIds[$i]; ?></h3>
-                            <h3 class="food-id hidden"><?php echo $row['id']; ?></h3>
+                            
                             <h3 class="topping-price hidden"><?php echo $toppingPrices[$i]; ?></h3>
-                            <h3 class="quantity-food-topping hidden"><?php echo $quantity; ?></h3>
+                            
                         </button>
                     <?php
                     }
