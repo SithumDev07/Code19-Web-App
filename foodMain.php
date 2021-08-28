@@ -177,18 +177,18 @@ if (isset($_GET['clear'])) {
             top: 50%;
         }
 
-        #upload-profile-customer {
+        #UploadProfileCustomer {
             position: absolute;
             top: 0;
             z-index: 10;
-            width: 6rem;
-            height: 6rem;
+            width: 48rem;
+            height: 48rem;
             opacity: 0;
             left: 0;
             cursor: pointer;
         }
 
-        #upload-profile-customer::-webkit-file-upload-button {
+        #UploadProfileCustomer::-webkit-file-upload-button {
             visibility: hidden;
         }
     </style>

@@ -12,11 +12,14 @@ function Render($results, $address, $phone)
         $firstName = substr($fullname, 0, strpos($fullname, ' '));
         $lastName = substr($fullname, strpos($fullname, ' ') + 1);
 ?>
-        <div class="flex justify-center">
+        <div class="flex justify-center relative">
+            <div class="err-message-update-profile hidden text-sm xl:text-base absolute -bottom-6 text-gray-200 bg-red-400 px-3 py-3 rounded-md z-20">
+                Oops! Seems to be you have entered in incorrect format.
+            </div>
             <div class="w-48 h-48 rounded-full overflow-hidden relative cursor-pointer profile-picture-customer">
                 <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl z-10"></i>
-                <img id="profile" class="transform transition hover:opacity-50 duration-300" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="Profile">
-                <input type="file" name="profileUploadCustomer" id="upload-profile-customer">
+                <img id="UploadedProfile" class="transform transition hover:opacity-50 duration-300 w-full h-full rounded-full object-cover" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="Profile">
+                <input type="file" name="profileUploadCustomer" id="UploadProfileCustomer">
             </div>
         </div>
         <div class=" flex items-center w-full flex-wrap mt-10">
@@ -27,8 +30,11 @@ function Render($results, $address, $phone)
         <textarea type="text" placeholder="Address" class="text-gray-200 rounded-md w-full px-3 py-3 mt-6 bg-transparent border border-gray-200 placeholder-gray-300" id="AddressCustomerProfile" name="address"><?php echo $address; ?></textarea>
         <button type="submit" class="relative w-full rounded-md mt-5 flex items-center justify-center bg-blue-600 p-3 text-gray-300 text-sm font-semibold h-14 hover:bg-blue-700 transition duration-300" id="UpdateCustomerProfile">
             Update Profile
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute top-1/2 right-5 transform -translate-y-1/2" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="validated-icon h-6 w-6 absolute top-1/2 right-5 transform -translate-y-1/2" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="not-validated-icon h-6 w-6 absolute top-1/2 right-5 transform -translate-y-1/2 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
         </button>
         <div class="flex items-center mt-2 mb-5">
@@ -45,7 +51,9 @@ function Render($results, $address, $phone)
                 </svg>
             </button>
 
+
         </div>
+
         <?php
     }
 }
