@@ -20,10 +20,10 @@ function Render($results, $address, $phone)
             </div>
         </div>
         <div class=" flex items-center w-full flex-wrap mt-10">
-            <input type="text" class="text-gray-200 flex-1 rounded-md xl:rounded-r-none px-3 py-3 mt-4 bg-transparent border border-gray-200 placeholder-gray-300" placeholder="First Name" name="firstname" id="FirstNameCustomerProfile" value="<?php echo $firstName; ?>">
-            <input type="text" class="text-gray-200 flex-1 xl:ml-2 rounded-md xl:rounded-l-none px-3 py-3 mt-4 bg-transparent border border-gray-200 placeholder-gray-300" placeholder="Last Name" name="lastname" id="LastNameCustomerProfile" value="<?php echo $lastName; ?>">
+            <input type="text" class="text-gray-200 flex-1 rounded-md rounded-r-none px-3 py-3 mt-4 bg-transparent border border-gray-200 placeholder-gray-300" placeholder="First Name" name="firstname" id="FirstNameCustomerProfile" value="<?php echo $firstName; ?>">
+            <input type="text" class="text-gray-200 flex-1 ml-2 rounded-md rounded-l-none px-3 py-3 mt-4 bg-transparent border border-gray-200 placeholder-gray-300" placeholder="Last Name" name="lastname" id="LastNameCustomerProfile" value="<?php echo $lastName; ?>">
         </div>
-        <input type="number" placeholder="Phone Number" class="text-gray-200 rounded-md w-full px-3 py-3 mt-6 bg-transparent border border-gray-200 placeholder-gray-300" id="PhoneCustomerProfile" name="phone" value="<?php echo $phone; ?>">
+        <input type="number" placeholder="Phone Number" class="text-gray-200 rounded-md w-full px-3 py-3 mt-6 bg-transparent border border-gray-200 placeholder-gray-300" id="CustomerPersonalNumber" name="phone" value="<?php echo $phone; ?>">
         <textarea type="text" placeholder="Address" class="text-gray-200 rounded-md w-full px-3 py-3 mt-6 bg-transparent border border-gray-200 placeholder-gray-300" id="AddressCustomerProfile" name="address"><?php echo $address; ?></textarea>
         <button type="submit" class="relative w-full rounded-md mt-5 flex items-center justify-center bg-blue-600 p-3 text-gray-300 text-sm font-semibold h-14 hover:bg-blue-700 transition duration-300" id="UpdateCustomerProfile">
             Update Profile
@@ -31,6 +31,21 @@ function Render($results, $address, $phone)
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
             </svg>
         </button>
+        <div class="flex items-center mt-2 mb-5">
+            <button type="submit" class="w-full rounded-md mt-5 flex flex-1 mr-5 items-center justify-center p-3 text-red-500 text-sm font-semibold transform h-14 hover:scale-105 transition duration-150 active:scale-90" id="DeleteCustomerProfile">
+                Delete Account
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+            </button>
+            <button type="submit" class="w-full rounded-md mt-5 flex flex-1 items-center justify-center text-black p-3 text-sm font-semibold h-14 transform hover:scale-105 transition duration-150 active:scale-90" id="LogOutCustomerProfile">
+                Logout
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+            </button>
+
+        </div>
         <?php
     }
 }

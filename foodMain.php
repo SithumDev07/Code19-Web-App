@@ -91,18 +91,21 @@ if (isset($_GET['clear'])) {
         }
 
         .toppings::-webkit-scrollbar,
-        .customize-menu::-webkit-scrollbar {
+        .customize-menu::-webkit-scrollbar,
+        .profile-data::-webkit-scrollbar {
             width: 0.6em;
             border-radius: 50%;
         }
 
         .toppings::-webkit-scrollbar-track,
-        .customize-menu::-webkit-scrollbar-track {
+        .customize-menu::-webkit-scrollbar-track, 
+        .profile-data::-webkit-scrollbar-track {
             box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         }
 
         .toppings::-webkit-scrollbar-thumb,
-        .customize-menu::-webkit-scrollbar-thumb {
+        .customize-menu::-webkit-scrollbar-thumb,
+        .profile-data::-webkit-scrollbar-thumb {
             background-color: rgba(30, 30, 30, 0.7);
             border-radius: 1.2em;
         }
@@ -427,7 +430,7 @@ if (isset($_GET['clear'])) {
 
         <!-- Header -->
         <header class="flex flex-col xl:flex-row xl:container xl:mx-auto h-screen">
-            <div class="left flex flex-col xl:flex-1 px-2">
+            <div class="left flex flex-col px-2 flex-1">
 
                 <h1 class="text-6xl md:text-9xl font-extrabold selection:bg-red-500" style="-webkit-text-stroke: 2px; -webkit-text-stroke-color: rgb(229, 231, 235); color: transparent;">Profile</h1>
                 <div class="payment w-full h-auto border rounded-md p-6 my-4">
@@ -482,7 +485,7 @@ if (isset($_GET['clear'])) {
                 </div>
             </div>
 
-            <div class="right flex xl:justify-center flex-col flex-1 py-4 px-10 profile-data">
+            <div class="right py-4 px-10 profile-data xl:overflow-y-scroll 2xl:overflow-hidden flex-1 2xl:flex 2xl:justify-center 2xl:flex-col">
                 
             </div>
         </header>
