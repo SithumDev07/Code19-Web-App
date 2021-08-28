@@ -37,6 +37,10 @@ window.renderOrder = function () {
 
             $('.cart-header').removeClass('flex');
             $('.cart-header').addClass('hidden');
+
+
+            $('.takeawayContainer').removeClass('flex');
+            $('.takeawayContainer').addClass('hidden');
             
             
         } else {
@@ -45,6 +49,9 @@ window.renderOrder = function () {
 
             $('.cart-header').addClass('flex');
             $('.cart-header').removeClass('hidden');
+
+            $('.takeawayContainer').addClass('flex');
+            $('.takeawayContainer').removeClass('hidden');
 
 
             $(".cart-cards").load("operations/get-card-cards.php", {
