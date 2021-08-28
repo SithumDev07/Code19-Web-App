@@ -78,9 +78,30 @@ $(document).ready(function() {
 
         })
 
-        // TODO Logout
+        
         $("#LogOutCustomerProfile").click(function() {
             window.location.replace("foodMain.php?clear");
+        })
+
+
+        $("#DeleteCustomerProfile").click(function() {
+            const sessionId = document.querySelector('.sessionId').innerHTML;
+
+            const form_data = new FormData();
+            form_data.append('sessionId', sessionId);
+            $.ajax({
+                url: 'operations/delete-customer.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert(response);
+
+                    $(".ustomer-profile").addClass("scale-0");
+                    window.location.replace("foodMain.php?clear");
+                }
+            });
         })
 
 

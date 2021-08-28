@@ -41,7 +41,7 @@ if (isset($_POST['sessionId'])) {
                 echo "sql error";
                 exit();
             } else {
-                $bindFailed = mysqli_stmt_bind_param($statement, 'iS', $id, $address);
+                $bindFailed = mysqli_stmt_bind_param($statement, 'is', $id, $address);
                 if ($bindFailed === false) {
                     echo htmlspecialchars($statement->error);
                     exit();
@@ -53,10 +53,19 @@ if (isset($_POST['sessionId'])) {
 
 
 
-    if (empty($id) || empty($fullname) || empty($phone) || empty($address)) {
-        echo "EMPTY FIELDS $id $fullname $phone $address";
+    if (empty($id) || empty($fullname)) {
+        echo "EMPTY FIELDS $id $fullname";
         exit();
     } else {
+
+        if(empty($address)) {
+            $address = " ";
+        }
+
+        if(empty($phone)) {
+            $phone = " ";
+        }
+
         if (isset($_FILES['profileCustomer']['name'])) {
             $file = $_FILES['profileCustomer'];
             $fileName = $_FILES['profileCustomer']['name'];
