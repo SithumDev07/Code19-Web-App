@@ -12,6 +12,8 @@ $(document).ready(function() {
     $("#CartClose").click(function() {
         $(".checkout-menu").addClass("scale-0");
         $("body").removeClass("overflow-hidden");
+
+        updateCartCounter();
     })
 
     
@@ -66,7 +68,7 @@ window.renderOrder = function () {
         let toppingPriceByOrder = [];
         let EachFoodPriceByOrder = [];
 
-        $("#onlinePay").click(function () {
+        $("#onlinePay").unbind().click(function () {
             console.log('Current Complete Order');
             getCartData().forEach(ele => {
                 console.log(ele);
@@ -84,11 +86,29 @@ window.renderOrder = function () {
                 // ? Removing Specific Order 
                 let remove = ele.querySelector('#CartCardRemove');
                 $(remove).click(function (){
-                    completeOrder.splice(index, 1);
-                    toppingPriceByOrder.splice(index, 1);
-                    EachFoodPriceByOrder.splice(index, 1);
+                    
+                    if(completeOrder.length == 1) {
 
-                    UpdateTotalPrice();
+                        completeOrder.splice(index, 1);
+                        toppingPriceByOrder.splice(index, 1);
+                        EachFoodPriceByOrder.splice(index, 1);
+    
+                        ele.classList.add('hidden');
+    
+                        UpdateTotalPrice();
+
+                        $(".checkout-menu").addClass("scale-0");
+                        $("body").removeClass("overflow-hidden");
+                        updateCartCounter();
+                    } else {
+                        completeOrder.splice(index, 1);
+                        toppingPriceByOrder.splice(index, 1);
+                        EachFoodPriceByOrder.splice(index, 1);
+    
+                        ele.classList.add('hidden');
+    
+                        UpdateTotalPrice();
+                    }
                 })
 
                 selectedToppingsButtons = ele.querySelectorAll('.toppingAtCart');
