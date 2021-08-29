@@ -6,6 +6,30 @@ include '../config.php';
 function Render($results, $conn)
 {
 
+    $sql = "SELECT * FROM filling";
+    $resultsFilling = mysqli_query($conn, $sql);
+    $resultCheckFilling = mysqli_num_rows($resultsFilling);
+    $fillingsAll = array();
+
+    if ($resultCheckFilling > 0) {
+        while ($rowFilling = mysqli_fetch_assoc($resultsFilling)) {
+            array_push($fillingsAll, $rowFilling['id']);
+        }
+    }
+
+    $sql = "select * from filling left join (select count(*) as now_count, count(filling_id) as disappearing ,filling_id, ingredient_id from ingredient_filling join ingredient on ingredient.id = ingredient_filling.ingredient_id where ingredient_filling.no_of_units < ingredient.remaining_units group by filling_id) as total_ing on total_ing.filling_id = filling.id join (select id as ingredientId, name as ingredient, remaining_units from ingredient) as ingredient on ingredient.ingredientId = total_ing.ingredient_id join (select count(*) as counts_ing, filling_id from ingredient_filling group by filling_id) as final_ing on final_ing.filling_id = filling.id where total_ing.ingredient_id in (select id from ingredient join ingredient_filling on ingredient.id = ingredient_filling.ingredient_id where ingredient_filling.no_of_units < ingredient.remaining_units) and total_ing.disappearing < final_ing.counts_ing;";
+    $resultsFilling = mysqli_query($conn, $sql);
+    $resultCheckFilling = mysqli_num_rows($resultsFilling);
+    $toppingsOutOfStock = array();
+    if ($resultCheckFilling > 0) {
+        while ($rowFilling = mysqli_fetch_assoc($resultsFilling)) {
+            array_push($toppingsOutOfStock, $rowFilling['id']);
+        }
+    }
+    $toBeShown = array();
+    $toBeShown = array_diff($fillingsAll, $toppingsOutOfStock);
+    $toBeShown = implode("','", $toBeShown);
+
     while ($row = mysqli_fetch_assoc($results)) {
 ?>
 
@@ -87,12 +111,14 @@ function Render($results, $conn)
                     <?php
 
 
-                    $sql = "select * from filling";
+                    $sql = "SELECT * FROM filling WHERE id IN('$toBeShown');";
+                    // $sql = "select * from filling left join (select count(*) as now_count, count(filling_id) as disappearing ,filling_id, ingredient_id from ingredient_filling join ingredient on ingredient.id = ingredient_filling.ingredient_id where ingredient_filling.no_of_units < ingredient.remaining_units group by filling_id) as total_ing on total_ing.filling_id = filling.id join (select id as ingredientId, name as ingredient, remaining_units from ingredient) as ingredient on ingredient.ingredientId = total_ing.ingredient_id join (select count(*) as counts_ing, filling_id from ingredient_filling group by filling_id) as final_ing on final_ing.filling_id = filling.id where total_ing.ingredient_id in (select id from ingredient join ingredient_filling on ingredient.id = ingredient_filling.ingredient_id where ingredient_filling.no_of_units < ingredient.remaining_units) and total_ing.disappearing < final_ing.counts_ing;";
                     $resultsFilling = mysqli_query($conn, $sql);
                     $resultCheckFilling = mysqli_num_rows($resultsFilling);
 
                     if ($resultCheckFilling > 0) {
                         while ($rowFilling = mysqli_fetch_assoc($resultsFilling)) {
+
 
                     ?>
 
@@ -127,13 +153,13 @@ function Render($results, $conn)
                     </div>
                     <p class="hidden basicPrice"><?php echo $row['basic_price']; ?></p>
                     <h2 class="text-4xl text-gray-100 font-semibold">Rs.<?php
-                        if(substr($row['basic_price'], (int)strpos($row['basic_price'], '.') + 1) == 0) {
-                            echo substr($row['basic_price'], 0, (int)strpos($row['basic_price'], '.'));
-                            // echo "\nprice has no decimal";
-                        } else {
-                            echo $row['basic_price'];
-                        }
-                    ?>/<span class="text-sm">each</span></h2>
+                                                                        if (substr($row['basic_price'], (int)strpos($row['basic_price'], '.') + 1) == 0) {
+                                                                            echo substr($row['basic_price'], 0, (int)strpos($row['basic_price'], '.'));
+                                                                            // echo "\nprice has no decimal";
+                                                                        } else {
+                                                                            echo $row['basic_price'];
+                                                                        }
+                                                                        ?>/<span class="text-sm">each</span></h2>
                 </div>
                 <!-- // TODO Take care of disabled -->
                 <button disabled class="rounded-br-none fixed bottom-5 right-10 explore flex text-gray-100 bg-black py-3 px-5 rounded-xl justify-center items-center mt-5 font-semibold disabled:opacity-50" id="GoCheckout">Add to cart<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
