@@ -42,8 +42,15 @@ $(document).ready(function() {
 
         $("#CloseCustomMenu").click(function() {
 
+            let clearAmount = 0;
+            if(document.querySelector(".quantity-customize").innerHTML == 0) {
+                clearAmount = 0;
+            } else {
+                clearAmount = proceedCheck;
+            }
+
             const form_data = new FormData();
-            form_data.append('quantity', proceedCheck);
+            form_data.append('quantity', clearAmount);
             form_data.append('selectedfoodid', foodId);
             form_data.append('selectedToppings', JSON.stringify(selectedToppingsIds));
             console.log(selectedToppingsIds);
@@ -79,11 +86,29 @@ $(document).ready(function() {
         $("#QuantityIncreaser").click(function() {
 
             // ? Update the DB for the moment
-            const form_data = new FormData();
+            let form_data = new FormData();
             form_data.append('quantity', 1);
             form_data.append('selectedfoodid', foodId);
             $.ajax({
                 url: 'operations/update-food-customized.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    // alert(response);
+                    
+                }
+            });
+
+
+            // ? Update the DB for the moment for toppings
+            form_data = new FormData();
+            form_data.append('quantity', 1);
+            form_data.append('selectedToppings', JSON.stringify(selectedToppingsIds));
+            $.ajax({
+                url: 'operations/update-toppings-customized.php',
                 type: 'POST',
                 data: form_data,
                 contentType: false,
@@ -108,7 +133,7 @@ $(document).ready(function() {
 
             if(parseInt(document.querySelector(".quantity-customize").innerHTML) >= 1) {
                 // ? Update the DB for the moment
-                const form_data = new FormData();
+                let form_data = new FormData();
                 form_data.append('quantity', -1);
                 form_data.append('selectedfoodid', foodId);
                 $.ajax({
@@ -119,6 +144,23 @@ $(document).ready(function() {
                     processData: false,
                     success: function(response) {
     
+                        // alert(response);
+                        
+                    }
+                });
+
+                // ? Update the DB for the moment for toppings
+                form_data = new FormData();
+                form_data.append('quantity', -1);
+                form_data.append('selectedToppings', JSON.stringify(selectedToppingsIds));
+                $.ajax({
+                    url: 'operations/update-toppings-customized.php',
+                    type: 'POST',
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+
                         alert(response);
                         
                     }
@@ -168,24 +210,61 @@ $(document).ready(function() {
 
         $("#keepOrder").click(function() {
 
+            // ? Update the DB for the moment for toppings
+            form_data = new FormData();
+            form_data.append('quantity', -1);
+            form_data.append('selectedToppings', JSON.stringify(selectedToppingsIds));
+            $.ajax({
+                url: 'operations/update-toppings-customized.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    alert(response);
+                    
+                }
+            });
+
             $(".popupmenu-stay").addClass('scale-0');
         
-                    const ToppingsContainer = document.querySelector('.toppings');
-                    const ToppingsList = ToppingsContainer.querySelectorAll('.toppings-buttons');
-                    ToppingsList.forEach(ele => {
-                        ele.classList.remove('bg-black');
-                        ele.classList.add('border');
-                        ele.classList.add('border-gray-300');
-                        ele.querySelector('svg').classList.add('hidden');
-                    })
-        
-                    makeOrder();
+            const ToppingsContainer = document.querySelector('.toppings');
+            const ToppingsList = ToppingsContainer.querySelectorAll('.toppings-buttons');
+            ToppingsList.forEach(ele => {
+                ele.classList.remove('bg-black');
+                ele.classList.add('border');
+                ele.classList.add('border-gray-300');
+                ele.querySelector('svg').classList.add('hidden');
+            })
+
+            document.querySelector(".quantity-customize").innerHTML = 0;
+
+            makeOrder();
 
             
         })
 
 
         $("#checkoutTakeaway").click(function(e) {
+
+            // ? Update the DB for the moment for toppings
+            form_data = new FormData();
+            form_data.append('quantity', -1);
+            form_data.append('selectedToppings', JSON.stringify(selectedToppingsIds));
+            $.ajax({
+                url: 'operations/update-toppings-customized.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    alert(response);
+                    
+                }
+            });
+
             $(".customize-menu").addClass("scale-0");
             $(".checkout-menu").removeClass("scale-0");
             $("body").addClass("overflow-hidden");
