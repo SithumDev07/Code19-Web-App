@@ -38,8 +38,27 @@ $(document).ready(function() {
         })
 
         $("#CloseCustomMenu").click(function() {
-            $(".customize-menu").addClass("scale-0");
-            $("body").removeClass("overflow-hidden");
+
+            const form_data = new FormData();
+            form_data.append('quantity', proceedCheck);
+            form_data.append('selectedToppings', JSON.stringify(selectedToppingsIds));
+            console.log(selectedToppingsIds);
+            $.ajax({
+                url: 'operations/reset-inventory-customized.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    alert(response);
+                    $(".customize-menu").addClass("scale-0");
+                    $("body").removeClass("overflow-hidden");
+                }
+            });
+
+
+
         })
 
         // ? Checkout
@@ -78,7 +97,7 @@ $(document).ready(function() {
             
         })
 
-        // ? Refresh Page
+        // ? Refresh Page (Not Working Upto now)
         $(window).bind('beforeunload',function(){
 
             const form_data = new FormData();

@@ -12,6 +12,10 @@ if (isset($_POST['quantity'])) {
     $currentlySelected = $_POST['selectedToppings'];
     $currentlySelected = json_decode($currentlySelected);
 
+    if($quantity == 0){
+        $quantity = 1;
+    }
+
     $allIngredientIds = array();
     $allIngredientQuantities = array();
     for ($i = 0; $i < count($currentlySelected); $i++) {
