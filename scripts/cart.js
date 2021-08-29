@@ -169,11 +169,29 @@ window.renderOrder = function () {
                     $(topping).click(function () {
                         topping.querySelector('svg').classList.toggle('hidden');
                         if(!(topping.querySelector('svg').classList.contains('hidden'))) {
-    
+
                             let isSelected = completeOrder[index][2].find(element => element == topping.querySelector('.tooping-id').innerHTML);
                             if(isSelected === undefined) {
                                 completeOrder[index][2].push(topping.querySelector('.tooping-id').innerHTML);
                             }
+
+                            // ? Update the DB for the moment for toppings
+                            const form_data = new FormData();
+                            // let value = parseInt(completeOrder[index][1]) * -1;
+                            form_data.append('quantity', parseInt(completeOrder[index][1]));
+                            form_data.append('selectedToppings', JSON.stringify(completeOrder[index][2]));
+                            $.ajax({
+                                url: 'operations/update-toppings-customized.php',
+                                type: 'POST',
+                                data: form_data,
+                                contentType: false,
+                                processData: false,
+                                success: function(response) {
+
+                                    alert(response);
+                                    
+                                }
+                            });
 
                             // ? Searching for the topping price if it is already in the aray
                             let isAddedToppingPrice = toppingPriceByOrder[index].find(element => element == topping.querySelector('.topping-price').innerHTML);
@@ -182,6 +200,24 @@ window.renderOrder = function () {
                             }
 
                         } else {
+
+                            // ? Update the DB for the moment for toppings
+                            const form_data = new FormData();
+                            let value = parseInt(completeOrder[index][1]) * -1;
+                            form_data.append('quantity', value);
+                            form_data.append('selectedToppings', JSON.stringify(completeOrder[index][2]));
+                            $.ajax({
+                                url: 'operations/update-toppings-customized.php',
+                                type: 'POST',
+                                data: form_data,
+                                contentType: false,
+                                processData: false,
+                                success: function(response) {
+
+                                    alert(response);
+                                    
+                                }
+                            });
     
                             for(var i = 0; i < completeOrder[index][2].length; i++) {
                                 if(completeOrder[index][2][i] == topping.querySelector('.tooping-id').innerHTML) {
