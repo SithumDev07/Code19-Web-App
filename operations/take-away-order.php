@@ -31,14 +31,18 @@ if (isset($_POST['sessionId'])) {
         $totalPriceforSelectedToppings = 0.0;
         $totalPriceforSelectedFoods = 0.0;
 
-        for ($i=0; $i < count($finalOrder); $i++) { 
-            print_r($finalOrder[$i][2]) . "<br>";
-        }
+        $toppingsIdsOrder = array();
+        $foodIdsOrder = array();
 
+        // for ($i=0; $i < count($finalOrder); $i++) { 
+        //     print_r($finalOrder[$i][2]) . "<br>";
+        // }
+
+        // ? Getting all food and filling ids and calculate total amount
         for ($i = 0; $i < count($finalOrder); $i++) {
             for ($j = 0; $j < count($finalOrder[$i][2]); $j++) {
 
-                $sql = "SELECT * FROM filling WHERE id = " . $finalOrder[$i][2][$j] .";";
+                $sql = "SELECT * FROM filling WHERE id = " . $finalOrder[$i][2][$j] . ";";
 
                 $results = mysqli_query($conn, $sql);
                 $resultCheck = mysqli_num_rows($results);
@@ -46,11 +50,12 @@ if (isset($_POST['sessionId'])) {
                 if ($resultCheck > 0) {
                     while ($row = mysqli_fetch_assoc($results)) {
                         $totalPriceforSelectedToppings = $totalPriceforSelectedToppings + (float)$row['price'] * (int)$finalOrder[$i][1];
+                        array_push($toppingsIdsOrder, $row['id']);
                     }
                 }
             }
 
-            $sqlFood = "SELECT * FROM food WHERE id = " . $finalOrder[$i][0]. ";";
+            $sqlFood = "SELECT * FROM food WHERE id = " . $finalOrder[$i][0] . ";";
 
             $resultsFood = mysqli_query($conn, $sqlFood);
             $resultCheckFood = mysqli_num_rows($resultsFood);
@@ -58,6 +63,7 @@ if (isset($_POST['sessionId'])) {
             if ($resultCheckFood > 0) {
                 while ($rowFood = mysqli_fetch_assoc($resultsFood)) {
                     $totalPriceforSelectedFoods = $totalPriceforSelectedFoods + (float)$rowFood['basic_price'] * (int)$finalOrder[$i][1];
+                    array_push($foodIdsOrder, $rowFood['id']);
                 }
             }
         }
@@ -125,14 +131,67 @@ if (isset($_POST['sessionId'])) {
                 }
             }
 
+            // ? Updating Inventory from fillings
+            // TODO
+            $newArray = array();
+            $newArray = $finalOrder;
+
+            for ($i = 0; $i < count($newArray); $i++) {
+                $ingredientsIdsArrayTopping = array();
+                $ingredientsQQsArrayTopping = array();
+                for ($j = 0; $j < count($newArray[$i][2]); $j++) {
+                    $sql = "SELECT * FROM ingredient_filling WHERE filling_id = " . $newArray[$i][2][$j] . ";";
+
+                    $results = mysqli_query($conn, $sql);
+                    $resultCheck = mysqli_num_rows($results);
+
+                    if ($resultCheck > 0) {
+                        while ($row = mysqli_fetch_assoc($results)) {
+                            array_push($ingredientsIdsArrayTopping, $row['ingredient_id']);
+                            array_push($ingredientsQQsArrayTopping, (int)$row['no_of_units'] * (int)$newArray[$i][1]);
+                        }
+                    }
+                }
+                array_push($newArray[$i], $ingredientsIdsArrayTopping);
+                array_push($newArray[$i], $ingredientsQQsArrayTopping);
+            }
+
+            // ? Updating inventory data related to order
+            for ($i = 0; $i < count($ingredientsIdsArrayTopping); $i++) {
+
+                // TODO
+                // ? Getting current stock at inventory
+                $sql = "SELECT * FROM ingredient WHERE id = " . $ingredientsIdsArrayTopping[$i] . ";";
+                $results = mysqli_query($conn, $sql);
+                $resultCheck = mysqli_num_rows($results);
+                $currentStok = 0;
+                if ($resultCheck > 0) {
+                    while ($row = mysqli_fetch_assoc($results)) {
+                        $currentStok = (int)$row['remaining_units'];
+                    }
+                }
+
+                $sql = "UPDATE ingredient SET remaining_units = ? WHERE id = ?";
+                if (!mysqli_stmt_prepare($statement, $sql)) {
+                    echo "SQL SERVER ERROR UPDATING ingredient";
+                    exit();
+                } else {
+                    $newStock = $currentStok - $ingredientsQQsArrayTopping[$i];
+                    $bindFailed = mysqli_stmt_bind_param($statement, 'ii', $newStock, $ingredientsIdsArrayTopping[$i]);
+
+                    if ($bindFailed === false) {
+                        echo htmlspecialchars($statement->error);
+                        exit();
+                    }
+                    mysqli_stmt_execute($statement);
+                }
+            }
+
 
             echo "success all $newOrderIdGenerated $userid $finalAmount";
             exit();
         }
     }
-
-
-
 } else {
     // header("Location: ../dashboard.php?error=accessforbidden");
     echo "main error";

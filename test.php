@@ -8,10 +8,11 @@ if (isset($_GET['id'])) {
     $order1 = array();
     array_push($order1, "4");
     array_push($order1, "7");
-    array_push($order1, "2");
+    array_push($order1, "8");
+    array_push($order1, "1");
 
     $order2 = array();
-    array_push($order2, "2");
+    array_push($order2, "9");
 
     $order3 = array();
 
@@ -27,7 +28,7 @@ if (isset($_GET['id'])) {
     array_push($finalOrder2, "5");
     array_push($finalOrder2, $order2);
 
-    array_push($finalOrder3, "7");
+    array_push($finalOrder3, "2");
     array_push($finalOrder3, "1");
     array_push($finalOrder3, $order3);
 
@@ -41,18 +42,64 @@ if (isset($_GET['id'])) {
         for ($j = 0; $j < count($Complete[$i][2]); $j++) {
             echo $Complete[$i][2][$j] . " ";
         }
-        // echo "<br>";
+        echo "<br>";
     }
 
+    // TODO
+    $newArray = array();
+    $newArray = $Complete;
+
+    for ($i = 0; $i < count($newArray); $i++) {
+        $ingredientsIdsArrayTopping = array();
+        $ingredientsQQsArrayTopping = array();
+        for ($j = 0; $j < count($newArray[$i][2]); $j++) {
+
+            
+            $sql = "SELECT * FROM ingredient_filling WHERE filling_id = " . $newArray[$i][2][$j] . ";";
+            $results = mysqli_query($conn, $sql);
+            $resultCheck = mysqli_num_rows($results);
+
+            if ($resultCheck > 0) {
+                while ($row = mysqli_fetch_assoc($results)) {
+                    array_push($ingredientsIdsArrayTopping, $row['ingredient_id']);
+                    array_push($ingredientsQQsArrayTopping, (int)$row['no_of_units'] * (int)$newArray[$i][1]);
+                }
+            }
+        }
+        array_push($newArray[$i], $ingredientsIdsArrayTopping);
+        array_push($newArray[$i], $ingredientsQQsArrayTopping);
+    }
+
+    // ? Updating inventory data related to order
+    // for ($i = 0; $i < count($ingredientsIdsArrayTopping); $i++) {
+    //     $sql = "UPDATE ingredient SET remaining_units = ? WHERE id = ?";
+    //     // $statement = mysqli_stmt_init($conn);
+    //     if (!mysqli_stmt_prepare($statement, $sql)) {
+    //         echo "SQL SERVER ERROR UPDATING ingredient";
+    //         exit();
+    //     } else {
+
+    //         $bindFailed = mysqli_stmt_bind_param($statement, 'ii', $ingredientsQQsArrayTopping[$i], $ingredientsIdsArrayTopping[$i]);
+
+    //         if ($bindFailed === false) {
+    //             echo htmlspecialchars($statement->error);
+    //             exit();
+    //         }
+    //         mysqli_stmt_execute($statement);
+    //     }
+    // }
+
+    // ? End
 
     $totalPriceforSelectedToppings = 0.0;
     $totalPriceforSelectedFoods = 0.0;
 
+
     for ($i = 0; $i < count($Complete); $i++) {
         for ($j = 0; $j < count($Complete[$i][2]); $j++) {
 
-            echo $Complete[$i][2][$j] . " ";
-            $sql = "SELECT * FROM filling WHERE id = $Complete[$i][2][$j]";
+            // echo $Complete[$i][2][$j] . " ";
+            $sql = "SELECT * FROM filling WHERE id = " . $Complete[$i][2][$j] . ";";
 
             $results = mysqli_query($conn, $sql);
             $resultCheck = mysqli_num_rows($results);
@@ -64,7 +111,7 @@ if (isset($_GET['id'])) {
             }
         }
 
-        $sqlFood = "SELECT * FROM food WHERE id = $Complete[$i][0]";
+        $sqlFood = "SELECT * FROM food WHERE id = " . $Complete[$i][0] . ";";
 
         $resultsFood = mysqli_query($conn, $sqlFood);
         $resultCheckFood = mysqli_num_rows($resultsFood);
@@ -77,72 +124,20 @@ if (isset($_GET['id'])) {
     }
 
 
-
-    // ? Inserting data into customer_order
-    $sql = "INSERT INTO customer_order(customer_id, date, time, status, delivery_method, total_amount) VALUES (?, ?, ?, ?, ?, ?);";
-
-    $statement = mysqli_stmt_init($conn);
-
-    if (!mysqli_stmt_prepare($statement, $sql)) {
-        echo "SQL SERVER ERROR";
-        exit();
-    } else {
-        $bindFailed = mysqli_stmt_bind_param($statement, 'issssi', $userid, $date, $time, $status, $deliveryMethod, $finalAmount);
-        if ($bindFailed === false) {
-            echo htmlspecialchars($statement->error);
-            exit();
-        }
-        mysqli_stmt_execute($statement);
-        $newOrderIdGenerated = mysqli_stmt_insert_id($statement);
-
-
-        // TODO Insert into filling order and food order
-        // ? Inserting data into food_order
-        $sql = "INSERT INTO food_order(order_id, food_id, quantity) VALUES (?, ?, ?)";
-        // $statement = mysqli_stmt_init($conn);
-        if (!mysqli_stmt_prepare($statement, $sql)) {
-            echo "SQL SERVER ERROR FOOD";
-            exit();
-        } else {
-
-            for ($i = 0; $i < count($Complete); $i++) {
-
-                $bindFailed = mysqli_stmt_bind_param($statement, 'iii', $newGeneratedOrderId, $Complete[$i][0], $Complete[$i][1]);
-
-                if ($bindFailed === false) {
-                    echo htmlspecialchars($statement->error);
-                    exit();
-                }
-                mysqli_stmt_execute($statement);
-            }
-        }
-
-        // ? Inserting data into filling_order
-        $sql = "INSERT INTO filling_order(order_id, filling_id, quantity) VALUES (?, ?, ?)";
-        // $statement = mysqli_stmt_init($conn);
-        if (!mysqli_stmt_prepare($statement, $sql)) {
-            echo "SQL SERVER ERROR FILLING";
-            exit();
-        } else {
-
-            for ($i = 0; $i < count($Complete); $i++) {
-                for ($j = 0; $j < count($Complete[$i][2]); $j++) {
-
-                    $bindFailed = mysqli_stmt_bind_param($statement, 'iii', $newGeneratedOrderId, $Complete[$i][2][$j], $Complete[$i][1]);
-
-                    if ($bindFailed === false) {
-                        echo htmlspecialchars($statement->error);
-                        exit();
-                    }
-                    mysqli_stmt_execute($statement);
-                }
-            }
-        }
+    echo "Comple Order<br>";
+    for ($i = 0; $i < count($Complete); $i++) {
+        print_r($Complete[$i]);
+        echo "<br>";
     }
 
 
 
-    
+    echo "<br>";
+    echo "New Array<br>";
+    for ($i = 0; $i < count($newArray); $i++) {
+        print_r($newArray[$i]);
+        echo "<br>";
+    }
 } else {
     // header("Location: ../dashboard.php?error=accessforbidden");
     echo "main error";
