@@ -93,6 +93,23 @@ window.renderOrder = function () {
                 // ? Removing Specific Order 
                 let remove = ele.querySelector('#CartCardRemove');
                 $(remove).click(function (){
+
+                    // ? Update the DB for the moment
+                    const form_data = new FormData();
+                    form_data.append('quantity', completeOrder[index][1]);
+                    form_data.append('selectedfoodid', completeOrder[index][0]);
+                    form_data.append('selectedToppings', JSON.stringify(completeOrder[index][2]));
+                    $.ajax({
+                        url: 'operations/reset-inventory-customized.php',
+                        type: 'POST',
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+        
+                            alert(response);
+                        }
+                    });
                     
                     if(completeOrder.length == 1) {
 
