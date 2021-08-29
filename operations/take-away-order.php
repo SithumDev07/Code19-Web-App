@@ -110,8 +110,8 @@ if (isset($_POST['sessionId'])) {
             }
 
             // ? Inserting data into filling_order
-            $sql = "INSERT INTO filling_order(order_id, filling_id, quantity) VALUES (?, ?, ?)";
-            // $statement = mysqli_stmt_init($conn);
+            $sql = "INSERT INTO filling_order(order_id, filling_id, quantity) VALUES (?, ?, ?);";
+            $lastFillingId = 'Not set';
             if (!mysqli_stmt_prepare($statement, $sql)) {
                 echo "SQL SERVER ERROR FILLING";
                 exit();
@@ -127,68 +127,71 @@ if (isset($_POST['sessionId'])) {
                             exit();
                         }
                         mysqli_stmt_execute($statement);
+                        $lastFillingId = $finalOrder[$i][2][$j];
                     }
                 }
             }
 
-            // ? Updating Inventory from fillings
-            // TODO
-            $newArray = array();
-            $newArray = $finalOrder;
-
-            for ($i = 0; $i < count($newArray); $i++) {
-                $ingredientsIdsArrayTopping = array();
-                $ingredientsQQsArrayTopping = array();
-                for ($j = 0; $j < count($newArray[$i][2]); $j++) {
-                    $sql = "SELECT * FROM ingredient_filling WHERE filling_id = " . $newArray[$i][2][$j] . ";";
-
-                    $results = mysqli_query($conn, $sql);
-                    $resultCheck = mysqli_num_rows($results);
-
-                    if ($resultCheck > 0) {
-                        while ($row = mysqli_fetch_assoc($results)) {
-                            array_push($ingredientsIdsArrayTopping, $row['ingredient_id']);
-                            array_push($ingredientsQQsArrayTopping, (int)$row['no_of_units'] * (int)$newArray[$i][1]);
-                        }
-                    }
-                }
-                array_push($newArray[$i], $ingredientsIdsArrayTopping);
-                array_push($newArray[$i], $ingredientsQQsArrayTopping);
-            }
-
-            // ? Updating inventory data related to order
-            for ($i = 0; $i < count($ingredientsIdsArrayTopping); $i++) {
-
-                // TODO
-                // ? Getting current stock at inventory
-                $sql = "SELECT * FROM ingredient WHERE id = " . $ingredientsIdsArrayTopping[$i] . ";";
-                $results = mysqli_query($conn, $sql);
-                $resultCheck = mysqli_num_rows($results);
-                $currentStok = 0;
-                if ($resultCheck > 0) {
-                    while ($row = mysqli_fetch_assoc($results)) {
-                        $currentStok = (int)$row['remaining_units'];
-                    }
-                }
-
-                $sql = "UPDATE ingredient SET remaining_units = ? WHERE id = ?";
-                if (!mysqli_stmt_prepare($statement, $sql)) {
-                    echo "SQL SERVER ERROR UPDATING ingredient";
-                    exit();
-                } else {
-                    $newStock = $currentStok - $ingredientsQQsArrayTopping[$i];
-                    $bindFailed = mysqli_stmt_bind_param($statement, 'ii', $newStock, $ingredientsIdsArrayTopping[$i]);
-
-                    if ($bindFailed === false) {
-                        echo htmlspecialchars($statement->error);
-                        exit();
-                    }
-                    mysqli_stmt_execute($statement);
-                }
-            }
 
 
-            echo "success all $newOrderIdGenerated $userid $finalAmount";
+            // // ? Updating Inventory from fillings
+            // // TODO
+            // $newArray = array();
+            // $newArray = $finalOrder;
+
+            // for ($i = 0; $i < count($newArray); $i++) {
+            //     $ingredientsIdsArrayTopping = array();
+            //     $ingredientsQQsArrayTopping = array();
+            //     for ($j = 0; $j < count($newArray[$i][2]); $j++) {
+            //         $sql = "SELECT * FROM ingredient_filling WHERE filling_id = " . $newArray[$i][2][$j] . ";";
+
+            //         $results = mysqli_query($conn, $sql);
+            //         $resultCheck = mysqli_num_rows($results);
+
+            //         if ($resultCheck > 0) {
+            //             while ($row = mysqli_fetch_assoc($results)) {
+            //                 array_push($ingredientsIdsArrayTopping, $row['ingredient_id']);
+            //                 array_push($ingredientsQQsArrayTopping, (int)$row['no_of_units'] * (int)$newArray[$i][1]);
+            //             }
+            //         }
+            //     }
+            //     array_push($newArray[$i], $ingredientsIdsArrayTopping);
+            //     array_push($newArray[$i], $ingredientsQQsArrayTopping);
+            // }
+
+            // // ? Updating inventory data related to order
+            // for ($i = 0; $i < count($ingredientsIdsArrayTopping); $i++) {
+
+            //     // TODO
+            //     // ? Getting current stock at inventory
+            //     $sql = "SELECT * FROM ingredient WHERE id = " . $ingredientsIdsArrayTopping[$i] . ";";
+            //     $results = mysqli_query($conn, $sql);
+            //     $resultCheck = mysqli_num_rows($results);
+            //     $currentStok = 0;
+            //     if ($resultCheck > 0) {
+            //         while ($row = mysqli_fetch_assoc($results)) {
+            //             $currentStok = (int)$row['remaining_units'];
+            //         }
+            //     }
+
+            //     $sql = "UPDATE ingredient SET remaining_units = ? WHERE id = ?";
+            //     if (!mysqli_stmt_prepare($statement, $sql)) {
+            //         echo "SQL SERVER ERROR UPDATING ingredient";
+            //         exit();
+            //     } else {
+            //         $newStock = $currentStok - $ingredientsQQsArrayTopping[$i];
+            //         $bindFailed = mysqli_stmt_bind_param($statement, 'ii', $newStock, $ingredientsIdsArrayTopping[$i]);
+
+            //         if ($bindFailed === false) {
+            //             echo htmlspecialchars($statement->error);
+            //             exit();
+            //         }
+            //         mysqli_stmt_execute($statement);
+            //     }
+            // }
+
+
+            echo "success all $newOrderIdGenerated $userid $finalAmount $lastFillingId";
             exit();
         }
     }

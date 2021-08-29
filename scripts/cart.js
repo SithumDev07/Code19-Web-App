@@ -84,6 +84,31 @@ window.renderOrder = function () {
             console.log(document.querySelector('.grandTotal').innerHTML);
         })
 
+
+        // TODO - Not working up to now
+        // ? Refresh Page
+        $(window).bind('beforeunload',function(){
+
+            if(!(document.querySelector('.checkout-menu').classList.contains('scale-0'))) {
+                // const form_data = new FormData();
+                // form_data.append('completeorder', JSON.stringify(completeOrder));
+                // $.ajax({
+                //     url: 'operations/reset-inventory-cart.php',
+                //     type: 'POST',
+                //     data: form_data,
+                //     contentType: false,
+                //     processData: false,
+                //     success: function(response) {
+    
+                //         alert(response);
+                //     }
+                // });
+
+                alert(completeOrder);
+            }
+
+        });
+
        
 
         // ? Handling all removing and adding parts of single cart card
@@ -245,6 +270,42 @@ window.renderOrder = function () {
                 // ? Adding more quantity
                 const PlusButton = ele.querySelector(".PlusQuantity");
                 $(PlusButton).click(function() {
+
+                    // ? Update the DB for the moment
+                    let form_data = new FormData();
+                    form_data.append('quantity', 1);
+                    form_data.append('selectedfoodid', completeOrder[index][0]);
+                    $.ajax({
+                        url: 'operations/update-food-customized.php',
+                        type: 'POST',
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+
+                            // alert(response);
+                            
+                        }
+                    });
+
+
+                    // ? Update the DB for the moment for toppings
+                    form_data = new FormData();
+                    form_data.append('quantity', 1);
+                    form_data.append('selectedToppings', JSON.stringify(completeOrder[index][2]));
+                    $.ajax({
+                        url: 'operations/update-toppings-customized.php',
+                        type: 'POST',
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+
+                            alert(response);
+                            
+                        }
+                    });
+
                     completeOrder[index][1]++;
                     ele.querySelector('.DisplayingQuantity').innerHTML = completeOrder[index][1];
                     UpdateTotalPrice();
@@ -255,11 +316,49 @@ window.renderOrder = function () {
                 const MinusButton = ele.querySelector(".MinusQuantity");
                 $(MinusButton).click(function() {
                     if(parseInt(completeOrder[index][1]) > 1 ) {
+
+
+                        // ? Update the DB for the moment
+                        let form_data = new FormData();
+                        form_data.append('quantity', -1);
+                        form_data.append('selectedfoodid', completeOrder[index][0]);
+                        $.ajax({
+                            url: 'operations/update-food-customized.php',
+                            type: 'POST',
+                            data: form_data,
+                            contentType: false,
+                            processData: false,
+                            success: function(response) {
+            
+                                // alert(response);
+                                
+                            }
+                        });
+
+                        // ? Update the DB for the moment for toppings
+                        form_data = new FormData();
+                        form_data.append('quantity', -1);
+                        form_data.append('selectedToppings', JSON.stringify(completeOrder[index][2]));
+                        $.ajax({
+                            url: 'operations/update-toppings-customized.php',
+                            type: 'POST',
+                            data: form_data,
+                            contentType: false,
+                            processData: false,
+                            success: function(response) {
+
+                                alert(response);
+                                
+                            }
+                        });
+
                         completeOrder[index][1]--;
                         ele.querySelector('.DisplayingQuantity').innerHTML = completeOrder[index][1];
                         UpdateTotalPrice();
                     }
                 })
+
+                
 
 
             })
