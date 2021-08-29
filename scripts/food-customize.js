@@ -104,23 +104,27 @@ $(document).ready(function() {
         
         // ? Decreasing Quantity
         $("#QuantityReducer").click(function() {
-            // TODO
-            // ? Update the DB for the moment
-            const form_data = new FormData();
-            form_data.append('quantity', -1);
-            form_data.append('selectedfoodid', foodId);
-            $.ajax({
-                url: 'operations/update-food-customized.php',
-                type: 'POST',
-                data: form_data,
-                contentType: false,
-                processData: false,
-                success: function(response) {
+            
 
-                    alert(response);
-                    
-                }
-            });
+            if(parseInt(document.querySelector(".quantity-customize").innerHTML) >= 1) {
+                // ? Update the DB for the moment
+                const form_data = new FormData();
+                form_data.append('quantity', -1);
+                form_data.append('selectedfoodid', foodId);
+                $.ajax({
+                    url: 'operations/update-food-customized.php',
+                    type: 'POST',
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+    
+                        alert(response);
+                        
+                    }
+                });
+            }
+
 
             if(parseInt(document.querySelector(".quantity-customize").innerHTML) >= 1)
             document.querySelector(".quantity-customize").innerHTML = parseInt(document.querySelector(".quantity-customize").innerHTML) - 1;
