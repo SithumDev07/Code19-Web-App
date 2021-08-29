@@ -13,22 +13,7 @@ $(document).ready(function() {
             $("body").addClass("overflow-hidden");
             foodId = ele.querySelector('.food-id').innerHTML;
 
-            // ? Update the DB for the moment
-            const form_data = new FormData();
-            form_data.append('quantity', proceedCheck);
-            form_data.append('selectedfoodid', foodId);
-            $.ajax({
-                url: 'operations/update-food-customized.php',
-                type: 'POST',
-                data: form_data,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-
-                    alert(response);
-                    
-                }
-            });
+            
 
             // TODO
             $(".customize-menu").load("operations/get-food-customize-data.php", {
@@ -92,6 +77,24 @@ $(document).ready(function() {
 
         // ? Increasing Quantity
         $("#QuantityIncreaser").click(function() {
+
+            // ? Update the DB for the moment
+            const form_data = new FormData();
+            form_data.append('quantity', 1);
+            form_data.append('selectedfoodid', foodId);
+            $.ajax({
+                url: 'operations/update-food-customized.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    alert(response);
+                    
+                }
+            });
+
             document.querySelector(".quantity-customize").innerHTML = parseInt(document.querySelector(".quantity-customize").innerHTML) + 1;
             proceedCheck = parseInt(document.querySelector(".quantity-customize").innerHTML);
             // listenOnProceed();
@@ -101,6 +104,24 @@ $(document).ready(function() {
         
         // ? Decreasing Quantity
         $("#QuantityReducer").click(function() {
+            // TODO
+            // ? Update the DB for the moment
+            const form_data = new FormData();
+            form_data.append('quantity', -1);
+            form_data.append('selectedfoodid', foodId);
+            $.ajax({
+                url: 'operations/update-food-customized.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    alert(response);
+                    
+                }
+            });
+
             if(parseInt(document.querySelector(".quantity-customize").innerHTML) >= 1)
             document.querySelector(".quantity-customize").innerHTML = parseInt(document.querySelector(".quantity-customize").innerHTML) - 1;
             proceedCheck = parseInt(document.querySelector(".quantity-customize").innerHTML);
@@ -119,21 +140,24 @@ $(document).ready(function() {
         // ? Refresh Page
         $(window).bind('beforeunload',function(){
 
-            const form_data = new FormData();
-            form_data.append('quantity', proceedCheck);
-            form_data.append('selectedfoodid', foodId);
-            form_data.append('selectedToppings', JSON.stringify(selectedToppingsIds));
-            $.ajax({
-                url: 'operations/reset-inventory-customized.php',
-                type: 'POST',
-                data: form_data,
-                contentType: false,
-                processData: false,
-                success: function(response) {
+            if(!(document.querySelector('.customize-menu').classList.contains('scale-0'))) {
+                const form_data = new FormData();
+                form_data.append('quantity', proceedCheck);
+                form_data.append('selectedfoodid', foodId);
+                form_data.append('selectedToppings', JSON.stringify(selectedToppingsIds));
+                $.ajax({
+                    url: 'operations/reset-inventory-customized.php',
+                    type: 'POST',
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+    
+                        alert(response);
+                    }
+                });
+            }
 
-                    alert(response);
-                }
-            });
        
        });
 
