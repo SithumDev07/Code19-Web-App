@@ -13,6 +13,24 @@ $(document).ready(function() {
             $("body").addClass("overflow-hidden");
             foodId = ele.querySelector('.food-id').innerHTML;
 
+            // ? Update the DB for the moment
+            const form_data = new FormData();
+            form_data.append('quantity', proceedCheck);
+            form_data.append('selectedfoodid', foodId);
+            $.ajax({
+                url: 'operations/update-food-customized.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    alert(response);
+                    
+                }
+            });
+
+            // TODO
             $(".customize-menu").load("operations/get-food-customize-data.php", {
                 id: foodId,
             }, function() {
@@ -41,6 +59,7 @@ $(document).ready(function() {
 
             const form_data = new FormData();
             form_data.append('quantity', proceedCheck);
+            form_data.append('selectedfoodid', foodId);
             form_data.append('selectedToppings', JSON.stringify(selectedToppingsIds));
             console.log(selectedToppingsIds);
             $.ajax({
@@ -97,11 +116,12 @@ $(document).ready(function() {
             
         })
 
-        // ? Refresh Page (Not Working Upto now)
+        // ? Refresh Page
         $(window).bind('beforeunload',function(){
 
             const form_data = new FormData();
             form_data.append('quantity', proceedCheck);
+            form_data.append('selectedfoodid', foodId);
             form_data.append('selectedToppings', JSON.stringify(selectedToppingsIds));
             $.ajax({
                 url: 'operations/reset-inventory-customized.php',
@@ -119,18 +139,20 @@ $(document).ready(function() {
 
 
         $("#keepOrder").click(function() {
+
             $(".popupmenu-stay").addClass('scale-0');
+        
+                    const ToppingsContainer = document.querySelector('.toppings');
+                    const ToppingsList = ToppingsContainer.querySelectorAll('.toppings-buttons');
+                    ToppingsList.forEach(ele => {
+                        ele.classList.remove('bg-black');
+                        ele.classList.add('border');
+                        ele.classList.add('border-gray-300');
+                        ele.querySelector('svg').classList.add('hidden');
+                    })
+        
+                    makeOrder();
 
-            const ToppingsContainer = document.querySelector('.toppings');
-            const ToppingsList = ToppingsContainer.querySelectorAll('.toppings-buttons');
-            ToppingsList.forEach(ele => {
-                ele.classList.remove('bg-black');
-                ele.classList.add('border');
-                ele.classList.add('border-gray-300');
-                ele.querySelector('svg').classList.add('hidden');
-            })
-
-            makeOrder();
             
         })
 

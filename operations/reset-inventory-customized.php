@@ -2,36 +2,7 @@
 
 include '../config.php';
 
-
-if (isset($_POST['quantity'])) {
-
-    $sql;
-    $results;
-    $message;
-    $quantity = $_POST['quantity'];
-    $currentlySelected = $_POST['selectedToppings'];
-    $currentlySelected = json_decode($currentlySelected);
-
-    if($quantity == 0){
-        $quantity = 1;
-    }
-
-    $allIngredientIds = array();
-    $allIngredientQuantities = array();
-    for ($i = 0; $i < count($currentlySelected); $i++) {
-
-        $sql = "SELECT * FROM ingredient_filling WHERE filling_id = " . $currentlySelected[$i] . ";";
-        $results = mysqli_query($conn, $sql);
-        $resultCheckFilling = mysqli_num_rows($results);
-
-        if ($resultCheckFilling > 0) {
-            while ($rowIngredient = mysqli_fetch_assoc($results)) {
-                array_push($allIngredientIds, $rowIngredient['ingredient_id']);
-                array_push($allIngredientQuantities, (int)$rowIngredient['no_of_units'] * (int)$quantity);
-            }
-        }
-    }
-
+function updateInventory($conn, $allIngredientIds, $allIngredientQuantities) {
     // ? Getting current remaining units
     $currentStockIngredients = 0;
     for ($i = 0; $i < count($allIngredientIds); $i++) {
@@ -65,6 +36,55 @@ if (isset($_POST['quantity'])) {
             mysqli_stmt_execute($statement);
         }
     }
+}
+
+
+if (isset($_POST['quantity'])) {
+
+    $sql;
+    $results;
+    $message;
+    $quantity = $_POST['quantity'];
+    $selectedfoodid = $_POST['selectedfoodid'];
+    $currentlySelected = $_POST['selectedToppings'];
+    $currentlySelected = json_decode($currentlySelected);
+
+    if($quantity == 0){
+        $quantity = 1;
+    }
+
+    $allIngredientIds = array();
+    $allIngredientQuantities = array();
+    for ($i = 0; $i < count($currentlySelected); $i++) {
+
+        $sql = "SELECT * FROM ingredient_filling WHERE filling_id = " . $currentlySelected[$i] . ";";
+        $results = mysqli_query($conn, $sql);
+        $resultCheckFilling = mysqli_num_rows($results);
+
+        if ($resultCheckFilling > 0) {
+            while ($rowIngredient = mysqli_fetch_assoc($results)) {
+                array_push($allIngredientIds, $rowIngredient['ingredient_id']);
+                array_push($allIngredientQuantities, (int)$rowIngredient['no_of_units'] * (int)$quantity);
+            }
+        }
+    }
+
+    updateInventory($conn, $allIngredientIds, $allIngredientQuantities);
+    
+    // ? Resetting Food Update
+    $allIngredientIds = array();
+    $allIngredientQuantities = array();
+    $sql = "SELECT * FROM ingredient_food WHERE food_id = " . $selectedfoodid . ";";
+    $results = mysqli_query($conn, $sql);
+    $resultCheckFilling = mysqli_num_rows($results);
+    
+    if ($resultCheckFilling > 0) {
+        while ($rowIngredient = mysqli_fetch_assoc($results)) {
+            array_push($allIngredientIds, $rowIngredient['ingredient_id']);
+            array_push($allIngredientQuantities, (int)$rowIngredient['no_of_units'] * (int)$quantity);
+        }
+    }
+    updateInventory($conn, $allIngredientIds, $allIngredientQuantities);
 
     echo "reset successfully";
     exit();
