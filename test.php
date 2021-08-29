@@ -46,48 +46,25 @@ if (isset($_GET['id'])) {
     }
 
     // TODO
-    $newArray = array();
-    $newArray = $Complete;
 
-    for ($i = 0; $i < count($newArray); $i++) {
-        $ingredientsIdsArrayTopping = array();
-        $ingredientsQQsArrayTopping = array();
-        for ($j = 0; $j < count($newArray[$i][2]); $j++) {
+    $sql;
+    $results;
+    $message;
+    $id = $_GET['fillingid'];
+    $quantity = $_GET['quantity'];
 
-            
-            $sql = "SELECT * FROM ingredient_filling WHERE filling_id = " . $newArray[$i][2][$j] . ";";
-            $results = mysqli_query($conn, $sql);
-            $resultCheck = mysqli_num_rows($results);
+    $sql = "SELECT * FROM ingredient_filling WHERE filling_id = $id;";
+    $results = mysqli_query($conn, $sql);
+    $resultCheckFilling = mysqli_num_rows($results);
+    $allIngredientIds = array();
+    $allIngredientQuantities = array();
 
-            if ($resultCheck > 0) {
-                while ($row = mysqli_fetch_assoc($results)) {
-                    array_push($ingredientsIdsArrayTopping, $row['ingredient_id']);
-                    array_push($ingredientsQQsArrayTopping, (int)$row['no_of_units'] * (int)$newArray[$i][1]);
-                }
-            }
+    if ($resultCheckFilling > 0) {
+        while ($rowIngredient = mysqli_fetch_assoc($results)) {
+            array_push($allIngredientIds, $rowIngredient['ingredient_id']);
+            array_push($allIngredientQuantities, (int)$rowIngredient['no_of_units'] * (int)$quantity);
         }
-        array_push($newArray[$i], $ingredientsIdsArrayTopping);
-        array_push($newArray[$i], $ingredientsQQsArrayTopping);
     }
-
-    // ? Updating inventory data related to order
-    // for ($i = 0; $i < count($ingredientsIdsArrayTopping); $i++) {
-    //     $sql = "UPDATE ingredient SET remaining_units = ? WHERE id = ?";
-    //     // $statement = mysqli_stmt_init($conn);
-    //     if (!mysqli_stmt_prepare($statement, $sql)) {
-    //         echo "SQL SERVER ERROR UPDATING ingredient";
-    //         exit();
-    //     } else {
-
-    //         $bindFailed = mysqli_stmt_bind_param($statement, 'ii', $ingredientsQQsArrayTopping[$i], $ingredientsIdsArrayTopping[$i]);
-
-    //         if ($bindFailed === false) {
-    //             echo htmlspecialchars($statement->error);
-    //             exit();
-    //         }
-    //         mysqli_stmt_execute($statement);
-    //     }
-    // }
 
     // ? End
 
@@ -124,18 +101,18 @@ if (isset($_GET['id'])) {
     }
 
 
-    echo "Comple Order<br>";
-    for ($i = 0; $i < count($Complete); $i++) {
-        print_r($Complete[$i]);
+    echo "ING Ids<br>";
+    for ($i = 0; $i < count($allIngredientIds); $i++) {
+        print_r($allIngredientIds[$i]);
         echo "<br>";
     }
 
 
 
     echo "<br>";
-    echo "New Array<br>";
-    for ($i = 0; $i < count($newArray); $i++) {
-        print_r($newArray[$i]);
+    echo "QQQQQQQQQQQQ<br>";
+    for ($i = 0; $i < count($allIngredientQuantities); $i++) {
+        print_r($allIngredientQuantities[$i]);
         echo "<br>";
     }
 } else {

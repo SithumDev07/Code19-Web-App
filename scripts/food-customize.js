@@ -58,6 +58,7 @@ $(document).ready(function() {
             proceedCheck = parseInt(document.querySelector(".quantity-customize").innerHTML);
             // listenOnProceed();
             listenOnProceed();
+            console.log(selectedToppingsIds);
         })
         
         // ? Decreasing Quantity
@@ -134,36 +135,120 @@ $(document).ready(function() {
         }
     }
 
+    // TODO Backup
+    // function toppingsListHandler(List) {
+    //     List.forEach(element => {
+    //         $(element).click(function() {
+
+    //             if(!(element.querySelector('svg').classList.contains('hidden'))) {
+
+    //                 let ifRemoved = selectedToppingsIds.find(ele => ele == element.querySelector('.fillingId').innerHTML)
+    //                 if(ifRemoved !== undefined) {
+    //                     for(var i = 0; i < selectedToppingsIds.length; i++) {
+    //                         if(selectedToppingsIds[i] == element.querySelector('.fillingId').innerHTML) {
+    //                             selectedToppingsIds.splice(i, 1);
+    //                         }
+    //                     }
+    //                 }
+
+    //             } else {
+
+    //                 let isSelected = selectedToppingsIds.find(ele => ele == element.querySelector('.fillingId').innerHTML)
+    //                 if(isSelected === undefined) {
+    //                     selectedToppingsIds.push(element.querySelector('.fillingId').innerHTML);
+    //                 }
+
+    //             }
+
+    //             element.classList.toggle('bg-black');
+    //             element.classList.toggle('border');
+    //             element.classList.toggle('border-gray-300');
+    //             element.querySelector('svg').classList.toggle('hidden');
+    //         })
+    //     })
+    // }
+
+
     function toppingsListHandler(List) {
         List.forEach(element => {
-            $(element).click(function() {
+            $(element).on('click', function() {
 
-                if(!(element.querySelector('svg').classList.contains('hidden'))) {
-
-                    let ifRemoved = selectedToppingsIds.find(ele => ele == element.querySelector('.fillingId').innerHTML)
-                    if(ifRemoved !== undefined) {
-                        for(var i = 0; i < selectedToppingsIds.length; i++) {
-                            if(selectedToppingsIds[i] == element.querySelector('.fillingId').innerHTML) {
-                                selectedToppingsIds.splice(i, 1);
-                            }
+                // ? Adding
+                let isSelected = selectedToppingsIds.find(ele => ele == element.querySelector('.fillingId').innerHTML)
+                if(isSelected === undefined) {
+                    selectedToppingsIds.push(element.querySelector('.fillingId').innerHTML);
+                } else {
+                    for(var i = 0; i < selectedToppingsIds.length; i++) {
+                        if(selectedToppingsIds[i] == element.querySelector('.fillingId').innerHTML) {
+                            selectedToppingsIds.splice(i, 1);
                         }
                     }
-
-                } else {
-
-                    let isSelected = selectedToppingsIds.find(ele => ele == element.querySelector('.fillingId').innerHTML)
-                    if(isSelected === undefined) {
-                        selectedToppingsIds.push(element.querySelector('.fillingId').innerHTML);
-                    }
-
                 }
 
-                element.classList.toggle('bg-black');
-                element.classList.toggle('border');
-                element.classList.toggle('border-gray-300');
-                element.querySelector('svg').classList.toggle('hidden');
+                let fillingId = element.querySelector('.fillingId').innerHTML;
+                $(".customize-menu-right .toppings").load("operations/get-realtime-toppings-data.php", {
+                    fillingid: fillingId,
+                    quantity: 1,
+                    currentlySelected: JSON.stringify(selectedToppingsIds)
+                }, function(reponse) {
+                    
+                    // // ? Removing
+                    // let ifRemoved = selectedToppingsIds.find(ele => ele == element.querySelector('.fillingId').innerHTML)
+                    // if(ifRemoved !== undefined) {
+                    //     for(var i = 0; i < selectedToppingsIds.length; i++) {
+                    //         if(selectedToppingsIds[i] == element.querySelector('.fillingId').innerHTML) {
+                    //             selectedToppingsIds.splice(i, 1);
+                    //         }
+                    //     }
+                    // }
+                    // TODO
+
+                    // // ? Adding
+                    // let isSelected = selectedToppingsIds.find(ele => ele == element.querySelector('.fillingId').innerHTML)
+                    // if(isSelected === undefined) {
+                    //     selectedToppingsIds.push(element.querySelector('.fillingId').innerHTML);
+                    // } else {
+                    //     for(var i = 0; i < selectedToppingsIds.length; i++) {
+                    //         if(selectedToppingsIds[i] == element.querySelector('.fillingId').innerHTML) {
+                    //             selectedToppingsIds.splice(i, 1);
+                    //         }
+                    //     }
+                    // }
+
+                    toppingsButtonClickable(document.querySelectorAll('.toppings-buttons'));
+                })
+
+
+                // if(!(element.querySelector('svg').classList.contains('hidden'))) {
+                
+                //     let ifRemoved = selectedToppingsIds.find(ele => ele == element.querySelector('.fillingId').innerHTML)
+                //     if(ifRemoved !== undefined) {
+                //         for(var i = 0; i < selectedToppingsIds.length; i++) {
+                //             if(selectedToppingsIds[i] == element.querySelector('.fillingId').innerHTML) {
+                //                 selectedToppingsIds.splice(i, 1);
+                //             }
+                //         }
+                //     }
+    
+                // } else {
+                    
+                //     let isSelected = selectedToppingsIds.find(ele => ele == element.querySelector('.fillingId').innerHTML)
+                //     if(isSelected === undefined) {
+                //         selectedToppingsIds.push(element.querySelector('.fillingId').innerHTML);
+                //     }
+                    
+                // }
+                
+                
+
+
             })
         })
+    }
+
+    function toppingsButtonClickable(List) {
+       
+        toppingsListHandler(List);
     }
 })
 

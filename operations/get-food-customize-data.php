@@ -103,7 +103,7 @@ function Render($results, $conn)
                 </div>
             </div>
 
-            <div class="right relative flex xl:justify-center flex-col flex-1">
+            <div class="right relative flex xl:justify-center flex-col flex-1 customize-menu-right">
                 <h1 class="text-2xl md:text-5xl lg:text-7xl xl:text-5xl text-gray-200 font-bold"><?php echo $row['name']; ?></h1>
                 <p class="text-justify text-gray-300 text-base md:text-xl xl:text-base my-2 md:my-6 lg:my-10 xl:my-3"><?php echo $row['description']; ?></p>
                 <h3 class="uppercase font-semibold text-2xl text-gray-200 tracking-widest">Topping</h3>
