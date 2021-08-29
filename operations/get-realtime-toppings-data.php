@@ -78,6 +78,9 @@ if (isset($_POST['fillingid'])) {
     $message;
     $id = $_POST['fillingid'];
     $quantity = $_POST['quantity'];
+    if($quantity == 0) {
+        $quantity = 1;
+    }
     $currentlySelected = $_POST['currentlySelected'];
     $currentlySelected = json_decode($currentlySelected);
 
