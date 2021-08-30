@@ -45,10 +45,8 @@ $(document).ready(function() {
                 success: function(response) {
 
                     alert(response);
-                    clearCartData();
-                    updateCartCounter();
 
-                    $(".customize-menu").addClass("scale-0");
+                    $(".customer-profile").addClass("scale-0");
                     window.location.replace("foodMain.php");
                 }
             });
