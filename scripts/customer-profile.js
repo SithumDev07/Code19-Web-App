@@ -144,6 +144,32 @@ $(document).ready(function() {
     })
 
 
+    // ? Remove card at cart
+    $("#cancelCardCart").click(function(e) {
+        e.preventDefault();
+        document.querySelector('.err-message-card-profile').classList.add('hidden');
+
+        document.querySelector('#nameOnCardCart').value = '';
+        document.querySelector('#cardNumberCart').value = '';
+        document.querySelector('#expireDateCart').value = '';
+        document.querySelector('#CVCCart').value = '';
+
+        $(".add-card").toggleClass("h-48");
+        $(".add-card").toggleClass("add-card-active");
+        const addNewcard = document.querySelector("#expandCardInputsCart");
+        addNewcard.querySelector('svg').classList.toggle('rotate-45');
+        $(".hidden-credit-card-cart").addClass('hidden');
+        $(".hidden-credit-card-cart").removeClass('flex');
+
+        if(document.querySelector('.credit-card-warning').classList.contains('should-show')){
+
+            $(".credit-card-warning").removeClass('hidden');
+        }
+        
+        // $(".credit-card-warning").removeClass('should-show');
+    })
+
+
     // ? Remove Existing Card
     $("#removeCard").click(function(e) {
         e.preventDefault();

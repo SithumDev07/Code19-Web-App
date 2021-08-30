@@ -104,11 +104,8 @@ window.renderOrder = function () {
 
 
         
-        console.log(document.querySelector('.credit-card-id'));
         if(document.querySelector('.credit-card-id') !== null) {
             document.querySelector("#onlinePay").removeAttribute('disabled');
-            // if(document.querySelector('.credit-card-id').innerHTML !== '') {
-            // }
         }
         
        
