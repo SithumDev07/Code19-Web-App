@@ -118,7 +118,8 @@ if (isset($_GET['clear'])) {
         .cart-cards::-webkit-scrollbar,
         .cart::-webkit-scrollbar,
         .checkout-menu::-webkit-scrollbar,
-        .customer-profile::-webkit-scrollbar {
+        .customer-profile::-webkit-scrollbar,
+        .payment::-webkit-scrollbar {
             width: 0.6em;
             border-radius: 50%;
         }
@@ -126,14 +127,16 @@ if (isset($_GET['clear'])) {
         .cart-cards::-webkit-scrollbar-track,
         .cart::-webkit-scrollbar-track,
         .checkout-menu::-webkit-scrollbar-track,
-        .customer-profile::-webkit-scrollbar-track {
+        .customer-profile::-webkit-scrollbar-track,
+        .payment::-webkit-scrollbar-track {
             box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         }
 
         .cart-cards::-webkit-scrollbar-thumb,
         .cart::-webkit-scrollbar-thumb,
         .checkout-menu::-webkit-scrollbar-thumb,
-        .customer-profile::-webkit-scrollbar-thumb {
+        .customer-profile::-webkit-scrollbar-thumb,
+        .payment::-webkit-scrollbar-thumb {
             background-color: rgba(30, 30, 30, 0.7);
             border-radius: 1.2em;
         }
@@ -436,19 +439,20 @@ if (isset($_GET['clear'])) {
             <div class="left flex flex-col px-2 flex-1">
 
                 <h1 class="text-6xl md:text-9xl font-extrabold selection:bg-red-500" style="-webkit-text-stroke: 2px; -webkit-text-stroke-color: rgb(229, 231, 235); color: transparent;">Profile</h1>
-                <div class="payment w-full h-auto border rounded-md p-6 my-4">
+                <div class="payment payment-profile w-full h-auto border rounded-md p-6 my-4">
+
                     <div class="flex flex-col overflow-hidden h-48 add-card-profile">
-                        <div class="flex">
+                        <div class="flex w-1/2 xl:w-full mx-auto">
                             <div class="credit-card w-72 h-44 rounded-2xl flex flex-col p-3 justify-between bg-primary relative overflow-hidden">
                                 <div class="flex justify-between relative">
                                     <div class="w-6 h-6 rounded-full bg-gray-50 opacity-40"></div>
                                     <div class="w-6 h-6 rounded-full bg-gray-50 absolute top-0 left-4 z-10"></div>
                                     <h4 class="uppercase font-semibold text-gray-100 text-xl">visa</h4>
                                 </div>
-                                <h3 class="font-semibold text-2xl text-gray-200">8956 1254 8995</h3>
+                                <h3 class="font-semibold text-2xl text-gray-200 card-number-display">XXXX XXXX XXXX</h3>
                                 <div class="flex justify-between">
-                                    <h3 class="uppercase font-semibold text-gray-200 text-sm">Your Name</h3>
-                                    <h3 class="uppercase font-semibold text-gray-200 text-sm z-20">09/23</h3>
+                                    <h3 class="uppercase font-semibold text-gray-200 text-sm card-name-display">Your Name</h3>
+                                    <h3 class="uppercase font-semibold text-gray-200 text-sm z-20 expire-date-display">XX/XX</h3>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-48 w-48 absolute -bottom-20 -right-16 text-blue-400 z-10" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
@@ -458,7 +462,7 @@ if (isset($_GET['clear'])) {
                             <div class="w-44 h-44 rounded-2xl border-dotted border-2 border-gray-200 ml-5 flex items-center justify-center">
                                 <div class="w-12 h-12 rounded-xl bg-gray-100 bg-opacity-10 flex items-center justify-center text-gray-100">
                                     <button class="transform transition duration-200 hover:scale-110" id="addNewCard">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                     </button>
@@ -466,29 +470,31 @@ if (isset($_GET['clear'])) {
                             </div>
                         </div>
 
-                        <div class="flex flex-col my-4">
+                        <div class="err-message-card-profile hidden w-4/5 lg:w-1/2 xl:w-full mx-auto text-center text-sm xl:text-base mt-6 mb-1 text-gray-200 bg-red-400 px-3 py-3 rounded-md z-20">
+                            Oops! Seems to be you have entered in incorrect format.
+                        </div>
+
+                        <div class="flex flex-col my-4 w-1/2 xl:w-full mx-auto">
                             <h1 class='text-gray-200 text-2xl font-semibold mb-3'>Add new card</h1>
-                            <form action="">
                                 <input type="text" name="nameOnCard" id="nameOnCardProfile" placeholder="Name on card" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-full mb-3">
                                 <div class="flex justify-between">
-                                    <input type="text" name="cardNumber" id="cardNumberProfile" placeholder="Card number" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-80 mb-3">
-                                    <input type="text" name="expireDate" id="expireDateProfile" placeholder="Expiration date" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 mb-3">
+                                    <input type="text" name="cardNumber" maxlength="14" id="cardNumberProfile" placeholder="Card number" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-80 mb-3">
+                                    <input type="text" name="expireDate" maxlength="5" id="expireDateProfile" placeholder="Expiration date YY/MM" class="ml-4 border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 mb-3">
                                 </div>
                                 <div class="flex justify-between">
-                                    <input type="text" name="CVC" id="CVCProfile" placeholder="CVC" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-64 mb-3">
+                                    <input type="text" name="CVC" maxlength="3" id="CVCProfile" placeholder="CVC" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-64 mb-3">
                                     <p class="text-base text-gray-200 font-thin ml-5">By clicking confirm "I agree to the company's <a href="terms.html" class='text-black font-medium'>terms and services.</a></p>
                                 </div>
                                 <div class="flex justify-between">
                                     <button class="px-5 py-3 text-red-600 rounded-md ml-4" onclick="activateAddSection()">Cancel</button>
-                                    <button class="px-5 py-3 bg-black rounded-md ml-4 text-white transition duration-150 hover:shadow-lg">Confirm</button>
+                                    <button class="px-5 py-3 bg-black rounded-md ml-4 text-white transition duration-150 hover:shadow-lg" id="ConfirmCard">Confirm</button>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="right py-4 px-10 profile-data xl:overflow-y-scroll 2xl:overflow-hidden flex-1 2xl:flex 2xl:justify-center 2xl:flex-col">
+            <div class="right w-1/2 xl:w-full mx-auto py-4 px-10 profile-data xl:overflow-y-scroll 2xl:overflow-hidden flex-1 2xl:flex 2xl:justify-center 2xl:flex-col">
 
             </div>
         </header>

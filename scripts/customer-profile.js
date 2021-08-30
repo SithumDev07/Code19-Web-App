@@ -1,4 +1,164 @@
 $(document).ready(function() {
+
+    // ? Credit Card Area
+    $("#addNewCard").click(function() {
+        $(".add-card-profile").toggleClass("h-48");
+        $(".add-card-profile").toggleClass("add-card-active");
+        const addNewcard = document.querySelector("#addNewCard");
+        addNewcard.querySelector('svg').classList.toggle('rotate-45');
+        $('.payment-profile').toggleClass('xl:overflow-y-scroll');
+        $('.payment-profile').toggleClass('2xl:overflow-hidden');
+    })
+
+    $("#ConfirmCard").click(function() {
+        validateCreditCardInfo(document.querySelector('#nameOnCardProfile'), 'Profile');
+        validateCreditCardInfo(document.querySelector('#cardNumberProfile'), 'Profile');
+        validateCreditCardInfo(document.querySelector('#expireDateProfile'), 'Profile');
+        validateCreditCardInfo(document.querySelector('#CVCProfile'), 'Profile');
+        if(success) {
+            console.log('validated');
+            document.querySelector('.err-message-card-profile').classList.add('hidden');
+            // setErrorOnInputsCards()
+        }
+        else{
+            document.querySelector('.err-message-card-profile').classList.remove('hidden');
+            document.querySelector('.err-message-card-profile').innerHTML = message;
+            console.log('not');
+        } 
+    })
+
+    let message;
+    let success = true;
+    let currentYear = new Date().getFullYear();
+    function validateCreditCardInfo(ele, name) {
+        success = true;
+        if(ele.id == `nameOnCard${name}` && (validateSpecialCharacters(ele.value) || isContainNumbers(ele.value) || ele.value.length == 0)) {
+            message = "Oops! You've entered name incorrectly. Please try again.";
+            success = false;
+            console.log('here1');
+            setErrorOnInputsCards(ele, true);
+        }
+        
+        if(ele.id == `cardNumber${name}` && (ele.value.length !== 14 || ele.value.length == 0)) {
+            success = false;
+            console.log('here2');
+            message = "Sorry! Card number cannot contain text and it should be 12 digits.";
+            setErrorOnInputsCards(ele, true);
+        } 
+        
+        if(ele.id == `expireDate${name}` && (parseInt(ele.value.substring(0,3)) < parseInt(currentYear.toString().substring(2)) || ele.value.length == 0)) {
+            message = "Opps! Seems to be your card is expired or you haven't filled yet.";
+            success = false;
+            console.log('here3');
+            setErrorOnInputsCards(ele, true);
+        } else if(ele.id == `expireDate${name}` && (!(0 < parseInt(ele.value.substring(3)) && parseInt(ele.value.substring(3)) < 13) || ele.value.length == 0)) {
+            message = "Sorry! You have entered wrong month. Check with your card again.";
+            success = false;
+            console.log('here4');
+            setErrorOnInputsCards(ele, true);
+        }
+        
+        if(ele.id == `CVC${name}` && (ele.value.length !== 3 || ele.value.length == 0)) {
+            message = "Hmm! CVC number should be 3 digits and shouldn't be contain text.";
+            success = false;
+            console.log('here5');
+            setErrorOnInputsCards(ele, true);
+        }
+
+        return success;
+    }
+
+    ListenerInputsCard(document.querySelector('#nameOnCardProfile'), 'cardName')
+    ListenerInputsCard(document.querySelector('#expireDateProfile'), 'expireDate')
+    ListenerInputsCard(document.querySelector('#cardNumberProfile'), 'cardNumber')
+    ListenerInputsCard(document.querySelector('#CVCProfile'), 'CVC')
+
+    console.log('Sithum Basnayake'.length);
+
+    function ListenerInputsCard(ele, type){
+        $(ele).keyup(function() {
+            let value = $(this).val();
+            if(type == 'cardName') {
+                if(validateSpecialCharacters(ele.value) || isContainNumbers(ele.value) || ele.value.length == 0) {
+                    setErrorOnInputsCards(ele, true);
+                } else {
+                    setErrorOnInputsCards(ele, false);
+                }
+                if(value.length > 16){
+                    document.querySelector('.card-name-display').innerHTML = value.toString().substring(0,16) + "...";
+                } else {
+                    document.querySelector('.card-name-display').innerHTML = value;
+                }
+
+            } else if(type == 'cardNumber'){
+                let number = value.replace(/\s/g, '');
+                console.log(isOnlyText(number));
+
+                if(!isContainNumbers(number) || number.length == 0) {
+                    setErrorOnInputsCards(ele, true);
+                } else if(number.length !== 12) {
+                    setErrorOnInputsCards(ele, true);
+                } else {
+                    setErrorOnInputsCards(ele, false);
+                }
+                document.querySelector('.card-number-display').innerHTML = value;
+                switch (value.length) {
+                    case 4:
+                        ele.value = value + " ";
+                        console.log('Its 4');
+                        break;
+                    case 9:
+                        ele.value = value + " ";
+                        break;
+                    default:
+                        break;
+                }
+            } else if(type == 'expireDate') {
+                if(parseInt(ele.value.substring(0,3)) < parseInt(currentYear.toString().substring(2)) || ele.value.length == 0) {
+                    setErrorOnInputsCards(ele, true);
+                } else if(!(0 < parseInt(ele.value.substring(3)) && parseInt(ele.value.substring(3)) < 13) || ele.value.length == 0) {
+                    setErrorOnInputsCards(ele, true);
+                } else {
+                    setErrorOnInputsCards(ele, false);
+                }
+                document.querySelector('.expire-date-display').innerHTML = value;
+
+                if(value.length == 2) {
+                    document.querySelector("#expireDateProfile").value = value + "/";
+                }
+            } else if(type == 'CVC') {
+                if(ele.value.length !== 3 || ele.value.length == 0 || !isContainNumbers(value)) {
+                    setErrorOnInputsCards(ele, true);
+                } else {
+                    setErrorOnInputsCards(ele, false);
+                }
+            }
+        })
+    }
+
+    function setErrorOnInputsCards(ele, status) {
+        if(status) {
+            // $(ele).addClass('border-2');
+            $(ele).addClass('bg-red-400');
+            $(ele).removeClass('bg-opacity-50');
+        } else {
+            $(ele).addClass('bg-opacity-50');
+            $(ele).removeClass('bg-red-400');
+        }
+    }
+
+    function isContainNumbers(value) {
+        return /\d/.test(value);
+    }
+
+    function isOnlyText(value) {
+        return /^[a-zA-Z0-9@]+$/.test(value);
+    }
+    
+    
+
+
+    // ? Profile Area
     $("#CustomerProfile").click(function() {
         $(".customer-profile").removeClass("scale-0");
         $("body").addClass("overflow-hidden");
@@ -9,10 +169,6 @@ $(document).ready(function() {
         $("body").removeClass("overflow-hidden");
     })
 
-    $("#addNewCard").click(function() {
-        $(".add-card-profile").toggleClass("h-48");
-        $(".add-card-profile").toggleClass("add-card-active");
-    })
 
 
     const userId = document.querySelector('.sessionId').innerHTML;
