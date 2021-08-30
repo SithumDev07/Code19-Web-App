@@ -447,7 +447,7 @@ if (isset($_GET['clear'])) {
                                 <div class="flex justify-between relative">
                                     <div class="w-6 h-6 rounded-full bg-gray-50 opacity-40"></div>
                                     <div class="w-6 h-6 rounded-full bg-gray-50 absolute top-0 left-4 z-10"></div>
-                                    <h4 class="uppercase font-semibold text-gray-100 text-xl">visa</h4>
+                                    <h4 class="uppercase font-semibold text-gray-100 text-xl card-type-display">visa</h4>
                                 </div>
                                 <h3 class="font-semibold text-2xl text-gray-200 card-number-display">XXXX XXXX XXXX</h3>
                                 <div class="flex justify-between">

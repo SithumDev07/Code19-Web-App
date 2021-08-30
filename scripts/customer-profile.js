@@ -18,7 +18,40 @@ $(document).ready(function() {
         if(success) {
             console.log('validated');
             document.querySelector('.err-message-card-profile').classList.add('hidden');
-            // setErrorOnInputsCards()
+            
+
+            const sessionId = document.querySelector('.sessionId').innerHTML;
+
+            const nameOnCard = $("#nameOnCardProfile").val();
+            const cardNumber = $("#cardNumberProfile").val();
+            const expireDate = $("#expireDateProfile").val();
+            const cvc = $("#CVCProfile").val();
+            let number = cardNumber.replace(/\s/g, '');
+            const cardType = getCreditCardType(parseInt(number));
+
+            const form_data = new FormData();
+            form_data.append('sessionId', sessionId);
+            form_data.append('nameuponcard', nameOnCard);
+            form_data.append('cardnumber', number);
+            form_data.append('cardtype', cardType);
+            form_data.append('expiredate', expireDate);
+            form_data.append('cvc', cvc);
+            $.ajax({
+                url: 'operations/add-new-credit-card.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    alert(response);
+                    clearCartData();
+                    updateCartCounter();
+
+                    $(".customize-menu").addClass("scale-0");
+                    window.location.replace("foodMain.php");
+                }
+            });
         }
         else{
             document.querySelector('.err-message-card-profile').classList.remove('hidden');
@@ -35,13 +68,11 @@ $(document).ready(function() {
         if(ele.id == `nameOnCard${name}` && (validateSpecialCharacters(ele.value) || isContainNumbers(ele.value) || ele.value.length == 0)) {
             message = "Oops! You've entered name incorrectly. Please try again.";
             success = false;
-            console.log('here1');
             setErrorOnInputsCards(ele, true);
         }
         
         if(ele.id == `cardNumber${name}` && (ele.value.length !== 14 || ele.value.length == 0)) {
             success = false;
-            console.log('here2');
             message = "Sorry! Card number cannot contain text and it should be 12 digits.";
             setErrorOnInputsCards(ele, true);
         } 
@@ -49,19 +80,16 @@ $(document).ready(function() {
         if(ele.id == `expireDate${name}` && (parseInt(ele.value.substring(0,3)) < parseInt(currentYear.toString().substring(2)) || ele.value.length == 0)) {
             message = "Opps! Seems to be your card is expired or you haven't filled yet.";
             success = false;
-            console.log('here3');
             setErrorOnInputsCards(ele, true);
         } else if(ele.id == `expireDate${name}` && (!(0 < parseInt(ele.value.substring(3)) && parseInt(ele.value.substring(3)) < 13) || ele.value.length == 0)) {
             message = "Sorry! You have entered wrong month. Check with your card again.";
             success = false;
-            console.log('here4');
             setErrorOnInputsCards(ele, true);
         }
         
         if(ele.id == `CVC${name}` && (ele.value.length !== 3 || ele.value.length == 0)) {
             message = "Hmm! CVC number should be 3 digits and shouldn't be contain text.";
             success = false;
-            console.log('here5');
             setErrorOnInputsCards(ele, true);
         }
 
@@ -73,7 +101,6 @@ $(document).ready(function() {
     ListenerInputsCard(document.querySelector('#cardNumberProfile'), 'cardNumber')
     ListenerInputsCard(document.querySelector('#CVCProfile'), 'CVC')
 
-    console.log('Sithum Basnayake'.length);
 
     function ListenerInputsCard(ele, type){
         $(ele).keyup(function() {
@@ -102,6 +129,8 @@ $(document).ready(function() {
                     setErrorOnInputsCards(ele, false);
                 }
                 document.querySelector('.card-number-display').innerHTML = value;
+                document.querySelector('.card-type-display').innerHTML = getCreditCardType(parseInt(number));
+
                 switch (value.length) {
                     case 4:
                         ele.value = value + " ";
@@ -155,7 +184,33 @@ $(document).ready(function() {
         return /^[a-zA-Z0-9@]+$/.test(value);
     }
     
-    
+    // console.log("TYPE - ", getCreditCardType(421689223682));
+
+    function getCreditCardType(value) {
+        let VISA = /^4[0-9]{6,}$/;
+        let MASTERCARD = /^5[1-5][0-9]{5,}|222[1-9][0-9]{3,}|22[3-9][0-9]{4,}|2[3-6][0-9]{5,}|27[01][0-9]{4,}|2720[0-9]{3,}$/;
+        let AMERICAN_EXPRESS = /^3[47][0-9]{5,}$/;
+        let DINERS_CLUB = /^3(?:0[0-5]|[68][0-9])[0-9]{4,}$/;
+        let DISCOVER = /^6(?:011|5[0-9]{2})[0-9]{3,}$/;
+        let JCB = /^(?:2131|1800|35[0-9]{3})[0-9]{3,}$/;
+
+        switch(true) {
+            case VISA.test(value):
+                return 'VISA';
+            case MASTERCARD.test(value):
+                return 'MASTER CARD';
+            case AMERICAN_EXPRESS.test(value):
+                return 'AMERICAN EXPRESS';
+            case DINERS_CLUB.test(value):
+                return 'DINERS CLUB';
+            case DISCOVER.test(value):
+                return 'DISCOVER';
+            case JCB.test(value):
+                return 'JSB';
+            default:
+                return 'UNRECOGNIZED';
+        }
+    }
 
 
     // ? Profile Area
