@@ -13,6 +13,18 @@ $(document).ready(function() {
         $(".hidden-credit-card").toggleClass('flex');
     })
 
+    $("#expandCardInputsCart").click(function() {
+        $(".add-card").toggleClass("h-48");
+        $(".add-card").toggleClass("add-card-active");
+        const addNewcard = document.querySelector("#expandCardInputsCart");
+        addNewcard.querySelector('svg').classList.toggle('rotate-45');
+        if(document.querySelector('.credit-card-warning').classList.contains('should-show')) {
+            $(".credit-card-warning").toggleClass('hidden');
+        }
+        $(".hidden-credit-card-cart").toggleClass('hidden');
+        $(".hidden-credit-card-cart").toggleClass('flex');
+    })
+
     $("#ConfirmCard").click(function(e) {
         e.preventDefault();
         if(validateCreditCardInfo(document.querySelector('#nameOnCardProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#cardNumberProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#expireDateProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#CVCProfile'), 'Profile')) {
@@ -105,6 +117,31 @@ $(document).ready(function() {
     })
 
 
+    // ? Confirm at cart
+    $("#ConfirmCardCart").click(function(e) {
+        e.preventDefault();
+        if(validateCreditCardInfo(document.querySelector('#nameOnCardCart'), 'Cart') && validateCreditCardInfo(document.querySelector('#cardNumberCart'), 'Cart') && validateCreditCardInfo(document.querySelector('#expireDateCart'), 'Cart') && validateCreditCardInfo(document.querySelector('#CVCCart'), 'Cart')) {
+            console.log('validated');
+            document.querySelector('.err-message-card-profile').classList.add('hidden');
+
+            // TODO
+            $(".add-card").toggleClass("h-48");
+            $(".add-card").toggleClass("add-card-active");
+            const addNewcard = document.querySelector("#expandCardInputsCart");
+            addNewcard.querySelector('svg').classList.toggle('rotate-45');
+            $(".credit-card-warning").addClass('hidden');
+            $(".credit-card-warning").removeClass('should-show');
+            $(".hidden-credit-card-cart").removeClass('hidden');
+            $(".hidden-credit-card-cart").addClass('flex');
+        }
+        else{
+            document.querySelector('.err-message-card-profile').classList.remove('hidden');
+            document.querySelector('.err-message-card-profile').innerHTML = message;
+            console.log('not');
+        } 
+    })
+
+
     // ? Remove Existing Card
     $("#removeCard").click(function(e) {
         e.preventDefault();
@@ -170,6 +207,12 @@ $(document).ready(function() {
     ListenerInputsCard(document.querySelector('#cardNumberProfile'), 'cardNumber')
     ListenerInputsCard(document.querySelector('#CVCProfile'), 'CVC')
 
+    
+    ListenerInputsCard(document.querySelector('#nameOnCardCart'), 'cardName')
+    ListenerInputsCard(document.querySelector('#expireDateCart'), 'expireDate')
+    ListenerInputsCard(document.querySelector('#cardNumberCart'), 'cardNumber')
+    ListenerInputsCard(document.querySelector('#CVCCart'), 'CVC')
+
 
     function ListenerInputsCard(ele, type){
         $(ele).keyup(function() {
@@ -222,7 +265,7 @@ $(document).ready(function() {
                 document.querySelector('.expire-date-display').innerHTML = value;
 
                 if(value.length == 2) {
-                    document.querySelector("#expireDateProfile").value = value + "/";
+                    ele.value = value + "/";
                 }
             } else if(type == 'CVC') {
                 if(ele.value.length !== 3 || ele.value.length == 0 || !isContainNumbers(value)) {
