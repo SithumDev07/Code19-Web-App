@@ -104,6 +104,30 @@ $(document).ready(function() {
         } 
     })
 
+
+    // ? Remove Existing Card
+    $("#removeCard").click(function(e) {
+        e.preventDefault();
+        const creditCardId = document.querySelector('.credit-card-id').innerHTML;
+
+        const form_data = new FormData();
+        form_data.append('cardid', creditCardId);
+        $.ajax({
+            url: 'operations/delete-credit-card.php',
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+
+                alert(response);
+
+                $(".customer-profile").addClass("scale-0");
+                window.location.replace("foodMain.php");
+            }
+        });
+    })
+
     let message;
     // let success = false;
     let currentYear = new Date().getFullYear();

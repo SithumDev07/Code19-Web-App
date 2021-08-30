@@ -551,7 +551,7 @@ if (isset($_GET['clear'])) {
                                 <input type="text" name="CVC" maxlength="3" id="CVCProfile" placeholder="CVC" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-64 mb-3">
                                 <p class="text-base text-gray-200 font-thin ml-5">By clicking confirm "I agree to the company's <a href="terms.html" class='text-black font-medium'>terms and services.</a></p>
                             </div>
-                            <div class="flex justify-between">
+                            <div class="flex <?php if($update) { echo 'justify-between';} else {echo 'justify-end';} ?>">
                                 <?php
                                 if ($update) {
                                 ?>
