@@ -441,23 +441,85 @@ if (isset($_GET['clear'])) {
                 <h1 class="text-6xl md:text-9xl font-extrabold selection:bg-red-500" style="-webkit-text-stroke: 2px; -webkit-text-stroke-color: rgb(229, 231, 235); color: transparent;">Profile</h1>
                 <div class="payment payment-profile w-full h-auto border rounded-md p-6 my-4">
 
+
                     <div class="flex flex-col overflow-hidden h-48 add-card-profile">
                         <div class="flex w-1/2 xl:w-full mx-auto">
-                            <div class="credit-card w-72 h-44 rounded-2xl flex flex-col p-3 justify-between bg-primary relative overflow-hidden">
-                                <div class="flex justify-between relative">
-                                    <div class="w-6 h-6 rounded-full bg-gray-50 opacity-40"></div>
-                                    <div class="w-6 h-6 rounded-full bg-gray-50 absolute top-0 left-4 z-10"></div>
-                                    <h4 class="uppercase font-semibold text-gray-100 text-xl card-type-display">visa</h4>
-                                </div>
-                                <h3 class="font-semibold text-2xl text-gray-200 card-number-display">XXXX XXXX XXXX</h3>
-                                <div class="flex justify-between">
-                                    <h3 class="uppercase font-semibold text-gray-200 text-sm card-name-display">Your Name</h3>
-                                    <h3 class="uppercase font-semibold text-gray-200 text-sm z-20 expire-date-display">XX/XX</h3>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-48 w-48 absolute -bottom-20 -right-16 text-blue-400 z-10" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                                </svg>
-                            </div>
+                            <?php
+                            if (isset($_SESSION['sessionId'])) {
+
+
+                                $sql = "SELECT * FROM paymentmethod WHERE customer_id = " . $_SESSION['sessionId'] . ";";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+
+                                $nameOnCard;
+                                $cardNumber;
+                                $expireDate;
+                                $CVC;
+                                $cardType;
+
+                                if ($resultCheck > 0) {
+                                    while ($row = mysqli_fetch_assoc($results)) {
+                                        $nameOnCard = $row['name_upon_card'];
+                                        $cardNumber = $row['card_number'];
+                                        $expireDate = $row['expire_date'];
+                                        $CVC = $row['cvc'];
+                                        $cardType = $row['card_type'];
+                                    }
+
+                            ?>
+                                    <div class="credit-card w-72 h-44 rounded-2xl flex flex-col p-3 justify-between bg-primary relative overflow-hidden">
+                                        <div class="flex justify-between relative">
+                                            <div class="w-6 h-6 rounded-full bg-gray-50 opacity-40"></div>
+                                            <div class="w-6 h-6 rounded-full bg-gray-50 absolute top-0 left-4 z-10"></div>
+                                            <h4 class="uppercase font-semibold text-gray-100 text-xl card-type-display"><?php if ($cardType != null) {
+                                                                                                                            echo $cardType;
+                                                                                                                        } else { ?>visa<?php } ?></h4>
+                                        </div>
+                                        <h3 class="font-semibold text-2xl text-gray-200 card-number-display"><?php if ($cardNumber != null) {
+                                                                                                                    $formattedNumber = substr($cardNumber, 0, 4) . " XXXX " . substr($cardNumber, 8, 12);
+                                                                                                                    echo $formattedNumber;
+                                                                                                                } else { ?>XXXX XXXX XXXX<?php } ?></h3>
+                                        <div class="flex justify-between">
+                                            <h3 class="uppercase font-semibold text-gray-200 text-sm card-name-display"><?php if ($nameOnCard != null) {
+                                                                                                                            if (strlen($nameOnCard) > 16) {
+                                                                                                                                $formattedName = substr($nameOnCard, 0, 16) . "...";
+                                                                                                                            } else {
+                                                                                                                                $formattedName = $nameOnCard;
+                                                                                                                            }
+                                                                                                                            echo $formattedName;
+                                                                                                                        } else { ?>Your Name<?php } ?></h3>
+                                            <h3 class="uppercase font-semibold text-gray-200 text-sm z-20 expire-date-display"><?php if ($expireDate != null) {
+                                                                                                                                    echo $expireDate;
+                                                                                                                                } else { ?>XX/XX<?php } ?></h3>
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-48 w-48 absolute -bottom-20 -right-16 text-blue-400 z-10" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                                        </svg>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <h3 class="font-semibold text-lg text-gray-800 credit-card-warning">No Credit or Debit Card added to your account.</h3>
+                                    <div class="hidden hidden-credit-card w-72 h-44 rounded-2xl flex-col p-3 justify-between bg-primary relative overflow-hidden">
+                                        <div class="flex justify-between relative">
+                                            <div class="w-6 h-6 rounded-full bg-gray-50 opacity-40"></div>
+                                            <div class="w-6 h-6 rounded-full bg-gray-50 absolute top-0 left-4 z-10"></div>
+                                            <h4 class="uppercase font-semibold text-gray-100 text-xl card-type-display">visa</h4>
+                                        </div>
+                                        <h3 class="font-semibold text-2xl text-gray-200 card-number-display">XXXX XXXX XXXX</h3>
+                                        <div class="flex justify-between">
+                                            <h3 class="uppercase font-semibold text-gray-200 text-sm card-name-display">Your Name</h3>
+                                            <h3 class="uppercase font-semibold text-gray-200 text-sm z-20 expire-date-display">XX/XX</h3>
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-48 w-48 absolute -bottom-20 -right-16 text-blue-400 z-10" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                                        </svg>
+                                    </div>
+                            <?php
+                                }
+                            }
+                            ?>
 
                             <div class="w-44 h-44 rounded-2xl border-dotted border-2 border-gray-200 ml-5 flex items-center justify-center">
                                 <div class="w-12 h-12 rounded-xl bg-gray-100 bg-opacity-10 flex items-center justify-center text-gray-100">
@@ -476,19 +538,19 @@ if (isset($_GET['clear'])) {
 
                         <div class="flex flex-col my-4 w-1/2 xl:w-full mx-auto">
                             <h1 class='text-gray-200 text-2xl font-semibold mb-3'>Add new card</h1>
-                                <input type="text" name="nameOnCard" id="nameOnCardProfile" placeholder="Name on card" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-full mb-3">
-                                <div class="flex justify-between">
-                                    <input type="text" name="cardNumber" maxlength="14" id="cardNumberProfile" placeholder="Card number" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-80 mb-3">
-                                    <input type="text" name="expireDate" maxlength="5" id="expireDateProfile" placeholder="Expiration date YY/MM" class="ml-4 border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 mb-3">
-                                </div>
-                                <div class="flex justify-between">
-                                    <input type="text" name="CVC" maxlength="3" id="CVCProfile" placeholder="CVC" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-64 mb-3">
-                                    <p class="text-base text-gray-200 font-thin ml-5">By clicking confirm "I agree to the company's <a href="terms.html" class='text-black font-medium'>terms and services.</a></p>
-                                </div>
-                                <div class="flex justify-between">
-                                    <button class="px-5 py-3 text-red-600 rounded-md ml-4" onclick="activateAddSection()">Cancel</button>
-                                    <button class="px-5 py-3 bg-black rounded-md ml-4 text-white transition duration-150 hover:shadow-lg" id="ConfirmCard">Confirm</button>
-                                </div>
+                            <input type="text" name="nameOnCard" id="nameOnCardProfile" placeholder="Name on card" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-full mb-3">
+                            <div class="flex justify-between">
+                                <input type="text" name="cardNumber" maxlength="14" id="cardNumberProfile" placeholder="Card number" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-80 mb-3">
+                                <input type="text" name="expireDate" maxlength="5" id="expireDateProfile" placeholder="Expiration date YY/MM" class="ml-4 border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 mb-3">
+                            </div>
+                            <div class="flex justify-between">
+                                <input type="text" name="CVC" maxlength="3" id="CVCProfile" placeholder="CVC" class="border-0 bg-gray-800 bg-opacity-50 placeholder-gray-100 text-white outline-none rounded-md py-3 px-4 w-64 mb-3">
+                                <p class="text-base text-gray-200 font-thin ml-5">By clicking confirm "I agree to the company's <a href="terms.html" class='text-black font-medium'>terms and services.</a></p>
+                            </div>
+                            <div class="flex justify-between">
+                                <button class="px-5 py-3 text-red-600 rounded-md ml-4" onclick="activateAddSection()">Cancel</button>
+                                <button class="px-5 py-3 bg-black rounded-md ml-4 text-white transition duration-150 hover:shadow-lg" id="ConfirmCard">Confirm</button>
+                            </div>
                         </div>
                     </div>
                 </div>

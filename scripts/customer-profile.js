@@ -8,14 +8,19 @@ $(document).ready(function() {
         addNewcard.querySelector('svg').classList.toggle('rotate-45');
         $('.payment-profile').toggleClass('xl:overflow-y-scroll');
         $('.payment-profile').toggleClass('2xl:overflow-hidden');
+        $(".credit-card-warning").toggleClass('hidden');
+        $(".hidden-credit-card").toggleClass('hidden');
+        $(".hidden-credit-card").toggleClass('flex');
     })
 
-    $("#ConfirmCard").click(function() {
-        validateCreditCardInfo(document.querySelector('#nameOnCardProfile'), 'Profile');
-        validateCreditCardInfo(document.querySelector('#cardNumberProfile'), 'Profile');
-        validateCreditCardInfo(document.querySelector('#expireDateProfile'), 'Profile');
-        validateCreditCardInfo(document.querySelector('#CVCProfile'), 'Profile');
-        if(success) {
+    $("#ConfirmCard").click(function(e) {
+        e.preventDefault();
+        // validateCreditCardInfo(document.querySelector('#nameOnCardProfile'), 'Profile');
+        // validateCreditCardInfo(document.querySelector('#cardNumberProfile'), 'Profile');
+        // validateCreditCardInfo(document.querySelector('#expireDateProfile'), 'Profile');
+        // validateCreditCardInfo(document.querySelector('#CVCProfile'), 'Profile');
+        // if(success) {
+        if(validateCreditCardInfo(document.querySelector('#nameOnCardProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#cardNumberProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#expireDateProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#CVCProfile'), 'Profile')) {
             console.log('validated');
             document.querySelector('.err-message-card-profile').classList.add('hidden');
             
@@ -59,10 +64,11 @@ $(document).ready(function() {
     })
 
     let message;
-    let success = true;
+    // let success = false;
     let currentYear = new Date().getFullYear();
     function validateCreditCardInfo(ele, name) {
-        success = true;
+        // success = true;
+        let success = true;
         if(ele.id == `nameOnCard${name}` && (validateSpecialCharacters(ele.value) || isContainNumbers(ele.value) || ele.value.length == 0)) {
             message = "Oops! You've entered name incorrectly. Please try again.";
             success = false;
