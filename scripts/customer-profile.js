@@ -15,11 +15,6 @@ $(document).ready(function() {
 
     $("#ConfirmCard").click(function(e) {
         e.preventDefault();
-        // validateCreditCardInfo(document.querySelector('#nameOnCardProfile'), 'Profile');
-        // validateCreditCardInfo(document.querySelector('#cardNumberProfile'), 'Profile');
-        // validateCreditCardInfo(document.querySelector('#expireDateProfile'), 'Profile');
-        // validateCreditCardInfo(document.querySelector('#CVCProfile'), 'Profile');
-        // if(success) {
         if(validateCreditCardInfo(document.querySelector('#nameOnCardProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#cardNumberProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#expireDateProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#CVCProfile'), 'Profile')) {
             console.log('validated');
             document.querySelector('.err-message-card-profile').classList.add('hidden');
@@ -43,6 +38,52 @@ $(document).ready(function() {
             form_data.append('cvc', cvc);
             $.ajax({
                 url: 'operations/add-new-credit-card.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    alert(response);
+
+                    $(".customer-profile").addClass("scale-0");
+                    window.location.replace("foodMain.php");
+                }
+            });
+        }
+        else{
+            document.querySelector('.err-message-card-profile').classList.remove('hidden');
+            document.querySelector('.err-message-card-profile').innerHTML = message;
+            console.log('not');
+        } 
+    })
+
+    // ? Update Existing Card
+    $("#UpdateCard").click(function(e) {
+        e.preventDefault();
+        if(validateCreditCardInfo(document.querySelector('#nameOnCardProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#cardNumberProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#expireDateProfile'), 'Profile') && validateCreditCardInfo(document.querySelector('#CVCProfile'), 'Profile')) {
+            console.log('validated');
+            document.querySelector('.err-message-card-profile').classList.add('hidden');
+            
+
+            const creditCardId = document.querySelector('.credit-card-id').innerHTML;
+
+            const nameOnCard = $("#nameOnCardProfile").val();
+            const cardNumber = $("#cardNumberProfile").val();
+            const expireDate = $("#expireDateProfile").val();
+            const cvc = $("#CVCProfile").val();
+            let number = cardNumber.replace(/\s/g, '');
+            const cardType = getCreditCardType(parseInt(number));
+
+            const form_data = new FormData();
+            form_data.append('cardid', creditCardId);
+            form_data.append('nameuponcard', nameOnCard);
+            form_data.append('cardnumber', number);
+            form_data.append('cardtype', cardType);
+            form_data.append('expiredate', expireDate);
+            form_data.append('cvc', cvc);
+            $.ajax({
+                url: 'operations/update-credit-card.php',
                 type: 'POST',
                 data: form_data,
                 contentType: false,

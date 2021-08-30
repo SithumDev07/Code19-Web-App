@@ -457,14 +457,17 @@ if (isset($_GET['clear'])) {
                                 $expireDate;
                                 $CVC;
                                 $cardType;
+                                $update = false;
 
                                 if ($resultCheck > 0) {
+                                    $update = true;
                                     while ($row = mysqli_fetch_assoc($results)) {
                                         $nameOnCard = $row['name_upon_card'];
                                         $cardNumber = $row['card_number'];
                                         $expireDate = $row['expire_date'];
                                         $CVC = $row['cvc'];
                                         $cardType = $row['card_type'];
+                                        $cardid = $row['id'];
                                     }
 
                             ?>
@@ -472,7 +475,8 @@ if (isset($_GET['clear'])) {
                                         <div class="flex justify-between relative">
                                             <div class="w-6 h-6 rounded-full bg-gray-50 opacity-40"></div>
                                             <div class="w-6 h-6 rounded-full bg-gray-50 absolute top-0 left-4 z-10"></div>
-                                            <h4 class="uppercase font-semibold text-gray-100 text-xl card-type-display"><?php if ($cardType != null) {
+                                            <p class="hidden credit-card-id"><?php echo $cardid; ?></p>
+                                            <h4 class="uppercase font-semibold text-gray-100 text-lg card-type-display italic"><?php if ($cardType != null) {
                                                                                                                             echo $cardType;
                                                                                                                         } else { ?>visa<?php } ?></h4>
                                         </div>
@@ -548,8 +552,19 @@ if (isset($_GET['clear'])) {
                                 <p class="text-base text-gray-200 font-thin ml-5">By clicking confirm "I agree to the company's <a href="terms.html" class='text-black font-medium'>terms and services.</a></p>
                             </div>
                             <div class="flex justify-between">
-                                <button class="px-5 py-3 text-red-600 rounded-md ml-4" onclick="activateAddSection()">Cancel</button>
-                                <button class="px-5 py-3 bg-black rounded-md ml-4 text-white transition duration-150 hover:shadow-lg" id="ConfirmCard">Confirm</button>
+                                <?php
+                                if ($update) {
+                                ?>
+                                    <button class="px-5 py-3 text-red-600 rounded-md ml-4" id="removeCard">Remove</button>
+                                    <button class="px-5 py-3 bg-black rounded-md ml-4 text-white transition duration-150 hover:shadow-lg" id="UpdateCard">Update</button>
+                                <?php
+                                } else {
+                                ?>
+
+                                    <button class="px-5 py-3 bg-black rounded-md ml-4 text-white transition duration-150 hover:shadow-lg" id="ConfirmCard">Confirm</button>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
