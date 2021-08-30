@@ -133,6 +133,8 @@ $(document).ready(function() {
             $(".credit-card-warning").removeClass('should-show');
             $(".hidden-credit-card-cart").removeClass('hidden');
             $(".hidden-credit-card-cart").addClass('flex');
+
+            document.querySelector("#onlinePay").removeAttribute('disabled');
         }
         else{
             document.querySelector('.err-message-card-profile').classList.remove('hidden');

@@ -75,14 +75,7 @@ window.renderOrder = function () {
         let toppingPriceByOrder = [];
         let EachFoodPriceByOrder = [];
 
-        $("#onlinePay").unbind().click(function () {
-            console.log('Current Complete Order');
-            getCartData().forEach(ele => {
-                console.log(ele);
-            })
-
-            console.log(document.querySelector('.grandTotal').innerHTML);
-        })
+        
 
 
         // TODO - Not working up to now
@@ -109,6 +102,15 @@ window.renderOrder = function () {
 
         });
 
+
+        
+        console.log(document.querySelector('.credit-card-id'));
+        if(document.querySelector('.credit-card-id') !== null) {
+            document.querySelector("#onlinePay").removeAttribute('disabled');
+            // if(document.querySelector('.credit-card-id').innerHTML !== '') {
+            // }
+        }
+        
        
 
         // ? Handling all removing and adding parts of single cart card
@@ -426,6 +428,35 @@ window.renderOrder = function () {
                 }
                 // console.log(document.querySelector('.deliveryCharges'));
                 UpdateTotalPrice();
+        })
+
+
+        $("#onlinePay").unbind().click(function (e) {
+            e.preventDefault();
+            let deliveryCharges = 100.00;
+
+            const sessionId = document.querySelector('.sessionId').innerHTML;
+
+            const form_data = new FormData();
+            form_data.append('sessionId', sessionId);
+            form_data.append('deliverycharges', deliveryCharges);
+            form_data.append('finalOrder', JSON.stringify(completeOrder));
+            $.ajax({
+                url: 'operations/online-pay-order.php',
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+
+                    alert(response);
+                    clearCartData();
+                    updateCartCounter();
+
+                    $(".checkout-menu").addClass("scale-0");
+                    window.location.replace("foodMain.php");
+                }
+            });
         })
     
 
