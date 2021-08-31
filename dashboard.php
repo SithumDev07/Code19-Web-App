@@ -545,35 +545,35 @@ if (!isset($_SESSION['sessionId'])) {
 
                 <!-- Single Order Display -->
                 <div class="single-order-container glass rounded-t-3xl absolute top-24 left-0 z-base-search right-0 hidden h-full w-full">
-                    <div class="flex flex-col w-full h-full py-5 px-10">
+                    <!-- <div class="flex flex-col w-full h-full py-5 px-10">
                         <div class="flex items-center justify-between w-full px-5">
                             <h1 class="text-5xl opacity-60 font-semibold text-gray-400 order-id-display italic">#24</h1>
                             <h1 class="text-5xl opacity-60 font-semibold text-gray-400 order-total italic">Rs.1250.00</h1>
                         </div>
                         <div class="flex items-center mt-5">
-                            <div class="w-20 h-20 rounded-full overflow-hidden">
+                            <div class="w-16 h-16 rounded-full overflow-hidden">
                                 <img src="./photo_uploads/customers/612ab1c826c941.41813831.png" class="w-full h-full object-cover rounded-full" alt="single-food">
                             </div>
                             <div class="flex flex-col ml-4">
                                 <h4 class="text-blue-600 font-semibold text-xl">Sithum Basnayake</h4>
-                                <h4 class="text-blue-400 font-semibold mt-1">Badulla</h4>
+                                <h4 class="text-blue-600 opacity-80 font-semibold">Badulla</h4>
                             </div>
                         </div>
                         <div class="list flex flex-col my-6">
-                            <div class="flex items-center justify-between">
+                            <div class="flex items-center justify-between border border-gray-400 px-3 py-2 rounded">
                                 <div class="w-14 h-14 rounded-full overflow-hidden">
-                                    <img src="./assets/featured/7.png" class="w-full h-full object-cover rounded-full" alt="single-food">
+                                    <img src="./photo_uploads/foods/612685afb471c5.59557558.png" class="w-full h-full object-cover rounded-full" alt="single-food">
                                 </div>
                                 <h2 class="text-xl font-semibold text-gray-700 food-name">Food Name x2</h2>
                                 <p class="text-xl text-gray-500 fillings-list">Fillings, Fillings, Fillings</p>
                             </div>
                         </div>
-                        <div class="actions flex items-center">
-                            <button class="flex items-center rounded-md justify-center px-4 py-3 bg-black text-gray-200 transform transition duration-150 active:scale-95 hover:scale-105">Accept</button>
-                            <button class="flex items-center rounded-md justify-center px-4 py-3 bg-blue-500 text-gray-200 transform transition duration-150 active:scale-95 mx-6 hover:scale-105">Hold</button>
-                            <button class="flex items-center rounded-md justify-center px-4 py-3 bg-yellow-400 text-gray-200 transform transition duration-150 active:scale-95 hover:scale-105">Cancel</button>
+                        <div class="actions flex items-center justify-end">
+                            <button class="flex items-center rounded-md justify-center px-4 py-3 bg-green-400 text-gray-200 transform transition duration-150 active:scale-95 hover:scale-105" id="AcceptOrder">Accept</button>
+                            <button class="flex items-center rounded-md justify-center px-4 py-3 bg-yellow-300 text-gray-200 transform transition duration-150 active:scale-95 mx-6 hover:scale-105" id="HoldOrder">Hold</button>
+                            <button class="flex items-center rounded-md justify-center px-4 py-3 bg-red-400 text-gray-200 transform transition duration-150 active:scale-95 hover:scale-105" id="CancelOrder">Cancel</button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Orders -->
