@@ -4,119 +4,167 @@ require './config.php';
 
 // TODO reset isset function
 if (isset($_GET['id'])) {
+?>
+    <!-- Table -->
+    <table class="rounded-t-lg w-full bg-transparent text-gray-800 mt-8">
+        <tr class="text-left border-b border-gray-500">
+            <th class="px-4 py-3">Order ID</th>
+            <th class="px-4 py-3">Customer</th>
+            <th class="px-4 py-3">Order</th>
+            <th class="px-4 py-3">Extra notes</th>
+            <th class="px-4 py-3">Total</th>
+            <th class="px-4 py-3">Delivery Method</th>
+            <th class="px-4 py-3">Status</th>
+        </tr>
+        <?php
 
-    $order1 = array();
-    array_push($order1, "4");
-    array_push($order1, "7");
-    array_push($order1, "8");
-    array_push($order1, "1");
+        $sql = "SELECT * FROM customer_order ORDER BY id DESC;";
+        $results = mysqli_query($conn, $sql);
+        $resultCheck = mysqli_num_rows($results);
 
-    $order2 = array();
-    array_push($order2, "9");
+        $foodIDs = array();
+        $foodQuantities = array();
+        $foodNames = array();
 
-    $order3 = array();
+        $fillingsIDs = array();
+        $fillingNames = array();
 
-    $finalOrder = array();
-    $finalOrder2 = array();
-    $finalOrder3 = array();
+        $data = array();
+        $allData = array();
+        if ($resultCheck > 0) {
+            while ($row = mysqli_fetch_assoc($results)) {
+                array_push($data, $row['customer_id']);
+                array_push($data, $row['id']);
+                array_push($data, $row['delivery_method']);
+                array_push($data, $row['total_amount']);
+                array_push($data, $row['status']);
 
-    array_push($finalOrder, "4");
-    array_push($finalOrder, "10");
-    array_push($finalOrder, $order1);
-
-    array_push($finalOrder2, "1");
-    array_push($finalOrder2, "5");
-    array_push($finalOrder2, $order2);
-
-    array_push($finalOrder3, "2");
-    array_push($finalOrder3, "1");
-    array_push($finalOrder3, $order3);
-
-    $Complete = array();
-
-    array_push($Complete, $finalOrder);
-    array_push($Complete, $finalOrder2);
-    array_push($Complete, $finalOrder3);
-
-    for ($i = 0; $i < count($Complete); $i++) {
-        for ($j = 0; $j < count($Complete[$i][2]); $j++) {
-            echo $Complete[$i][2][$j] . " ";
-        }
-        echo "<br>";
-    }
-
-    // TODO
-
-    $sql;
-    $results;
-    $message;
-    $id = $_GET['fillingid'];
-    $quantity = $_GET['quantity'];
-
-    $sql = "SELECT * FROM ingredient_filling WHERE filling_id = $id;";
-    $results = mysqli_query($conn, $sql);
-    $resultCheckFilling = mysqli_num_rows($results);
-    $allIngredientIds = array();
-    $allIngredientQuantities = array();
-
-    if ($resultCheckFilling > 0) {
-        while ($rowIngredient = mysqli_fetch_assoc($results)) {
-            array_push($allIngredientIds, $rowIngredient['ingredient_id']);
-            array_push($allIngredientQuantities, (int)$rowIngredient['no_of_units'] * (int)$quantity);
-        }
-    }
-
-    // ? End
-
-    $totalPriceforSelectedToppings = 0.0;
-    $totalPriceforSelectedFoods = 0.0;
-
-
-    for ($i = 0; $i < count($Complete); $i++) {
-        for ($j = 0; $j < count($Complete[$i][2]); $j++) {
-
-            // echo $Complete[$i][2][$j] . " ";
-            $sql = "SELECT * FROM filling WHERE id = " . $Complete[$i][2][$j] . ";";
-
-            $results = mysqli_query($conn, $sql);
-            $resultCheck = mysqli_num_rows($results);
-
-            if ($resultCheck > 0) {
-                while ($row = mysqli_fetch_assoc($results)) {
-                    $totalPriceforSelectedToppings = $totalPriceforSelectedToppings + (float)$row['price'];
+                $sqlCustomer = "SELECT * FROM customer WHERE id=" . $row['customer_id'] . ";";
+                $resultsCustomer = mysqli_query($conn, $sqlCustomer);
+                $resultCheckCustomer = mysqli_num_rows($resultsCustomer);
+                if ($resultCheckCustomer > 0) {
+                    while ($rowCustomer = mysqli_fetch_assoc($resultsCustomer)) {
+                        array_push($data, $rowCustomer['name']);
+                    }
                 }
+
+                // ? Getting Foods
+                $sqlFood = "SELECT * FROM food_order WHERE order_id=" . $row['id'] . ";";
+                $resultsFood = mysqli_query($conn, $sqlFood);
+                $resultCheckFood = mysqli_num_rows($resultsFood);
+                if ($resultCheckFood > 0) {
+                    while ($rowFood = mysqli_fetch_assoc($resultsFood)) {
+                        array_push($foodIDs, $rowFood['food_id']);
+                        array_push($foodQuantities, $rowFood['quantity']);
+                    }
+
+
+                    for ($i = 0; $i < count($foodIDs); $i++) {
+                        $sqlFood = "SELECT * FROM food WHERE id=" . $foodIDs[$i] . ";";
+                        $resultsFood = mysqli_query($conn, $sqlFood);
+                        $resultCheckFood = mysqli_num_rows($resultsFood);
+                        if ($resultCheckFood > 0) {
+                            while ($rowFood = mysqli_fetch_assoc($resultsFood)) {
+                                array_push($foodNames, $rowFood['name']);
+                            }
+                        }
+                    }
+                    $foodIDs = array();
+                }
+
+
+                //? Getting Fillings
+                $sqlFillings = "SELECT * FROM filling_order WHERE order_id = " . $row['id'] . ";";
+                $resultsFillings = mysqli_query($conn, $sqlFillings);
+                $resultsCheckFillings = mysqli_num_rows($resultsFillings);
+                if ($resultsCheckFillings > 0) {
+                    while ($rowFillings = mysqli_fetch_assoc($resultsFillings)) {
+                        array_push($fillingsIDs, $rowFillings['filling_id']);
+                    }
+
+                    for ($i = 0; $i < count($fillingsIDs); $i++) {
+                        $sqlFillings = "SELECT * FROM filling WHERE id = " . $fillingsIDs[$i] . ";";
+                        $resultsFillings = mysqli_query($conn, $sqlFillings);
+                        $resultsCheckFillings = mysqli_num_rows($resultsFillings);
+                        if ($resultsCheckFillings > 0) {
+                            while ($rowFillings = mysqli_fetch_assoc($resultsFillings)) {
+                                array_push($fillingNames, $rowFillings['name']);
+                            }
+                        }
+                    }
+
+                    $fillingsIDs = array();
+                }
+
+
+                array_push($data, $foodNames);
+                array_push($data, $fillingNames);
+                array_push($data, $foodQuantities);
+                array_push($allData, $data);
+                $foodNames = array();
+                $foodQuantities = array();
+                $fillingNames = array();
+                $data = array();
             }
         }
 
-        $sqlFood = "SELECT * FROM food WHERE id = " . $Complete[$i][0] . ";";
+        // for ($i = 0; $i < count($allData); $i++) {
+        //     print_r($allData[$i]);
+        //     echo "<br>";
+        // }
 
-        $resultsFood = mysqli_query($conn, $sqlFood);
-        $resultCheckFood = mysqli_num_rows($resultsFood);
 
-        if ($resultCheckFood > 0) {
-            while ($rowFood = mysqli_fetch_assoc($resultsFood)) {
-                $totalPriceforSelectedFoods = $totalPriceforSelectedFoods + (float)$rowFood['basic_price'];
-            }
+        for ($i = 0; $i < count($allData); $i++) {
+
+        ?>
+            <tr class="text-left border-b border-gray-500 text-sm">
+                <td class="px-4 py-3">#<?php echo $allData[$i][1]; ?></td>
+                <td class="px-4 py-3"><?php if (strlen($allData[$i][5]) > 15) {
+                                            $customer = substr($allData[$i][5], 0, 15) . "...";
+                                        } else {
+                                            $customer = $allData[$i][5];
+                                        }
+                                        echo $customer; ?></td>
+                <td class="px-4 py-3"><?php
+                                        $foodList = '';
+                                        //? Looping Through Foods
+                                        for ($j = 0; $j < count($allData[$i][6]); $j++) {
+                                            $foodList .= $allData[$i][6][$j] . " x" . $allData[$i][8][$j] . ", ";
+                                            // echo $allData[$i][6][$j] . " x" . $allData[$i][8][$j] . ", ";
+                                        }
+
+                                        if(strlen($foodList) > 35) {
+                                            echo substr($foodList, 0, 35) . "...";
+                                        } else {
+                                            echo $foodList;
+                                        }
+                                        ?></td>
+                <td class="px-4 py-3"><?php
+                                        $fillingsList = '';
+                                        //? Looping Through Fillings
+                                        for ($j = 0; $j < count($allData[$i][7]); $j++) {
+                                            $fillingsList .= $allData[$i][7][$j] . ", ";
+                                            // echo $allData[$i][7][$j] . ", ";
+                                        }
+                                        if(strlen($fillingsList) > 30) {
+                                            substr($fillingsList, 0, 30) . "...";
+                                        } else {
+                                            echo $fillingsList;
+                                        }
+                                        ?></td>
+                <td class="px-4 py-3">Rs.<?php echo $allData[$i][3]; ?></td>
+                <td class="px-4 py-3 text-center capitalize"><?php echo $allData[$i][2]; ?></td>
+                <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200 capitalize"><?php if ($allData[$i][4] == 'active') {
+                                                                                                                    echo "Accept";
+                                                                                                                } ?></button></td>
+            </tr>
+        <?php
+
         }
-    }
-
-
-    echo "ING Ids<br>";
-    for ($i = 0; $i < count($allIngredientIds); $i++) {
-        print_r($allIngredientIds[$i]);
-        echo "<br>";
-    }
-
-
-
-    echo "<br>";
-    echo "QQQQQQQQQQQQ<br>";
-    for ($i = 0; $i < count($allIngredientQuantities); $i++) {
-        print_r($allIngredientQuantities[$i]);
-        echo "<br>";
-    }
-} else {
-    // header("Location: ../dashboard.php?error=accessforbidden");
-    echo "main error";
-    exit();
-}
+        ?>
+    </table> <?php
+            } else {
+                // header("Location: ../dashboard.php?error=accessforbidden");
+                echo "main error";
+                exit();
+            }

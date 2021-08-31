@@ -94,6 +94,7 @@ if (!isset($_SESSION['sessionId'])) {
             background-color: rgba(30, 30, 30, 0.3);
             border-radius: 1.2em;
         }
+
         .add-kitchen-form::-webkit-scrollbar {
             width: 0.6em;
             border-radius: 50%;
@@ -176,6 +177,7 @@ if (!isset($_SESSION['sessionId'])) {
             left: 0;
             cursor: pointer;
         }
+
         #foodPhotoUpload {
             position: absolute;
             top: 0;
@@ -190,6 +192,7 @@ if (!isset($_SESSION['sessionId'])) {
         #crewUploadProfile::-webkit-file-upload-button {
             visibility: hidden;
         }
+
         #foodPhotoUpload::-webkit-file-upload-button {
             visibility: hidden;
         }
@@ -565,7 +568,7 @@ if (!isset($_SESSION['sessionId'])) {
                     </div>
 
                     <!-- Search Field -->
-                    <div class="mt-5 flex items-center w-full sticky top-0" id="stickySearch">
+                    <div class="mt-5 flex items-center w-full sticky top-0 z-30" id="stickySearch">
                         <input type="text" placeholder="Search for orderID, Customer, Order Status Or Something..." class="flex-1 rounded-md bg-transparent border transform transition-colors duration-300">
                         <button class="flex items-center text-gray-500 mx-5 bg-transparent px-3 py-2 rounded-md transform transition-colors duration-300" id="filter">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
@@ -609,141 +612,146 @@ if (!isset($_SESSION['sessionId'])) {
                             <th class="px-4 py-3">Delivery Method</th>
                             <th class="px-4 py-3">Status</th>
                         </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
-                        <tr class="text-left border-b border-gray-500 text-sm">
-                            <td class="px-4 py-3">#7898</td>
-                            <td class="px-4 py-3">Sithum Basnayake</td>
-                            <td class="px-4 py-3">Chicken Burger XL x2</td>
-                            <td class="px-4 py-3">Mushrooms, Bacon, Ketchup</td>
-                            <td class="px-4 py-3">Rs. 980.00</td>
-                            <td class="px-4 py-3 text-center">Delivery</td>
-                            <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200">Accept</button></td>
-                        </tr>
+                        <?php
+
+                        $sql = "SELECT * FROM customer_order ORDER BY id DESC;";
+                        $results = mysqli_query($conn, $sql);
+                        $resultCheck = mysqli_num_rows($results);
+
+                        $foodIDs = array();
+                        $foodQuantities = array();
+                        $foodNames = array();
+
+                        $fillingsIDs = array();
+                        $fillingNames = array();
+
+                        $data = array();
+                        $allData = array();
+                        if ($resultCheck > 0) {
+                            while ($row = mysqli_fetch_assoc($results)) {
+                                array_push($data, $row['customer_id']);
+                                array_push($data, $row['id']);
+                                array_push($data, $row['delivery_method']);
+                                array_push($data, $row['total_amount']);
+                                array_push($data, $row['status']);
+
+                                $sqlCustomer = "SELECT * FROM customer WHERE id=" . $row['customer_id'] . ";";
+                                $resultsCustomer = mysqli_query($conn, $sqlCustomer);
+                                $resultCheckCustomer = mysqli_num_rows($resultsCustomer);
+                                if ($resultCheckCustomer > 0) {
+                                    while ($rowCustomer = mysqli_fetch_assoc($resultsCustomer)) {
+                                        array_push($data, $rowCustomer['name']);
+                                    }
+                                }
+
+                                // ? Getting Foods
+                                $sqlFood = "SELECT * FROM food_order WHERE order_id=" . $row['id'] . ";";
+                                $resultsFood = mysqli_query($conn, $sqlFood);
+                                $resultCheckFood = mysqli_num_rows($resultsFood);
+                                if ($resultCheckFood > 0) {
+                                    while ($rowFood = mysqli_fetch_assoc($resultsFood)) {
+                                        array_push($foodIDs, $rowFood['food_id']);
+                                        array_push($foodQuantities, $rowFood['quantity']);
+                                    }
+
+
+                                    for ($i = 0; $i < count($foodIDs); $i++) {
+                                        $sqlFood = "SELECT * FROM food WHERE id=" . $foodIDs[$i] . ";";
+                                        $resultsFood = mysqli_query($conn, $sqlFood);
+                                        $resultCheckFood = mysqli_num_rows($resultsFood);
+                                        if ($resultCheckFood > 0) {
+                                            while ($rowFood = mysqli_fetch_assoc($resultsFood)) {
+                                                array_push($foodNames, $rowFood['name']);
+                                            }
+                                        }
+                                    }
+                                    $foodIDs = array();
+                                }
+
+
+                                //? Getting Fillings
+                                $sqlFillings = "SELECT * FROM filling_order WHERE order_id = " . $row['id'] . ";";
+                                $resultsFillings = mysqli_query($conn, $sqlFillings);
+                                $resultsCheckFillings = mysqli_num_rows($resultsFillings);
+                                if ($resultsCheckFillings > 0) {
+                                    while ($rowFillings = mysqli_fetch_assoc($resultsFillings)) {
+                                        array_push($fillingsIDs, $rowFillings['filling_id']);
+                                    }
+
+                                    for ($i = 0; $i < count($fillingsIDs); $i++) {
+                                        $sqlFillings = "SELECT * FROM filling WHERE id = " . $fillingsIDs[$i] . ";";
+                                        $resultsFillings = mysqli_query($conn, $sqlFillings);
+                                        $resultsCheckFillings = mysqli_num_rows($resultsFillings);
+                                        if ($resultsCheckFillings > 0) {
+                                            while ($rowFillings = mysqli_fetch_assoc($resultsFillings)) {
+                                                array_push($fillingNames, $rowFillings['name']);
+                                            }
+                                        }
+                                    }
+
+                                    $fillingsIDs = array();
+                                }
+
+
+                                array_push($data, $foodNames);
+                                array_push($data, $fillingNames);
+                                array_push($data, $foodQuantities);
+                                array_push($allData, $data);
+                                $foodNames = array();
+                                $foodQuantities = array();
+                                $fillingNames = array();
+                                $data = array();
+                            }
+                        }
+
+                        for ($i = 0; $i < count($allData); $i++) {
+
+                        ?>
+                            <tr class="text-left border-b border-gray-500 text-sm cursor-pointer hover:scale-105 transform transition duration-300">
+                                <td class="px-4 py-3">#<?php echo $allData[$i][1]; ?></td>
+                                <td class="px-4 py-3"><?php if (strlen($allData[$i][5]) > 15) {
+                                                            $customer = substr($allData[$i][5], 0, 15) . "...";
+                                                        } else {
+                                                            $customer = $allData[$i][5];
+                                                        }
+                                                        echo $customer; ?></td>
+                                <td class="px-4 py-3"><?php
+                                                        $foodList = '';
+                                                        //? Looping Through Foods
+                                                        for ($j = 0; $j < count($allData[$i][6]); $j++) {
+                                                            $foodList .= $allData[$i][6][$j] . " x" . $allData[$i][8][$j] . ", ";
+                                                            // echo $allData[$i][6][$j] . " x" . $allData[$i][8][$j] . ", ";
+                                                        }
+
+                                                        if (strlen($foodList) > 35) {
+                                                            echo substr($foodList, 0, 35) . "...";
+                                                        } else {
+                                                            echo $foodList;
+                                                        }
+                                                        ?></td>
+                                <td class="px-4 py-3"><?php
+                                                        $fillingsList = '';
+                                                        //? Looping Through Fillings
+                                                        for ($j = 0; $j < count($allData[$i][7]); $j++) {
+                                                            $fillingsList .= $allData[$i][7][$j] . ", ";
+                                                            // echo $allData[$i][7][$j] . ", ";
+                                                        }
+                                                        if (strlen($fillingsList) > 30) {
+                                                            echo substr($fillingsList, 0, 30) . "...";
+                                                        } else {
+                                                            echo $fillingsList;
+                                                        }
+                                                        ?></td>
+                                <td class="px-4 py-3">Rs.<?php echo $allData[$i][3]; ?></td>
+                                <td class="px-4 py-3 text-center capitalize"><?php echo $allData[$i][2]; ?></td>
+                                <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200 capitalize"><?php if ($allData[$i][4] == 'active') {
+                                                                                                                                    echo "Accept";
+                                                                                                                                } ?></button></td>
+                            </tr>
+                        <?php
+
+                        }
+                        ?>
                     </table>
                 </div>
 
@@ -1255,7 +1263,11 @@ if (!isset($_SESSION['sessionId'])) {
                     ?>
                             <div class="warning w-full rounded-xl bg-yellow-500 bg-opacity-30 my-5 flex items-center p-5 transform transition duration-200 hover:shadow-lg hover:scale-95 cursor-pointer">
                                 <div class="flex-1">
-                                    <h1 class="text-2xl font-semibold text-gray-600">Total <?php if($diapperingFoodCount == 1) { echo $diapperingFoodCount . " food"; } else { echo $diapperingFoodCount . " foods"; } ?> will disappearing because the inventory is running out</h1>
+                                    <h1 class="text-2xl font-semibold text-gray-600">Total <?php if ($diapperingFoodCount == 1) {
+                                                                                                echo $diapperingFoodCount . " food";
+                                                                                            } else {
+                                                                                                echo $diapperingFoodCount . " foods";
+                                                                                            } ?> will disappearing because the inventory is running out</h1>
                                     <button class="flex items-center text-sm mt-4">
                                         Show
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
