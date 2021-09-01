@@ -261,7 +261,7 @@ if (!isset($_SESSION['sessionId'])) {
                                 <img class="w-full h-full object-cover rounded-full" src="./photo_uploads/users/<?php echo $row['photo']; ?>" alt="Profile Picture">
                             </div>
 
-                            <h2 class="text-base font-semibold text-gray-500"><?php echo $row['name']; ?></h2>
+                            <h2 class="text-base font-semibold text-gray-500 current-user"><?php echo $row['name']; ?></h2>
                             <h4 class="text-sm font-light text-gray-500"><?php echo $row['position'] ?></h4>
                     <?php
                         }
@@ -754,7 +754,7 @@ if (!isset($_SESSION['sessionId'])) {
                                                         ?></td>
                                 <td class="px-4 py-3">Rs.<?php echo $allData[$i][3]; ?></td>
                                 <td class="px-4 py-3 text-center capitalize"><?php echo $allData[$i][2]; ?></td>
-                                <td class="px-4 py-3"><button class="px-3 py-2 bg-green-400 rounded text-gray-200 capitalize"><?php if ($allData[$i][4] == 'active') {
+                                <td class="px-4 py-3"><button class="px-3 py-2 <?php if($allData[$i][4] == "Cancelled") { echo "bg-red-500 bg-opacity-80"; } else { echo "bg-green-400"; } ?> rounded text-gray-200 capitalize"><?php if ($allData[$i][4] == 'active') {
                                                                                                                                     echo "Accept";
                                                                                                                                 } else echo $allData[$i][4]; ?></button></td>
                             </tr>

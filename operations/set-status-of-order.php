@@ -6,14 +6,24 @@ if (isset($_POST['id'])) {
     $id = $_POST['id'];
     $status = $_POST['status'];
 
+   
+
 
     if (empty($id) || empty($status)) {
         // header("Location: ../dasboard.php?error=empty_fields");
         echo "empty fields $id $status";
         exit();
     } else {
+        $sql;
+        if(isset($_POST['note'])) {
+    
+            $sql = "UPDATE customer_order SET status=?, special_notes=? WHERE id=?;";
 
-        $sql = "UPDATE customer_order SET status=? WHERE id=?;";
+        } else {
+
+            $sql = "UPDATE customer_order SET status=? WHERE id=?;";
+        }
+
 
         $statement = mysqli_stmt_init($conn);
 
@@ -22,7 +32,14 @@ if (isset($_POST['id'])) {
             exit();
         } else {
 
-            $bindFailed = mysqli_stmt_bind_param($statement, 'si', $status, $id);
+            $bindFailed = false;
+            if(isset($_POST['note'])) {
+                $bindFailed = mysqli_stmt_bind_param($statement, 'ssi', $status, $_POST['note'], $id);
+            } else {
+                
+                $bindFailed = mysqli_stmt_bind_param($statement, 'si', $status, $id);
+            }
+
             if ($bindFailed === false) {
                 echo htmlspecialchars($statement->error);
                 exit();

@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    
+
     handleOrderList();
 
     $("#orderViewCancel").click(function() {
@@ -9,6 +11,9 @@ $(document).ready(function() {
 
         $(".after-orders-loader").load("operations/get-order-status.php", {
         }, function() {
+
+            
+
             handleOrderList();
         })
     })
@@ -18,6 +23,7 @@ $(document).ready(function() {
         const singleOrders = document.querySelectorAll('.single-order');
         singleOrders.forEach((ele, index) => {
             $(ele).click(function() {
+
                 $(".single-order-container").removeClass('hidden');
                 $(".single-order-container").addClass('flex');
                 $("#orderViewCancel").removeClass('hidden');
@@ -33,6 +39,9 @@ $(document).ready(function() {
                 $(".single-order-container").load("operations/get-single-order.php", {
                     orderid: orderId,
                 }, function() {
+
+                    let currentUser = document.querySelector('.current-user').innerHTML;
+                    document.querySelector('.order-cancelled-message').innerHTML = "This order is cancelled by " + currentUser;
                     
                     $("#AcceptOrder").click(function() {
                         $("#AcceptOrder").toggleClass('scale-0');
@@ -44,6 +53,50 @@ $(document).ready(function() {
                         const form_data = new FormData();
                         form_data.append('id', orderId);
                         form_data.append('status', 'Processing');
+                        $.ajax({
+                            url: 'operations/set-status-of-order.php',
+                            type: 'POST',
+                            data: form_data,
+                            contentType: false,
+                            processData: false,
+                            success: function(response) {
+            
+                                alert(response);
+                            }
+                        });
+                    })
+
+                    $("#CancelOrder").click(function() {
+
+                        $('.order-cancel-confirmation').removeClass('scale-0');
+    
+                    })
+
+
+                    $("#CloseCancelation").click(function() {
+
+                        $('.order-cancel-confirmation').addClass('scale-0');
+    
+                    })
+
+                    $("#CancelConfirm").click(function() {
+                        $('.order-cancel-confirmation').addClass('scale-0');
+                        $('#CancelOrder').addClass('scale-0');
+                        $("#HoldOrder").removeClass('animate-ping');
+                        $("#HoldOrder").addClass('scale-0');
+                        $("#Delivered").removeClass('animate-ping');
+                        $("#Delivered").addClass('scale-0');
+
+                        $(".order-cancelled-message").removeClass('hidden');
+                        
+
+                        const note = $("#specialNote").val();
+
+                        // ? Update the status of order
+                        const form_data = new FormData();
+                        form_data.append('id', orderId);
+                        form_data.append('status', 'Cancelled');
+                        form_data.append('note', note);
                         $.ajax({
                             url: 'operations/set-status-of-order.php',
                             type: 'POST',
