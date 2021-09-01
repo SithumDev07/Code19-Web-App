@@ -44,13 +44,7 @@ $(document).ready(function() {
                 break;
         }
 
-        // $(".after-orders-loader").load("operations/get-order-status.php", {
-        // }, function() {
-
-            
-
-        //     handleOrderList();
-        // })
+        document.querySelector("#SearchOrder").value = '';
     })
 
 
@@ -260,6 +254,23 @@ $(document).ready(function() {
         }, function() {
             handleOrderList();
         })
+    })
+
+    // ? Orders Searching
+    $("#SearchOrder").keyup(function() {
+        let value = $(this).val();
+        if(value !== '') {
+
+                $(".after-orders-loader").load("operations/get-searched-orders.php", {
+                    query: value,
+                }, function() {
+                    handleOrderList();
+                });
+        }else {
+            $(".after-orders-loader").load("operations/get-order-status.php", {}, function() {
+                handleOrderList();
+            });
+        }
     })
 
     
