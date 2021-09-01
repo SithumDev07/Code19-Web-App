@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    
+    let orderNavigationStatus = "AllOrders";
 
     handleOrderList();
 
@@ -9,13 +9,48 @@ $(document).ready(function() {
         $(".single-order-container").toggleClass('flex');
         $("#stickyContainer").removeClass('overflow-y-hidden');
 
-        $(".after-orders-loader").load("operations/get-order-status.php", {
-        }, function() {
+        switch(orderNavigationStatus) {
+            case 'AllOrders':
+                $(".after-orders-loader").load("operations/get-order-status.php", {
+                }, function() {
+                    handleOrderList();
+                });
+                break;
+            case 'Active':
+                $(".after-orders-loader").load("operations/get-active-orders.php", {
+                }, function() {
+                    handleOrderList();
+                });
+                break;
+            case 'Delivering':
+                $(".after-orders-loader").load("operations/get-delivering-orders.php", {
+                }, function() {
+                    handleOrderList();
+                });
+                break;
+            case 'OnHold':
+                $(".after-orders-loader").load("operations/get-hold-orders.php", {
+                }, function() {
+                    handleOrderList();
+                });
+                break;
+            case 'CancelledOrders':
+                $(".after-orders-loader").load("operations/get-cancelled-orders.php", {
+                }, function() {
+                    handleOrderList();
+                });
+                break;
+            default:
+                break;
+        }
+
+        // $(".after-orders-loader").load("operations/get-order-status.php", {
+        // }, function() {
 
             
 
-            handleOrderList();
-        })
+        //     handleOrderList();
+        // })
     })
 
 
@@ -172,6 +207,60 @@ $(document).ready(function() {
             })
         })
     }
+
+    $("#AllOrders").click(function() {
+        
+        orderNavigationStatus = "AllOrders";
+
+        $(".after-orders-loader").load("operations/get-order-status.php", {
+        }, function() {
+            handleOrderList();
+        })
+    })
+
+
+    $("#ActiveOrders").click(function() {
+        
+        orderNavigationStatus = "Active";
+
+        $(".after-orders-loader").load("operations/get-active-orders.php", {
+        }, function() {
+            handleOrderList();
+        })
+    })
+
+
+    $("#DeliveringOrders").click(function() {
+        
+        orderNavigationStatus = "Delivering";
+
+        $(".after-orders-loader").load("operations/get-delivering-orders.php", {
+        }, function() {
+            handleOrderList();
+        })
+    })
+
+
+    $("#OnHoldOrders").click(function() {
+        
+        orderNavigationStatus = "OnHold";
+
+        $(".after-orders-loader").load("operations/get-hold-orders.php", {
+        }, function() {
+            handleOrderList();
+        })
+    })
+
+
+    $("#CancelledOrders").click(function() {
+        
+        orderNavigationStatus = "CancelledOrders";
+
+        $(".after-orders-loader").load("operations/get-cancelled-orders.php", {
+        }, function() {
+            handleOrderList();
+        })
+    })
 
     
 })

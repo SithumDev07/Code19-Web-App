@@ -568,11 +568,11 @@ if (!isset($_SESSION['sessionId'])) {
                     </div>
                     <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
                         <ul class="flex items-center h-full">
-                            <li class="option all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer" style="width: 20%;">All Orders</li>
-                            <li class="option completed block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Completed</li>
-                            <li class="option continuing block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Continuing</li>
-                            <li class="option on-hold block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">On Hold</li>
-                            <li class="option canceled block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;">Canceled</li>
+                            <li class="option all-orders block h-full text-center text-yellow-500 font-bold cursor-pointer" style="width: 20%;" id="AllOrders">All Orders</li>
+                            <li class="option active-orders block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;" id="ActiveOrders">Active</li>
+                            <li class="option delivering-orders block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;" id="DeliveringOrders">Delivering</li>
+                            <li class="option on-hold block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;" id="OnHoldOrders">On Hold</li>
+                            <li class="option canceled block h-full text-center text-gray-500 cursor-pointer" style="width: 20%;" id="CancelledOrders">Canceled</li>
                         </ul>
                         <span class="underline-slide absolute bottom-0 left-0 h-1 bg-yellow-400 transform transition-all duration-500 rounded-xl" style="width: 20%;"></span>
                     </div>
@@ -613,11 +613,11 @@ if (!isset($_SESSION['sessionId'])) {
 
                     <!-- Table -->
                     <table class="rounded-t-lg w-full bg-transparent text-gray-800 mt-8 after-orders-loader">
-                        <tr class="text-left border-b border-gray-500">
+                        <tr class="text-left border-b border-gray-500 text-sm 2xl:text-base">
                             <th class="px-4 py-3">Order ID</th>
                             <th class="px-4 py-3">Customer</th>
                             <th class="px-4 py-3">Order</th>
-                            <th class="px-4 py-3">Extra notes</th>
+                            <th class="px-4 py-3">Extra Fillings</th>
                             <th class="px-4 py-3">Total</th>
                             <th class="px-4 py-3">Delivery Method</th>
                             <th class="px-4 py-3">Status</th>

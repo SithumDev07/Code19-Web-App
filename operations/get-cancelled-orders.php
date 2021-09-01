@@ -18,7 +18,7 @@ function Render($conn)
     </tr>
     <?php
 
-    $sql = "SELECT * FROM customer_order ORDER BY id DESC;";
+    $sql = "SELECT * FROM customer_order WHERE status='Cancelled' ORDER BY id DESC;";
     $results = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($results);
 
