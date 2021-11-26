@@ -545,7 +545,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                 <!-- Single Order Display -->
                 <div class="single-order-container glass rounded-t-3xl absolute top-24 left-0 z-base-search right-0 hidden h-full w-full overscroll-y-auto">
-                    
+
                 </div>
 
                 <!-- Orders -->
@@ -754,9 +754,13 @@ if (!isset($_SESSION['sessionId'])) {
                                                         ?></td>
                                 <td class="px-4 py-3">Rs.<?php echo $allData[$i][3]; ?></td>
                                 <td class="px-4 py-3 text-center capitalize"><?php echo $allData[$i][2]; ?></td>
-                                <td class="px-4 py-3"><button class="px-3 py-2 <?php if($allData[$i][4] == "Cancelled") { echo "bg-red-500 bg-opacity-80"; } else { echo "bg-green-400"; } ?> rounded text-gray-200 capitalize"><?php if ($allData[$i][4] == 'active') {
-                                                                                                                                    echo "Accept";
-                                                                                                                                } else echo $allData[$i][4]; ?></button></td>
+                                <td class="px-4 py-3"><button class="px-3 py-2 <?php if ($allData[$i][4] == "Cancelled") {
+                                                                                    echo "bg-red-500 bg-opacity-80";
+                                                                                } else {
+                                                                                    echo "bg-green-400";
+                                                                                } ?> rounded text-gray-200 capitalize"><?php if ($allData[$i][4] == 'active') {
+                                                                                                                                                                                                                                    echo "Accept";
+                                                                                                                                                                                                                                } else echo $allData[$i][4]; ?></button></td>
                             </tr>
                         <?php
 

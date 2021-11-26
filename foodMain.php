@@ -693,13 +693,15 @@ if (isset($_GET['clear'])) {
                                 if ($row['photo'] != null) {
                     ?>
                                     <button class="w-14 h-14 rounded-full overflow-hidden transform transition active:scale-75 duration-150 hover:scale-105" id="CustomerProfile">
-                                        <img src="./photo_uploads/customers/<?php echo $row['photo']; ?>" class="w-full h-full object-cover" alt="">
+                                        <img src="./photo_uploads/customers/<?php echo $row['photo']; ?>" class="w-full h-full object-cover" alt="Customer Profile Picture">
                                     </button>
                                 <?php
                                 } else {
                                 ?>
                                     <button class="w-14 h-14 rounded-full overflow-hidden transform transition active:scale-75 duration-150 hover:scale-105" id="CustomerProfile">
-                                        <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" class="w-full h-full object-cover" alt="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
                                     </button>
                         <?php
                                 }
@@ -708,7 +710,9 @@ if (isset($_GET['clear'])) {
                     } else {
                         ?>
                         <button class="w-14 h-14 rounded-full overflow-hidden transform transition active:scale-75 duration-150 hover:scale-105" id="CustomerProfile">
-                            <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" class="w-full h-full object-cover" alt="">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                         </button>
                     <?php
                     }
@@ -774,12 +778,17 @@ if (isset($_GET['clear'])) {
         </header>
 
         <section class="welcome-banner xl:container xl:mx-auto">
-            <div class="main-section-banner h-44 rounded-lg flex flex-col px-10 py-5" style="background-image: url('https://i.ibb.co/JnmTD12/banner.jpg'); background-position: center; background-size: cover;">
-                <h2 class="text-gray-100 text-xl">Hello Sara!</h2>
-                <h4 class="text-base text-gray-200 flex my-2">Get free delivery for every <p class="text-gray-900 mx-2">Rs500</p> purchase.</h4>
-                <div class="button bg-white w-36 h-10 rounded-full flex items-center justify-center cursor-pointer">
-                    <h4 class="text-yellow-500">Learn More</h4>
+            <div class="main-section-banner bg-gray-900 h-52 rounded-lg flex flex-col px-10 py-5 relative overflow-hidden">
+                <?php // TODO Change Customer Name Here 
+                ?>
+                <div class="absolute top-0 left-0 right-0 bottom-0 h-full w-full overflow-hidden">
+                    <img class="object-contain h-full w-full transform translate-x-1/4" src="./assets/featured/image2.png" alt="Featured Black Friday">
                 </div>
+                <h2 class="text-gray-100 text-xl">Hello Sara!</h2>
+                <h4 class="w-1/2 text-2xl text-gray-200 my-2">It's Black Friday, Win Execlusive Offers. Up to <span class="text-red-600 font-black mx-1">40%</span> Discounts.</h4>
+                <button class="button mt-2 bg-white text-yellow-500 font-bold cursor-pointer w-36 h-10 rounded-full flex items-center justify-center transform transition hover:bg-yellow-500 duration-300 hover:text-gray-50">
+                    Explore
+                </button>
             </div>
         </section>
 

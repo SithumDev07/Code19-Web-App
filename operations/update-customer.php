@@ -51,18 +51,55 @@ if (isset($_POST['sessionId'])) {
         }
     }
 
+    function updateMobile($conn, $id, $mobile)
+    {
+        //* Retrieving Current Mobile Number
+        $sql = "SELECT * FROM customer_phone WHERE customer_id = " . $id . ";";
+        $results = mysqli_query($conn, $sql);
+        $resultCheck = mysqli_num_rows($results);
 
+        if ($resultCheck > 0) {
+            $sql = "UPDATE customer_phone SET phone = ? WHERE customer_id = ?;";
+            $statement = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($statement, $sql)) {
+                echo "SQL Error while updating the phone number";
+                exit();
+            } else {
+                $bindFailed = mysqli_stmt_bind_param($statement, "si", $mobile, $id);
+                if ($bindFailed === false) {
+                    echo htmlspecialchars($statement->error);
+                    exit();
+                }
+                mysqli_stmt_execute($statement);
+            }
+        } else {
+            $sql = "INSERT INTO customer_phone(customer_id, phone) VALUES (?, ?);";
+            $statement = mysqli_stmt_init($conn);
+
+            if (!mysqli_stmt_prepare($statement, $sql)) {
+                echo "sql error";
+                exit();
+            } else {
+                $bindFailed = mysqli_stmt_bind_param($statement, 'is', $id, $mobile);
+                if ($bindFailed === false) {
+                    echo htmlspecialchars($statement->error);
+                    exit();
+                }
+                mysqli_stmt_execute($statement);
+            }
+        }
+    }
 
     if (empty($id) || empty($fullname)) {
         echo "EMPTY FIELDS $id $fullname";
         exit();
     } else {
 
-        if(empty($address)) {
+        if (empty($address)) {
             $address = " ";
         }
 
-        if(empty($phone)) {
+        if (empty($phone)) {
             $phone = " ";
         }
 
@@ -128,6 +165,7 @@ if (isset($_POST['sessionId'])) {
 
                             // ? Calling Update Address Function
                             updateAddress($conn, $id, $address);
+                            updateMobile($conn, $id, $phone);
 
                             echo "successfully updated with image";
                             exit();
@@ -160,6 +198,7 @@ if (isset($_POST['sessionId'])) {
 
                 // ? Calling Update Address Function
                 updateAddress($conn, $id, $address);
+                updateMobile($conn, $id, $phone);
 
                 echo "successfully updated without image";
                 exit();
