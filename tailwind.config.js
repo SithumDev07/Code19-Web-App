@@ -3,7 +3,14 @@ module.exports = {
   // purge: { enabled: true, content: ['./index.php', './checkout.php', './customizeFoodMenu.php', './dashboard.php', './foodMain.php', './login.php', './signup.php', './page_not_found.php'], },
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        'es': '0.0125rem',
+      },
+      fontFamily: {
+        'Aventra': ['Aventra']
+      },
+    },
     backgroundColor: theme => ({
       ...theme('colors'),
       'primary': '#343DFF',

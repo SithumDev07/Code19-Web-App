@@ -661,6 +661,7 @@ if (isset($_GET['clear'])) {
             <ul class="flex flex-1 justify-center">
                 <li><a href="#" class="mr-10 font-bold">Today</a></li>
                 <li><a href="#" class="mr-10">How to order?</a></li>
+                <li><a href="/code19/black-mafia-special.php" class="mr-10 relative">Black Mafia Special <div class="bg-red-600 px-2 absolute -top-5 -right-4 rounded-3xl text-gray-50" style="font-size: x-small; padding-top: 0.25rem; padding-bottom: 0.25rem;">new</div> </a></li>
                 <li><a href="#" class="mr-10">FAQ</a></li>
                 <li><a href="#" class="mr-10">Contact</a></li>
             </ul>
@@ -757,14 +758,14 @@ if (isset($_GET['clear'])) {
                     </svg></a>
 
                 <div class="flex mt-8">
-                    <div class="small-cards w-20 h-24 rounded-md bg-white mr-2">
+                    <div class="small-cards w-20 h-24 rounded-md bg-white mr-2 bg-opacity-50">
                         <img src="./assets/featured/featured-burger.png" class="w-full h-full object-contain" alt="">
                     </div>
-                    <div class="small-cards w-20 h-24 rounded-md bg-white mr-2">
-                        <img src="./assets/featured/featured-burger.png" class="w-full h-full object-contain" alt="">
+                    <div class="small-cards w-20 h-24 rounded-md bg-white mr-2 bg-opacity-50">
+                        <img src="./assets/featured/7.png" class="w-full h-full object-contain" alt="">
                     </div>
-                    <div class="small-cards w-20 h-24 rounded-md bg-white">
-                        <img src="./assets/featured/featured-burger.png" class="w-full h-full object-contain" alt="">
+                    <div class="small-cards w-20 h-24 rounded-md bg-white bg-opacity-50">
+                        <img src="./assets/featured/burger2.png" class="w-full h-full object-contain" alt="">
                     </div>
                 </div>
             </div>
@@ -779,13 +780,26 @@ if (isset($_GET['clear'])) {
 
         <section class="welcome-banner xl:container xl:mx-auto">
             <div class="main-section-banner bg-gray-900 h-52 rounded-lg flex flex-col px-10 py-5 relative overflow-hidden">
-                <?php // TODO Change Customer Name Here 
-                ?>
+
                 <div class="absolute top-0 left-0 right-0 bottom-0 h-full w-full overflow-hidden">
                     <img class="object-contain h-full w-full transform translate-x-1/4" src="./assets/featured/image2.png" alt="Featured Black Friday">
                 </div>
-                <h2 class="text-gray-100 text-xl">Hello Sara!</h2>
-                <h4 class="w-1/2 text-2xl text-gray-200 my-2">It's Black Friday, Win Execlusive Offers. Up to <span class="text-red-600 font-black mx-1">40%</span> Discounts.</h4>
+                <?php // TODO Change Customer Name Here 
+                $sql = "SELECT * FROM customer WHERE id = " . $_SESSION['sessionId'] . ";";
+                $results = mysqli_query($conn, $sql);
+                $resultCheck = mysqli_num_rows($results);
+
+                if ($resultCheck > 0) {
+                    while ($row = mysqli_fetch_assoc($results)) {
+                        if ($row['name'] != null) {
+                ?>
+                            <h2 class="text-gray-100 text-xl">Hello, <?php echo $row['name']; ?>!</h2>
+                <?php
+                        }
+                    }
+                }
+                ?>
+                <h4 class="w-1/2 text-2xl text-gray-200 my-2">It's <span class="font-extrabold text-red-500">Black Friday</span>, Win Execlusive Offers. Up to <span class="text-red-600 font-black mx-1">40%</span> Discounts.</h4>
                 <button class="button mt-2 bg-white text-yellow-500 font-bold cursor-pointer w-36 h-10 rounded-full flex items-center justify-center transform transition hover:bg-yellow-500 duration-300 hover:text-gray-50">
                     Explore
                 </button>
@@ -797,51 +811,27 @@ if (isset($_GET['clear'])) {
             <h1 class="text-3xl font-bold text-gray-700">Menu Category</h1>
             <!-- Category Cards -->
             <div class="cat-cards flex mt-6">
-                <div class="cursor-pointer card mr-5 flex flex-col items-center py-2 w-36 h-44 bg-gray-50 rounded-xl shadow-lg px-2">
-                    <div class="w-14 h-14 my-2">
-                        <img src="./assets/icons/Untitled-1.png" class="w-full h-full object-contain" alt="food-icon">
+                <?php
+                $categories = array();
+                array_push($categories, 'Shipwreck Burger');
+                array_push($categories, 'The Good Fellas');
+                array_push($categories, "Boss's Daughter");
+                array_push($categories, "Machine Gun Tommy");
+                array_push($categories, "The Big Poppa");
+                foreach ($categories as $category) {
+                ?>
+                    <div class="cursor-pointer card mr-5 flex flex-col items-center py-2 w-36 h-44 relative bg-gray-50 rounded-xl shadow-sm hover:shadow-md px-2">
+                        <div class="w-14 h-14 my-2">
+                            <img src="./assets/icons/Untitled-1.png" class="w-full h-full object-contain" alt="food-icon">
+                        </div>
+                        <h3 class="text-gray-700 text-center text-base font-bold"><?php echo $category; ?></h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute bottom-2 left-1/2 transform -translate-x-1/2 mt-2 h-8 w-8 rounded-full p-2 bg-yellow-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
                     </div>
-                    <h3 class="text-gray-700 text-center text-base font-bold">Shipwreck Burger</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mt-2 h-8 w-8 rounded-full p-2 bg-yellow-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </div>
-                <div class="cursor-pointer card mr-5 flex flex-col items-center py-2 w-36 h-44 bg-gray-50 rounded-xl shadow-lg px-2">
-                    <div class="w-14 h-14 my-2">
-                        <img src="./assets/icons/Untitled-1.png" class="w-full h-full object-contain" alt="food-icon">
-                    </div>
-                    <h3 class="text-gray-700 text-center text-base font-bold">Shipwreck Burger</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mt-2 h-8 w-8 rounded-full p-2 bg-yellow-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </div>
-                <div class="cursor-pointer card mr-5 flex flex-col items-center py-2 w-36 h-44 bg-gray-50 rounded-xl shadow-lg px-2">
-                    <div class="w-14 h-14 my-2">
-                        <img src="./assets/icons/Untitled-1.png" class="w-full h-full object-contain" alt="food-icon">
-                    </div>
-                    <h3 class="text-gray-700 text-center text-base font-bold">Shipwreck Burger</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mt-2 h-8 w-8 rounded-full p-2 bg-yellow-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </div>
-                <div class="cursor-pointer card mr-5 flex flex-col items-center py-2 w-36 h-44 bg-gray-50 rounded-xl shadow-lg px-2">
-                    <div class="w-14 h-14 my-2">
-                        <img src="./assets/icons/Untitled-1.png" class="w-full h-full object-contain" alt="food-icon">
-                    </div>
-                    <h3 class="text-gray-700 text-center text-base font-bold">Shipwreck Burger</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mt-2 h-8 w-8 rounded-full p-2 bg-yellow-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </div>
-                <div class="cursor-pointer card mr-5 flex flex-col items-center py-2 w-36 h-44 bg-gray-50 rounded-xl shadow-lg px-2">
-                    <div class="w-14 h-14 my-2">
-                        <img src="./assets/icons/Untitled-1.png" class="w-full h-full object-contain" alt="food-icon">
-                    </div>
-                    <h3 class="text-gray-700 text-center text-base font-bold">Shipwreck Burger</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mt-2 h-8 w-8 rounded-full p-2 bg-yellow-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </div>
+                <?php
+                }
+                ?>
             </div>
 
 

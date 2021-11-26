@@ -22741,6 +22741,10 @@ select {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.font-Aventra {
+  font-family: Aventra;
+}
+
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
@@ -22804,6 +22808,10 @@ select {
 .text-9xl {
   font-size: 8rem;
   line-height: 1;
+}
+
+.text-es {
+  font-size: 0.0125rem;
 }
 
 .font-thin {
@@ -32663,6 +32671,12 @@ select {
 
 .content-none {
   content: none;
+}
+
+@font-face {
+  font-family: "Aventra";
+
+  src: url("../assets/fonts/Averta.otf");
 }
 
 @media (min-width: 640px) {
@@ -54589,6 +54603,10 @@ select {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .sm\:font-Aventra {
+    font-family: Aventra;
+  }
+
   .sm\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -54652,6 +54670,10 @@ select {
   .sm\:text-9xl {
     font-size: 8rem;
     line-height: 1;
+  }
+
+  .sm\:text-es {
+    font-size: 0.0125rem;
   }
 
   .sm\:font-thin {
@@ -86085,6 +86107,10 @@ select {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .md\:font-Aventra {
+    font-family: Aventra;
+  }
+
   .md\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -86148,6 +86174,10 @@ select {
   .md\:text-9xl {
     font-size: 8rem;
     line-height: 1;
+  }
+
+  .md\:text-es {
+    font-size: 0.0125rem;
   }
 
   .md\:font-thin {
@@ -117581,6 +117611,10 @@ select {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .lg\:font-Aventra {
+    font-family: Aventra;
+  }
+
   .lg\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -117644,6 +117678,10 @@ select {
   .lg\:text-9xl {
     font-size: 8rem;
     line-height: 1;
+  }
+
+  .lg\:text-es {
+    font-size: 0.0125rem;
   }
 
   .lg\:font-thin {
@@ -149077,6 +149115,10 @@ select {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .xl\:font-Aventra {
+    font-family: Aventra;
+  }
+
   .xl\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -149140,6 +149182,10 @@ select {
   .xl\:text-9xl {
     font-size: 8rem;
     line-height: 1;
+  }
+
+  .xl\:text-es {
+    font-size: 0.0125rem;
   }
 
   .xl\:font-thin {
@@ -180573,6 +180619,10 @@ select {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .\32xl\:font-Aventra {
+    font-family: Aventra;
+  }
+
   .\32xl\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -180636,6 +180686,10 @@ select {
   .\32xl\:text-9xl {
     font-size: 8rem;
     line-height: 1;
+  }
+
+  .\32xl\:text-es {
+    font-size: 0.0125rem;
   }
 
   .\32xl\:font-thin {
