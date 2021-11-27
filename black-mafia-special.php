@@ -22,21 +22,24 @@
 <body class="w-screen overflow-x-hidden font-Aventra bg-black">
     <main>
         <header class="fixed top-0 left-0 right-0 z-50">
-            <nav class="relative w-screen h-28 flex items-center justify-center bg-black text-white px-24">
+            <nav class="relative w-screen h-28 flex items-center justify-end lg:justify-center bg-black text-white xl:px-24">
                 <a href="/code19/foodMain.php" class="absolute top-1/2 transform -translate-y-1/2 left-12 p-2 rounded-full bg-gray-100 text-gray-800 transition duration-200 hover:bg-red-500 hover:text-gray-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                     </svg>
                 </a>
-                <ul class="flex items-center justify-between w-1/2 font-Aventra transform transition duration-200">
-                    <li><a href="#peakyDeals">Peaky Deals</a></li>
-                    <li class="relative">
+                <ul class="hidden md:flex items-center justify-between lg:w-1/2 font-Aventra transform transition duration-200">
+                    <li class="mr-4 lg:mr-0"><a href="#peakyDeals">Peaky Deals</a></li>
+                    <li class="relative mr-4 lg:mr-0">
                         <a href="#blackFriday">Black Friday <div class="bg-red-600 px-2 absolute -top-5 -right-4 rounded-3xl text-gray-50" style="font-size: x-small; padding-top: 0.25rem; padding-bottom: 0.25rem;">new</div></a>
                     </li>
-                    <li><a href="#tag">Tag 'n Win</a></li>
+                    <li class="mr-4 lg:mr-0"><a href="#tag">Tag 'n Win</a></li>
                     <li><a href="#mafia">What Mafia Says?</a></li>
                 </ul>
-                <a href="/gallery" class="px-3 py-2 bg-red-600 rounded-full transform transition duration-200 hover:bg-red-700 hover:bg-opacity-70 ml-12">Gallery</a>
+                <div class="md:hidden w-36 h-36 flex items-center justify-center">
+                    <img class="featured-clipped" src="./assets/logo/logo.jpg" alt="Logo">
+                </div>
+                <a href="/gallery" class="ml-5 mr-8 lg:mr-0 px-3 py-2 bg-red-600 rounded-full transform transition duration-200 hover:bg-red-700 hover:bg-opacity-70 lg:ml-12">Gallery</a>
             </nav>
         </header>
         <section class="bg-black w-screen mt-28 n">
@@ -155,7 +158,7 @@
                 </div>
             </div>
         </section>
-        <footer class="container mx-auto bg-gray-50 mt-20 py-16">
+        <footer class="container mx-auto bg-gray-50 mt-20 py-8 lg:py-16">
             <div class="flex flex-wrap -mx-1 overflow-hidden">
                 <div class="my-1 px-1 w-full overflow-hidden md:w-1/3 flex flex-col items-center justify-center">
                     <h1 class="text-3xl tracking-wide font-semibold"><span class="text-red-500 font-bold">Burger</span> Mafia</h1>
@@ -163,7 +166,7 @@
                     <p id="footerCopyright"></p>
                 </div>
                 <div class="bg-black my-1 px-1 w-full overflow-hidden md:w-1/3 flex flex-col items-center justify-center">
-                    <p class="text-center px-4 my-auto font-semibold text-gray-50 text-lg">We are proud to announce that Burger Mafia is now OPEN for delivery Mon-Sun from 11.30am - 9.30pm</p>
+                    <p class="text-center py-6 md:py-0 px-4 my-auto font-semibold text-gray-50 text-lg">We are proud to announce that Burger Mafia is now OPEN for delivery Mon-Sun from 11.30am - 9.30pm</p>
                 </div>
                 <div class="my-1 px-1 w-full overflow-hidden md:w-1/3 flex flex-col items-center justify-center">
                     <ul class="flex flex-col items-start justify-between h-full py-8 font-Aventra transform transition duration-200">
