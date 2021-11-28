@@ -37,7 +37,12 @@ if (isset($_POST['final'])) {
                 if ($fileSize < 3000000) {
                     $fileNameNew = uniqid('', true) . "." . $fileActualExt;
                     $fileDestination = '../photo_uploads/users/' . $fileNameNew;
-                    move_uploaded_file($fileTmpName, $fileDestination);
+                    $moveError = move_uploaded_file($fileTmpName, $fileDestination);
+
+                    if(!$moveError){
+                        header("Location: ../index.php?signup.php&error=move_error");
+                        exit();
+                    }
     
                     $sql = "INSERT INTO staff_member(user_name, name, password, email, address, DOB, position, shift, personal_no, LAN_no, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                     $statement = mysqli_stmt_init($conn);
