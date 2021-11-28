@@ -28,7 +28,7 @@ if (isset($_POST['final'])) {
 
     $allowed = array('jpg', 'jpeg', 'png', 'pdf');
 
-    if (empty($username) || empty($email) || empty($password) || empty($firstname) || empty($lastname) || empty($address) || empty($birthday) || empty($mobile) || empty($landline) || empty($position) || empty($shift)) {
+    if (empty($username) || empty($email) || empty($password) || empty($firstname) || empty($lastname) || empty($address) || empty($birthday) || empty($mobile) || empty($position) || empty($shift)) {
         header("Location: ../signup.php?error=empty_fields");
         exit();
     } else {
@@ -48,8 +48,16 @@ if (isset($_POST['final'])) {
                     } else {
                         $fullName = $firstname . ' ' . $lastname;
                         $hashPass = password_hash($password, PASSWORD_DEFAULT);
+
+                        if(empty($landline)){
+                            $landline = "";
+                        }
                         mysqli_stmt_bind_param($statement, 'sssssssssss', $username, $fullName, $hashPass, $email, $address, $birthday, $position, $shift, $mobile, $landline, $fileNameNew);
                         mysqli_stmt_execute($statement);
+                        // $error = $statement->error;
+
+                        // header("Location: ../index.php?&error=" . $error);
+                        // exit();
 
 
                         $sql = "SELECT id FROM staff_member WHERE user_name = '" . $username . "';";
@@ -66,7 +74,7 @@ if (isset($_POST['final'])) {
                         session_start();
                         $_SESSION['sessionId'] = $userKey;
                         $_SESSION['sessionUser'] = $username;
-                        header("Location: ../dashboard.php?success=registered");
+                        header("Location: ../dashboard.php?success=registered?" . $_SESSION['sessionId']);
                         exit();
                     }
                 

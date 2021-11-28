@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "admin";
+$password = "admin";
 $dbname = "pap_s_kitchen";
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error){
