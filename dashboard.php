@@ -459,26 +459,78 @@ if (!isset($_SESSION['sessionId'])) {
                                 </svg>
                             </div>
                             <div class="circles my-2 flex">
-                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                </div>
-                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1627754939597-ba460af0844f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                </div>
-                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1628258946431-b99fbe144787?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                </div>
+                                <?php 
+                                    //TODO
+                                    $sql = "SELECT * FROM staff_member WHERE shift='Day' LIMIT 6;";
+                                    $results = mysqli_query($conn, $sql);
+                                    $resultCheck = mysqli_num_rows($results);
+
+                                    if ($resultCheck > 0) {
+                                        while ($row = mysqli_fetch_assoc($results)) {
+
+
+
+                                            if($row['photo'] == null){
+                                                ?>
+                                                    <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                                        <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="Day Crew">
+                                                    </div>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                    <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                                        <img class="rounded-full w-full h-full object-cover" src="./photo_uploads/users/<?php echo $row['photo']; ?>" alt="Day Crew">
+                                                    </div>
+                                                <?php
+                                            }
+                                        }
+                                    } else {
+                                        //*  Do nothing
+                                    }
+                                ?>
                             </div>
                             <div class="info flex items-center justify-between">
-                                <div class="w-12 h-12 rounded-md bg-white shadow-md flex items-center justify-center text-xs font-bold text-gray-700 mr-2 p-1 text-center">
-                                    64 More
+                                <div class="py-2 px-2 rounded-md bg-white shadow-md flex items-center justify-center text-xs font-bold text-gray-700 mr-2 text-center">
+                                <?php 
+                                    //TODO
+                                    $sql = "SELECT count(id) AS count FROM staff_member;";
+                                    $results = mysqli_query($conn, $sql);
+                                    $resultCheck = mysqli_num_rows($results);
+
+                                    if ($resultCheck > 0) {
+                                        while ($row = mysqli_fetch_assoc($results)) {
+                                            echo $row['count'] - 6 . " more...";
+                                        }
+                                    } else {
+                                        //*  Do nothing
+                                    }
+                                ?>
                                 </div>
-                                <div class="info text-xs text-gray-700">
-                                    Lorem ipsum dolor sit amet.
+                                <div class="info text-xs text-gray-700 font-semibold">
+                                    Based on shift
                                 </div>
                             </div>
                         </div>
                         <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            <div>
+                                <h1>Night Crew</h1>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div class="circles">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="info">
+                                <div>
+                                    64 More
+                                </div>
+                                <div class="info">
+                                    Lorem ipsum dolor sit amet.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
                             <div>
                                 <h1>Day Crew</h1>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -496,26 +548,7 @@ if (!isset($_SESSION['sessionId'])) {
                                     Lorem ipsum dolor sit amet.
                                 </div>
                             </div>
-                        </div>
-                        <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                            <div>
-                                <h1>Day Crew</h1>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                            </div>
-                            <div class="circles">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="info">
-                                <div>
-                                    64 More
-                                </div>
-                                <div class="info">
-                                    Lorem ipsum dolor sit amet.
-                                </div>
-                            </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="charts mt-10 flex p-3 mb-36">
