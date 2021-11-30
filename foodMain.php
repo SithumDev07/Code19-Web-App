@@ -201,7 +201,7 @@ if (isset($_GET['clear'])) {
 </head>
 
 <body>
-    <!-- // ? Reister -->
+    <!-- // ? Register -->
     <div class="w-full h-screen fixed glass-dark py-6 px-12 transform scale-0 duration-200 signup-form">
         <h1 class="text-6xl md:text-9xl font-extrabold selection:bg-red-500" style="-webkit-text-stroke: 2px; -webkit-text-stroke-color: rgb(229, 231, 235); color: transparent;">Signup</h1>
 
@@ -235,6 +235,11 @@ if (isset($_GET['clear'])) {
                             <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                     </button>
+
+                    <div class="flex items-center text-gray-700 text-lg mt-5">
+                        <p>Already have an account?</p>
+                        <a class="text-blue-600 font-bold ml-3" href="./foodMain.php?login">Login</a>
+                    </div>
                 </div>
 
                 <div class="err-message hidden text-sm xl:text-base absolute -top-10 xl:bottom-3 xl:top-auto text-gray-200 bg-red-400 px-3 py-3 rounded-md">
@@ -785,16 +790,19 @@ if (isset($_GET['clear'])) {
                     <img class="object-contain h-full w-full transform translate-x-1/4" src="./assets/featured/image2.png" alt="Featured Black Friday">
                 </div>
                 <?php // TODO Change Customer Name Here 
-                $sql = "SELECT * FROM customer WHERE id = " . $_SESSION['sessionId'] . ";";
-                $results = mysqli_query($conn, $sql);
-                $resultCheck = mysqli_num_rows($results);
 
-                if ($resultCheck > 0) {
-                    while ($row = mysqli_fetch_assoc($results)) {
-                        if ($row['name'] != null) {
+                if (isset($_SESSION['sessionId'])) {
+                    $sql = "SELECT * FROM customer WHERE id = " . $_SESSION['sessionId'] . ";";
+                    $results = mysqli_query($conn, $sql);
+                    $resultCheck = mysqli_num_rows($results);
+
+                    if ($resultCheck > 0) {
+                        while ($row = mysqli_fetch_assoc($results)) {
+                            if ($row['name'] != null) {
                 ?>
-                            <h2 class="text-gray-100 text-xl">Hello, <?php echo $row['name']; ?>!</h2>
+                                <h2 class="text-gray-100 text-xl">Hello, <?php echo $row['name']; ?>!</h2>
                 <?php
+                            }
                         }
                     }
                 }
@@ -910,6 +918,9 @@ if (isset($_GET['clear'])) {
     ?>
     <script src="./scripts/cart.js"></script>
     <script src="./scripts/customer-profile.js"></script>
+    <script>
+        console.log("Works");
+    </script>
 </body>
 
 </html>

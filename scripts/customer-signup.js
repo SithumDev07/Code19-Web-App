@@ -71,6 +71,7 @@ $(document).ready(function() {
 
 
     $("#LoginCustomer").click(function(e) {
+        console.log("It Working here");
         e.preventDefault();
         const form_data = new FormData();
         const username = $("#UsernameCustomerLogin").val();

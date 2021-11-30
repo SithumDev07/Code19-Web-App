@@ -83,7 +83,7 @@ $resultCheck = mysqli_num_rows($results);
 
             <div class="w-80 h-64 rounded-lg overflow-hidden relative cursor-pointer profile-picture p-1 border-2 foodImageContainer shadow-2xl">
                 <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl z-10"></i>
-                <img id="foodUploadedPhoto" class="rounded-lg opacity-80 w-full h-full object-cover" src="./photo_uploads/users/Mayuko.jpg" alt="Food Photo">
+                <img id="foodUploadedPhoto" class="rounded-lg opacity-80 w-full h-full object-cover" src="./photo_uploads/users/burger.jpg" alt="Food Photo">
                 <input type="file" name="foodUpload" id="foodPhotoUpload">
             </div>
 
@@ -106,33 +106,33 @@ $resultCheck = mysqli_num_rows($results);
     <h2 class="text-3xl text-gray-400 font-semibold my-4 px-12 hidden topic-ingredient-food">How much need from each ingredient?</h2>
 
     <div class="items-end hidden food-ingredients-inputs px-12">
-            <input type="text" placeholder="Selected Ingredient Name" class="flex-1 rounded-md bg-transparent mr-5" id="IngredientNameFoodDisabled" disabled name="name">
-            <div class=" flex items-center">
-                <div class="flex flex-col">
-                    <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="Quantity">
-                        Quantity to make
-                    </label>
-                    <input type="number" placeholder="Quantity" class="mx-4 bg-transparent rounded-md transform transition-colors duration-300" id="IngredientQuantityFood" name="quantity">
-                </div>
-            </div>
-            <div class="flex flex-col ml-2">
-                <label class="block text-gray-700 text-sm font-bold mr-2 mb-2" for="metricType">
-                    Type
+        <input type="text" placeholder="Selected Ingredient Name" class="flex-1 rounded-md bg-transparent mr-5" id="IngredientNameFoodDisabled" disabled name="name">
+        <div class=" flex items-center">
+            <div class="flex flex-col">
+                <label class="block text-gray-700 text-sm font-bold mb-2 mx-4" for="Quantity">
+                    Quantity to make
                 </label>
-                <select class="px-3 py-2 w-auto rounded bg-transparent" id="IngredientMetricTypeFood" name="metricType">
-
-                    <option value="g">g</option>
-                    <option value="ml">ml</option>
-                    <option value="pieces">pieces</option>
-                </select>
+                <input type="number" placeholder="Quantity" class="mx-4 bg-transparent rounded-md transform transition-colors duration-300" id="IngredientQuantityFood" name="quantity">
             </div>
-            <button class="flex items-center text-green-500 mx-5 mb-0 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="AddtoListIngredientFood" type="submit" name="addtolist">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Add to list
-            </button>
         </div>
+        <div class="flex flex-col ml-2">
+            <label class="block text-gray-700 text-sm font-bold mr-2 mb-2" for="metricType">
+                Type
+            </label>
+            <select class="px-3 py-2 w-auto rounded bg-transparent" id="IngredientMetricTypeFood" name="metricType">
+
+                <option value="g">g</option>
+                <option value="ml">ml</option>
+                <option value="pieces">pieces</option>
+            </select>
+        </div>
+        <button class="flex items-center text-green-500 mx-5 mb-0 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="AddtoListIngredientFood" type="submit" name="addtolist">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Add to list
+        </button>
+    </div>
 
     <div class="flex-col my-5 px-12 hidden selectedTextFood">
         <h2 class="text-2xl text-gray-400 font-semibold mb-4">Selected</h2>

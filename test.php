@@ -1,11 +1,14 @@
-<?php
+<html lang="en">
 
-require './config.php';
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-// TODO reset isset function
-if (isset($_GET['id'])) {
-} else {
-    // header("Location: ../dashboard.php?error=accessforbidden");
-    echo "main error";
-    exit();
-}
+<body>
+    <form action="./operations/test.php"></form>
+</body>
+
+</html>

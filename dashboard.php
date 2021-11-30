@@ -17,11 +17,12 @@ if (!isset($_SESSION['sessionId'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Manage Everything - Gain more control over your business</title>
     <link rel="stylesheet" href="./public/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <style>
         body {
             background-color: #DFE1EE;
@@ -237,6 +238,18 @@ if (!isset($_SESSION['sessionId'])) {
             left: unset;
             right: 0.3rem;
         }
+
+        #chart {
+            max-width: 650px;
+        }
+
+        #yearSales {
+            max-width: 650px;
+        }
+
+        .apexcharts-toolbar {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -382,7 +395,11 @@ if (!isset($_SESSION['sessionId'])) {
                 </div>
 
                 <div class="buttons flex">
-                    <a href="#" class="bg-white rounded-full p-2 shadow-lg transform transition duration-200 active:scale-75 relative">
+                    <?php
+                    // TODO : Future Implementations
+
+                    ?>
+                    <!-- <a href="#" class="bg-white rounded-full p-2 shadow-lg transform transition duration-200 active:scale-75 relative">
                         <div class="absolute top-1 right-2 w-2 h-2 rounded-full bg-red-500 z-50"></div>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -392,13 +409,13 @@ if (!isset($_SESSION['sessionId'])) {
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
-                    </a>
+                    </a> -->
                     <a href="./dashboard.php" class="bg-white rounded-full p-2 shadow-lg ml-2 transform transition duration-200 active:scale-75">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                         </svg>
                     </a>
-                    <a href="#" class="bg-white rounded-full p-2 shadow-lg ml-2 transform transition duration-200 active:scale-75">
+                    <!-- <a href="#" class="bg-white rounded-full p-2 shadow-lg ml-2 transform transition duration-200 active:scale-75">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
@@ -407,7 +424,7 @@ if (!isset($_SESSION['sessionId'])) {
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                         </svg>
-                    </a>
+                    </a> -->
                 </div>
             </div>
             <div class="relative h-screen container mx-auto">
@@ -417,7 +434,6 @@ if (!isset($_SESSION['sessionId'])) {
                 <div class="moving-part Dashboard glass rounded-3xl p-5 overflow-y-auto h-full absolute top-0 right-0 left-0 z-base">
                     <div class="greeting flex w-full justify-between items-center">
                         <?php
-                        // $sql = "SELECT * FROM staff_member WHERE user_name=" . $_SESSION['sessionUser'] . ";";
                         $sql = "SELECT * FROM staff_member WHERE user_name='" . $_SESSION['sessionUser'] . "';";
                         $results = mysqli_query($conn, $sql);
                         $resultCheck = mysqli_num_rows($results);
@@ -439,15 +455,7 @@ if (!isset($_SESSION['sessionId'])) {
                         }
                         ?>
 
-                        <div class="flex items-center">
-                            <a href="#" class="text-yellow-500 font-bold">View All</a>
-                            <button class="flex ml-5 px-4 py-3 bg-black text-gray-200 rounded-full hover:shadow-xl transform transition duration-150 active:scale-95">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Add Widget
-                            </button>
-                        </div>
+
                     </div>
                     <div class="cards flex flex-wrap mt-5 2xl:mt-8">
                         <!-- Random color array -->
@@ -459,86 +467,155 @@ if (!isset($_SESSION['sessionId'])) {
                                 </svg>
                             </div>
                             <div class="circles my-2 flex">
-                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                </div>
-                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1627754939597-ba460af0844f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                </div>
-                                <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                    <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1628258946431-b99fbe144787?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                </div>
+
+                                <?php
+                                $sql = "SELECT photo FROM staff_member WHERE shift = 'Day' LIMIT 6;";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+
+                                if ($resultCheck > 0) {
+                                    while ($row = mysqli_fetch_assoc($results)) {
+
+                                        if ($row['photo'] == null) {
+                                ?>
+                                            <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                                <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="Day Crew">
+                                            </div>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                                <img class="rounded-full w-full h-full object-cover" src="./photo_uploads/users/<?php echo $row['photo']; ?>" alt="Day Crew">
+                                            </div>
+                                <?php
+                                        }
+                                    }
+                                } else {
+                                    header("Location: ../signup.php?error=restricted");
+                                    exit();
+                                }
+                                ?>
                             </div>
                             <div class="info flex items-center justify-between">
-                                <div class="w-12 h-12 rounded-md bg-white shadow-md flex items-center justify-center text-xs font-bold text-gray-700 mr-2 p-1 text-center">
-                                    64 More
-                                </div>
-                                <div class="info text-xs text-gray-700">
-                                    Lorem ipsum dolor sit amet.
+
+                                <?php
+                                $sql = "SELECT count(id) AS count FROM staff_member WHERE shift = 'Day';";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+
+                                if ($resultCheck > 0) {
+                                    while ($row = mysqli_fetch_assoc($results)) {
+                                        if ($row['count'] > 6) {
+                                ?>
+                                            <div class="py-2 px-2 rounded-md bg-white shadow-md flex items-center justify-center text-xs font-bold text-gray-700 mr-2 text-center">
+
+                                                <?php echo $row['count'] - 6 . " more..."; ?>
+
+                                            </div>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <div class="py-2 px-2 rounded-md bg-white shadow-md flex items-center justify-center text-xs font-bold text-gray-700 mr-2 text-center">
+                                                <?php echo $row['count'] . " employees"; ?>
+                                            </div>
+                                <?php
+                                        }
+                                    }
+                                } else {
+                                    //*  Do nothing
+                                }
+                                ?>
+
+                                <div class="info text-xs text-gray-700 font-semibold">
+                                    Based on shift
                                 </div>
                             </div>
                         </div>
-                        <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                            <div>
-                                <h1>Day Crew</h1>
+                        <div class="card cursor-pointer border min-w-min border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
+                            <div class="flex items-center justify-between">
+                                <h1>Night Crew</h1>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
                             </div>
-                            <div class="circles">
-                                <div class="circle"></div>
+                            <div class="circles my-2 flex">
+                                <?php
+                                $sql = "SELECT photo FROM staff_member WHERE shift = 'Night' LIMIT 6;";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+
+                                if ($resultCheck > 0) {
+                                    while ($row = mysqli_fetch_assoc($results)) {
+
+                                        if ($row['photo'] == null) {
+                                ?>
+                                            <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                                <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="Day Crew">
+                                            </div>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
+                                                <img class="rounded-full w-full h-full object-cover" src="./photo_uploads/users/<?php echo $row['photo']; ?>" alt="Day Crew">
+                                            </div>
+                                <?php
+                                        }
+                                    }
+                                } else {
+                                    header("Location: ../signup.php?error=restricted");
+                                    exit();
+                                }
+                                ?>
                             </div>
-                            <div class="info">
-                                <div>
-                                    64 More
-                                </div>
-                                <div class="info">
-                                    Lorem ipsum dolor sit amet.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card cursor-pointer border border-gray-300 rounded-2xl p-5 ml-5 transform transition duration-200 hover:bg-white hover:border-opacity-0 hover:shadow-2xl hover:scale-105">
-                            <div>
-                                <h1>Day Crew</h1>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                            </div>
-                            <div class="circles">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="info">
-                                <div>
-                                    64 More
-                                </div>
-                                <div class="info">
-                                    Lorem ipsum dolor sit amet.
+                            <div class="info flex items-center justify-between">
+
+                                <?php
+                                $sql = "SELECT count(id) AS count FROM staff_member WHERE shift = 'Night';";
+                                $results = mysqli_query($conn, $sql);
+                                $resultCheck = mysqli_num_rows($results);
+
+                                if ($resultCheck > 0) {
+                                    while ($row = mysqli_fetch_assoc($results)) {
+                                        if ($row['count'] > 6) {
+                                ?>
+                                            <div class="py-2 px-2 rounded-md bg-white shadow-md flex items-center justify-center text-xs font-bold text-gray-700 mr-2 text-center">
+
+                                                <?php echo $row['count'] - 6 . " more..."; ?>
+
+                                            </div>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <div class="py-2 px-2 rounded-md bg-gray-900 shadow-md flex items-center justify-center text-xs font-bold text-gray-50 mr-2 text-center">
+                                                <?php echo $row['count'] . " employees"; ?>
+                                            </div>
+                                <?php
+                                        }
+                                    }
+                                } else {
+                                    //*  Do nothing
+                                }
+                                ?>
+
+                                <div class="info text-xs text-gray-700 font-semibold">
+                                    Based on shift
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="charts mt-10 flex p-3 mb-36">
-                        <div class="flex flex-col mr-2 flex-1">
+                    <div class="charts mt-10 flex flex-col p-3 mb-36">
+                        <div class="flex flex-col">
                             <div class="chart">
                                 <h1 class="text-2xl font-semibold text-gray-600 mb-5">Sales Overview</h1>
-                                <canvas id="myChart"></canvas>
-                            </div>
-                            <div class="recent-activities mt-5">
-                                <div class="row">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                    <h2>Name</h2>
-                                    <h2>Description</h2>
-                                    <h2>Amount</h2>
-                                    <h2>Status</h2>
-                                </div>
+                                <div id="chart"></div>
                             </div>
                         </div>
-
-                        <div>
-                            <canvas id="myChartBar"></canvas>
+                        <div class="flex flex-col mt-10">
+                            <div class="chart">
+                                <h1 id=setYearSales class="text-2xl font-semibold text-gray-600 mb-5">Sales</h1>
+                                <div id="yearSales"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -564,7 +641,7 @@ if (!isset($_SESSION['sessionId'])) {
                         </button>
                     </div>
                     <div>
-                        <p class="mt-5 text-sm text-gray-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos quasi iure officia id, nam eum expedita dolores aliquid numquam quis minus non eligendi quibusdam inventore blanditiis assumenda tenetur voluptatibus. Animi.</p>
+                        <p class="mt-5 text-sm text-gray-600">In the order details section, you can review and manage all orders with their details. You can set status of the order such as is it delivering is it cancelled or is it in hold likewise.</p>
                     </div>
                     <div class="relative h-12 shadow-md mx-auto mt-5" style="width: 80%;">
                         <ul class="flex items-center h-full">
@@ -759,8 +836,8 @@ if (!isset($_SESSION['sessionId'])) {
                                                                                 } else {
                                                                                     echo "bg-green-400";
                                                                                 } ?> rounded text-gray-200 capitalize"><?php if ($allData[$i][4] == 'active') {
-                                                                                                                                                                                                                                    echo "Accept";
-                                                                                                                                                                                                                                } else echo $allData[$i][4]; ?></button></td>
+                                                                                                                            echo "Accept";
+                                                                                                                        } else echo $allData[$i][4]; ?></button></td>
                             </tr>
                         <?php
 
@@ -970,7 +1047,25 @@ if (!isset($_SESSION['sessionId'])) {
 
                     <div class="warning w-full rounded-xl bg-yellow-500 bg-opacity-30 my-5 flex items-center p-5">
                         <div class="flex-1">
-                            <h1 class="text-2xl font-semibold text-gray-600">Total 12 Ingredients are running out</h1>
+                            <?php
+                            $sql = "SELECT COUNT(remaining_units) AS remaining FROM ingredient WHERE remaining_units < 100;";
+                            $results = mysqli_query($conn, $sql);
+                            $resultCheck = mysqli_num_rows($results);
+
+                            if ($resultCheck > 0) {
+                                while ($row = mysqli_fetch_assoc($results)) {
+                                    if ($row['remaining'] > 1) {
+
+
+                            ?>
+
+
+                                        <h1 class="text-2xl font-semibold text-gray-600">Total <?php echo $row['remaining']; ?> Ingredients are running out</h1>
+                            <?php
+                                    }
+                                }
+                            }
+                            ?>
                             <button class="flex items-center text-sm mt-4">
                                 Show
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1103,78 +1198,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                 <!-- Kitchen Form -->
                 <div class="kitchen-form-container glass rounded-t-3xl absolute top-24 left-0 z-base-search right-0 hidden h-full w-full">
-                    <!-- <div class="w-full h-full p-10 flex-col add-supplier-form hidden overflow-y-auto">
-                            <div class="flex items-center">
-                                <div class="flex-1 flex flex-col px-12">
-                                    <input type="text" placeholder="Full Name" class="mb-5 flex-1 rounded-md bg-gray-50" id="crewName" name="name">
-                                    <input type="email" placeholder="Email (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewEmail" name="email">
-                                    <textarea name="address" id="crewAddress" class="mb-5 appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-50 rounded-md transform transition-colors duration-300" placeholder="Address" id="crewAddress" name="address"></textarea>
-                                    
-                                
-                                </div>
-                                <div class="w-48 h-48 rounded-full overflow-hidden relative cursor-pointer profile-picture p-1 border-2 border-blue-600 CrewImageContainer shadow-2xl">
-                                    <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl z-10"></i>
-                                    <img id="crewUploadedProfile" class="opacity-80 rounded-full w-full h-full object-cover" src="./photo_uploads/users/Mayuko.jpg" alt="Crew Profile">
-                                    <input type="file" name="profileUpload" id="crewUploadProfile">
-                                </div>
-                            </div>
-                            <div class="mb-24 mt-5">
-                                    <div class="flex items-center">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="birthday">
-                                            Date of Birth
-                                        </label>
-                                        <input class="shadow appearance-none border rounded flex-1 mx-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5" id="crewDOB" type="date" name="birthday" required>
-                                        
-                                        <input type="number" placeholder="Personal Number" class="mx-4 mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewPersonalNumber" name="mobile">
-                                        <input type="number" placeholder="Land Number (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewLandLine" name="landline">
-                                    </div>
 
-                                    <div class="flex items-center mb-5">
-                                        <div class="flex flex-col">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="position">
-                                                Position
-                                            </label>
-                                            <select class="px-3 py-2 w-28 rounded" id="crewPosition" name="position">
-                                                <option value="Chef">Chef</option>
-                                                <option value="Helper">Helper</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="flex flex-col mx-5">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="shift">
-                                                Shift
-                                            </label>
-                                            <select class="px-3 py-2 w-28 rounded" id="crewShift" name="shift">
-                                                <option value="Day">Day</option>
-                                                <option value="Night">Night</option>
-                                            </select>
-                                        </div>
-
-                                        <input type="number" placeholder="Salary" class="-mb-7 mx-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewSalary" name="salary">
-
-                                        <div class="flex flex-col">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="payDate">
-                                                Pay Date
-                                            </label>
-                                            <div class="flex items-end">
-                                                <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="crewPayDate" placeholder="Day" type="number" name="payDate" required>
-                                                <p class="ml-2 text-gray-500">in every month</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    
-                                    <div class="flex justify-end items-center mb-48">
-                                        <p class="text-red-500 font-semibold text-sm hidden crew-error-message">Oops. It seems to be some inputs are not valid.</p>
-                                        <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="InsertCrew" type="submit" name="crew-submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            Add
-                                        </button>
-                                    </div>
-                            </div>
-                        </div> -->
                 </div>
 
                 <!-- Kitchen -->
@@ -1271,12 +1295,7 @@ if (!isset($_SESSION['sessionId'])) {
                             <!-- Single Card -->
                             <?php
 
-                            // $sqlTotalIngredients = "select count(*) as totalIngredientCount from ingredient_food group by food_id;";
-                            // $resultsIngredients = mysqli_query($conn, $sqlTotalIngredients);
-                            // $resultCheckIngredients = mysqli_num_rows($resultCheckIngredients);
 
-
-                            // $sql = "select * from food left join (select *, (select count(*) from ingredient_food) as count from ingredient_food) total_ing on total_ing.food_id = food.id where total_ing.ingredient_id in (select id from ingredient join ingredient_food on ingredient.id = ingredient_food.ingredient_id where ingredient_food.no_of_units < ingredient.remaining_units);";
                             $sql = "select * from food left join (select count(*), food_id, ingredient_id from ingredient_food join ingredient on ingredient.id = ingredient_food.ingredient_id where ingredient_food.no_of_units  < ingredient.remaining_units group by food_id) as total_ing on total_ing.food_id = food.id join (select id as ingredientId, name as ingredient, remaining_units from ingredient) as ingredient on ingredient.ingredientId = total_ing.ingredient_id join (select count(*) as counts_ing, food_id from ingredient_food group by food_id) as final_ing on final_ing.food_id = food.id where total_ing.ingredient_id in (select id from ingredient join ingredient_food on ingredient.id = ingredient_food.ingredient_id where ingredient_food.no_of_units < ingredient.remaining_units);";
                             $results = mysqli_query($conn, $sql);
                             $resultCheck = mysqli_num_rows($results);
@@ -1346,9 +1365,6 @@ if (!isset($_SESSION['sessionId'])) {
 
                             <?php
                                 }
-
-                                // Render($name, $rating, $consistIngredients, $countEnd);
-                                // $countEnd = 1;
                             }
                             ?>
                             <!-- End of card -->
@@ -1360,78 +1376,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                 <!-- Suppliers -Form -->
                 <div class="supplier-form-container glass rounded-t-3xl absolute top-24 left-0 z-base-search right-0 hidden h-full w-full">
-                    <!-- <div class="w-full h-full p-10 flex-col add-supplier-form hidden overflow-y-auto">
-                            <div class="flex items-center">
-                                <div class="flex-1 flex flex-col px-12">
-                                    <input type="text" placeholder="Full Name" class="mb-5 flex-1 rounded-md bg-gray-50" id="crewName" name="name">
-                                    <input type="email" placeholder="Email (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewEmail" name="email">
-                                    <textarea name="address" id="crewAddress" class="mb-5 appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-50 rounded-md transform transition-colors duration-300" placeholder="Address" id="crewAddress" name="address"></textarea>
-                                    
-                                
-                                </div>
-                                <div class="w-48 h-48 rounded-full overflow-hidden relative cursor-pointer profile-picture p-1 border-2 border-blue-600 CrewImageContainer shadow-2xl">
-                                    <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl z-10"></i>
-                                    <img id="crewUploadedProfile" class="opacity-80 rounded-full w-full h-full object-cover" src="./photo_uploads/users/Mayuko.jpg" alt="Crew Profile">
-                                    <input type="file" name="profileUpload" id="crewUploadProfile">
-                                </div>
-                            </div>
-                            <div class="mb-24 mt-5">
-                                    <div class="flex items-center">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="birthday">
-                                            Date of Birth
-                                        </label>
-                                        <input class="shadow appearance-none border rounded flex-1 mx-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5" id="crewDOB" type="date" name="birthday" required>
-                                        
-                                        <input type="number" placeholder="Personal Number" class="mx-4 mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewPersonalNumber" name="mobile">
-                                        <input type="number" placeholder="Land Number (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewLandLine" name="landline">
-                                    </div>
 
-                                    <div class="flex items-center mb-5">
-                                        <div class="flex flex-col">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="position">
-                                                Position
-                                            </label>
-                                            <select class="px-3 py-2 w-28 rounded" id="crewPosition" name="position">
-                                                <option value="Chef">Chef</option>
-                                                <option value="Helper">Helper</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="flex flex-col mx-5">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="shift">
-                                                Shift
-                                            </label>
-                                            <select class="px-3 py-2 w-28 rounded" id="crewShift" name="shift">
-                                                <option value="Day">Day</option>
-                                                <option value="Night">Night</option>
-                                            </select>
-                                        </div>
-
-                                        <input type="number" placeholder="Salary" class="-mb-7 mx-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewSalary" name="salary">
-
-                                        <div class="flex flex-col">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="payDate">
-                                                Pay Date
-                                            </label>
-                                            <div class="flex items-end">
-                                                <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="crewPayDate" placeholder="Day" type="number" name="payDate" required>
-                                                <p class="ml-2 text-gray-500">in every month</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    
-                                    <div class="flex justify-end items-center mb-48">
-                                        <p class="text-red-500 font-semibold text-sm hidden crew-error-message">Oops. It seems to be some inputs are not valid.</p>
-                                        <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="InsertCrew" type="submit" name="crew-submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            Add
-                                        </button>
-                                    </div>
-                            </div>
-                        </div> -->
                 </div>
 
                 <!-- Suppliers -->
@@ -1523,7 +1468,6 @@ if (!isset($_SESSION['sessionId'])) {
                                             <p class="hidden card-supplier-id"><?php echo $row['id']; ?></p>
                                             <div class="flex-1 ml-2">
                                                 <h1 class="text-gray-600 font-semibold text-sm">All Purpose Flour and 6+ more</h1>
-                                                <!-- <p class="text-xs text-gray-400 my-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, provident.</p> -->
                                                 <p class="text-xs text-gray-500"><?php echo $mobile; ?></p>
                                                 <p class="text-xs text-gray-500"><?php echo $row['email']; ?></p>
 
@@ -1572,78 +1516,7 @@ if (!isset($_SESSION['sessionId'])) {
 
                 <!-- Crew - Form -->
                 <div class="crew-form-container glass rounded-t-3xl absolute top-24 left-0 z-base-search right-0 hidden h-full w-full">
-                    <!-- <div class="w-full h-full p-10 flex-col add-crew-form hidden overflow-y-auto">
-                            <div class="flex items-center">
-                                <div class="flex-1 flex flex-col px-12">
-                                    <input type="text" placeholder="Full Name" class="mb-5 flex-1 rounded-md bg-gray-50" id="crewName" name="name">
-                                    <input type="email" placeholder="Email (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewEmail" name="email">
-                                    <textarea name="address" id="crewAddress" class="mb-5 appearance-none py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-50 rounded-md transform transition-colors duration-300" placeholder="Address" id="crewAddress" name="address"></textarea>
-                                    
-                                
-                                </div>
-                                <div class="w-48 h-48 rounded-full overflow-hidden relative cursor-pointer profile-picture p-1 border-2 border-blue-600 CrewImageContainer shadow-2xl">
-                                    <i class="fas fa-camera text-white absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl z-10"></i>
-                                    <img id="crewUploadedProfile" class="opacity-80 rounded-full w-full h-full object-cover" src="./photo_uploads/users/Mayuko.jpg" alt="Crew Profile">
-                                    <input type="file" name="profileUpload" id="crewUploadProfile">
-                                </div>
-                            </div>
-                            <div class="mb-24 mt-5">
-                                    <div class="flex items-center">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="birthday">
-                                            Date of Birth
-                                        </label>
-                                        <input class="shadow appearance-none border rounded flex-1 mx-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5" id="crewDOB" type="date" name="birthday" required>
-                                        
-                                        <input type="number" placeholder="Personal Number" class="mx-4 mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewPersonalNumber" name="mobile">
-                                        <input type="number" placeholder="Land Number (Optional)" class="mb-5 flex-1 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewLandLine" name="landline">
-                                    </div>
 
-                                    <div class="flex items-center mb-5">
-                                        <div class="flex flex-col">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="position">
-                                                Position
-                                            </label>
-                                            <select class="px-3 py-2 w-28 rounded" id="crewPosition" name="position">
-                                                <option value="Chef">Chef</option>
-                                                <option value="Helper">Helper</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="flex flex-col mx-5">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="shift">
-                                                Shift
-                                            </label>
-                                            <select class="px-3 py-2 w-28 rounded" id="crewShift" name="shift">
-                                                <option value="Day">Day</option>
-                                                <option value="Night">Night</option>
-                                            </select>
-                                        </div>
-
-                                        <input type="number" placeholder="Salary" class="-mb-7 mx-5 bg-gray-50 rounded-md transform transition-colors duration-300" id="crewSalary" name="salary">
-
-                                        <div class="flex flex-col">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="payDate">
-                                                Pay Date
-                                            </label>
-                                            <div class="flex items-end">
-                                                <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="crewPayDate" placeholder="Day" type="number" name="payDate" required>
-                                                <p class="ml-2 text-gray-500">in every month</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    
-                                    <div class="flex justify-end items-center mb-48">
-                                        <p class="text-red-500 font-semibold text-sm hidden crew-error-message">Oops. It seems to be some inputs are not valid.</p>
-                                        <button class="flex items-center text-green-500 mx-5 bg-green-200 px-5 py-3 rounded-md transform transition-colors duration-300 active:scale-95 hover:bg-green-400 hover:text-gray-200" id="InsertCrew" type="submit" name="crew-submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            Add
-                                        </button>
-                                    </div>
-                            </div>
-                        </div> -->
                 </div>
 
                 <!-- Crew -->
@@ -1828,7 +1701,7 @@ if (!isset($_SESSION['sessionId'])) {
 
 
                 <!-- Settings -->
-                <div class="moving-part Settings glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="stickyContainerCrew">
+                <div class="moving-part Settings glass rounded-3xl p-7 h-full absolute top-0 right-0 left-0 z-3" id="Settings">
                     <div class="greeting flex w-full justify-between items-center">
                         <h1 class="text-2xl text-gray-700 font-semibold">🛠 Settings</h1>
                     </div>
@@ -1890,17 +1763,7 @@ if (!isset($_SESSION['sessionId'])) {
                                     </svg>
                                 </div>
                                 <div class="info flex items-center justify-between">
-                                    <!-- <div class="flex items-center">
-                                    <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                        <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1592621385612-4d7129426394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                    </div>
-                                    <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                        <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1627754939597-ba460af0844f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                    </div>
-                                    <div class=" mr-1 circle rounded-full overflow-hidden w-7 h-7">
-                                        <img class="rounded-full w-full h-full object-cover" src="https://images.unsplash.com/photo-1628258946431-b99fbe144787?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="">
-                                    </div>
-                                </div> -->
+
                                     <div class="info text-xs text-gray-500">
                                         Change Colors As your preference
                                     </div>
@@ -1948,78 +1811,139 @@ if (!isset($_SESSION['sessionId'])) {
 
     <!-- Toppings -->
     <!-- <script src="./scripts/add-new-topping.js"></script> -->
-    <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
 
-        var ctx = document.getElementById('myChartBar').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+
+
+    <script>
+        document.querySelector('#setYearSales').innerHTML = `Sales in ${new Date().getFullYear()}`;
+
+
+
+        //* ApexCharts
+        var burgerLabels = [];
+        var burgerQuantities = [];
+        <?php
+        $sql = "SELECT food.name, AVG(food_order.quantity) AS quantity, food_order.food_id FROM food, food_order WHERE food.id = food_order.food_id GROUP BY food_id;";
+        $results = mysqli_query($conn, $sql);
+        $resultCheck = mysqli_num_rows($results);
+        $labels = array();
+        $quantities = array();
+
+        if ($resultCheck > 0) {
+            while ($row = mysqli_fetch_assoc($results)) {
+
+                array_push($labels, $row['name']);
+                array_push($quantities, $row['quantity']);
             }
-        });
+
+            foreach ($labels as $label) {
+        ?>
+                burgerLabels.push('<?php echo $label; ?>');
+            <?php
+            }
+
+            foreach ($quantities as $quantity) {
+            ?>
+                burgerQuantities.push(<?php echo $quantity; ?>);
+        <?php
+            }
+        }
+        ?>
+
+
+        var Apexoptions = {
+            chart: {
+                type: 'donut'
+            },
+            series: burgerQuantities,
+            labels: burgerLabels,
+            fill: {
+                type: "gradient",
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.9,
+                    stops: [0, 90, 100]
+                },
+            },
+        }
+
+        var chart = new ApexCharts(document.querySelector("#chart"), Apexoptions);
+
+        chart.render();
+
+
+        //* Line Chart
+        var TotalByMonths = [];
+        var Months = [];
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        var finalMonths = [];
+        <?php
+        $sql = "SELECT SUM(total_amount) AS Total, EXTRACT(MONTH from date) AS Month FROM customer_order GROUP BY EXTRACT(MONTH FROM date);";
+        $results = mysqli_query($conn, $sql);
+        $resultCheck = mysqli_num_rows($results);
+        $totalAtEachMonth = array();
+        $months = array();
+
+        if ($resultCheck > 0) {
+            while ($row = mysqli_fetch_assoc($results)) {
+
+                array_push($totalAtEachMonth, $row['Total']);
+                array_push($months, $row['Month']);
+            }
+
+            foreach ($totalAtEachMonth as $total) {
+        ?>
+                TotalByMonths.push(<?php echo $total; ?>);
+            <?php
+            }
+
+            foreach ($months as $month) {
+            ?>
+                Months.push(<?php echo $month; ?>);
+        <?php
+            }
+        }
+        ?>
+
+        Months.forEach((item, index) => {
+            finalMonths.push(monthNames[Months[index] - 1])
+        })
+
+        var yearSalesOptions = {
+            chart: {
+                height: 280,
+                type: "area"
+            },
+            stroke: {
+                curve: 'smooth',
+            },
+            dataLabels: {
+                enabled: false
+            },
+            series: [{
+                name: "Sales",
+                data: TotalByMonths
+            }],
+            fill: {
+                type: "gradient",
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.9,
+                    stops: [0, 90, 100]
+                }
+            },
+            xaxis: {
+                categories: finalMonths
+            }
+        };
+
+        var yearSalesChart = new ApexCharts(document.querySelector("#yearSales"), yearSalesOptions);
+
+        yearSalesChart.render();
     </script>
 </body>
 
