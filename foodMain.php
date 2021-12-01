@@ -664,11 +664,11 @@ if (isset($_GET['clear'])) {
             </div>
 
             <ul class="flex flex-1 justify-center">
-                <li><a href="#" class="mr-10 font-bold">Today</a></li>
+                <li><a href="/code19/foodMain.php" class="mr-10 font-bold">Today</a></li>
                 <li><a href="/code19/HowToOrder.php" class="mr-10">How to order?</a></li>
                 <li><a href="/code19/black-mafia-special.php" class="mr-10 relative">Black Mafia Special <div class="bg-red-600 px-2 absolute -top-5 -right-4 rounded-3xl text-gray-50" style="font-size: x-small; padding-top: 0.25rem; padding-bottom: 0.25rem;">new</div> </a></li>
                 <li><a href="/code19/FAQ.php" class="mr-10">FAQ</a></li>
-                <li><a href="#" class="mr-10">Contact</a></li>
+                <li><a href="/code19/Contact.php" class="mr-10">Contact</a></li>
             </ul>
 
             <div class="flex items-center">

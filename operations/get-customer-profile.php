@@ -21,12 +21,12 @@ function Render($results, $address, $phone)
                 <?php
                 if ($row['photo'] == null) {
                 ?>
-                    <img id="UploadedProfile" class="transform transition hover:opacity-50 duration-300 w-full h-full rounded-full object-cover" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" alt="Profile">
-                        <?php
+                    <img id="UploadedProfile" class="transform transition hover:opacity-50 duration-300 w-full h-full rounded-full object-cover" src="./photo_uploads/users/profile.jpg" alt="Profile">
+                <?php
                 } else {
-                    ?> 
+                ?>
                     <img id="UploadedProfile" class="transform transition hover:opacity-50 duration-300 w-full h-full rounded-full object-cover" src="./photo_uploads/customers/<?php echo $row['photo']; ?>" alt="Profile">
-                    <?php
+                <?php
                 }
                 ?>
                 <input type="file" name="profileUploadCustomer" id="UploadProfileCustomer">
