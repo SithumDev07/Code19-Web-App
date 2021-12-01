@@ -26,10 +26,10 @@ session_start();
                 </div>
                 <ul class="text-gray-600 flex flex-1 justify-end items-center">
                     <li class="ml-8">
-                        <a href="/">Solutions</a>
+                        <a href="./Contact.php">Contact</a>
                     </li>
                     <li class="ml-8">
-                        <a href="/">FAQ</a>
+                        <a href="./FAQ.php">FAQ</a>
                     </li>
                     <li class="ml-8">
                         <?php
