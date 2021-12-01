@@ -1,6 +1,6 @@
 <?php
 
-    session_start();
+session_start();
 
 ?>
 
@@ -33,20 +33,20 @@
                     </li>
                     <li class="ml-8">
                         <?php
-                            if(isset($_SESSION['sessionUser'])) {
+                        if (isset($_SESSION['sessionUser'])) {
 
-                                ?>
-                                <h1><?php echo $_SESSION['sessionUser']; ?></h1>
-                                <a href="./login.php?username=<?php echo $_SESSION['sessionUser']; ?>" class="bg-yellow-400 px-4 text-sm py-2 font-bold text-white rounded-full cursor-pointer hover:bg-yellow-500">Login</a>
-                            <?php
-                            } else {
-
-                                ?>
-                            <a href="./signup.php" class="bg-yellow-400 px-4 text-sm py-2 font-bold text-white rounded-full cursor-pointer hover:bg-yellow-500">Sign Up</a>
-                                <?php
-                            }
                         ?>
-                        
+                            <h1 class="hidden"><?php echo $_SESSION['sessionUser']; ?></h1>
+                            <a href="./login.php?username=<?php echo $_SESSION['sessionUser']; ?>" class="bg-yellow-400 px-4 text-sm py-2 font-bold text-white rounded-full cursor-pointer hover:bg-yellow-500">Login</a>
+                        <?php
+                        } else {
+
+                        ?>
+                            <a href="./signup.php" class="bg-yellow-400 px-4 text-sm py-2 font-bold text-white rounded-full cursor-pointer hover:bg-yellow-500">Sign Up</a>
+                        <?php
+                        }
+                        ?>
+
                     </li>
                 </ul>
             </nav>
