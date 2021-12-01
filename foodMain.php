@@ -816,31 +816,34 @@ if (isset($_GET['clear'])) {
 
         <!-- Menu Category -->
         <div class="menu-category mt-10 xl:container xl:mx-auto">
-            <h1 class="text-3xl font-bold text-gray-700">Menu Category</h1>
+            <h1 class="text-3xl font-bold text-gray-700">All Burgers</h1>
             <!-- Category Cards -->
-            <div class="cat-cards flex mt-6">
+            <?php  // TODO : Future Implementataions 
+            ?>
+            <!-- <div class="cat-cards flex mt-6">
                 <?php
-                $categories = array();
-                array_push($categories, 'Shipwreck Burger');
-                array_push($categories, 'The Good Fellas');
-                array_push($categories, "Boss's Daughter");
-                array_push($categories, "Machine Gun Tommy");
-                array_push($categories, "The Big Poppa");
-                foreach ($categories as $category) {
+                // $categories = array();
+                // array_push($categories, 'Shipwreck Burger');
+                // array_push($categories, 'The Good Fellas');
+                // array_push($categories, "Boss's Daughter");
+                // array_push($categories, "Machine Gun Tommy");
+                // array_push($categories, "The Big Poppa");
+                // foreach ($categories as $category) {
                 ?>
-                    <div class="cursor-pointer card mr-5 flex flex-col items-center py-2 w-36 h-44 relative bg-gray-50 rounded-xl shadow-sm hover:shadow-md px-2">
-                        <div class="w-14 h-14 my-2">
-                            <img src="./assets/icons/Untitled-1.png" class="w-full h-full object-contain" alt="food-icon">
-                        </div>
-                        <h3 class="text-gray-700 text-center text-base font-bold"><?php echo $category; ?></h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute bottom-2 left-1/2 transform -translate-x-1/2 mt-2 h-8 w-8 rounded-full p-2 bg-yellow-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
+                <div class="cursor-pointer card mr-5 flex flex-col items-center py-2 w-36 h-44 relative bg-gray-50 rounded-xl shadow-sm hover:shadow-md px-2">
+                    <div class="w-14 h-14 my-2">
+                        <img src="./assets/icons/Untitled-1.png" class="w-full h-full object-contain" alt="food-icon">
                     </div>
+                    <h3 class="text-gray-700 text-center text-base font-bold"><?php //echo $category; 
+                                                                                ?></h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="absolute bottom-2 left-1/2 transform -translate-x-1/2 mt-2 h-8 w-8 rounded-full p-2 bg-yellow-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
                 <?php
-                }
+                //}
                 ?>
-            </div>
+            </div> -->
 
 
 
