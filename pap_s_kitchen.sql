@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2021 at 09:55 PM
+-- Generation Time: Dec 01, 2021 at 10:00 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 8.0.6
 
@@ -86,19 +86,22 @@ CREATE TABLE `customer_order` (
 --
 
 INSERT INTO `customer_order` (`id`, `customer_id`, `date`, `time`, `status`, `delivery_method`, `total_amount`, `special_notes`) VALUES
-(9, 7, '08/28/2021', '07:37', 'Processing', 'takeaway', '1200.00', NULL),
-(10, 7, '08/28/2021', '07:37', 'active', 'takeaway', '1610.00', NULL),
-(11, 7, '08/28/2021', '07:49', 'active', 'takeaway', '1860.00', NULL),
-(12, 7, '08/28/2021', '07:49', 'active', 'takeaway', '1860.00', NULL),
-(13, 7, '08/28/2021', '07:51', 'active', 'takeaway', '1860.00', NULL),
-(14, 7, '08/28/2021', '07:51', 'active', 'takeaway', '1860.00', NULL),
-(15, 7, '08/28/2021', '07:55', 'On Hold', 'takeaway', '1860.00', NULL),
-(16, 7, '08/29/2021', '03:37', 'Cancelled', 'takeaway', '1710.00', 'Bad Weather'),
-(20, 13, '08/29/2021', '06:16', 'Delivering', 'takeaway', '1170.00', NULL),
-(21, 13, '08/30/2021', '03:26', 'Delivering', 'takeaway', '655.00', NULL),
-(22, 13, '08/30/2021', '03:34', 'Delivering', 'takeaway', '655.00', NULL),
-(23, 13, '08/31/2021', '12:30', 'Delivering', 'delivery', '635.00', NULL),
-(24, 7, '08/31/2021', '07:01', 'Cancelled', 'takeaway', '375.00', 'Heavy Rain');
+(9, 7, '2021-05-28', '07:37', 'Processing', 'takeaway', '1200.00', NULL),
+(10, 7, '2021-05-28', '07:37', 'active', 'takeaway', '1610.00', NULL),
+(11, 7, '2021-06-28', '07:49', 'active', 'takeaway', '1860.00', NULL),
+(12, 7, '2021-06-28', '07:49', 'active', 'takeaway', '1860.00', NULL),
+(13, 7, '2021-06-28', '07:51', 'active', 'takeaway', '1860.00', NULL),
+(14, 7, '2021-07-28', '07:51', 'active', 'takeaway', '1860.00', NULL),
+(15, 7, '2021-08-28', '07:55', 'On Hold', 'takeaway', '1860.00', NULL),
+(16, 7, '2021-08-28', '03:37', 'Cancelled', 'takeaway', '1710.00', 'Bad Weather'),
+(20, 13, '2021-08-30', '06:16', 'Delivering', 'takeaway', '1170.00', NULL),
+(21, 13, '2021-08-30', '03:26', 'Delivering', 'takeaway', '655.00', NULL),
+(22, 13, '2021-08-30', '03:34', 'Delivering', 'takeaway', '655.00', NULL),
+(23, 13, '2021-08-30', '12:30', 'Delivering', 'delivery', '635.00', NULL),
+(24, 7, '2021-09-23', '07:01', 'Cancelled', 'takeaway', '375.00', 'Heavy Rain'),
+(25, 14, '2021-11-29', '11:36', 'Delivering', 'delivery', '1390.00', NULL),
+(26, 14, '2021-11-30', '04:31', 'Delivering', 'takeaway', '665.00', NULL),
+(27, 14, '12/01/2021', '10:56', 'active', 'delivery', '475.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -196,7 +199,9 @@ INSERT INTO `filling_order` (`order_id`, `filling_id`, `quantity`) VALUES
 (21, 5, 1),
 (22, 3, 1),
 (22, 5, 1),
-(23, 3, 1);
+(23, 3, 1),
+(25, 3, 3),
+(26, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -259,7 +264,10 @@ INSERT INTO `food_order` (`order_id`, `food_id`, `quantity`) VALUES
 (21, 4, 1),
 (22, 4, 1),
 (23, 4, 1),
-(24, 1, 1);
+(24, 1, 1),
+(25, 1, 3),
+(26, 2, 1),
+(27, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -280,11 +288,12 @@ CREATE TABLE `ingredient` (
 --
 
 INSERT INTO `ingredient` (`id`, `name`, `remaining_units`, `type`, `created_at`) VALUES
-(1, 'All Purpose Flour', 4600, 'g', '2021-08-21 04:49:19'),
-(2, 'Fresh Milk', 383, 'ml', '2021-08-21 05:50:37'),
+(1, 'All Purpose Flour', 23200, 'g', '2021-08-21 04:49:19'),
+(2, 'Fresh Milk', 149867, 'ml', '2021-08-21 05:50:37'),
 (12, 'Chilli Sauce', 0, 'pieces', '2021-08-21 23:03:10'),
-(14, 'Sugar', 470, 'g', '2021-08-22 00:20:27'),
-(15, 'Cheese', 485, 'g', '2021-08-22 04:19:41');
+(14, 'Sugar', 340, 'g', '2021-08-22 00:20:27'),
+(15, 'Cheese', 9331, 'g', '2021-08-22 04:19:41'),
+(17, 'Hellmanns Real Mayonnaise', 2750, 'ml', '2021-11-30 12:17:44');
 
 -- --------------------------------------------------------
 
@@ -409,7 +418,8 @@ INSERT INTO `staff_member` (`id`, `user_name`, `name`, `password`, `email`, `add
 (13, NULL, 'Chiran Jayith', NULL, 'chiran@gmail.com', 'Passara Road Kandy', '2002-10-25', 'Helper', 'Day', '0785678125', NULL, '35000', NULL, '30', '611e19ab4ff732.68589728.jpg', '2021-08-19 08:43:23'),
 (15, 'Morichi', 'Morichi Django', '$2y$10$mG0lCqaM4dbhKezwUWxd0.ExImrl3GruiMAX2IeeWlnIluv/8zm4u', 'mori@django.com', 'Republic of Congo', '2002-07-17', 'Chef', 'Night', '94755698263', '9431222569', '78000', NULL, '28', '611e70191341c1.71835067.jpg', '2021-08-19 14:52:09'),
 (17, NULL, 'Mayuko Inouie', NULL, 'mayuko@hotmail.com', 'Tokyo, Japan', '2005-08-09', 'Chef', 'Day', '0714569258', NULL, '180000', NULL, '22', '612051de8c1cd2.14950543.jpg', '2021-08-21 01:07:42'),
-(18, NULL, 'Jhon Philips', NULL, NULL, 'Bangkok, Thailand', '2003-02-18', 'Helper', 'Night', '0704512369', NULL, '45000', NULL, '15', '612390089f71e2.62351617.jpg', '2021-08-23 12:09:44');
+(18, NULL, 'Jhon Philips', NULL, NULL, 'Bangkok, Thailand', '2003-02-18', 'Helper', 'Night', '0704512369', NULL, '45000', NULL, '15', '612390089f71e2.62351617.jpg', '2021-08-23 12:09:44'),
+(19, 'Naveen', 'Sithum Naveen', '$2y$10$PdK85WGKA130N2n6ML7CGu/w/Ta2HYKwRUpuvfOyx8JzUaiE.q4ym', 'na@gmail.com', 'Kel', '2005-11-29', 'Manager', 'Day', '94755555555', '9475820555', NULL, NULL, NULL, '61a46edbbfbf57.67088052.png', '2021-11-29 06:10:35');
 
 -- --------------------------------------------------------
 
@@ -487,7 +497,11 @@ INSERT INTO `supplier_ingredient` (`id`, `supplier_id`, `ingredient_id`, `cost`,
 (5, 11, 1, '20000.00', 'no', 5000, '2021-08-03', '2023-08-03', '2021-08-21', '2021-08-21 05:49:30'),
 (6, 5, 2, '10000.00', 'yes', 1500, '2021-07-30', '2023-07-30', '2021-04-07', '2021-08-21 05:51:19'),
 (16, 5, 15, '45000.00', 'yes', 10000, '2021-08-03', '2021-10-19', '2021-08-22', '2021-08-22 04:19:41'),
-(17, 12, 12, '5600.00', 'yes', 60, '2021-05-04', '2022-06-08', '2021-08-23', '2021-08-23 12:21:47');
+(17, 12, 12, '5600.00', 'yes', 60, '2021-05-04', '2022-06-08', '2021-08-23', '2021-08-23 12:21:47'),
+(19, 11, 17, '6000.00', 'yes', 2750, '2021-11-08', '2024-10-11', '2021-11-30', '2021-11-30 12:17:44'),
+(20, 5, 2, '85000.00', 'yes', 150000, '2021-11-28', '2021-12-30', '2021-12-01', '2021-12-01 05:16:16'),
+(21, 5, 15, '2500.00', 'yes', 9000, '2021-11-29', '2022-02-17', '2021-12-01', '2021-12-01 05:18:04'),
+(22, 11, 1, '14000.00', 'yes', 20000, '2021-11-29', '2022-04-21', '2021-12-01', '2021-12-01 05:18:59');
 
 --
 -- Indexes for dumped tables
@@ -610,7 +624,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `customer_order`
 --
 ALTER TABLE `customer_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `filling`
@@ -628,7 +642,7 @@ ALTER TABLE `food`
 -- AUTO_INCREMENT for table `ingredient`
 --
 ALTER TABLE `ingredient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `paymentmethod`
@@ -640,7 +654,7 @@ ALTER TABLE `paymentmethod`
 -- AUTO_INCREMENT for table `staff_member`
 --
 ALTER TABLE `staff_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -652,7 +666,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `supplier_ingredient`
 --
 ALTER TABLE `supplier_ingredient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
