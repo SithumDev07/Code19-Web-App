@@ -1896,7 +1896,9 @@ if (!isset($_SESSION['sessionId'])) {
 
             foreach ($totalAtEachMonth as $total) {
         ?>
+
                 TotalByMonths.push(<?php echo $total; ?>);
+
             <?php
             }
 
