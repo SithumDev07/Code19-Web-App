@@ -13,7 +13,7 @@ if (isset($_POST['sessionId'])) {
     $deliveryMethod = "delivery";
 
     date_default_timezone_set('Asia/Colombo');
-    $date = date('m/d/Y h:i:s a', time());
+    $date = date('Y-m-d h:i:s a', time());
 
 
     $time = substr($date, -11, 5);

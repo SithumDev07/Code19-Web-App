@@ -1054,13 +1054,13 @@ if (!isset($_SESSION['sessionId'])) {
 
                             if ($resultCheck > 0) {
                                 while ($row = mysqli_fetch_assoc($results)) {
-                                    if ($row['remaining'] > 1) {
+                                    if ($row['remaining'] >= 1) {
 
 
                             ?>
 
 
-                                        <h1 class="text-2xl font-semibold text-gray-600">Total <?php echo $row['remaining']; ?> Ingredients are running out</h1>
+                                        <h1 class="text-2xl font-semibold text-gray-600">Total <?php echo $row['remaining']; ?> Ingredient(s) are running out</h1>
                             <?php
                                     }
                                 }

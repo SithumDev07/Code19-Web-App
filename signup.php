@@ -204,7 +204,7 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="mb-4 relative">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
-            Home (Optional)
+            Home
           </label>
           <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="landLine" type="number" placeholder="Ex: +94 3X XXX XXX X" name="landline">
           <i class="fas fa-check-circle text-green-500 absolute top-10 right-2"></i>
