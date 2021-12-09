@@ -46,7 +46,7 @@ function Render($results)
                 $date = substr($date, 3, 2);
 
                 if (($row['pay_date'] - $date) < 0) {
-                    $due = "Lost";
+                    $due = "Critical";
                     $primaryColor = 'text-red-500';
                     $secondaryColor = 'bg-red-200';
                 } else if (($row['pay_date'] - $date) < 3 && ($row['pay_date'] - $date) > 0) {

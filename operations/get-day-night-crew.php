@@ -54,7 +54,7 @@ if ($resultCheck > 0) {
                 $primaryColor;
                 $secondaryColor;
                 if (($row['pay_date'] - $date) < 0) {
-                    $due = "Lost";
+                    $due = "Critical";
                     $primaryColor = 'text-red-500';
                     $secondaryColor = 'bg-red-200';
                 } else if (($row['pay_date'] - $date) < 3 && ($row['pay_date'] - $date) > 0) {
@@ -90,11 +90,11 @@ if ($resultCheck > 0) {
                                                 echo "Every " . $row['pay_date'] . "nd";
                                             } else if ($day == 3) {
                                                 echo "Every " . $row['pay_date'] . "rd";
-                                            } else if($day == 11) {
+                                            } else if ($day == 11) {
                                                 echo "Every " . $row['pay_date'] . "th";
-                                            } else if($day == 12) {
+                                            } else if ($day == 12) {
                                                 echo "Every " . $row['pay_date'] . "th";
-                                            } else if($day == 13) {
+                                            } else if ($day == 13) {
                                                 echo "Every " . $row['pay_date'] . "th";
                                             } else {
                                                 echo "Every " . $row['pay_date'] . "th";
